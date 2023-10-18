@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 
 class ProductCardWidget extends StatefulWidget {
   final int index;
-  const ProductCardWidget({super.key, required this.index});
+  final bool withHeight;
+  final double? height;
+  const ProductCardWidget(
+      {super.key, required this.index, required this.withHeight, this.height});
 
   @override
   State<ProductCardWidget> createState() => _ProductCardWidgetState();
@@ -18,6 +21,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       children: [
         Container(
             width: 160,
+            height: widget.withHeight ? widget.height : null,
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(.1), // color of grid items
 
@@ -30,7 +34,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/images/product_image.png")),
                       borderRadius: BorderRadius.only(
