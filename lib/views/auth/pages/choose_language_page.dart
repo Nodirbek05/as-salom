@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LanguagePage extends StatelessWidget {
+  static const routeName = "/languagePage";
   const LanguagePage({super.key});
 
   @override
