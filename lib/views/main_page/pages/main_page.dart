@@ -123,9 +123,9 @@ class MainPage extends StatelessWidget {
                 ),
               ),
             ),
-      
+
             ScreenUtil().setVerticalSpacing(30),
-      
+
             Padding(
               padding: EdgeInsets.only(
                 left: 15.w,
@@ -136,7 +136,7 @@ class MainPage extends StatelessWidget {
                 style: Styles.styles700sp20Black,
               ),
             ),
-      
+
             SizedBox(
               height: 130.h,
               child: ListView.builder(
@@ -149,7 +149,7 @@ class MainPage extends StatelessWidget {
                     ),
                     child: Container(
                       // margin: EdgeInsets.only(
-      
+
                       //   right: 5.w,
                       // ),
                       height: 123.h,
@@ -164,7 +164,7 @@ class MainPage extends StatelessWidget {
               ),
             ),
             ScreenUtil().setVerticalSpacing(18.h),
-      
+
             Padding(
               padding: EdgeInsets.only(
                 left: 15.w,
@@ -175,9 +175,11 @@ class MainPage extends StatelessWidget {
                 style: Styles.styles700sp20Black,
               ),
             ),
-      
+
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w,),
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ),
               child: SizedBox(
                 height: 300.h,
                 child: ListView.builder(
