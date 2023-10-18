@@ -11,7 +11,7 @@ abstract class Routes {
       case RegistrationPage.routeName:
         return MaterialPageRoute(builder: (_) => const RegistrationPage());
       case MainPage.routeName:
-        return MaterialPageRoute(builder: (_) => const MainPage());
+        return MaterialPageRoute(builder: (_) =>  MainPage());
 
       default:
         return MaterialPageRoute(builder: (_) => const LanguagePage());
