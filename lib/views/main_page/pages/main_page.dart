@@ -5,16 +5,59 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   static const routeName = "/mainPage";
 
   MainPage({super.key});
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   final PageController _pageController1 = PageController(viewportFraction: 1.0);
+
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: ConstColor.greyColor,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Menu',
+          ),
+
+           BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+
+           BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_sharp),
+            label: 'Cart',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: ConstColor.as_salomText,
+        onTap: _onItemTapped,
+       
+      ),
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         bottom: PreferredSize(
@@ -123,9 +166,9 @@ class MainPage extends StatelessWidget {
                 ),
               ),
             ),
-      
+
             ScreenUtil().setVerticalSpacing(30),
-      
+
             Padding(
               padding: EdgeInsets.only(
                 left: 15.w,
@@ -136,7 +179,7 @@ class MainPage extends StatelessWidget {
                 style: Styles.styles700sp20Black,
               ),
             ),
-      
+
             SizedBox(
               height: 130.h,
               child: ListView.builder(
@@ -149,7 +192,7 @@ class MainPage extends StatelessWidget {
                     ),
                     child: Container(
                       // margin: EdgeInsets.only(
-      
+
                       //   right: 5.w,
                       // ),
                       height: 123.h,
@@ -164,7 +207,7 @@ class MainPage extends StatelessWidget {
               ),
             ),
             ScreenUtil().setVerticalSpacing(18.h),
-      
+
             Padding(
               padding: EdgeInsets.only(
                 left: 15.w,
@@ -175,9 +218,11 @@ class MainPage extends StatelessWidget {
                 style: Styles.styles700sp20Black,
               ),
             ),
-      
+
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w,),
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ),
               child: SizedBox(
                 height: 300.h,
                 child: ListView.builder(
