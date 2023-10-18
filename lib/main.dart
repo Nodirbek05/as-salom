@@ -20,10 +20,12 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: Colors.white,
+
         useMaterial3: true,
       ),
       home: const ScreenUtilInit(
-          designSize: Size(375, 812), child: SplashScreen()),
+          designSize: Size(375, 812), child: SplashScreen(),),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
+import 'package:assalomproject/views/main_page/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,7 +69,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 setState(() {
                   hasSms = true;
                 });
+                 
               }
+              Navigator.pushNamed(context, MainPage.routeName);
+             
             },
             child: Container(
               alignment: Alignment.center,
