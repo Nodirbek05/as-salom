@@ -11,15 +11,8 @@ class ChooseButtonLang extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const RegistrationPage();
-              },
-            ),
-          );
+      onTap: () {
+        Navigator.pushNamed(context, RegistrationPage.routeName);
       },
       child: Container(
         alignment: Alignment.center,

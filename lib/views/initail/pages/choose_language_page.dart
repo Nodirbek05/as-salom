@@ -1,5 +1,5 @@
 import 'package:assalomproject/core/constant/text_styles.dart';
-import 'package:assalomproject/views/auth/components/choose_lang_button.dart';
+import 'package:assalomproject/views/initail/components/choose_lang_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,11 +29,11 @@ class LanguagePage extends StatelessWidget {
                 style: Styles.chooseText,
               ),
               ScreenUtil().setVerticalSpacing(35),
-             const ChooseButtonLang(langName: "Русский"),
+              ChooseButtonLang(langName: "Русский"),
               ScreenUtil().setVerticalSpacing(15),
-             const ChooseButtonLang(langName: "O'zbek tili"),
+              ChooseButtonLang(langName: "O'zbek tili"),
               ScreenUtil().setVerticalSpacing(15),
-             const ChooseButtonLang(langName: "English"),
+              ChooseButtonLang(langName: "English"),
             ],
           ),
         ),

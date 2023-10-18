@@ -1,4 +1,5 @@
-import 'package:assalomproject/views/auth/pages/splash_screen.dart';
+import 'package:assalomproject/core/constant/routes.dart';
+import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,14 +16,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      initialRoute: SplashScreen.routeName,
+      onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
-       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  const ScreenUtilInit(
-           designSize:  Size(375, 812),
-        child: SplashScreen()),
+      home: const ScreenUtilInit(
+          designSize: Size(375, 812), child: SplashScreen()),
     );
   }
 }

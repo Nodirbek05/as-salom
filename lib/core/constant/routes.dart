@@ -1,4 +1,5 @@
-import 'package:assalomproject/views/auth/pages/choose_language_page.dart';
+import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
+import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:flutter/material.dart';
 
 abstract class Routes {
@@ -6,6 +7,8 @@ abstract class Routes {
     switch (settings.name) {
       case LanguagePage.routeName:
         return MaterialPageRoute(builder: (_) => const LanguagePage());
+      case RegistrationPage.routeName:
+        return MaterialPageRoute(builder: (_) =>  RegistrationPage());
 
       default:
         return MaterialPageRoute(builder: (_) => const LanguagePage());

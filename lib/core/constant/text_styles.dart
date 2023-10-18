@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class Styles{
   static const interFontFamily = "Inter";
-  //! Weight 700
   static final tooBoldtext60 = TextStyle(
     color: ConstColor.mainWhite,
     fontSize: 60.sp,
@@ -19,10 +18,24 @@ abstract class Styles{
     fontFamily: interFontFamily,
   );
 
+   static final style400sp16Main = TextStyle(
+    color: ConstColor.as_salomText,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
+
   static final chooseText = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 25.sp,
     fontWeight: FontWeight.w700,
+    fontFamily: interFontFamily,
+  );
+
+   static final styles400sp16Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
     fontFamily: interFontFamily,
   );
 
@@ -47,6 +60,12 @@ abstract class Styles{
     fontFamily: interFontFamily,
   );
 
+static final style500sp16Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: interFontFamily,
+  );
 
   static final greyRegister = TextStyle(
     color: ConstColor.greyColor,
