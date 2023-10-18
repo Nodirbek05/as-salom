@@ -17,6 +17,12 @@ abstract class Styles{
     fontWeight: FontWeight.w700,
     fontFamily: interFontFamily,
   );
+   static final styles700sp20Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w700,
+    fontFamily: interFontFamily,
+  );
 
    static final style400sp16Main = TextStyle(
     color: ConstColor.as_salomText,
@@ -24,6 +30,7 @@ abstract class Styles{
     fontWeight: FontWeight.w400,
     fontFamily: interFontFamily,
   );
+
 
   static final chooseText = TextStyle(
     color: ConstColor.mainBlack,
@@ -35,6 +42,14 @@ abstract class Styles{
    static final styles400sp16Black = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
+
+
+   static final styles400sp14Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     fontFamily: interFontFamily,
   );
