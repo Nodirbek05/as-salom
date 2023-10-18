@@ -5,16 +5,59 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   static const routeName = "/mainPage";
 
   MainPage({super.key});
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   final PageController _pageController1 = PageController(viewportFraction: 1.0);
+
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: ConstColor.greyColor,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Menu',
+          ),
+
+           BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+
+           BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_sharp),
+            label: 'Cart',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: ConstColor.as_salomText,
+        onTap: _onItemTapped,
+       
+      ),
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         bottom: PreferredSize(
