@@ -25,11 +25,26 @@ abstract class Styles{
     fontFamily: interFontFamily,
   );
 
+   static final style600sp14Main = TextStyle(
+    color: ConstColor.as_salomText,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
+
   static final chooseText = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 25.sp,
     fontWeight: FontWeight.w700,
     fontFamily: interFontFamily,
+  );
+
+   static final style400sp12GreyUnderline = TextStyle(
+    color: ConstColor.greyColor,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+    decoration: TextDecoration.lineThrough
   );
 
    static final styles400sp16Black = TextStyle(

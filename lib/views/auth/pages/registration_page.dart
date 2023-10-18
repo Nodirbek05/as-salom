@@ -53,10 +53,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
         // height:96.h,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(.2),
+          color: ConstColor.mainWhite,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10.r),
-            topRight: Radius.circular(10.r),
+            topLeft: Radius.circular(20.r),
+            topRight: Radius.circular(20.r),
           ),
         ),
         child: Padding(
@@ -69,10 +77,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 setState(() {
                   hasSms = true;
                 });
-                 
               }
               Navigator.pushNamed(context, MainPage.routeName);
-             
             },
             child: Container(
               alignment: Alignment.center,
@@ -82,7 +88,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   color: ConstColor.as_salomText,
                   borderRadius: BorderRadius.circular(50.r)),
               child: Text(
-                "Получить код",
+                hasSms
+                    ? isLogin
+                        ? "Войти"
+                        : "Зарегистрироваться"
+                    : "Получить код",
                 style: Styles.buttonText,
               ),
             ),
