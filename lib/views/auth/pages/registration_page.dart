@@ -3,6 +3,7 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
 import 'package:assalomproject/views/auth/data/logic/bloc/register_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,6 +81,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   isLoading = false;
                 });
               }
+              Navigator.pushNamed(context, CustomNavigatonBar.routeName);
             },
             child: InkWell(
               onTap: () {
