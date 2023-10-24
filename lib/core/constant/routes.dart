@@ -1,4 +1,6 @@
 import 'package:assalomproject/views/auth/data/logic/bloc/register_bloc.dart';
+import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
+import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -13,7 +15,7 @@ abstract class Routes {
       case LanguagePage.routeName:
         return MaterialPageRoute(builder: (_) => const LanguagePage());
 
-         case CustomNavigatonBar.routeName:
+      case CustomNavigatonBar.routeName:
         return MaterialPageRoute(builder: (_) => const CustomNavigatonBar());
       case RegistrationPage.routeName:
         return MaterialPageRoute(
@@ -23,6 +25,12 @@ abstract class Routes {
                 ));
       case MainPage.routeName:
         return MaterialPageRoute(builder: (_) => MainPage());
+
+      case FavoritesPage.routeName:
+        return MaterialPageRoute(builder: (_) => const FavoritesPage());
+
+      case DrawerPage.routeName:
+        return MaterialPageRoute(builder: (_) => const DrawerPage());
       case ProductDetailPage.routeName:
         return MaterialPageRoute(builder: (_) => const ProductDetailPage());
 

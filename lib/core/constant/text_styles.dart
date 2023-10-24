@@ -11,6 +11,13 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+  static final appBarText = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
+
   static final asSalomText = TextStyle(
     color: ConstColor.as_salomText,
     fontSize: 34.sp,
