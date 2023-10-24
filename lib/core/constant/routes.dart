@@ -1,4 +1,6 @@
-import 'package:assalomproject/views/auth/data/logic/bloc/register_bloc.dart';
+import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart';
+import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
+import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -13,12 +15,22 @@ abstract class Routes {
       case LanguagePage.routeName:
         return MaterialPageRoute(builder: (_) => const LanguagePage());
 
-         case CustomNavigatonBar.routeName:
+      case CustomNavigatonBar.routeName:
         return MaterialPageRoute(builder: (_) => const CustomNavigatonBar());
       case RegistrationPage.routeName:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => RegisterBloc(),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => RegisterBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => VerificationBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => LoginBloc(),
+                    ),
+                  ],
                   child: const RegistrationPage(),
                 ));
       case MainPage.routeName:

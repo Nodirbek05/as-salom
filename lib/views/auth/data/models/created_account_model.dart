@@ -50,12 +50,13 @@ class CreatedAccountModel extends ResponseData {
 }
 
 class CreateAccountDataModel {
-  UserModel user;
+  UserModel? user;
   String token;
   CreateAccountDataModel({
-    required this.user,
+    this.user,
     required this.token,
   });
+  
 
   CreateAccountDataModel copyWith({
     UserModel? user,
@@ -70,7 +71,9 @@ class CreateAccountDataModel {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
   
-    result.addAll({'user': user.toMap()});
+    if(user != null){
+      result.addAll({'user': user!.toMap()});
+    }
     result.addAll({'token': token});
   
     return result;
@@ -78,7 +81,7 @@ class CreateAccountDataModel {
 
   factory CreateAccountDataModel.fromMap(Map<String, dynamic> map) {
     return CreateAccountDataModel(
-      user: UserModel.fromMap(map['user']),
+      user: map['user'] != null ? UserModel.fromMap(map['user']) : null,
       token: map['token'] ?? '',
     );
   }
@@ -107,7 +110,7 @@ class UserModel {
   String? name;
   String? phone;
   String? device_name;
-  num? code;
+  dynamic code;
   num? id;
   String? updated_at;
   String? created_at;
@@ -125,7 +128,7 @@ class UserModel {
     String? name,
     String? phone,
     String? device_name,
-    num? code,
+    dynamic code,
     num? id,
     String? updated_at,
     String? created_at,

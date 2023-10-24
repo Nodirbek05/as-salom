@@ -1,15 +1,24 @@
+import 'package:assalomproject/core/common_models/error_model.dart';
+import 'package:assalomproject/core/common_models/error_response.dart';
+import 'package:assalomproject/core/common_models/response_data.dart';
+import 'package:assalomproject/core/common_models/status_codes.dart';
+import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
-import 'package:assalomproject/views/auth/data/logic/bloc/register_bloc.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart';
+import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
+import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationPage extends StatefulWidget {
   static const routeName = "/authPage";
@@ -29,6 +38,29 @@ class _RegistrationPageState extends State<RegistrationPage> {
   bool hasSms = false;
   bool isLoading = false;
   final focusNode = FocusNode();
+
+  static Future<ResponseData> getCode() async {
+    try {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      var token = _prefs.getString('token');
+      final response = await http
+          .get(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCode}'), headers: {
+        'Authorization': "Bearer $token",
+        'Content-Type': 'application/json'
+      });
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
 
   var phoneFormatter = MaskTextInputFormatter(
       mask: '##-###-##-##',
@@ -72,55 +104,136 @@ class _RegistrationPageState extends State<RegistrationPage> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: BlocListener<RegisterBloc, RegisterState>(
-            listener: (context, state) {
-              if (state is RegisterSuccess) {
-                setState(() {
-                  hasSms = true;
-                  isLoading = false;
-                });
-              }
-              Navigator.pushNamed(context, CustomNavigatonBar.routeName);
-            },
-            child: InkWell(
-              onTap: () {
-                if (phoneController.text.length < 12) {
-                  print("VALIDATION");
-                } else {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  context.read<RegisterBloc>().add(RegisterDataEvent(
-                      name: controller.text,
-                      phone: phoneController.text,
-                      deviceName: "Test"));
-                }
-                // Navigator.pushNamed(context, MainPage.routeName);
-              },
-              child: Container(
-                alignment: Alignment.center,
-                height: 50.h,
-                width: 328.w,
-                decoration: BoxDecoration(
-                    color: ConstColor.as_salomText,
-                    borderRadius: BorderRadius.circular(50.r)),
-                child: isLoading
-                    ? const CupertinoActivityIndicator(
-                        color: ConstColor.mainWhite,
-                      )
-                    : Text(
-                        hasSms
-                            ? isLogin
-                                ? "Войти"
-                                : "Зарегистрироваться"
-                            : "Получить код",
-                        style: Styles.buttonText,
+            padding: const EdgeInsets.all(8.0),
+            child: !isLogin
+                ? BlocListener<RegisterBloc, RegisterState>(
+                    listener: (context, state) {
+                      if (state is RegisterSuccess) {
+                        getCode();
+                        setState(() {
+                          hasSms = true;
+                          isLoading = false;
+                        });
+                      }
+                    },
+                    child: InkWell(
+                      onTap: () {
+                        if (phoneController.text.length < 12) {
+                          print("VALIDATION");
+                        } else {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          context.read<RegisterBloc>().add(RegisterDataEvent(
+                              name: controller.text,
+                              phone: phoneController.text,
+                              deviceName: "Test"));
+                        }
+                        // Navigator.pushNamed(context, MainPage.routeName);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50.h,
+                        width: 328.w,
+                        decoration: BoxDecoration(
+                            color: ConstColor.as_salomText,
+                            borderRadius: BorderRadius.circular(50.r)),
+                        child: isLoading
+                            ? const CupertinoActivityIndicator(
+                                color: ConstColor.mainWhite,
+                              )
+                            : Text(
+                                "Получить код",
+                                style: Styles.buttonText,
+                              ),
                       ),
-              ),
-            ),
-          ),
-        ),
+                    ),
+                  )
+                : !hasSms
+                    ? BlocListener<LoginBloc, LoginState>(
+                        listener: (context, state) {
+                          if (state is LoginSuccess) {
+                            print("LOGIN SUCCES");
+                            getCode();
+                            setState(() {
+                              hasSms = true;
+                              isLoading = false;
+                            });
+                          }
+                        },
+                        child: InkWell(
+                          onTap: () {
+                            if (phoneController.text.length < 12) {
+                              print("VALIDATION");
+                            } else {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              context.read<LoginBloc>().add(LoginDataEvent(
+                                    phone: phoneController.text,
+                                  ));
+                            }
+                            // Navigator.pushNamed(context, MainPage.routeName);
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.h,
+                            width: 328.w,
+                            decoration: BoxDecoration(
+                                color: ConstColor.as_salomText,
+                                borderRadius: BorderRadius.circular(50.r)),
+                            child: isLoading
+                                ? const CupertinoActivityIndicator(
+                                    color: ConstColor.mainWhite,
+                                  )
+                                : Text(
+                                    "Получить код",
+                                    style: Styles.buttonText,
+                                  ),
+                          ),
+                        ),
+                      )
+                    : BlocListener<VerificationBloc, VerificationState>(
+                        listener: (context, state) {
+                          if (state is VerificationSuccess) {
+                            Navigator.pushNamedAndRemoveUntil(context,
+                                CustomNavigatonBar.routeName, (route) => false);
+                          }
+                        },
+                        child: InkWell(
+                          onTap: () {
+                            if (pinController.text.length < 4) {
+                              print("VALIDATION");
+                            } else {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              context
+                                  .read<VerificationBloc>()
+                                  .add(VerificationDataEvent(
+                                    code: num.parse(pinController.text),
+                                  ));
+                            }
+                            // Navigator.pushNamed(context, MainPage.routeName);
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.h,
+                            width: 328.w,
+                            decoration: BoxDecoration(
+                                color: ConstColor.as_salomText,
+                                borderRadius: BorderRadius.circular(50.r)),
+                            child: isLoading
+                                ? const CupertinoActivityIndicator(
+                                    color: ConstColor.mainWhite,
+                                  )
+                                : Text(
+                                    isLogin ? "Войти" : "Зарегистрироваться",
+                                    style: Styles.buttonText,
+                                  ),
+                          ),
+                        ),
+                      )),
       ),
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
@@ -207,7 +320,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             separatorBuilder: (index) =>
                                 const SizedBox(width: 8),
                             hapticFeedbackType: HapticFeedbackType.lightImpact,
-                            onCompleted: (pin) {},
+                            onCompleted: (pin) {
+                              context
+                                  .read<VerificationBloc>()
+                                  .add(VerificationDataEvent(
+                                    code: num.parse(pin),
+                                  ));
+                            },
                             cursor: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
