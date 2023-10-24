@@ -1,9 +1,11 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
-import 'package:assalomproject/views/main_page/pages/main_page.dart';
+import 'package:assalomproject/views/auth/data/logic/bloc/register_bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pinput/pinput.dart';
@@ -24,6 +26,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   bool isLogin = false;
   bool hasSms = false;
+  bool isLoading = false;
   final focusNode = FocusNode();
 
   var phoneFormatter = MaskTextInputFormatter(
@@ -69,31 +72,49 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: InkWell(
-            onTap: () {
-              if (phoneController.text.length < 12) {
-                print("VALIDATION");
-              } else {
+          child: BlocListener<RegisterBloc, RegisterState>(
+            listener: (context, state) {
+              if (state is RegisterSuccess) {
                 setState(() {
                   hasSms = true;
+                  isLoading = false;
                 });
               }
-              Navigator.pushNamed(context, MainPage.routeName);
             },
-            child: Container(
-              alignment: Alignment.center,
-              height: 50.h,
-              width: 328.w,
-              decoration: BoxDecoration(
-                  color: ConstColor.as_salomText,
-                  borderRadius: BorderRadius.circular(50.r)),
-              child: Text(
-                hasSms
-                    ? isLogin
-                        ? "Войти"
-                        : "Зарегистрироваться"
-                    : "Получить код",
-                style: Styles.buttonText,
+            child: InkWell(
+              onTap: () {
+                if (phoneController.text.length < 12) {
+                  print("VALIDATION");
+                } else {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  context.read<RegisterBloc>().add(RegisterDataEvent(
+                      name: controller.text,
+                      phone: phoneController.text,
+                      deviceName: "Test"));
+                }
+                // Navigator.pushNamed(context, MainPage.routeName);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 50.h,
+                width: 328.w,
+                decoration: BoxDecoration(
+                    color: ConstColor.as_salomText,
+                    borderRadius: BorderRadius.circular(50.r)),
+                child: isLoading
+                    ? const CupertinoActivityIndicator(
+                        color: ConstColor.mainWhite,
+                      )
+                    : Text(
+                        hasSms
+                            ? isLogin
+                                ? "Войти"
+                                : "Зарегистрироваться"
+                            : "Получить код",
+                        style: Styles.buttonText,
+                      ),
               ),
             ),
           ),

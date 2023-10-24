@@ -3,6 +3,7 @@ import 'package:assalomproject/views/auth/data/api/auth_request.dart';
 import 'package:assalomproject/views/auth/data/models/created_account_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -18,6 +19,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     final response = await AuthRequests.createAccount(
         event.name, event.phone, event.deviceName);
     if (response is CreatedAccountModel) {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      await _prefs.setString('token', response.data.token);
       emit(RegisterSuccess(registerData: response));
     } else if (response is ErrorModel) {
       emit(RegisterFail(errorModel: response));

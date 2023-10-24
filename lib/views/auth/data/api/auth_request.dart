@@ -13,14 +13,15 @@ class AuthRequests {
   static Future<ResponseData> createAccount(
       String name, String phone, String deviceName) async {
     try {
+      print('${ApiPaths.basicUrl}${ApiPaths.register}');
       final response =
           await http.post(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.register}'),
               headers: {'Content-Type': 'application/json'},
               body: json.encode(
                 {
-                  "name": name,
-                  "phone": phone,
-                  "device_name ": deviceName,
+                  'name': name,
+                  'phone': "+998"+phone.replaceAll("-", " "),
+                  'device_name' : deviceName,
                 },
               ));
       print(response.body);
