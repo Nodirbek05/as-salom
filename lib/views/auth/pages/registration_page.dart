@@ -105,29 +105,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
         child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: !isLogin
-                ? BlocListener<RegisterBloc, RegisterState>(
+            child: hasSms
+                ? BlocListener<VerificationBloc, VerificationState>(
                     listener: (context, state) {
-                      if (state is RegisterSuccess) {
-                        getCode();
-                        setState(() {
-                          hasSms = true;
-                          isLoading = false;
-                        });
+                      if (state is VerificationSuccess) {
+                        Navigator.pushNamedAndRemoveUntil(context,
+                            CustomNavigatonBar.routeName, (route) => false);
                       }
                     },
                     child: InkWell(
                       onTap: () {
-                        if (phoneController.text.length < 12) {
+                        if (pinController.text.length < 4) {
                           print("VALIDATION");
                         } else {
                           setState(() {
                             isLoading = true;
                           });
-                          context.read<RegisterBloc>().add(RegisterDataEvent(
-                              name: controller.text,
-                              phone: phoneController.text,
-                              deviceName: "Test"));
+                          context
+                              .read<VerificationBloc>()
+                              .add(VerificationDataEvent(
+                                code: num.parse(pinController.text),
+                              ));
                         }
                         // Navigator.pushNamed(context, MainPage.routeName);
                       },
@@ -143,14 +141,58 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 color: ConstColor.mainWhite,
                               )
                             : Text(
-                                "Получить код",
+                                isLogin ? "Войти" : "Зарегистрироваться",
                                 style: Styles.buttonText,
                               ),
                       ),
                     ),
                   )
-                : !hasSms
-                    ? BlocListener<LoginBloc, LoginState>(
+                : !isLogin
+                    ? BlocListener<RegisterBloc, RegisterState>(
+                        listener: (context, state) {
+                          if (state is RegisterSuccess) {
+                            getCode();
+                            setState(() {
+                              hasSms = true;
+                              isLoading = false;
+                            });
+                          }
+                        },
+                        child: InkWell(
+                          onTap: () {
+                            if (phoneController.text.length < 12) {
+                              print("VALIDATION");
+                            } else {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              context.read<RegisterBloc>().add(
+                                  RegisterDataEvent(
+                                      name: controller.text,
+                                      phone: phoneController.text,
+                                      deviceName: "Test"));
+                            }
+                            // Navigator.pushNamed(context, MainPage.routeName);
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.h,
+                            width: 328.w,
+                            decoration: BoxDecoration(
+                                color: ConstColor.as_salomText,
+                                borderRadius: BorderRadius.circular(50.r)),
+                            child: isLoading
+                                ? const CupertinoActivityIndicator(
+                                    color: ConstColor.mainWhite,
+                                  )
+                                : Text(
+                                    "Получить код",
+                                    style: Styles.buttonText,
+                                  ),
+                          ),
+                        ),
+                      )
+                    : BlocListener<LoginBloc, LoginState>(
                         listener: (context, state) {
                           if (state is LoginSuccess) {
                             print("LOGIN SUCCES");
@@ -188,47 +230,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   )
                                 : Text(
                                     "Получить код",
-                                    style: Styles.buttonText,
-                                  ),
-                          ),
-                        ),
-                      )
-                    : BlocListener<VerificationBloc, VerificationState>(
-                        listener: (context, state) {
-                          if (state is VerificationSuccess) {
-                            Navigator.pushNamedAndRemoveUntil(context,
-                                CustomNavigatonBar.routeName, (route) => false);
-                          }
-                        },
-                        child: InkWell(
-                          onTap: () {
-                            if (pinController.text.length < 4) {
-                              print("VALIDATION");
-                            } else {
-                              setState(() {
-                                isLoading = true;
-                              });
-                              context
-                                  .read<VerificationBloc>()
-                                  .add(VerificationDataEvent(
-                                    code: num.parse(pinController.text),
-                                  ));
-                            }
-                            // Navigator.pushNamed(context, MainPage.routeName);
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50.h,
-                            width: 328.w,
-                            decoration: BoxDecoration(
-                                color: ConstColor.as_salomText,
-                                borderRadius: BorderRadius.circular(50.r)),
-                            child: isLoading
-                                ? const CupertinoActivityIndicator(
-                                    color: ConstColor.mainWhite,
-                                  )
-                                : Text(
-                                    isLogin ? "Войти" : "Зарегистрироваться",
                                     style: Styles.buttonText,
                                   ),
                           ),
