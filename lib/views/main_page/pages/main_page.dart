@@ -17,47 +17,9 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   final PageController _pageController1 = PageController(viewportFraction: 1.0);
 
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedItemColor: ConstColor.greyColor,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Menu',
-          ),
-
-           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-
-           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_sharp),
-            label: 'Cart',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: ConstColor.as_salomText,
-        onTap: _onItemTapped,
-       
-      ),
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         bottom: PreferredSize(
