@@ -25,7 +25,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       child: Stack(
         children: [
           Container(
-              width: 160,
+              width: widget.withHeight ? 160 : null,
               height: widget.withHeight ? widget.height : null,
               decoration: BoxDecoration(
                 color: Colors.grey.withOpacity(.1), // color of grid items
@@ -73,7 +73,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               )),
           const Positioned(
               top: 10,
-              right: 20,
+              right: 10,
               child: CircleAvatar(
                 backgroundColor: ConstColor.mainWhite,
                 radius: 17,
