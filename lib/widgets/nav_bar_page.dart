@@ -1,8 +1,9 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
+import 'package:assalomproject/views/basket/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
-import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
+import 'package:assalomproject/views/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,9 +21,8 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
     MainPage(),
     const FavoritesPage(),
     const DrawerPage(),
-    const ProductDetailPage(),
-    MainPage(),
-    MainPage(),
+    const ProfilePage(),
+    const BasketPage(),
   ];
 
   int _selectedIndex = 0;
@@ -42,7 +42,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
         backgroundColor: ConstColor.mainWhite,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         child: Padding(
-          padding:  EdgeInsets.only(
+          padding: EdgeInsets.only(
             top: 30.h,
           ),
           child: ListView(
@@ -52,23 +52,26 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
               ListTile(
                 leading: Icon(Icons.favorite),
                 title: Text('Home'),
-                trailing: Icon(Icons.arrow_forward_ios,
-                size: 15,
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 15,
                 ),
               ),
               ListTile(
-                 leading: Icon(Icons.favorite),
+                leading: Icon(Icons.favorite),
                 title: Text('Business'),
-                 trailing: Icon(Icons.arrow_forward_ios,
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
                   size: 15,
-                 ),
+                ),
               ),
               ListTile(
-                 leading: Icon(Icons.favorite),
+                leading: Icon(Icons.favorite),
                 title: Text('School'),
-                 trailing: Icon(Icons.arrow_forward_ios,
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
                   size: 15,
-                 ),
+                ),
               ),
             ],
           ),
@@ -76,7 +79,6 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
       ),
       body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        
         unselectedItemColor: ConstColor.greyColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

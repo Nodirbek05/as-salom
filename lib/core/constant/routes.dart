@@ -1,12 +1,14 @@
 import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart';
 import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
 import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
+import 'package:assalomproject/views/basket/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
+import 'package:assalomproject/views/profile/pages/profile_page.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +42,11 @@ abstract class Routes {
 
       case FavoritesPage.routeName:
         return MaterialPageRoute(builder: (_) => const FavoritesPage());
+      case ProfilePage.routeName:
+        return MaterialPageRoute(builder: (_) => const ProfilePage());
+
+        case BasketPage.routeName:
+        return MaterialPageRoute(builder: (_) => const BasketPage());
 
       case DrawerPage.routeName:
         return MaterialPageRoute(builder: (_) => const DrawerPage());

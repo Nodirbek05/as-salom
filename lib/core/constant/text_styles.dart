@@ -38,9 +38,44 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+   static final style700sp16Main = TextStyle(
+    color: ConstColor.as_salomText,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    fontFamily: interFontFamily,
+  );
+
   static final style600sp14Main = TextStyle(
     color: ConstColor.as_salomText,
     fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
+
+   static final style500sp14Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: interFontFamily,
+  );
+
+  static final style600sp14Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
+
+  static final style500sp12Grey = TextStyle(
+    color: ConstColor.greyColor,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
+
+  static final style500sp12White = TextStyle(
+    color: ConstColor.mainWhite,
+    fontSize: 12.sp,
     fontWeight: FontWeight.w600,
     fontFamily: interFontFamily,
   );
