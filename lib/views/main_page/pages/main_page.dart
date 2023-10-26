@@ -1,6 +1,6 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
-import 'package:assalomproject/views/main_page/logic/bloc/get_all_banners_bloc.dart';
+import 'package:assalomproject/views/main_page/logic/get_all_banners_bloc/get_all_banners_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/banner_page.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MainPage extends StatefulWidget {
   static const routeName = "/mainPage";
 
-  MainPage({super.key});
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -82,9 +82,9 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             BlocProvider(
+            BlocProvider(
               create: (context) => GetAllBannersBloc(),
-              child:const BannerPage(),
+              child: const BannerPage(),
             ),
             Padding(
               padding: EdgeInsets.only(
