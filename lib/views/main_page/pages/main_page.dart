@@ -1,5 +1,6 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/main_page/pages/banner_page.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,13 +24,12 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(10),
-          child: Container(
-            color: ConstColor.greyColor,
-            height: 0.5,
-            width: double.infinity,
-          ),
-        ),
+            preferredSize: const Size.fromHeight(10),
+            child: Container(
+              color: ConstColor.greyColor,
+              height: 0.5,
+              width: double.infinity,
+            ),),
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Container(
@@ -82,55 +82,7 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.only(
-                top: 20.h,
-              ),
-              height: 140.h,
-              child: PageView.builder(
-                controller: _pageController1,
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      left: 10.w,
-                      right: 10.w,
-                    ),
-                    child: Container(
-                      height: 115.h,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.r),
-                        color: ConstColor.as_salomText,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            ScreenUtil().setVerticalSpacing(6),
-            //! DOTS ARE HERE
-            Container(
-              margin: EdgeInsets.only(
-                top: 10.h,
-                bottom: 10.h,
-              ),
-              alignment: Alignment.bottomCenter,
-              height: 4.h,
-              child: SmoothPageIndicator(
-                controller: _pageController1,
-                count: 5,
-                effect: WormEffect(
-                  dotColor: ConstColor.dotColor,
-                  activeDotColor: ConstColor.as_salomText,
-                  dotHeight: ScreenUtil().setWidth(10.0),
-                  dotWidth: ScreenUtil().setWidth(10.0),
-                ),
-              ),
-            ),
-
-            ScreenUtil().setVerticalSpacing(30),
+            const BannerPage(),
 
             Padding(
               padding: EdgeInsets.only(
