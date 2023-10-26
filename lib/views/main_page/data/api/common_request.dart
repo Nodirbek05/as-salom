@@ -19,8 +19,8 @@ class CommonRequests {
       );
       print(response.body);
       switch (response.statusCode) {
-        // case StatusCodes.ok:
-        //   return GetAllBanners.fromJson(response.body);
+        case StatusCodes.ok:
+          return GetAllBanners.fromJson(response.body);
         case StatusCodes.alreadyTaken:
           return ErrorModel.fromJson(response.body);
         default:
