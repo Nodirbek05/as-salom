@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:assalomproject/core/common_models/error_model.dart';
 import 'package:assalomproject/core/common_models/error_response.dart';
 import 'package:assalomproject/core/common_models/response_data.dart';
@@ -11,8 +9,7 @@ import 'package:http/http.dart' as http;
 
 class CommonRequests {
   CommonRequests._();
-  static Future<ResponseData> createAccount(
-      String name, String phone, String deviceName) async {
+  static Future<ResponseData> getBanners() async {
     try {
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getBanners}'),

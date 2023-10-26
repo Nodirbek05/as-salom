@@ -9,4 +9,5 @@ class ApiPaths {
   static String updateNumber = "/change_phone";
   static String getBanners = "/get_banners";
   static String getCategories = "/get_categories";
+  static String imageUrl = "https://as-salom.uz/assets/images/";
 }
