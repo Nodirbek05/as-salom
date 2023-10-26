@@ -7,4 +7,5 @@ class ApiPaths {
   static String getUser = "/get_user";
   static String updateName = "/change_name";
   static String updateNumber = "/change_phone";
+  static String getBanners = "/get_banners";
 }
