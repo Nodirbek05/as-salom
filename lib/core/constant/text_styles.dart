@@ -66,6 +66,13 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+   static final style600sp20Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
+
   static final style400sp13Grey = TextStyle(
     color: ConstColor.greyColor,
     fontSize: 13.sp,
@@ -84,6 +91,27 @@ abstract class Styles {
     color: ConstColor.mainBlack,
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
+
+   static final style400sp16Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
+
+    static final style400sp20Main = TextStyle(
+    color: ConstColor.as_salomText,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
+
+    static final style500sp14Main = TextStyle(
+    color: ConstColor.as_salomText,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
     fontFamily: interFontFamily,
   );
 
@@ -148,6 +176,13 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+  static final style400sp24Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
+
   static final styles400sp16Black = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 16.sp,
@@ -161,6 +196,14 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
     fontFamily: interFontFamily,
   );
+
+  static final styles500sp14Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: interFontFamily,
+  );
+
 
   static final chooseLangColor = TextStyle(
     color: ConstColor.as_salomText,

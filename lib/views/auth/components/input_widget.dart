@@ -10,6 +10,7 @@ class InputWidget extends StatefulWidget {
   final Widget? prefixIcon;
   final bool? isVisible;
   final String? hintText;
+  final int? maxLines;
   final List<TextInputFormatter>? inputFormatter;
   final TextInputType? inputType;
   final int? maxLength;
@@ -17,6 +18,7 @@ class InputWidget extends StatefulWidget {
       {super.key,
       required this.controller,
       this.label,
+      this.maxLines,
       this.suffixIcon,
       this.maxLength,
       this.hintText,
@@ -39,6 +41,7 @@ class _InputWidgetState extends State<InputWidget> {
         const SizedBox(height: 7),
         TextFormField(
           maxLength: widget.maxLength,
+          maxLines: widget.maxLines,
           keyboardType: widget.inputType,
           inputFormatters: widget.inputFormatter,
           style: Styles.style500sp16Black,
