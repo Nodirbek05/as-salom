@@ -1,7 +1,9 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_banners_bloc/get_all_banners_bloc.dart';
+import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/banner_page.dart';
+import 'package:assalomproject/views/main_page/pages/categories_widget.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,31 +98,9 @@ class _MainPageState extends State<MainPage> {
                 style: Styles.styles700sp20Black,
               ),
             ),
-            SizedBox(
-              height: 130.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      left: 10.w,
-                    ),
-                    child: Container(
-                      // margin: EdgeInsets.only(
-
-                      //   right: 5.w,
-                      // ),
-                      height: 123.h,
-                      width: 127.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.r),
-                        color: ConstColor.as_salomText,
-                      ),
-                    ),
-                  );
-                },
-              ),
+            BlocProvider(
+              create: (context) => GetAllCategoriesBloc(),
+              child: const CategoriesWidget(),
             ),
             ScreenUtil().setVerticalSpacing(18.h),
             Padding(

@@ -30,7 +30,7 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getCategories() async {
-    try {
+    // try {
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}'),
         headers: {'Content-Type': 'application/json'},
@@ -44,8 +44,8 @@ class CommonRequests {
         default:
           throw ErrorModel.fromJson(response.body);
       }
-    } catch (e) {
-      return ResponseError.noInternet;
-    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
   }
 }

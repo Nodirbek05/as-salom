@@ -1,15 +1,18 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:assalomproject/core/common_models/response_data.dart';
 
 class CategoriesModel extends ResponseData {
-  CategoryDataModel data;
+  List<CategoryDataModel> data;
   CategoriesModel({
     required this.data,
   });
+ 
 
   CategoriesModel copyWith({
-    CategoryDataModel? data,
+    List<CategoryDataModel>? data,
   }) {
     return CategoriesModel(
       data: data ?? this.data,
@@ -18,22 +21,21 @@ class CategoriesModel extends ResponseData {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-
-    result.addAll({'data': data.toMap()});
-
+  
+    result.addAll({'data': data.map((x) => x.toMap()).toList()});
+  
     return result;
   }
 
   factory CategoriesModel.fromMap(Map<String, dynamic> map) {
     return CategoriesModel(
-      data: CategoryDataModel.fromMap(map['data']),
+      data: List<CategoryDataModel>.from(map['data']?.map((x) => CategoryDataModel.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CategoriesModel.fromJson(String source) =>
-      CategoriesModel.fromMap(json.decode(source));
+  factory CategoriesModel.fromJson(String source) => CategoriesModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'CategoriesModel(data: $data)';
@@ -41,8 +43,9 @@ class CategoriesModel extends ResponseData {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
-    return other is CategoriesModel && other.data == data;
+  
+    return other is CategoriesModel &&
+      listEquals(other.data, data);
   }
 
   @override
