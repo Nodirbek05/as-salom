@@ -4,7 +4,6 @@ import 'package:assalomproject/views/main_page/pages/banner_page.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = "/mainPage";
@@ -16,7 +15,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final PageController _pageController1 = PageController(viewportFraction: 1.0);
 
   @override
   Widget build(BuildContext context) {
