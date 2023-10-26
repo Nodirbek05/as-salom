@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         scaffoldBackgroundColor: Colors.white,
 
         useMaterial3: true,

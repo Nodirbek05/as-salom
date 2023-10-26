@@ -109,8 +109,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ? BlocListener<VerificationBloc, VerificationState>(
                     listener: (context, state) {
                       if (state is VerificationSuccess) {
-                        // Navigator.pushNamedAndRemoveUntil(context,
-                        //     CustomNavigatonBar.routeName, (route) => false);
+                        Navigator.pushNamedAndRemoveUntil(context,
+                            CustomNavigatonBar.routeName, (route) => false);
                       }
                     },
                     child: InkWell(
@@ -173,8 +173,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                       deviceName: "Test"));
                             }
                             // Navigator.pushNamed(context, MainPage.routeName);
-                            Navigator.pushNamedAndRemoveUntil(context,
-                            CustomNavigatonBar.routeName, (route) => false);
+                            // Navigator.pushNamedAndRemoveUntil(context,
+                            // CustomNavigatonBar.routeName, (route) => false);
                           },
                           child: Container(
                             alignment: Alignment.center,

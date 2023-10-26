@@ -36,6 +36,7 @@ class _ProfilePageState extends State<ProfilePage>
       length: myTabs.length,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: ConstColor.mainWhite,
           bottom: const TabBar(
               labelColor: ConstColor.as_salomText,
               indicatorColor: ConstColor.as_salomText,

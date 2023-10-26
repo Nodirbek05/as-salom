@@ -79,9 +79,11 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
       ),
       body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: ConstColor.mainWhite,
         unselectedItemColor: ConstColor.greyColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
+            
             icon: Icon(Icons.home),
             label: 'Home',
           ),
