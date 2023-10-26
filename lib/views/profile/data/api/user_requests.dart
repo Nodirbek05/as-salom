@@ -37,4 +37,58 @@ class UserRequests {
       return ResponseError.noInternet;
     }
   }
+
+  static Future<ResponseData> updateName(String name, num userId) async {
+    try {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      var token = _prefs.getString('token');
+      final response = await http.patch(
+          Uri.parse('${ApiPaths.basicUrl}${ApiPaths.updateName}/$userId'),
+          headers: {
+            'Authorization': "Bearer $token",
+            'Content-Type': 'application/json'
+          },
+          body: json.encode(
+            {'name': name},
+          ));
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> updatePhone(String number, num userId) async {
+    try {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      var token = _prefs.getString('token');
+      final response = await http.patch(
+          Uri.parse('${ApiPaths.basicUrl}${ApiPaths.updateNumber}/$userId'),
+          headers: {
+            'Authorization': "Bearer $token",
+            'Content-Type': 'application/json'
+          },
+          body: json.encode(
+            {'phone': "+998 ${number.replaceAll("-", " ")}"},
+          ));
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
 }

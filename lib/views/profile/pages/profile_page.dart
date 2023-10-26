@@ -3,7 +3,8 @@ import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
-import 'package:assalomproject/widgets/nav_bar_page.dart';
+import 'package:assalomproject/views/profile/data/models/model_for_update.dart';
+import 'package:assalomproject/views/profile/pages/update_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,6 +43,7 @@ class _ProfilePageState extends State<ProfilePage>
     return DefaultTabController(
       length: myTabs.length,
       child: Scaffold(
+       
         appBar: AppBar(
           backgroundColor: ConstColor.mainWhite,
           bottom: const TabBar(
@@ -283,21 +285,38 @@ class _ProfilePageState extends State<ProfilePage>
                         CircleAvatar(
                           radius: 58.r,
                           backgroundColor: ConstColor.dotColor,
+                          child: Icon(
+                            Icons.person_outline_outlined,
+                            size: 70,
+                            color: ConstColor.mainBlack.withOpacity(.7),
+                          ),
                         ),
-                        ScreenUtil().setVerticalSpacing(
-                          25.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              state.profilData.data.name.toString(),
-                              style: Styles.styles700sp20Black,
-                            ),
-                            SvgPicture.asset(
-                              ConstIcons.pensil,
-                            ),
-                          ],
+                        ScreenUtil().setVerticalSpacing(25.h),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              UpdateUserDataPage.routeName,
+                              arguments: ModelForUpdate(
+                                name: state.profilData.data.name.toString(),
+                                part: "Имя",
+                                phone: state.profilData.data.phone.toString(),
+                                userId: state.profilData.data.id,
+                              ),
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                state.profilData.data.name.toString(),
+                                style: Styles.styles700sp20Black,
+                              ),
+                              SvgPicture.asset(
+                                ConstIcons.pensil,
+                              ),
+                            ],
+                          ),
                         ),
                         ScreenUtil().setVerticalSpacing(25.h),
                         Text(
@@ -305,17 +324,31 @@ class _ProfilePageState extends State<ProfilePage>
                           style: Styles.style600sp14Black,
                         ),
                         ScreenUtil().setVerticalSpacing(10.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              state.profilData.data.phone.toString(),
-                              style: Styles.styles700sp20Black,
-                            ),
-                            SvgPicture.asset(
-                              ConstIcons.pensil,
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              UpdateUserDataPage.routeName,
+                              arguments: ModelForUpdate(
+                                name: state.profilData.data.name.toString(),
+                                part: "Номер",
+                                phone: state.profilData.data.phone.toString(),
+                                userId: state.profilData.data.id,
+                              ),
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                state.profilData.data.phone.toString(),
+                                style: Styles.styles700sp20Black,
+                              ),
+                              SvgPicture.asset(
+                                ConstIcons.pensil,
+                              ),
+                            ],
+                          ),
                         ),
                         ScreenUtil().setVerticalSpacing(25.h),
                         InkWell(

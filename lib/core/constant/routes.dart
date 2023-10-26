@@ -11,7 +11,10 @@ import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
+import 'package:assalomproject/views/profile/data/logic/update_name_bloc/update_name_bloc.dart';
+import 'package:assalomproject/views/profile/data/models/model_for_update.dart';
 import 'package:assalomproject/views/profile/pages/profile_page.dart';
+import 'package:assalomproject/views/profile/pages/update_page.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +58,7 @@ abstract class Routes {
       case BasketPage.routeName:
         return MaterialPageRoute(builder: (_) => const BasketPage());
 
-         case ChoosePaymentPage.routeName:
+      case ChoosePaymentPage.routeName:
         return MaterialPageRoute(builder: (_) => const ChoosePaymentPage());
 
       case DrawerPage.routeName:
@@ -64,6 +67,24 @@ abstract class Routes {
         return MaterialPageRoute(builder: (_) => const ProductDetailPage());
       case SplashScreen.routeName:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+
+      case UpdateUserDataPage.routeName:
+        final data = settings.arguments as ModelForUpdate;
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => UpdateNameBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => GetUserProfileBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => VerificationBloc(),
+                    ),
+                  ],
+                  child: UpdateUserDataPage(data: data),
+                ));
       default:
         return MaterialPageRoute(builder: (_) => const LanguagePage());
     }

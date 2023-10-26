@@ -5,4 +5,6 @@ class ApiPaths {
   static String verification = "/confirm_code";
   static String login = "/login_app";
   static String getUser = "/get_user";
+  static String updateName = "/change_name";
+  static String updateNumber = "/change_phone";
 }

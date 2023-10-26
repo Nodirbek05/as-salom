@@ -128,7 +128,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               ));
                         }
                         // Navigator.pushNamed(context, MainPage.routeName);
-                       
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -176,8 +175,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             // Navigator.pushNamed(context, MainPage.routeName);
                             // Navigator.pushNamedAndRemoveUntil(context,
                             // CustomNavigatonBar.routeName, (route) => false);
-                             Navigator.pushNamedAndRemoveUntil(context,
-                            CustomNavigatonBar.routeName, (route) => false);
+                            // Navigator.pushNamedAndRemoveUntil(context,
+                            //     CustomNavigatonBar.routeName, (route) => false);
                           },
                           child: Container(
                             alignment: Alignment.center,
