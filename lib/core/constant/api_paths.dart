@@ -8,4 +8,5 @@ class ApiPaths {
   static String updateName = "/change_name";
   static String updateNumber = "/change_phone";
   static String getBanners = "/get_banners";
+  static String imageUrl = "https://as-salom.uz/assets/images/";
 }
