@@ -73,6 +73,13 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+  static final style400sp14Grey = TextStyle(
+    color: ConstColor.greyColor,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
+
   static final style600sp14Black = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 14.sp,
@@ -122,6 +129,13 @@ abstract class Styles {
 
   static final style400sp14Black = TextStyle(
     color: ConstColor.mainBlack,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
+
+  static final style400sp14Red = TextStyle(
+    color: ConstColor.redColor,
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     fontFamily: interFontFamily,

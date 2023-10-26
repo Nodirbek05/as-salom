@@ -7,4 +7,6 @@ abstract class ConstColor{
   static const Color as_salomText = Color(0xff2ACED0);
   static const Color greyColor = Color(0xff8B8B8B);
   static const Color dotColor = Color(0xffE3E3E3);
+
+  static const Color redColor = Color(0xffD63512);
 }
