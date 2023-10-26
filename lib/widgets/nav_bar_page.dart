@@ -3,8 +3,10 @@ import 'package:assalomproject/views/basket/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
+import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomNavigatonBar extends StatefulWidget {
@@ -21,7 +23,10 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
     MainPage(),
     const FavoritesPage(),
     const DrawerPage(),
-    const ProfilePage(),
+    BlocProvider(
+      create: (context) => GetUserProfileBloc(),
+      child: const ProfilePage(),
+    ),
     const BasketPage(),
   ];
 
@@ -83,7 +88,6 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
         unselectedItemColor: ConstColor.greyColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            
             icon: Icon(Icons.home),
             label: 'Home',
           ),

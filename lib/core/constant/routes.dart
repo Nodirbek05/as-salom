@@ -6,8 +6,10 @@ import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
+import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
+import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/pages/profile_page.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
@@ -43,16 +45,21 @@ abstract class Routes {
       case FavoritesPage.routeName:
         return MaterialPageRoute(builder: (_) => const FavoritesPage());
       case ProfilePage.routeName:
-        return MaterialPageRoute(builder: (_) => const ProfilePage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => GetUserProfileBloc(),
+                  child: const ProfilePage(),
+                ));
 
-        case BasketPage.routeName:
+      case BasketPage.routeName:
         return MaterialPageRoute(builder: (_) => const BasketPage());
 
       case DrawerPage.routeName:
         return MaterialPageRoute(builder: (_) => const DrawerPage());
       case ProductDetailPage.routeName:
         return MaterialPageRoute(builder: (_) => const ProductDetailPage());
-
+      case SplashScreen.routeName:
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       default:
         return MaterialPageRoute(builder: (_) => const LanguagePage());
     }

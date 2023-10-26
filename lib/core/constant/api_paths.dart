@@ -4,4 +4,5 @@ class ApiPaths {
   static String getCode = "/get_code";
   static String verification = "/confirm_code";
   static String login = "/login_app";
+  static String getUser = "/get_user";
 }

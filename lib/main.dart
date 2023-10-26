@@ -1,31 +1,40 @@
 import 'package:assalomproject/core/constant/routes.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
+import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences _prefs = await SharedPreferences.getInstance();
+  bool hasRegistered = _prefs.getString('token') != null;
+  runApp(MyApp(hasRegistered: hasRegistered));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool hasRegistered;
+  const MyApp({super.key, required this.hasRegistered});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      initialRoute: SplashScreen.routeName,
+      title: 'As-Salom',
+      // initialRoute: SplashScreen.routeName,
       onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         scaffoldBackgroundColor: Colors.white,
-
         useMaterial3: true,
       ),
-      home: const ScreenUtilInit(
-          designSize: Size(375, 812), child: SplashScreen(),),
+      home: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        child:
+            hasRegistered ? const CustomNavigatonBar() : const SplashScreen(),
+      ),
     );
   }
 }
