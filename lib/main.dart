@@ -21,11 +21,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         scaffoldBackgroundColor: Colors.white,
-
         useMaterial3: true,
       ),
       home: const ScreenUtilInit(
-          designSize: Size(375, 812), child: SplashScreen(),),
+        designSize: Size(375, 812),
+        child: SplashScreen(),
+      ),
     );
   }
 }

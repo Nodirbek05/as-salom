@@ -1,6 +1,7 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,37 +13,190 @@ class BasketPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomSheet: Container(
-      //   height: 80.h,
-      //   width: double.infinity,
-      //   decoration: BoxDecoration(
-      //     borderRadius: BorderRadius.only(
-      //       topLeft: Radius.circular(10.r),
-      //       topRight: Radius.circular(10.r),
-      //     ),
-      //   ),
-      //   child: Column(
-      //     children: [
-      //       Text(
-      //         "Итого к оплате:50 000 сум",
-      //         style: Styles.style600sp18Black,
-      //       ),
-      //       ScreenUtil().setVerticalSpacing(5),
-      //       Container(
-      //         alignment: Alignment.center,
-      //         height: 45.h,
-      //         width: 328.w,
-      //         decoration: BoxDecoration(
-      //             color: ConstColor.as_salomText,
-      //             borderRadius: BorderRadius.circular(50.r)),
-      //         child: Text(
-      //           "Оформить заказ",
-      //           style: Styles.buttonText,
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      bottomSheet: Container(
+        height: 80.h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.r),
+            topRight: Radius.circular(10.r),
+          ),
+        ),
+        child: Column(
+          children: [
+            Text(
+              "Итого к оплате:50 000 сум",
+              style: Styles.style600sp18Black,
+            ),
+            ScreenUtil().setVerticalSpacing(5),
+            InkWell(
+              onTap: () {
+                showDialog<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: ConstColor.mainWhite,
+                      insetPadding: EdgeInsets.symmetric(
+                        horizontal: 15.w,
+                      ),
+                      // title: const Text('Basic dialog title'),
+                      content: Container(
+                        // color: ConstColor.mainWhite,
+                        height: 500.h,
+                        width: 350.w,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Состав заказа:",
+                                  style: Styles.style600sp18Black,
+                                ),
+                                const Spacer(),
+                                InkWell(
+                                  radius: 30.r,
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: SvgPicture.asset(
+                                    ConstIcons.xbutton,
+                                    height: 20.h,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ScreenUtil().setVerticalSpacing(15.h),
+                            SizedBox(
+                              height: 350.h,
+                              child: ListView(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      bottom: 10.h,
+                                    ),
+                                    height: 40.h,
+                                    width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: ConstColor.greyColor,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Coca-Cola 1.5 л",
+                                          style: Styles.style400sp14Black,
+                                        ),
+                                        const Spacer(),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "х2",
+                                              style: Styles.style400sp14Grey,
+                                            ),
+                                            ScreenUtil()
+                                                .setHorizontalSpacing(10),
+                                            Text(
+                                              "25 000 сум",
+                                              style: Styles.style400sp14Black,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      bottom: 10.h,
+                                    ),
+                                    height: 40.h,
+                                    width: double.infinity,
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: ConstColor.greyColor,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Coca-Cola 1.5 л",
+                                          style: Styles.style400sp14Black,
+                                        ),
+                                        const Spacer(),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "х2",
+                                              style: Styles.style400sp14Grey,
+                                            ),
+                                            ScreenUtil()
+                                                .setHorizontalSpacing(10),
+                                            Text(
+                                              "25 000 сум",
+                                              style: Styles.style400sp14Black,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Spacer(),
+                            Text(
+                              "*Оплаченный заказ отмене не подлежит",
+                              style: Styles.style400sp14Red,
+                            ),
+                            ScreenUtil().setVerticalSpacing(10),
+                            InkWell(
+                              radius: 50.r,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  ChoosePaymentPage.routeName,
+                                );
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 45.h,
+                                width: 328.w,
+                                decoration: BoxDecoration(
+                                    color: ConstColor.as_salomText,
+                                    borderRadius: BorderRadius.circular(50.r)),
+                                child: Text(
+                                  "Подтвердить",
+                                  style: Styles.buttonText,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 45.h,
+                width: 328.w,
+                decoration: BoxDecoration(
+                    color: ConstColor.as_salomText,
+                    borderRadius: BorderRadius.circular(50.r)),
+                child: Text(
+                  "Оформить заказ",
+                  style: Styles.buttonText,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         automaticallyImplyLeading: false,

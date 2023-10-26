@@ -23,12 +23,13 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(10),
-            child: Container(
-              color: ConstColor.greyColor,
-              height: 0.5,
-              width: double.infinity,
-            )),
+          preferredSize: const Size.fromHeight(10),
+          child: Container(
+            color: ConstColor.greyColor,
+            height: 0.5,
+            width: double.infinity,
+          ),
+        ),
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Container(

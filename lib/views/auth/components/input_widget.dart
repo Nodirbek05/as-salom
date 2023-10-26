@@ -35,7 +35,7 @@ class _InputWidgetState extends State<InputWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label.toString()),
+        widget.label != null ? Text(widget.label.toString()) : SizedBox() ,
         const SizedBox(height: 7),
         TextFormField(
           maxLength: widget.maxLength,
