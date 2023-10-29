@@ -1,5 +1,5 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
-import 'package:assalomproject/views/basket/basket_page.dart';
+import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -20,14 +20,14 @@ class CustomNavigatonBar extends StatefulWidget {
 class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final List<Widget> screens = [
-    MainPage(),
+    const MainPage(),
     const FavoritesPage(),
     const DrawerPage(),
     BlocProvider(
       create: (context) => GetUserProfileBloc(),
       child: const ProfilePage(),
     ),
-    const BasketPage(),
+    BasketPage(),
   ];
 
   int _selectedIndex = 0;

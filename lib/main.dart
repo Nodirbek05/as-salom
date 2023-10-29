@@ -1,13 +1,17 @@
+import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/constant/routes.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Hive.initFlutter();
+  Hive.registerAdapter(BasketModelAdapter());
+  await Hive.openBox<BasketModel>('basketBox');
   SharedPreferences _prefs = await SharedPreferences.getInstance();
   bool hasRegistered = _prefs.getString('token') != null;
   runApp(MyApp(hasRegistered: hasRegistered));

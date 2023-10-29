@@ -1,7 +1,7 @@
 import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart';
 import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
 import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
-import 'package:assalomproject/views/basket/basket_page.dart';
+import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/paying_by_card_page.dart';
@@ -58,7 +58,7 @@ abstract class Routes {
                 ));
 
       case BasketPage.routeName:
-        return MaterialPageRoute(builder: (_) => const BasketPage());
+        return MaterialPageRoute(builder: (_) => BasketPage());
 
       case ChoosePaymentPage.routeName:
         return MaterialPageRoute(builder: (_) => const ChoosePaymentPage());
@@ -68,7 +68,7 @@ abstract class Routes {
 
       case PayingByCardPage.routeName:
         return MaterialPageRoute(builder: (_) => const PayingByCardPage());
-       case ConfirmAnimationPage.routeName:
+      case ConfirmAnimationPage.routeName:
         return MaterialPageRoute(builder: (_) => const ConfirmAnimationPage());
       case ProductDetailPage.routeName:
         return MaterialPageRoute(builder: (_) => const ProductDetailPage());

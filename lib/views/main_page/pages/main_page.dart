@@ -137,7 +137,7 @@ class _MainPageState extends State<MainPage> {
             //   ),
             // ),
             ScreenUtil().setVerticalSpacing(35),
-           
+
             BlocProvider(
               create: (context) => GetSpesificProductsBloc(),
               child: const SpesificProductsWidget(),
