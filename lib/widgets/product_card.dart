@@ -1,5 +1,6 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
 import 'package:assalomproject/widgets/main_button.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,13 @@ class ProductCardWidget extends StatefulWidget {
   final int index;
   final bool withHeight;
   final double? height;
+  final ProductModel? product;
   const ProductCardWidget(
-      {super.key, required this.index, required this.withHeight, this.height});
+      {super.key,
+      required this.index,
+      required this.withHeight,
+      this.height,
+      this.product});
 
   @override
   State<ProductCardWidget> createState() => _ProductCardWidgetState();
@@ -50,15 +56,16 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       height: 110,
                     ),
                     Text(
-                      '19 000 сум',
+                      widget.product!.discount ?? '19 000 сум',
                       style: Styles.style600sp14Main,
                     ),
                     Text(
-                      '34 000 сум',
+                      widget.product!.price ?? '34 000 сум',
                       style: Styles.style400sp12GreyUnderline,
                     ),
                     Text(
-                      'Молоко 2,5 % “Простоквашино”...',
+                      widget.product!.name_ru ??
+                          'Молоко 2,5 % “Простоквашино”...',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.styles400sp16Black,

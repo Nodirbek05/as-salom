@@ -5,6 +5,7 @@ import 'package:assalomproject/core/common_models/status_codes.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/data/models/get_all_banners.dart';
+import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:http/http.dart' as http;
 
 class CommonRequests {
@@ -31,19 +32,39 @@ class CommonRequests {
 
   static Future<ResponseData> getCategories() async {
     // try {
-      final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}'),
-        headers: {'Content-Type': 'application/json'},
-      );
-      print(response.body);
-      switch (response.statusCode) {
-        case StatusCodes.ok:
-          return CategoriesModel.fromJson(response.body);
-        case StatusCodes.alreadyTaken:
-          return ErrorModel.fromJson(response.body);
-        default:
-          throw ErrorModel.fromJson(response.body);
-      }
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return CategoriesModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
+
+  static Future<ResponseData> getSpesificProducts() async {
+    // try {
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSelection}'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return SpesificProductsModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
     // } catch (e) {
     //   return ResponseError.noInternet;
     // }

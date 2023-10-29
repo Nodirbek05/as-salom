@@ -52,8 +52,9 @@ class _BannerPageState extends State<BannerPage> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image:  NetworkImage(
-                           ApiPaths.imageUrl +  bannerData.data![index].photo!.toString(),
+                            image: NetworkImage(
+                              ApiPaths.imageUrl +
+                                  bannerData.data![index].photo!.toString(),
                             ),
                           ),
                           borderRadius: BorderRadius.circular(15.r),
