@@ -9,7 +9,6 @@ class CategoriesModel extends ResponseData {
   CategoriesModel({
     required this.data,
   });
- 
 
   CategoriesModel copyWith({
     List<CategoryDataModel>? data,
@@ -21,21 +20,23 @@ class CategoriesModel extends ResponseData {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
+
     result.addAll({'data': data.map((x) => x.toMap()).toList()});
-  
+
     return result;
   }
 
   factory CategoriesModel.fromMap(Map<String, dynamic> map) {
     return CategoriesModel(
-      data: List<CategoryDataModel>.from(map['data']?.map((x) => CategoryDataModel.fromMap(x))),
+      data: List<CategoryDataModel>.from(
+          map['data']?.map((x) => CategoryDataModel.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CategoriesModel.fromJson(String source) => CategoriesModel.fromMap(json.decode(source));
+  factory CategoriesModel.fromJson(String source) =>
+      CategoriesModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'CategoriesModel(data: $data)';
@@ -43,9 +44,8 @@ class CategoriesModel extends ResponseData {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
-    return other is CategoriesModel &&
-      listEquals(other.data, data);
+
+    return other is CategoriesModel && listEquals(other.data, data);
   }
 
   @override

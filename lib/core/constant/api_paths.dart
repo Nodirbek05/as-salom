@@ -12,4 +12,5 @@ class ApiPaths {
   static String imageUrl = "https://as-salom.uz/assets/images/";
   static String getSelection = "/get_selection";
   static String getSubCategories = "/get_sub_selection";
+  static String search = "/search";
 }
