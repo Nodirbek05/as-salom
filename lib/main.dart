@@ -2,8 +2,10 @@ import 'package:assalomproject/core/common_models/hive_models/basket_model.dart'
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/routes.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
+import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,8 +41,12 @@ class MyApp extends StatelessWidget {
       ),
       home: ScreenUtilInit(
         designSize: const Size(375, 812),
-        child:
-            hasRegistered ? const CustomNavigatonBar() : const SplashScreen(),
+        child: hasRegistered
+            ?  BlocProvider(
+                create: (context) => GetAllCategoriesBloc(),
+                child:const CustomNavigatonBar(),
+              )
+            : const SplashScreen(),
       ),
     );
   }

@@ -2,9 +2,11 @@ import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
+import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/pages/profile_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +20,12 @@ class CustomNavigatonBar extends StatefulWidget {
 }
 
 class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
+  @override
+  void initState() {
+    context.read<GetAllCategoriesBloc>().add(GetCategories());
+    super.initState();
+  }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final List<Widget> screens = [
     const MainPage(),
@@ -43,44 +51,54 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: Drawer(
-        backgroundColor: ConstColor.mainWhite,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 30.h,
-          ),
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: const [
-              ListTile(
-                leading: Icon(Icons.favorite),
-                title: Text('Home'),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 15,
+      drawer: BlocBuilder<GetAllCategoriesBloc, GetAllCategoriesState>(
+        builder: (context, state) {
+          if (state is GetAllCategoriesInitial) {
+            return const Drawer(
+              child: Center(
+                child: CupertinoActivityIndicator(),
+              ),
+            );
+          } else if (state is GetAllCategoriesSuccess) {
+            final categoryData = state.categoryModel.data;
+            return Drawer(
+              backgroundColor: ConstColor.mainWhite,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0)),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: 30.h,
+                ),
+                child: ListView.builder(
+                  itemCount: categoryData.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: (){},
+                      leading: SizedBox(
+                        height: 20.h,
+                        width: 20.w,
+                        child: Image.network(
+                          categoryData[index].photo!,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      title: Text(categoryData[index].name_ru!),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      ),
+                    );
+                  },
                 ),
               ),
-              ListTile(
-                leading: Icon(Icons.favorite),
-                title: Text('Business'),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 15,
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite),
-                title: Text('School'),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 15,
-                ),
-              ),
-            ],
-          ),
-        ),
+            );
+          }
+          return const Drawer(
+            child: Center(
+              child: Text("NO Data"),
+            ),
+          );
+        },
       ),
       body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
