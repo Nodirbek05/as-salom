@@ -14,10 +14,7 @@ class ProductCardWidget extends StatefulWidget {
   final double? height;
   final ProductModel? product;
   const ProductCardWidget(
-      {super.key,
-      required this.withHeight,
-      this.height,
-      this.product});
+      {super.key, required this.withHeight, this.height, this.product});
 
   @override
   State<ProductCardWidget> createState() => _ProductCardWidgetState();
@@ -162,11 +159,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.photo![0],
                         int.parse(widget.product!.id!.toString()),
                         widget.product!.price!,
-                        "type of good")
+                        "type of good",
+                        widget.product!.discount!,
+                      )
                     : deleteProduct(int.parse(widget.product!.id!.toString()));
               },
               child: ValueListenableBuilder(
-                valueListenable: Hive.box<FavoritesModel>("favoritesBox").listenable(),
+                valueListenable:
+                    Hive.box<FavoritesModel>("favoritesBox").listenable(),
                 builder: (ctx, box, _) {
                   return isProductSavedInHive(
                           int.parse(widget.product!.id!.toString()))
@@ -206,13 +206,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     }
   }
 
-  void addToBox(String name, String image, int id, String price, String type) {
-
+  void addToBox(String name, String image, int id, String price, String type,
+      String discount) {
     final product = FavoritesModel()
       ..name = name
       ..id = id
       ..image = image
       ..price = price
+      ..discount = discount
       ..type = type;
 
     final box = Hive.box<FavoritesModel>('favoritesBox');
