@@ -3,9 +3,11 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_banners_bloc/get_all_banners_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/get_spesific_products_bloc/get_spesific_products_bloc.dart';
+import 'package:assalomproject/views/main_page/logic/get_sub_categories_bloc/get_sub_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/banner_page.dart';
 import 'package:assalomproject/views/main_page/pages/categories_widget.dart';
 import 'package:assalomproject/views/main_page/pages/spesific_producyts_widget.dart';
+import 'package:assalomproject/views/main_page/pages/sub_categories_widget.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -141,6 +143,11 @@ class _MainPageState extends State<MainPage> {
             BlocProvider(
               create: (context) => GetSpesificProductsBloc(),
               child: const SpesificProductsWidget(),
+            ),
+            ScreenUtil().setVerticalSpacing(35),
+            BlocProvider(
+              create: (context) => GetSubCategoriesBloc(),
+              child: const SubCategoriesWidget(),
             ),
             ScreenUtil().setVerticalSpacing(100),
           ],
