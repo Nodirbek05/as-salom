@@ -1,6 +1,9 @@
+import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class FavoritesPage extends StatelessWidget {
   static const routeName = "/favoritesPage";
@@ -19,7 +22,15 @@ class FavoritesPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: SizedBox(
+        child:  ValueListenableBuilder(valueListenable: Hive.box<FavoritesModel>("favoritesBox").listenable(), builder: (ctx, box, _){
+          final products = box.values.toList().cast<FavoritesModel>(); 
+          if(products.isEmpty){
+            return const Center(
+              child: Text("NO DATA"),
+            );
+          }
+
+          return SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: GridView.builder(
@@ -27,23 +38,31 @@ class FavoritesPage extends StatelessWidget {
             //   left: 20,
             //   // right: 15.w,
             // ),
-            gridDelegate:
-               const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-               mainAxisSpacing: 10,
-               childAspectRatio: 0.64,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              childAspectRatio: 0.64,
               //  mainAxisExtent: 300,
-                crossAxisSpacing: 10,
-                ),
-                itemCount: 10,
+              crossAxisSpacing: 10,
+            ),
+            itemCount: products.length,
             itemBuilder: (context, index) {
-              return ProductCardWidget(
-                index: index,
+              return  ProductCardWidget(
+                product: ProductModel(
+                  id: products[index].id,
+                  name_ru: products[index].name,
+                  photo: [products[index].image],
+                  type_good: products[index].type,
+                  price: products[index].price,
+                ),
                 withHeight: false,
-                
               );
             },
           ),
-        ),
+        );
+        })
+        
+        
       ),
     );
   }

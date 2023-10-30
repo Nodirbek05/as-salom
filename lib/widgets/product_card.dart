@@ -1,4 +1,5 @@
 import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
+import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
@@ -9,13 +10,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class ProductCardWidget extends StatefulWidget {
-  final int index;
   final bool withHeight;
   final double? height;
   final ProductModel? product;
   const ProductCardWidget(
       {super.key,
-      required this.index,
       required this.withHeight,
       this.height,
       this.product});
@@ -93,7 +92,6 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                    
                                       IconButton(
                                         splashRadius: 8.r,
                                         onPressed: () {
@@ -152,17 +150,45 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   ],
                 ),
               )),
-          const Positioned(
-              top: 10,
-              right: 10,
-              child: CircleAvatar(
-                backgroundColor: ConstColor.mainWhite,
-                radius: 17,
-                child: Icon(
-                  Icons.favorite,
-                  color: ConstColor.as_salomText,
-                ),
-              ))
+          Positioned(
+            top: 10,
+            right: 10,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20.r),
+              onTap: () {
+                !isProductSavedInHive(int.parse(widget.product!.id.toString()))
+                    ? addToBox(
+                        widget.product!.name_ru!,
+                        widget.product!.photo![0],
+                        int.parse(widget.product!.id!.toString()),
+                        widget.product!.price!,
+                        "type of good")
+                    : deleteProduct(int.parse(widget.product!.id!.toString()));
+              },
+              child: ValueListenableBuilder(
+                valueListenable: Hive.box<FavoritesModel>("favoritesBox").listenable(),
+                builder: (ctx, box, _) {
+                  return isProductSavedInHive(
+                          int.parse(widget.product!.id!.toString()))
+                      ? const CircleAvatar(
+                          backgroundColor: ConstColor.mainWhite,
+                          radius: 17,
+                          child: Icon(
+                            Icons.favorite,
+                            color: ConstColor.as_salomText,
+                          ),
+                        )
+                      : const CircleAvatar(
+                          backgroundColor: ConstColor.mainWhite,
+                          radius: 17,
+                          child: Icon(
+                            Icons.favorite_border,
+                          ),
+                        );
+                },
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -178,6 +204,19 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
         break;
       }
     }
+  }
+
+  void addToBox(String name, String image, int id, String price, String type) {
+
+    final product = FavoritesModel()
+      ..name = name
+      ..id = id
+      ..image = image
+      ..price = price
+      ..type = type;
+
+    final box = Hive.box<FavoritesModel>('favoritesBox');
+    box.add(product);
   }
 
   void decreaseQuantity(num drugId) {
@@ -232,8 +271,32 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     }
   }
 
+  void deleteProduct(int drugId) {
+    final box = Hive.box<FavoritesModel>('favoritesBox').values.toList();
+    final listProducts = Hive.box<FavoritesModel>('favoritesBox');
+    for (var product in box) {
+      if (drugId == product.id) {
+        print("Product REMOVED FROM BASKET");
+        listProducts.delete(product.key);
+        break;
+      }
+    }
+  }
+
   bool isProductInHive(int productId) {
     final savedProductList = Hive.box<BasketModel>('basketBox').values.toList();
+    var product = null;
+    for (var prod in savedProductList) {
+      if (prod.id == productId) {
+        product = prod;
+      }
+    }
+    return product != null;
+  }
+
+  bool isProductSavedInHive(int productId) {
+    final savedProductList =
+        Hive.box<FavoritesModel>('favoritesBox').values.toList();
     var product = null;
     for (var prod in savedProductList) {
       if (prod.id == productId) {

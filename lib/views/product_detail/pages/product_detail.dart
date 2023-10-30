@@ -134,7 +134,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         right: 10.w,
                       ),
                       child: ProductCardWidget(
-                          index: index, withHeight: true, height: 300.h),
+                          withHeight: true, height: 300.h),
                     );
                   },
                 ),
