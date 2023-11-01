@@ -1,8 +1,10 @@
+import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
+import 'package:assalomproject/widgets/main_button.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +28,94 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: Container(
+        color: Colors.white,
+        height: 60.h,
+        width: double.infinity,
+        child: ValueListenableBuilder(
+            valueListenable: Hive.box<BasketModel>('basketBox').listenable(),
+            builder: (ctx, basket, index) {
+              return isProductInHive(int.parse(widget.product.id.toString()))
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: 175,
+                          height: 50.h,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: ConstColor.as_salomText),
+                              color: ConstColor.mainWhite,
+                              borderRadius: BorderRadius.circular(50.r)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              IconButton(
+                                splashRadius: 8.r,
+                                onPressed: () {
+                                  if (getDrugQty(widget.product.id!) > 1) {
+                                    decreaseQuantity(widget.product.id!);
+                                    setState(() {});
+                                  } else {
+                                    deleteDrugFromBasket(widget.product.id!);
+                                  }
+                                },
+                                icon: const Icon(
+                                  Icons.remove,
+                                  color: ConstColor.as_salomText,
+                                ),
+                              ),
+                              Text(getDrugQty(widget.product.id!).toString(),
+                                  style: Styles.style500sp16Black),
+                              IconButton(
+                                splashRadius: 8.r,
+                                onPressed: () {
+                                  increaseQuantity(widget.product.id!);
+                                  setState(() {});
+                                },
+                                icon: const Icon(
+                                  Icons.add,
+                                  color: ConstColor.as_salomText,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.h,
+                            width: 175.w,
+                            decoration: BoxDecoration(
+                                color: ConstColor.as_salomText,
+                                borderRadius: BorderRadius.circular(50.r)),
+                            child: Text(
+                              "Kорзинa",
+                              style: Styles.buttonText,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: MainButtonWidget(
+                        text: "В корзину",
+                        onTap: () {
+                          addDrugToBasket(
+                              int.parse(widget.product.id.toString()),
+                              widget.product.name_ru.toString(),
+                              "test",
+                              widget.product.price.toString(),
+                              1);
+                        },
+                        width: double.infinity,
+                      ),
+                    );
+            }),
+      ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
@@ -221,6 +311,69 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
+  void increaseQuantity(num drugId) {
+    final box = Hive.box<BasketModel>('basketBox').values.toList();
+    for (var product in box) {
+      if (drugId == product.id) {
+        print("DRUG Quantity increase");
+        product.qty++;
+        print("DRUG Quantity ${product.qty}");
+        break;
+      }
+    }
+  }
+
+  void decreaseQuantity(num drugId) {
+    final box = Hive.box<BasketModel>('basketBox').values.toList();
+    for (var product in box) {
+      if (drugId == product.id) {
+        print("DRUG Quantity decrease");
+        product.qty--;
+        print("DRUG Quantity ${product.qty}");
+        break;
+      }
+    }
+  }
+
+  bool isProductInHive(int productId) {
+    final savedProductList = Hive.box<BasketModel>('basketBox').values.toList();
+    var product = null;
+    for (var prod in savedProductList) {
+      if (prod.id == productId) {
+        product = prod;
+      }
+    }
+    return product != null;
+  }
+
+  num getDrugQty(num drugId) {
+    num qty = 0;
+    final drugBasket = Hive.box<BasketModel>('basketBox').values.toList();
+    for (var prod in drugBasket) {
+      if (prod.id == drugId) {
+        qty = prod.qty;
+      }
+    }
+    return qty;
+  }
+
+  void addDrugToBasket(
+    int productId,
+    String name,
+    String type,
+    String price,
+    int qty,
+  ) {
+    final product = BasketModel()
+      ..id = productId
+      ..name = name
+      ..type = type
+      ..price = price
+      ..qty = qty;
+    final box = Hive.box<BasketModel>('basketBox');
+    box.add(product);
+  }
+
   void addToBox(String name, String image, int id, String price, String type,
       String discount) {
     final product = FavoritesModel()
@@ -257,5 +410,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       }
     }
     return product != null;
+  }
+
+  void deleteDrugFromBasket(num drugId) {
+    final box = Hive.box<BasketModel>('basketBox').values.toList();
+    final listProducts = Hive.box<BasketModel>('basketBox');
+    for (var product in box) {
+      if (drugId == product.id) {
+        print("DRUG REMOVED FROM BASKET");
+        listProducts.delete(product.key);
+        break;
+      }
+    }
   }
 }
