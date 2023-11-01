@@ -190,6 +190,13 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+  static final styles700sp16Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    fontFamily: interFontFamily,
+  );
+
   static final styles400sp14Black = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 14.sp,

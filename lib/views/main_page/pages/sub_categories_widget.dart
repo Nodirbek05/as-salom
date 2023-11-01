@@ -27,7 +27,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
         if (state is GetSubCategoriesSuccess) {
           var categories = state.data.data!.subcategories;
           return Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 15),
             child: SizedBox(
               width: double.infinity,
               height: 190.h,
