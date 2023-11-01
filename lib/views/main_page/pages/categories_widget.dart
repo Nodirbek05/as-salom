@@ -31,7 +31,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(
-                    left: 10.w,
+                    left: 15.w,
                   ),
                   child: Container(
                     padding: EdgeInsets.all(10.w),

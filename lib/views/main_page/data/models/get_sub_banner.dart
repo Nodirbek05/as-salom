@@ -4,16 +4,16 @@ import 'package:flutter/foundation.dart';
 
 import 'package:assalomproject/core/common_models/response_data.dart';
 
-class GetAllBanners extends ResponseData {
-  List<BannerData>? data;
-  GetAllBanners({
+class GetSubBannersModel extends ResponseData {
+  List<SubBanners>? data;
+  GetSubBannersModel({
     this.data,
   });
 
-  GetAllBanners copyWith({
-    List<BannerData>? data,
+  GetSubBannersModel copyWith({
+    List<SubBanners>? data,
   }) {
-    return GetAllBanners(
+    return GetSubBannersModel(
       data: data ?? this.data,
     );
   }
@@ -24,35 +24,35 @@ class GetAllBanners extends ResponseData {
     };
   }
 
-  factory GetAllBanners.fromMap(Map<String, dynamic> map) {
-    return GetAllBanners(
+  factory GetSubBannersModel.fromMap(Map<String, dynamic> map) {
+    return GetSubBannersModel(
       data: map['data'] != null
-          ? List<BannerData>.from(
-              map['data']?.map((x) => BannerData.fromMap(x)))
+          ? List<SubBanners>.from(
+              map['data']?.map((x) => SubBanners.fromMap(x)))
           : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory GetAllBanners.fromJson(String source) =>
-      GetAllBanners.fromMap(json.decode(source));
+  factory GetSubBannersModel.fromJson(String source) =>
+      GetSubBannersModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'GetAllBanners(data: $data)';
+  String toString() => 'GetSubBannersModel(data: $data)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is GetAllBanners && listEquals(other.data, data);
+    return other is GetSubBannersModel && listEquals(other.data, data);
   }
 
   @override
   int get hashCode => data.hashCode;
 }
 
-class BannerData extends ResponseData {
+class SubBanners extends ResponseData {
   num? id;
   String? photo;
   String? link;
@@ -61,7 +61,7 @@ class BannerData extends ResponseData {
   String? name_en;
   String? created_at;
   String? updated_at;
-  BannerData({
+  SubBanners({
     this.id,
     this.photo,
     this.link,
@@ -72,7 +72,7 @@ class BannerData extends ResponseData {
     this.updated_at,
   });
 
-  BannerData copyWith({
+  SubBanners copyWith({
     num? id,
     String? photo,
     String? link,
@@ -82,7 +82,7 @@ class BannerData extends ResponseData {
     String? created_at,
     String? updated_at,
   }) {
-    return BannerData(
+    return SubBanners(
       id: id ?? this.id,
       photo: photo ?? this.photo,
       link: link ?? this.link,
@@ -107,8 +107,8 @@ class BannerData extends ResponseData {
     };
   }
 
-  factory BannerData.fromMap(Map<String, dynamic> map) {
-    return BannerData(
+  factory SubBanners.fromMap(Map<String, dynamic> map) {
+    return SubBanners(
       id: map['id'],
       photo: map['photo'],
       link: map['link'],
@@ -122,19 +122,19 @@ class BannerData extends ResponseData {
 
   String toJson() => json.encode(toMap());
 
-  factory BannerData.fromJson(String source) =>
-      BannerData.fromMap(json.decode(source));
+  factory SubBanners.fromJson(String source) =>
+      SubBanners.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'BannerData(id: $id, photo: $photo, link: $link, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, created_at: $created_at, updated_at: $updated_at)';
+    return 'SubBanners(id: $id, photo: $photo, link: $link, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, created_at: $created_at, updated_at: $updated_at)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is BannerData &&
+    return other is SubBanners &&
         other.id == id &&
         other.photo == photo &&
         other.link == link &&

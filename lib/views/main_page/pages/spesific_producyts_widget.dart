@@ -32,7 +32,7 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
           return Padding(
             padding: EdgeInsets.only(
               left: 15.w,
-              bottom: 15.h,
+              // bottom: 15.h,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
                   padding: EdgeInsets.only(
                     top: 20.h,
                   ),
-                  height: 300.h,
+                  height: 280.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: products!.length,
