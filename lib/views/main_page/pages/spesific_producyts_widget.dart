@@ -1,9 +1,11 @@
+import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/logic/get_spesific_products_bloc/get_spesific_products_bloc.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class SpesificProductsWidget extends StatefulWidget {
   const SpesificProductsWidget({super.key});
@@ -71,4 +73,6 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
       },
     );
   }
+
+  
 }

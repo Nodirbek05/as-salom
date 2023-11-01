@@ -1,3 +1,4 @@
+import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
@@ -5,6 +6,7 @@ import 'package:assalomproject/views/main_page/data/models/spesific_products.dar
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -27,7 +29,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
-          // automaticallyImplyLeading: false,
+          automaticallyImplyLeading: false,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -57,7 +59,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ),
                 ],
               ),
-              // const SizedBox()
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.arrow_forward))
             ],
           ),
         ),
@@ -80,6 +83,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       itemBuilder: (context, index) {
                         return Container(
                           decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.black.withOpacity(.2),
+                                Colors.transparent
+                              ],
+                            ),
                             // color: ConstColor.as_salomText,
                             image: DecorationImage(
                                 image: NetworkImage(
@@ -112,6 +123,61 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ),
                       ),
                     ),
+                    Positioned(
+                      top: 12,
+                      // left: 16,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                                    size: 30,
+
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 25,
+                      right: 10,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(20.r),
+                        onTap: () {
+                          !isProductSavedInHive(
+                                  int.parse(widget.product.id.toString()))
+                              ? addToBox(
+                                  widget.product.name_ru!,
+                                  widget.product.photo![0],
+                                  int.parse(widget.product.id!.toString()),
+                                  widget.product.price!,
+                                  "type of good",
+                                  widget.product.discount!,
+                                )
+                              : deleteProduct(
+                                  int.parse(widget.product.id!.toString()));
+                        },
+                        child: ValueListenableBuilder(
+                          valueListenable:
+                              Hive.box<FavoritesModel>("favoritesBox")
+                                  .listenable(),
+                          builder: (ctx, box, _) {
+                            return isProductSavedInHive(
+                                    int.parse(widget.product.id!.toString()))
+                                ? Icon(
+                                    Icons.favorite,
+                                    color: ConstColor.as_salomText,
+                                    size: 30,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border,
+                                    size: 30,
+                                    color: Colors.white,
+                                  );
+                          },
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -154,5 +220,43 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
       ),
     );
+  }
+
+  void addToBox(String name, String image, int id, String price, String type,
+      String discount) {
+    final product = FavoritesModel()
+      ..name = name
+      ..id = id
+      ..image = image
+      ..price = price
+      ..discount = discount
+      ..type = type;
+
+    final box = Hive.box<FavoritesModel>('favoritesBox');
+    box.add(product);
+  }
+
+  void deleteProduct(int drugId) {
+    final box = Hive.box<FavoritesModel>('favoritesBox').values.toList();
+    final listProducts = Hive.box<FavoritesModel>('favoritesBox');
+    for (var product in box) {
+      if (drugId == product.id) {
+        print("Product REMOVED FROM BASKET");
+        listProducts.delete(product.key);
+        break;
+      }
+    }
+  }
+
+  bool isProductSavedInHive(int productId) {
+    final savedProductList =
+        Hive.box<FavoritesModel>('favoritesBox').values.toList();
+    var product = null;
+    for (var prod in savedProductList) {
+      if (prod.id == productId) {
+        product = prod;
+      }
+    }
+    return product != null;
   }
 }
