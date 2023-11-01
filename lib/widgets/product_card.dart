@@ -26,7 +26,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, ProductDetailPage.routeName);
+        Navigator.pushNamed(context, ProductDetailPage.routeName,
+            arguments: widget.product);
       },
       child: Stack(
         children: [

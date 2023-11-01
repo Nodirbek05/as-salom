@@ -10,6 +10,7 @@ import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
+import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
@@ -30,9 +31,9 @@ abstract class Routes {
 
       case CustomNavigatonBar.routeName:
         return MaterialPageRoute(
-            builder: (_) =>  BlocProvider(
+            builder: (_) => BlocProvider(
                   create: (context) => GetAllCategoriesBloc(),
-                  child:const CustomNavigatonBar(),
+                  child: const CustomNavigatonBar(),
                 ));
       case RegistrationPage.routeName:
         return MaterialPageRoute(
@@ -76,7 +77,9 @@ abstract class Routes {
       case ConfirmAnimationPage.routeName:
         return MaterialPageRoute(builder: (_) => const ConfirmAnimationPage());
       case ProductDetailPage.routeName:
-        return MaterialPageRoute(builder: (_) => const ProductDetailPage());
+        final product = settings.arguments as ProductModel;
+        return MaterialPageRoute(
+            builder: (_) => ProductDetailPage(product: product ));
       case SplashScreen.routeName:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
 
