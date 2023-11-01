@@ -1,14 +1,13 @@
-import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/logic/get_spesific_products_bloc/get_spesific_products_bloc.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/adapters.dart';
 
 class SpesificProductsWidget extends StatefulWidget {
-  const SpesificProductsWidget({super.key});
+  final int index;
+  const SpesificProductsWidget({super.key, required this.index});
 
   @override
   State<SpesificProductsWidget> createState() => _SpesificProductsWidgetState();
@@ -28,7 +27,7 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
         if (state is GetSpesificProductsInitial) {
           return const Center(child: CupertinoActivityIndicator());
         } else if (state is GetSpesificProductsSuccess) {
-          final products = state.spesificProducts.data![0].goods;
+          final products = state.spesificProducts.data![widget.index].goods;
           return Padding(
             padding: EdgeInsets.only(
               left: 15.w,
@@ -38,14 +37,14 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  state.spesificProducts.data![0].name_ru.toString(),
+                  state.spesificProducts.data![widget.index].name_ru.toString(),
                   style: Styles.styles700sp20Black,
                 ),
                 Container(
                   padding: EdgeInsets.only(
                     top: 20.h,
                   ),
-                  height: 280.h,
+                  height: 285.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: products!.length,
@@ -73,6 +72,4 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
       },
     );
   }
-
-  
 }

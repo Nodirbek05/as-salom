@@ -89,7 +89,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                           color: ConstColor.as_salomText),
                                       color: ConstColor.mainWhite,
                                       borderRadius:
-                                          BorderRadius.circular(12.r)),
+                                          BorderRadius.circular(50.r)),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,

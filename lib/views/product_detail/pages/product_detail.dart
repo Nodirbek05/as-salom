@@ -133,8 +133,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         icon: const Icon(
                           Icons.arrow_back,
                           color: Colors.white,
-                                    size: 30,
-
+                          size: 30,
                         ),
                       ),
                     ),

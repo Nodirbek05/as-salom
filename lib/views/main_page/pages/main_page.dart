@@ -1,4 +1,8 @@
+import 'package:assalomproject/core/common_models/error_model.dart';
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
+import 'package:assalomproject/core/common_models/response_data.dart';
+import 'package:assalomproject/core/common_models/status_codes.dart';
+import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
@@ -7,6 +11,7 @@ import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get
 import 'package:assalomproject/views/main_page/logic/get_spesific_products_bloc/get_spesific_products_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/get_sub_banners_bloc/get_sub_banners_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/get_sub_categories_bloc/get_sub_categories_bloc.dart';
+import 'package:assalomproject/views/main_page/pages/additional_products.dart';
 import 'package:assalomproject/views/main_page/pages/banner_page.dart';
 import 'package:assalomproject/views/main_page/pages/categories_widget.dart';
 import 'package:assalomproject/views/main_page/pages/spesific_producyts_widget.dart';
@@ -17,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class MainPage extends StatefulWidget {
   static const routeName = "/mainPage";
@@ -137,7 +143,7 @@ class _MainPageState extends State<MainPage> {
                     );
                   }
                   return SizedBox(
-                    height: 270.h,
+                    height: 310.h,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: products.length,
@@ -156,7 +162,7 @@ class _MainPageState extends State<MainPage> {
                               discount: products[index].discount,
                             ),
                             withHeight: true,
-                            height: 270.h,
+                            height: 310.h,
                           ),
                         );
                       },
@@ -166,26 +172,26 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             ScreenUtil().setVerticalSpacing(35),
-
-
             BlocProvider(
               create: (context) => GetSpesificProductsBloc(),
-              child: const SpesificProductsWidget(),
+              child: const SpesificProductsWidget(index: 0),
             ),
-
-            
-             SizedBox(
+            SizedBox(
               // height: 200.h,
               child: BlocProvider(
                 create: (context) => GetSubBannersBloc(),
-                child:const SubBannersPage(),
+                child: const SubBannersPage(),
               ),
             ),
             BlocProvider(
               create: (context) => GetSubCategoriesBloc(),
               child: const SubCategoriesWidget(),
             ),
-            ScreenUtil().setVerticalSpacing(100),
+            BlocProvider(
+              create: (context) => GetSpesificProductsBloc(),
+              child: const AdditionalProducts(),
+            ),
+            ScreenUtil().setVerticalSpacing(30),
           ],
         ),
       ),
