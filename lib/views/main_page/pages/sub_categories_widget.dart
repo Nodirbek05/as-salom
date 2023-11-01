@@ -1,3 +1,4 @@
+import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/logic/get_sub_categories_bloc/get_sub_categories_bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,10 +52,12 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                           width: 127.w,
                           decoration: BoxDecoration(
                             // color: Colors.red,
-                            image: const DecorationImage(
-                              image: NetworkImage(
-                                  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fphotos%2Ffruit&psig=AOvVaw2v4ixwgG4VljZvRPSBh4Nb&ust=1698446947585000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLj03YnmlIIDFQAAAAAdAAAAABAE"),
-                            ),
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  ApiPaths.imageUrl +
+                                      categories[index].photo.toString(),
+                                ),
+                                fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(15.r),
                             // color: ConstColor.grey300,
                           ),

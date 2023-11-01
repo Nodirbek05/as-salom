@@ -42,6 +42,7 @@ class _BannerPageState extends State<BannerPage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: bannerData.data!.length,
                   itemBuilder: (context, index) {
+                    print(bannerData.data![index].photo.toString());
                     return Padding(
                       padding: EdgeInsets.only(
                         left: 10.w,
@@ -51,14 +52,12 @@ class _BannerPageState extends State<BannerPage> {
                         height: 115.h,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          image: const DecorationImage(
-                            image: NetworkImage(
-                              "https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
-                              // ApiPaths.imageUrl +
-                              //     bannerData.data![index].photo!.toString(),
-                            ),
-                            fit: BoxFit.cover
-                          ),
+                          image:  DecorationImage(
+                              image: NetworkImage(
+                                ApiPaths.imageUrl +"manner/"+
+                                    bannerData.data![index].photo!.toString(),
+                              ),
+                              fit: BoxFit.cover),
                           borderRadius: BorderRadius.circular(15.r),
                           // color: ConstColor.as_salomText,
                         ),

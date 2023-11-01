@@ -1,5 +1,6 @@
 import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
+import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
@@ -44,11 +45,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         image: DecorationImage(
-                            image:
-                                AssetImage("assets/images/product_image.png")),
-                        borderRadius: BorderRadius.only(
+                            image: NetworkImage(
+                              ApiPaths.imageUrl +
+                                  widget.product!.photo![0].toString(),
+                            ),
+                            fit: BoxFit.cover),
+                        borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(15),
                             topRight: Radius.circular(15)),
                       ),

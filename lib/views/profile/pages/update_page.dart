@@ -231,6 +231,7 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
                         controller: controller,
                       )
                     : InputWidget(
+                      hintText: widget.data.phone.toString() .substring(5,17),
                         maxLength: 12,
                         inputFormatter: [
                           FilteringTextInputFormatter.digitsOnly,

@@ -59,7 +59,7 @@ class SubCategoriesModel extends ResponseData {
   String? name_uz;
   String? name_ru;
   String? name_en;
-  List<SubCategoriesModel>? subcategories;
+  List<SubCategoryModel>? subcategories;
   SubCategoriesModel({
     this.id,
     this.name_uz,
@@ -67,13 +67,14 @@ class SubCategoriesModel extends ResponseData {
     this.name_en,
     this.subcategories,
   });
+  
 
   SubCategoriesModel copyWith({
     num? id,
     String? name_uz,
     String? name_ru,
     String? name_en,
-    List<SubCategoriesModel>? subcategories,
+    List<SubCategoryModel>? subcategories,
   }) {
     return SubCategoriesModel(
       id: id ?? this.id,
@@ -86,24 +87,23 @@ class SubCategoriesModel extends ResponseData {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-
-    if (id != null) {
+  
+    if(id != null){
       result.addAll({'id': id});
     }
-    if (name_uz != null) {
+    if(name_uz != null){
       result.addAll({'name_uz': name_uz});
     }
-    if (name_ru != null) {
+    if(name_ru != null){
       result.addAll({'name_ru': name_ru});
     }
-    if (name_en != null) {
+    if(name_en != null){
       result.addAll({'name_en': name_en});
     }
-    if (subcategories != null) {
-      result.addAll(
-          {'subcategories': subcategories!.map((x) => x?.toMap()).toList()});
+    if(subcategories != null){
+      result.addAll({'subcategories': subcategories!.map((x) => x?.toMap()).toList()});
     }
-
+  
     return result;
   }
 
@@ -113,17 +113,13 @@ class SubCategoriesModel extends ResponseData {
       name_uz: map['name_uz'],
       name_ru: map['name_ru'],
       name_en: map['name_en'],
-      subcategories: map['subcategories'] != null
-          ? List<SubCategoriesModel>.from(
-              map['subcategories']?.map((x) => SubCategoriesModel.fromMap(x)))
-          : null,
+      subcategories: map['subcategories'] != null ? List<SubCategoryModel>.from(map['subcategories']?.map((x) => SubCategoryModel.fromMap(x))) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SubCategoriesModel.fromJson(String source) =>
-      SubCategoriesModel.fromMap(json.decode(source));
+  factory SubCategoriesModel.fromJson(String source) => SubCategoriesModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -133,26 +129,26 @@ class SubCategoriesModel extends ResponseData {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is SubCategoriesModel &&
-        other.id == id &&
-        other.name_uz == name_uz &&
-        other.name_ru == name_ru &&
-        other.name_en == name_en &&
-        listEquals(other.subcategories, subcategories);
+      other.id == id &&
+      other.name_uz == name_uz &&
+      other.name_ru == name_ru &&
+      other.name_en == name_en &&
+      listEquals(other.subcategories, subcategories);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name_uz.hashCode ^
-        name_ru.hashCode ^
-        name_en.hashCode ^
-        subcategories.hashCode;
+      name_uz.hashCode ^
+      name_ru.hashCode ^
+      name_en.hashCode ^
+      subcategories.hashCode;
   }
 }
 
-class SubcategoryModel {
+class SubCategoryModel {
   num? id;
   String? category_id;
   String? name_uz;
@@ -160,7 +156,7 @@ class SubcategoryModel {
   String? name_en;
   String? photo;
   Pivot? pivot;
-  SubcategoryModel({
+  SubCategoryModel({
     this.id,
     this.category_id,
     this.name_uz,
@@ -170,7 +166,7 @@ class SubcategoryModel {
     this.pivot,
   });
 
-  SubcategoryModel copyWith({
+  SubCategoryModel copyWith({
     num? id,
     String? category_id,
     String? name_uz,
@@ -179,7 +175,7 @@ class SubcategoryModel {
     String? photo,
     Pivot? pivot,
   }) {
-    return SubcategoryModel(
+    return SubCategoryModel(
       id: id ?? this.id,
       category_id: category_id ?? this.category_id,
       name_uz: name_uz ?? this.name_uz,
@@ -218,8 +214,8 @@ class SubcategoryModel {
     return result;
   }
 
-  factory SubcategoryModel.fromMap(Map<String, dynamic> map) {
-    return SubcategoryModel(
+  factory SubCategoryModel.fromMap(Map<String, dynamic> map) {
+    return SubCategoryModel(
       id: map['id'],
       category_id: map['category_id'],
       name_uz: map['name_uz'],
@@ -232,8 +228,8 @@ class SubcategoryModel {
 
   String toJson() => json.encode(toMap());
 
-  factory SubcategoryModel.fromJson(String source) =>
-      SubcategoryModel.fromMap(json.decode(source));
+  factory SubCategoryModel.fromJson(String source) =>
+      SubCategoryModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -244,7 +240,7 @@ class SubcategoryModel {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is SubcategoryModel &&
+    return other is SubCategoryModel &&
         other.id == id &&
         other.category_id == category_id &&
         other.name_uz == name_uz &&

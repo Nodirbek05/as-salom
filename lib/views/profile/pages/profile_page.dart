@@ -43,7 +43,6 @@ class _ProfilePageState extends State<ProfilePage>
     return DefaultTabController(
       length: myTabs.length,
       child: Scaffold(
-       
         appBar: AppBar(
           backgroundColor: ConstColor.mainWhite,
           bottom: const TabBar(
@@ -275,6 +274,7 @@ class _ProfilePageState extends State<ProfilePage>
               builder: (context, state) {
                 print(state);
                 if (state is GetUserProfileSuccess) {
+                  print(state.profilData.data.name.toString());
                   return Padding(
                     padding: EdgeInsets.only(
                       top: 70.h,
