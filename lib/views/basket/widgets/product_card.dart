@@ -1,4 +1,5 @@
 import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
+import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
@@ -48,6 +49,10 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                   height: 64.h,
                   width: 64.w,
                   decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            ApiPaths.imageUrl + widget.product.image),
+                        fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10.r),
                     color: ConstColor.dotColor,
                   ),

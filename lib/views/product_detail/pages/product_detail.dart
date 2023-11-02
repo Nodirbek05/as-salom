@@ -109,7 +109,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               widget.product.name_ru.toString(),
                               "test",
                               widget.product.price.toString(),
-                              1);
+                              1,
+                              widget.product.photo![0].toString());
                         },
                         width: double.infinity,
                       ),
@@ -363,12 +364,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     String type,
     String price,
     int qty,
+    String image,
   ) {
     final product = BasketModel()
       ..id = productId
       ..name = name
       ..type = type
       ..price = price
+      ..image = image
       ..qty = qty;
     final box = Hive.box<BasketModel>('basketBox');
     box.add(product);

@@ -139,7 +139,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         widget.product!.name_ru.toString(),
                                         "test",
                                         widget.product!.price.toString(),
-                                        1);
+                                        1,
+                                        widget.product!.photo![0].toString());
                                   },
                                   width: 140,
                                 );
@@ -254,12 +255,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     String type,
     String price,
     int qty,
+    String image,
   ) {
     final product = BasketModel()
       ..id = productId
       ..name = name
       ..type = type
       ..price = price
+      ..image = image
       ..qty = qty;
     final box = Hive.box<BasketModel>('basketBox');
     box.add(product);
