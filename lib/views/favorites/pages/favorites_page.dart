@@ -20,7 +20,8 @@ class FavoritesPage extends StatelessWidget {
           style: Styles.appBarText,
         ),
       ),
-      body: Padding(
+      body: 
+      Padding(
         padding: const EdgeInsets.all(20.0),
         child:  ValueListenableBuilder(valueListenable: Hive.box<FavoritesModel>("favoritesBox").listenable(), builder: (ctx, box, _){
           final products = box.values.toList().cast<FavoritesModel>(); 
@@ -30,7 +31,8 @@ class FavoritesPage extends StatelessWidget {
             );
           }
 
-          return SizedBox(
+          return 
+          SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: GridView.builder(

@@ -1,6 +1,8 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
+import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,25 +31,31 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               scrollDirection: Axis.horizontal,
               itemCount: categories.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                    left: 15.w,
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(10.w),
-                    height: 123.h,
-                    width: 127.w,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            ApiPaths.imageUrl +
-                                categories[index].photo.toString(),
-                          ),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(15.r),
-                      // color: ConstColor.grey300,
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, InsideCategoryPage.routeName,
+                        arguments: categories[index].name_ru);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 15.w,
                     ),
-                    child: Text(categories[index].name_ru.toString()),
+                    child: Container(
+                      padding: EdgeInsets.all(10.w),
+                      height: 123.h,
+                      width: 127.w,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              ApiPaths.imageUrl +
+                                  categories[index].photo.toString(),
+                            ),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.circular(15.r),
+                        // color: ConstColor.grey300,
+                      ),
+                      child: Text(categories[index].name_ru.toString()),
+                    ),
                   ),
                 );
               },

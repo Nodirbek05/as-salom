@@ -94,6 +94,13 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+  static final style400sp15Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: interFontFamily,
+  );
+
    static final style400sp16Black = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 16.sp,

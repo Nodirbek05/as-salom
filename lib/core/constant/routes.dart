@@ -10,6 +10,7 @@ import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
+import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -54,6 +55,15 @@ abstract class Routes {
       case MainPage.routeName:
         return MaterialPageRoute(builder: (_) => MainPage());
 
+      case InsideCategoryPage.routeName:
+        final productModel = settings.arguments as InsideCategoryPage;
+        return MaterialPageRoute(
+          builder: (_) => InsideCategoryPage(
+            model: productModel.model,
+            name: productModel.name,
+          ),
+        );
+
       case FavoritesPage.routeName:
         return MaterialPageRoute(builder: (_) => const FavoritesPage());
       case ProfilePage.routeName:
@@ -79,7 +89,7 @@ abstract class Routes {
       case ProductDetailPage.routeName:
         final product = settings.arguments as ProductModel;
         return MaterialPageRoute(
-            builder: (_) => ProductDetailPage(product: product ));
+            builder: (_) => ProductDetailPage(product: product));
       case SplashScreen.routeName:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
 
