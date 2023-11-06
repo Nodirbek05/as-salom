@@ -10,7 +10,10 @@ import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
+import 'package:assalomproject/views/inside_category/inside_cat_first_bloc/inside_cat_first_bloc.dart';
+import 'package:assalomproject/views/inside_category/pages/inside_cat_first_page.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
+import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -78,6 +81,18 @@ abstract class Routes {
 
       case ChoosePaymentPage.routeName:
         return MaterialPageRoute(builder: (_) => const ChoosePaymentPage());
+
+      case InsideCatFirstPage.routeName:
+        final subCategories = settings.arguments as InsideCatFirstPage;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => InsideCatFirstBloc(),
+                  child: InsideCatFirstPage(
+                    name: subCategories.name,
+                    id: subCategories.id,
+                  
+                  ),
+                ));
 
       case DrawerPage.routeName:
         return MaterialPageRoute(builder: (_) => const DrawerPage());

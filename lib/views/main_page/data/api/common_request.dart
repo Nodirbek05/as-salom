@@ -6,6 +6,7 @@ import 'package:assalomproject/core/common_models/response_data.dart';
 import 'package:assalomproject/core/common_models/status_codes.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
+import 'package:assalomproject/views/main_page/data/models/category_inner_model.dart';
 import 'package:assalomproject/views/main_page/data/models/get_all_banners.dart';
 import 'package:assalomproject/views/main_page/data/models/get_sub_banner.dart';
 import 'package:assalomproject/views/main_page/data/models/search_model.dart';
@@ -36,7 +37,7 @@ class CommonRequests {
     }
   }
 
-   static Future<ResponseData> getSubBanners() async {
+  static Future<ResponseData> getSubBanners() async {
     try {
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubBanners}'),
@@ -56,20 +57,36 @@ class CommonRequests {
     }
   }
 
-
-
-
-
   static Future<ResponseData> getCategories() async {
+    try {
+      final response = await http.get(
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}'),
+        headers: {'Content-Type': 'application/json'},
+      );
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return CategoriesModel.fromJson(response.body);
+        case StatusCodes.alreadyTaken:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> getInsideCategories(int id) async {
     // try {
     final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}'),
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.insideCat}$id'),
       headers: {'Content-Type': 'application/json'},
     );
     print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
-        return CategoriesModel.fromJson(response.body);
+        return CategoryInnerModel.fromJson(response.body);
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:

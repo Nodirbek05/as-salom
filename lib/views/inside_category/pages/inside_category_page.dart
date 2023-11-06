@@ -111,7 +111,8 @@ class InsideCategoryPage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: double.infinity,
-              child: GridView.builder(
+              child: 
+              GridView.builder(
                 // padding: EdgeInsets.only(
                 //   left: 20,
                 //   // right: 15.w,
