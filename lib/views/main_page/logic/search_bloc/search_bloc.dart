@@ -17,7 +17,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     final response = await CommonRequests.searchProducts(event.query);
     if (response is SearchModel) {
       emit(SearchSuccess(data: response));
-      print("GET ALL PRODUCTS SUCCESS ${response}");
+      print("GET SEARCH DATA **************** ${response}");
     } else if (response is ErrorModel) {
       emit(SearchFail(errorData: response));
       print("GET ALL PRODUCTS ERROR");

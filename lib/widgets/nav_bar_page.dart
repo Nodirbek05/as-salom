@@ -3,6 +3,7 @@ import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
+import 'package:assalomproject/views/main_page/logic/search_bloc/search_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/pages/profile_page.dart';
@@ -28,7 +29,10 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final List<Widget> screens = [
-    const MainPage(),
+    BlocProvider(
+      create: (context) => SearchBloc(),
+      child: const MainPage(),
+    ),
     const FavoritesPage(),
     const DrawerPage(),
     BlocProvider(
@@ -73,7 +77,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                   itemCount: categoryData.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      onTap: (){},
+                      onTap: () {},
                       leading: SizedBox(
                         height: 20.h,
                         width: 20.w,
