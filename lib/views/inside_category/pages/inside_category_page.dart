@@ -1,25 +1,36 @@
-import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/inside_category/components/filter_drawer.dart';
+import 'package:assalomproject/views/inside_category/filter_bloc/filter_bloc.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class InsideCategoryPage extends StatelessWidget {
   static const routeName = "/insideCategoryPage";
-  const InsideCategoryPage(
-      {super.key, required this.model, required this.name});
+  InsideCategoryPage(
+      {super.key, required this.model, required this.name, required this.id});
+
+  final GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
 
   final List<ProductModel> model;
   final String name;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: drawerKey,
+      drawer: BlocProvider(
+        create: (context) => FilterBloc(),
+        child: FilterDrawer(
+          id: id,
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         bottom: PreferredSize(
@@ -101,18 +112,21 @@ class InsideCategoryPage extends StatelessWidget {
                       style: Styles.style400sp15Black,
                     ),
                     ScreenUtil().setHorizontalSpacing(5),
-                    SvgPicture.asset(
-                      ConstIcons.filter,
+                    GestureDetector(
+                      onTap: () {
+                        drawerKey.currentState!.openDrawer();
+                      },
+                      child: SvgPicture.asset(
+                        ConstIcons.filter,
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
-            SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: 
-              GridView.builder(
+            Expanded(
+              child: GridView.builder(
+                shrinkWrap: true,
                 // padding: EdgeInsets.only(
                 //   left: 20,
                 //   // right: 15.w,

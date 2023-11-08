@@ -1,7 +1,9 @@
+import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
+import 'package:assalomproject/views/inside_category/pages/inside_cat_first_page.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/search_bloc/search_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -77,17 +79,24 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                   itemCount: categoryData.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, InsideCatFirstPage.routeName,
+                            arguments: InsideCatFirstPage(
+                                id: int.parse(
+                                    categoryData[index].id!.toString()),
+                                name: categoryData[index].name_ru!));
+                      },
                       leading: SizedBox(
                         height: 20.h,
                         width: 20.w,
                         child: Image.network(
-                          categoryData[index].photo!,
+                          ApiPaths.imageUrl + categoryData[index].photo!,
                           fit: BoxFit.cover,
                         ),
                       ),
                       title: Text(categoryData[index].name_ru!),
-                      trailing: Icon(
+                      trailing: const Icon(
                         Icons.arrow_forward_ios,
                         size: 15,
                       ),

@@ -2,10 +2,6 @@ import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/inside_category/inside_cat_first_bloc/inside_cat_first_bloc.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
-import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
-import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
-import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
-import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,9 +66,10 @@ class _InsideCatFirstPageState extends State<InsideCatFirstPage> {
                     onTap: () {
                       Navigator.pushNamed(context, InsideCategoryPage.routeName,
                           arguments: InsideCategoryPage(
+                              id: int.parse(
+                                  state.modelData.category.id!.toString()),
                               model: state.modelData.goods!.data!,
-                              name: state.modelData.category
-                                  .name_ru!));
+                              name: state.modelData.category.name_ru!));
                     },
                     child: Container(
                       padding: EdgeInsets.all(10.w),
