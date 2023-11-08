@@ -21,7 +21,7 @@ class InsideCatFirstBloc
       emit(InsideCatFirstSuccess(modelData: response));
       print("GET Inside CATEGORIES SUCCESS ${response}");
       print("${response.category} GOOODS SHOULD COMING WITH DATA");
-      print("${response.category.goods!} GOOODS SHOULD COMING");
+      // print("${response.category.goods!} GOOODS SHOULD COMING");
     } else if (response is ErrorModel) {
       emit(InsideCatFirstFail(errorMessage: response.message!));
       print("GET Inside Banners ERROR");

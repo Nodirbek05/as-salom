@@ -61,6 +61,7 @@ abstract class Routes {
         final productModel = settings.arguments as InsideCategoryPage;
         return MaterialPageRoute(
           builder: (_) => InsideCategoryPage(
+            id: productModel.id,
             model: productModel.model,
             name: productModel.name,
           ),
