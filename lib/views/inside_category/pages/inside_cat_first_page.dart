@@ -35,6 +35,7 @@ class _InsideCatFirstPageState extends State<InsideCatFirstPage> {
       ),
       body: BlocBuilder<InsideCatFirstBloc, InsideCatFirstState>(
         builder: (context, state) {
+          print("STATE HEREEEE $state");
           if (state is InsideCatFirstFail) {
             return const Center(
               child: CupertinoActivityIndicator(),
@@ -66,9 +67,7 @@ class _InsideCatFirstPageState extends State<InsideCatFirstPage> {
                     onTap: () {
                       Navigator.pushNamed(context, InsideCategoryPage.routeName,
                           arguments: InsideCategoryPage(
-                              id: int.parse(
-                                  state.modelData.category.id!.toString()),
-                              model: state.modelData.goods!.data!,
+                              id: int.parse(stateData[index].id.toString()),
                               name: state.modelData.category.name_ru!));
                     },
                     child: Container(

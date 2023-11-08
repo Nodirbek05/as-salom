@@ -10,6 +10,7 @@ import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
+import 'package:assalomproject/views/inside_category/get_category_products_bloc/get_cat_products_bloc.dart';
 import 'package:assalomproject/views/inside_category/inside_cat_first_bloc/inside_cat_first_bloc.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_cat_first_page.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
@@ -60,10 +61,12 @@ abstract class Routes {
       case InsideCategoryPage.routeName:
         final productModel = settings.arguments as InsideCategoryPage;
         return MaterialPageRoute(
-          builder: (_) => InsideCategoryPage(
-            id: productModel.id,
-            model: productModel.model,
-            name: productModel.name,
+          builder: (_) => BlocProvider(
+            create: (context) => GetCatProductsBloc(),
+            child: InsideCategoryPage(
+              id: productModel.id,
+              name: productModel.name,
+            ),
           ),
         );
 
@@ -90,7 +93,6 @@ abstract class Routes {
                   child: InsideCatFirstPage(
                     name: subCategories.name,
                     id: subCategories.id,
-                  
                   ),
                 ));
 

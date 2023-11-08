@@ -184,14 +184,14 @@ class CategoryGoods extends ResponseData {
   String? first_page_url;
   List<ProductModel>? data;
   List<LinksModel>? links;
-  String? from;
+  dynamic from;
   num? last_page;
   String? last_page_url;
   String? next_page_url;
   String? path;
   num? per_page;
   String? prev_page_url;
-  String? to;
+  dynamic to;
   num? total;
   CategoryGoods({
     this.current_page,
@@ -214,14 +214,14 @@ class CategoryGoods extends ResponseData {
     String? first_page_url,
     List<ProductModel>? data,
     List<LinksModel>? links,
-    String? from,
+    dynamic from,
     num? last_page,
     String? last_page_url,
     String? next_page_url,
     String? path,
     num? per_page,
     String? prev_page_url,
-    String? to,
+    dynamic to,
     num? total,
   }) {
     return CategoryGoods(
@@ -271,7 +271,7 @@ class CategoryGoods extends ResponseData {
           ? List<LinksModel>.from(
               map['links']?.map((x) => LinksModel.fromMap(x)))
           : null,
-      from: map['from'],
+      from: map['from'] != null ? map['from'] : null,
       last_page: map['last_page'],
       last_page_url: map['last_page_url'],
       next_page_url: map['next_page_url'],

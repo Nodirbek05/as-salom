@@ -13,6 +13,7 @@ import 'package:assalomproject/views/main_page/data/models/get_sub_banner.dart';
 import 'package:assalomproject/views/main_page/data/models/search_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
+import 'package:assalomproject/views/main_page/data/models/sub_category_inner_model.dart';
 import 'package:http/http.dart' as http;
 
 class CommonRequests {
@@ -77,7 +78,8 @@ class CommonRequests {
     }
   }
 
-  static Future<ResponseData> getInsideCategories(int id) async {
+  static Future<Object> getInsideCategories(int id) async {
+    print(id);
     // try {
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.insideCat}$id'),
@@ -87,6 +89,28 @@ class CommonRequests {
     switch (response.statusCode) {
       case StatusCodes.ok:
         return CategoryInnerModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
+
+  static Future<ResponseData> getCatProducts(int id) async {
+    print(id);
+    // try {
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.subCategoryInner}$id'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print("RESPONSE DATA ${response.body}");
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return SubCategoryModelMain.fromJson(response.body);
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:

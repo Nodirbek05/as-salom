@@ -3,6 +3,7 @@ import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/inside_category/components/filter_drawer.dart';
 import 'package:assalomproject/views/inside_category/filter_bloc/filter_bloc.dart';
+import 'package:assalomproject/views/inside_category/get_category_products_bloc/get_cat_products_bloc.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -10,16 +11,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class InsideCategoryPage extends StatelessWidget {
+class InsideCategoryPage extends StatefulWidget {
   static const routeName = "/insideCategoryPage";
-  InsideCategoryPage(
-      {super.key, required this.model, required this.name, required this.id});
+  InsideCategoryPage({super.key, required this.name, required this.id});
 
-  final GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
-
-  final List<ProductModel> model;
   final String name;
   final int id;
+
+  @override
+  State<InsideCategoryPage> createState() => _InsideCategoryPageState();
+}
+
+class _InsideCategoryPageState extends State<InsideCategoryPage> {
+  final GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    context.read<GetCatProductsBloc>().add(GetProducts(id: widget.id));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class InsideCategoryPage extends StatelessWidget {
       drawer: BlocProvider(
         create: (context) => FilterBloc(),
         child: FilterDrawer(
-          id: id,
+          id: widget.id,
         ),
       ),
       appBar: AppBar(
@@ -99,7 +108,7 @@ class InsideCategoryPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              name,
+              widget.name,
               style: Styles.styles700sp20Black,
             ),
             Row(
@@ -124,35 +133,44 @@ class InsideCategoryPage extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(
-              child: GridView.builder(
-                shrinkWrap: true,
-                // padding: EdgeInsets.only(
-                //   left: 20,
-                //   // right: 15.w,
-                // ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 0.64,
-                  //  mainAxisExtent: 300,
-                  crossAxisSpacing: 10,
-                ),
-                itemCount: model.length,
-                itemBuilder: (context, index) {
-                  return ProductCardWidget(
-                    product: ProductModel(
-                      id: model[index].id,
-                      discount: model[index].discount,
-                      name_ru: model[index].name_ru,
-                      photo: [model[index].photo![0]],
-                      type_good: model[index].type_good,
-                      price: model[index].price,
+            BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
+              builder: (context, state) {
+                if (state is GetCatProductsSuccess) {
+                  var products = state.subcategoryModel.goods;
+                  return Expanded(
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      // padding: EdgeInsets.only(
+                      //   left: 20,
+                      //   // right: 15.w,
+                      // ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 0.64,
+                        //  mainAxisExtent: 300,
+                        crossAxisSpacing: 10,
+                      ),
+                      itemCount: products!.data!.length,
+                      itemBuilder: (context, index) {
+                        return ProductCardWidget(
+                          product: ProductModel(
+                            id: products.data![index].id,
+                            discount: products.data![index].discount,
+                            name_ru: products.data![index].name_ru,
+                            photo: [products.data![index].photo![0]],
+                            type_good: products.data![index].type_good,
+                            price: products.data![index].price,
+                          ),
+                          withHeight: false,
+                        );
+                      },
                     ),
-                    withHeight: false,
                   );
-                },
-              ),
+                }
+                return const SizedBox();
+              },
             ),
           ],
         ),

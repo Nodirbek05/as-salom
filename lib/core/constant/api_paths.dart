@@ -15,5 +15,6 @@ class ApiPaths {
   static String getSubCategories = "/get_sub_selection";
   static String search = "/search";
   static String insideCat = "/category_inner/";
+  static String subCategoryInner = "/subcategory_inner/";
   static String filter = "/filter_subcategory";
 }
