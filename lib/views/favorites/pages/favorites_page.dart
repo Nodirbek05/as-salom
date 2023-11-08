@@ -20,53 +20,52 @@ class FavoritesPage extends StatelessWidget {
           style: Styles.appBarText,
         ),
       ),
-      body: 
-      Padding(
-        padding: const EdgeInsets.all(20.0),
-        child:  ValueListenableBuilder(valueListenable: Hive.box<FavoritesModel>("favoritesBox").listenable(), builder: (ctx, box, _){
-          final products = box.values.toList().cast<FavoritesModel>(); 
-          if(products.isEmpty){
-            return const Center(
-              child: Text("NO DATA"),
-            );
-          }
+      body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: ValueListenableBuilder(
+              valueListenable:
+                  Hive.box<FavoritesModel>("favoritesBox").listenable(),
+              builder: (ctx, box, _) {
+                final products = box.values.toList().cast<FavoritesModel>();
+                if (products.isEmpty) {
+                  return const Center(
+                    child: Text("NO DATA"),
+                  );
+                }
 
-          return 
-          SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: GridView.builder(
-            // padding: EdgeInsets.only(
-            //   left: 20,
-            //   // right: 15.w,
-            // ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              childAspectRatio: 0.64,
-              //  mainAxisExtent: 300,
-              crossAxisSpacing: 10,
-            ),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return  ProductCardWidget(
-                product: ProductModel(
-                  id: products[index].id,
-                  discount: products[index].discount,
-                  name_ru: products[index].name,
-                  photo: [products[index].image],
-                  type_good: products[index].type,
-                  price: products[index].price,
-                ),
-                withHeight: false,
-              );
-            },
-          ),
-        );
-        })
-        
-        
-      ),
+                return SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: GridView.builder(
+                    // padding: EdgeInsets.only(
+                    //   left: 20,
+                    //   // right: 15.w,
+                    // ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 0.64,
+                      //  mainAxisExtent: 300,
+                      crossAxisSpacing: 10,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return ProductCardWidget(
+                        product: ProductModel(
+                          id: products[index].id,
+                          discount: products[index].discount,
+                          name_ru: products[index].name,
+                          photo: [products[index].image],
+                          type_good: products[index].type,
+                          price: products[index].price,
+                        ),
+                        withHeight: false,
+                      );
+                    },
+                  ),
+                );
+              })),
     );
   }
 }
