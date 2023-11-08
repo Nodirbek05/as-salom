@@ -13,7 +13,6 @@ import 'package:assalomproject/views/main_page/data/models/search_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CommonRequests {
   CommonRequests._();
@@ -139,8 +138,8 @@ class CommonRequests {
 
   static Future<ResponseData> searchProducts(String query) async {
     // try {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    var token = _prefs.getString('token');
+    // SharedPreferences _prefs = await SharedPreferences.getInstance();
+    // var token = _prefs.getString('token');
     final response =
         await http.post(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.search}'),
             headers: {'Content-Type': 'application/json'},

@@ -13,7 +13,6 @@ import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/views/inside_category/inside_cat_first_bloc/inside_cat_first_bloc.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_cat_first_page.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
-import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';

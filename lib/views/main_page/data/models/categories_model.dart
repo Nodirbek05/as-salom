@@ -114,7 +114,7 @@ class CategoryDataModel {
       'photo': photo,
       'created_at': created_at,
       'updated_at': updated_at,
-      'subcategories': subcategories?.map((x) => x?.toMap())?.toList(),
+      'subcategories': subcategories?.map((x) => x.toMap()).toList(),
       'goods': goods?.toMap(),
     };
   }
@@ -245,8 +245,8 @@ class CategoryGoods extends ResponseData {
     return {
       'current_page': current_page,
       'first_page_url': first_page_url,
-      'data': data?.map((x) => x?.toMap())?.toList(),
-      'links': links?.map((x) => x?.toMap())?.toList(),
+      'data': data?.map((x) => x.toMap()).toList(),
+      'links': links?.map((x) => x.toMap()).toList(),
       'from': from,
       'last_page': last_page,
       'last_page_url': last_page_url,

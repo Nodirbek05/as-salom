@@ -1,6 +1,5 @@
 import 'package:assalomproject/core/common_models/error_model.dart';
 import 'package:assalomproject/views/main_page/data/api/common_request.dart';
-import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/data/models/category_inner_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';

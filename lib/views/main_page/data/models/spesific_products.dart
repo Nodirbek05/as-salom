@@ -22,7 +22,7 @@ class SpesificProductsModel extends ResponseData {
     final result = <String, dynamic>{};
 
     if (data != null) {
-      result.addAll({'data': data!.map((x) => x?.toMap()).toList()});
+      result.addAll({'data': data!.map((x) => x.toMap()).toList()});
     }
 
     return result;
@@ -116,7 +116,7 @@ class CategoryModel {
       result.addAll({'updated_at': updated_at});
     }
     if (goods != null) {
-      result.addAll({'goods': goods!.map((x) => x?.toMap()).toList()});
+      result.addAll({'goods': goods!.map((x) => x.toMap()).toList()});
     }
 
     return result;

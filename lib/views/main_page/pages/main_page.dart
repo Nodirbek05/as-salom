@@ -1,8 +1,4 @@
-import 'package:assalomproject/core/common_models/error_model.dart';
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
-import 'package:assalomproject/core/common_models/response_data.dart';
-import 'package:assalomproject/core/common_models/status_codes.dart';
-import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
@@ -23,7 +19,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:http/http.dart' as http;
 
 class MainPage extends StatefulWidget {
   static const routeName = "/mainPage";

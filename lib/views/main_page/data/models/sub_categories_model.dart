@@ -101,7 +101,7 @@ class SubCategoriesModel extends ResponseData {
       result.addAll({'name_en': name_en});
     }
     if(subcategories != null){
-      result.addAll({'subcategories': subcategories!.map((x) => x?.toMap()).toList()});
+      result.addAll({'subcategories': subcategories!.map((x) => x.toMap()).toList()});
     }
   
     return result;
