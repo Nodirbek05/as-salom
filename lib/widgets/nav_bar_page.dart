@@ -1,5 +1,6 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
+import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
@@ -41,7 +42,10 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
       create: (context) => GetUserProfileBloc(),
       child: const ProfilePage(),
     ),
-    BasketPage(),
+    BlocProvider(
+      create: (context) => CreateOrderBloc(),
+      child: BasketPage(),
+    ),
   ];
 
   int _selectedIndex = 0;

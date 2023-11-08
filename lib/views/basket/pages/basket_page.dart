@@ -2,9 +2,12 @@ import 'package:assalomproject/core/common_models/hive_models/basket_model.dart'
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
+import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/basket/widgets/product_card.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -39,7 +42,7 @@ class BasketPage extends StatelessWidget {
               onTap: () {
                 showDialog<void>(
                   context: context,
-                  builder: (BuildContext context) {
+                  builder: (parentContext) {
                     return AlertDialog(
                       backgroundColor: ConstColor.mainWhite,
                       insetPadding: EdgeInsets.symmetric(
@@ -201,26 +204,54 @@ class BasketPage extends StatelessWidget {
                               style: Styles.style400sp14Red,
                             ),
                             ScreenUtil().setVerticalSpacing(10),
-                            InkWell(
-                              radius: 50.r,
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  ChoosePaymentPage.routeName,
+                            BlocConsumer<CreateOrderBloc, CreateOrderState>(
+                              listener: (context, state) {
+                                if (state is CreateOrderSuccess) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    ChoosePaymentPage.routeName,
+                                  );
+                                }
+                              },
+                              builder: (ctx, state) {
+                                return InkWell(
+                                  radius: 50.r,
+                                  onTap: () {
+                                    List<GoodModel> goods = [];
+                                    for (var i = 0; i < products.length; i++) {
+                                      goods.add(GoodModel(
+                                          goodId: products[i].id,
+                                          qty: products[i].qty,
+                                          sizes: [],
+                                          weight: products[i].qty));
+                                    }
+                                    context.read<CreateOrderBloc>().add(
+                                          Makeorder(
+                                            good: CreateOrderModel(
+                                              desc: "",
+                                              name: "",
+                                              phone: "",
+                                              paymentType: 2,
+                                              goods: goods,
+                                            ),
+                                          ),
+                                        );
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: 45.h,
+                                    width: 328.w,
+                                    decoration: BoxDecoration(
+                                        color: ConstColor.as_salomText,
+                                        borderRadius:
+                                            BorderRadius.circular(50.r)),
+                                    child: Text(
+                                      "Подтвердить",
+                                      style: Styles.buttonText,
+                                    ),
+                                  ),
                                 );
                               },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 45.h,
-                                width: 328.w,
-                                decoration: BoxDecoration(
-                                    color: ConstColor.as_salomText,
-                                    borderRadius: BorderRadius.circular(50.r)),
-                                child: Text(
-                                  "Подтвердить",
-                                  style: Styles.buttonText,
-                                ),
-                              ),
                             ),
                           ],
                         ),
