@@ -211,21 +211,49 @@ class CommonRequests {
     // try {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var token = _prefs.getString('token');
+    var list = [];
+    var sizes = [];
+
+    for (var i = 0; i < order.goods.length; i++) {
+      for (var a = 0; a < order.goods[i].sizes!.length; a++) {
+        Map<String, dynamic> size = {
+          "size_id": order.goods[i].sizes![a].sizeId,
+          "quantity": order.goods[i].sizes![a].qty
+        };
+        sizes.add(size);
+      }
+      Map<String, dynamic> data = {
+        "good_id": order.goods[i].goodId,
+        "quantity": order.goods[i].qty,
+        "weight": order.goods[i].weight,
+        "sizes": sizes
+      };
+      list.add(data);
+    }
+    print(list);
+    print(order.name);
+    print(order.desc);
+    print(order.phone);
+    print(order.paymentType);
+    print('${ApiPaths.basicUrl}${ApiPaths.createOrder}');
+    print(token);
     final response = await http.post(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.createOrder}'),
-        headers: {
-          'Authorization': "Bearer $token",
-          'Content-Type': 'application/json'
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.createOrder}'),
+      headers: {
+        'Authorization': "Bearer $token",
+        'Content-Type': 'application/json'
+      },
+      body: json.encode(
+        {
+          'name': order.name,
+          'phone': order.phone,
+          'desc': order.desc,
+          'payment_type': order.paymentType,
+          'goods': list
         },
-        body: json.encode(
-          {
-            'name': order.name,
-            'phone': order.phone,
-            'desc': order.desc,
-            'payment_type': order.paymentType,
-            'goods': order.goods
-          },
-        ));
+      ),
+    );
+    print(response.statusCode);
     print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
@@ -233,7 +261,7 @@ class CommonRequests {
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:
-        throw ErrorModel.fromJson(response.body);
+        throw ErrorModel();
     }
     // } catch (e) {
     //   return ResponseError.noInternet;

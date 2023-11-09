@@ -1,6 +1,7 @@
 import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart';
 import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
 import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
+import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
@@ -35,8 +36,15 @@ abstract class Routes {
 
       case CustomNavigatonBar.routeName:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => GetAllCategoriesBloc(),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => GetAllCategoriesBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => CreateOrderBloc(),
+                    ),
+                  ],
                   child: const CustomNavigatonBar(),
                 ));
       case RegistrationPage.routeName:
