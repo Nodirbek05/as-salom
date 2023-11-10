@@ -41,9 +41,6 @@ abstract class Routes {
                     BlocProvider(
                       create: (context) => GetAllCategoriesBloc(),
                     ),
-                    BlocProvider(
-                      create: (context) => CreateOrderBloc(),
-                    ),
                   ],
                   child: const CustomNavigatonBar(),
                 ));
@@ -91,7 +88,11 @@ abstract class Routes {
         return MaterialPageRoute(builder: (_) => BasketPage());
 
       case ChoosePaymentPage.routeName:
-        return MaterialPageRoute(builder: (_) => const ChoosePaymentPage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => CreateOrderBloc(),
+                  child: const ChoosePaymentPage(),
+                ));
 
       case InsideCatFirstPage.routeName:
         final subCategories = settings.arguments as InsideCatFirstPage;

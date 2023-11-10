@@ -84,7 +84,9 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      decreaseQuantity(widget.product.id);
+                      int.parse(widget.product.qty.toString()) == 1
+                          ? deleteDrugFromBasket(widget.product.id)
+                          : decreaseQuantity(widget.product.id);
                     });
                   },
                   child: Container(

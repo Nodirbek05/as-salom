@@ -26,6 +26,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    // print(widget.product.)
     return Scaffold(
       bottomSheet: Container(
         color: Colors.white,
