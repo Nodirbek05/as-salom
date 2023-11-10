@@ -79,10 +79,7 @@ abstract class Routes {
         return MaterialPageRoute(builder: (_) => const FavoritesPage());
       case ProfilePage.routeName:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => GetUserProfileBloc(),
-                  child: const ProfilePage(),
-                ));
+            builder: (_) => const ProfilePage());
 
       case BasketPage.routeName:
         return MaterialPageRoute(builder: (_) => BasketPage());

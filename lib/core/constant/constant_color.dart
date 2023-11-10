@@ -8,6 +8,10 @@ abstract class ConstColor{
   static const Color greyColor = Color(0xff8B8B8B);
   static const Color dotColor = Color(0xffE3E3E3);
   static const Color lightGrey = Color(0xffDBDBE5);
+  static const Color indigo = Color(0xff1260D6);
+  static const Color purpleDeep = Color(0xff8401FF);
+  static const Color newStatus = Color(0xffF4F4F4);
+
 
   static const Color grey300 = Color(0xffD1D1D1A6);
 
