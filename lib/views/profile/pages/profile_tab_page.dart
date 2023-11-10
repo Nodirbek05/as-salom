@@ -6,7 +6,6 @@ import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/ge
 import 'package:assalomproject/views/profile/data/models/model_for_update.dart';
 import 'package:assalomproject/views/profile/pages/update_page.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

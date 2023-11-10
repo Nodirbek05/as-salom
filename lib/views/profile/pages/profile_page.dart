@@ -54,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage>
           children: [
             BlocProvider(
               create: (context) => GetOrdersBloc(),
-              child: OrdersPage(),
+              child: const OrdersPage(),
             ),
             BlocProvider(
               create: (context) => GetUserProfileBloc(),

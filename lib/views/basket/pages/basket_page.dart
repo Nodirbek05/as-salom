@@ -5,7 +5,6 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/basket/widgets/product_card.dart';
-import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
