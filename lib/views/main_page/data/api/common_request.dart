@@ -267,26 +267,4 @@ class CommonRequests {
     //   return ResponseError.noInternet;
     // }
   }
-
-  static Future<ResponseData> getOrders() async {
-    // try {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    var token = _prefs.getString('token');
-    final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getOrders}'),
-      headers: {'Content-Type': 'application/json'},
-    );
-    print(response.body);
-    switch (response.statusCode) {
-      case StatusCodes.ok:
-        return SearchModel.fromJson(response.body);
-      case StatusCodes.alreadyTaken:
-        return ErrorModel.fromJson(response.body);
-      default:
-        throw ErrorModel.fromJson(response.body);
-    }
-    // } catch (e) {
-    //   return ResponseError.noInternet;
-    // }
-  }
 }
