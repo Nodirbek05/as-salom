@@ -1,4 +1,5 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
+import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
 import 'package:assalomproject/views/main_page/logic/payment_bloc/payment_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,30 @@ class ChoosePaymentPage extends StatefulWidget {
   State<ChoosePaymentPage> createState() => _ChoosePaymentPageState();
 }
 
-class _ChoosePaymentPageState extends State<ChoosePaymentPage> {
+class _ChoosePaymentPageState extends State<ChoosePaymentPage>
+    with WidgetsBindingObserver {
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     context.read<PaymentBloc>().add(PaymentOrder(id: widget.id));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("LIFECYCLE WORKED OR NOPE");
+    print(state.toString());
+    if (state == AppLifecycleState.resumed) {
+      print("resumed");
+      Navigator.pushNamed(context, ConfirmAnimationPage.routeName);
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   @override
