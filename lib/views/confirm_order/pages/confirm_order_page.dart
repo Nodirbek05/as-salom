@@ -5,7 +5,6 @@ import 'package:assalomproject/views/auth/components/input_widget.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
-import 'package:assalomproject/views/confirm_order/pages/paying_by_card_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +33,7 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage> {
 
   @override
   Widget build(BuildContext context) {
-    final products = basketBox.values.toList().cast<BasketModel>();
+  
 
     return Scaffold(
       bottomSheet: Container(
@@ -53,25 +52,25 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage> {
         ),
         child: InkWell(
           onTap: () {
-            List<GoodModel> goods = [];
-            for (var i = 0; i < products.length; i++) {
-              goods.add(GoodModel(
-                  goodId: products[i].id,
-                  qty: products[i].qty,
-                  sizes: [],
-                  weight: products[i].qty));
-            }
-            context.read<CreateOrderBloc>().add(
-                  Makeorder(
-                    good: CreateOrderModel(
-                      desc: commentController.text,
-                      name: nameController.text,
-                      phone: phoneController.text,
-                      paymentType: 2,
-                      goods: goods,
-                    ),
-                  ),
-                );
+            // List<GoodModel> goods = [];
+            // for (var i = 0; i < products.length; i++) {
+            //   goods.add(GoodModel(
+            //       goodId: products[i].id,
+            //       qty: products[i].qty,
+            //       sizes: [],
+            //       weight: products[i].qty));
+            // }
+            // context.read<CreateOrderBloc>().add(
+            //       Makeorder(
+            //         good: CreateOrderModel(
+            //           desc: commentController.text,
+            //           name: nameController.text,
+            //           phone: phoneController.text,
+            //           paymentType: 2,
+            //           goods: goods,
+            //         ),
+            //       ),
+            //     );
           },
           child: Container(
             alignment: Alignment.center,
