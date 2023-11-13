@@ -54,7 +54,7 @@ class _BannerPageState extends State<BannerPage> {
                         decoration: BoxDecoration(
                           image:  DecorationImage(
                               image: NetworkImage(
-                                ApiPaths.imageUrl +"manner/"+
+                                ApiPaths.imageUrl +
                                     bannerData.data![index].photo!.toString(),
                               ),
                               fit: BoxFit.cover),

@@ -17,7 +17,7 @@ class ApiPaths {
   static String insideCat = "/category_inner/";
   static String subCategoryInner = "/subcategory_inner/";
   static String filter = "/filter_subcategory";
-  static String createOrder = "/checkout";
+  static String createOrder = "/checkout_app";
   static String getOrders = "/get_orders";
   static String getPayments = "/get_payments/";
 }
