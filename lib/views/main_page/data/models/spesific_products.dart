@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import 'package:assalomproject/core/common_models/response_data.dart';
+import 'package:assalomproject/views/product_detail/data/models/get_pro_with_slug_model.dart';
 
 class SpesificProductsModel extends ResponseData {
   List<CategoryModel>? data;
@@ -195,10 +196,10 @@ class ProductModel {
   List<String>? photo;
   String? created_at;
   String? updated_at;
-  dynamic quantity;
+  dynamic? quantity;
   String? weight_bruto;
   Pivot? pivot;
-  
+  List<SizeData>? sizes;
   ProductModel({
     this.id,
     this.type_good,
@@ -221,11 +222,12 @@ class ProductModel {
     this.photo,
     this.created_at,
     this.updated_at,
-     this.quantity,
+    this.quantity,
     this.weight_bruto,
     this.pivot,
+    this.sizes,
   });
-  
+ 
 
   ProductModel copyWith({
     num? id,
@@ -249,9 +251,10 @@ class ProductModel {
     List<String>? photo,
     String? created_at,
     String? updated_at,
-    dynamic quantity,
+    dynamic? quantity,
     String? weight_bruto,
     Pivot? pivot,
+    List<SizeData>? sizes,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -278,6 +281,7 @@ class ProductModel {
       quantity: quantity ?? this.quantity,
       weight_bruto: weight_bruto ?? this.weight_bruto,
       pivot: pivot ?? this.pivot,
+      sizes: sizes ?? this.sizes,
     );
   }
 
@@ -347,12 +351,17 @@ class ProductModel {
     if(updated_at != null){
       result.addAll({'updated_at': updated_at});
     }
-    result.addAll({'quantity': quantity});
+    if(quantity != null){
+      result.addAll({'quantity': quantity});
+    }
     if(weight_bruto != null){
       result.addAll({'weight_bruto': weight_bruto});
     }
     if(pivot != null){
       result.addAll({'pivot': pivot!.toMap()});
+    }
+    if(sizes != null){
+      result.addAll({'sizes': sizes!.map((x) => x?.toMap()).toList()});
     }
   
     return result;
@@ -381,9 +390,10 @@ class ProductModel {
       photo: List<String>.from(map['photo']),
       created_at: map['created_at'],
       updated_at: map['updated_at'],
-      quantity: map['quantity'] ?? null,
+      quantity: map['quantity'],
       weight_bruto: map['weight_bruto'],
       pivot: map['pivot'] != null ? Pivot.fromMap(map['pivot']) : null,
+      sizes: map['sizes'] != null ? List<SizeData>.from(map['sizes']?.map((x) => SizeData.fromMap(x))) : null,
     );
   }
 
@@ -393,7 +403,7 @@ class ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, type_good: $type_good, category_id: $category_id, subcategory_id: $subcategory_id, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, slug: $slug, price: $price, discount: $discount, weight: $weight, weight_max: $weight_max, ikpu: $ikpu, barcode: $barcode, nds: $nds, desc_ru: $desc_ru, desc_uz: $desc_uz, desc_en: $desc_en, photo: $photo, created_at: $created_at, updated_at: $updated_at, quantity: $quantity, weight_bruto: $weight_bruto, pivot: $pivot)';
+    return 'ProductModel(id: $id, type_good: $type_good, category_id: $category_id, subcategory_id: $subcategory_id, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, slug: $slug, price: $price, discount: $discount, weight: $weight, weight_max: $weight_max, ikpu: $ikpu, barcode: $barcode, nds: $nds, desc_ru: $desc_ru, desc_uz: $desc_uz, desc_en: $desc_en, photo: $photo, created_at: $created_at, updated_at: $updated_at, quantity: $quantity, weight_bruto: $weight_bruto, pivot: $pivot, sizes: $sizes)';
   }
 
   @override
@@ -424,7 +434,8 @@ class ProductModel {
       other.updated_at == updated_at &&
       other.quantity == quantity &&
       other.weight_bruto == weight_bruto &&
-      other.pivot == pivot;
+      other.pivot == pivot &&
+      listEquals(other.sizes, sizes);
   }
 
   @override
@@ -452,7 +463,8 @@ class ProductModel {
       updated_at.hashCode ^
       quantity.hashCode ^
       weight_bruto.hashCode ^
-      pivot.hashCode;
+      pivot.hashCode ^
+      sizes.hashCode;
   }
 }
 

@@ -370,7 +370,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               height: 70,
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: 4,
+                                  itemCount: widget.product.sizes!.length,
                                   itemBuilder: (ctx, indx) {
                                     return Padding(
                                       padding: const EdgeInsets.only(right: 10),
@@ -386,10 +386,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                         width: 73,
                                         height: 70,
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Text("48-50"),
-                                            Text("L"),
+                                            Text(widget
+                                                .product.sizes![indx].number
+                                                .toString()),
+                                            Text(widget
+                                                .product.sizes![indx].name_ru
+                                                .toString()),
                                           ],
                                         ),
                                       ),
