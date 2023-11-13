@@ -4,6 +4,7 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
+import 'package:assalomproject/views/confirm_order/pages/Choose_payment_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,17 +13,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class ChoosePaymentPage extends StatefulWidget {
-  static const routeName = "/choosePayment";
-  const ChoosePaymentPage({
+class ConfirmOrderPage extends StatefulWidget {
+  static const routeName = "/confirmOrder";
+  const ConfirmOrderPage({
     super.key,
   });
 
   @override
-  State<ChoosePaymentPage> createState() => _ChoosePaymentPageState();
+  State<ConfirmOrderPage> createState() => _ConfirmOrderPageState();
 }
 
-class _ChoosePaymentPageState extends State<ChoosePaymentPage> {
+class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController commentController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -110,7 +111,8 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage> {
       body: BlocListener<CreateOrderBloc, CreateOrderState>(
         listener: (context, state) {
           if (state is CreateOrderSuccess) {
-            Navigator.pushNamed(context, ConfirmAnimationPage.routeName);
+            Navigator.pushNamed(context, ChoosePaymentPage.routeName,
+                arguments: state.data.order.id);
           }
         },
         child: Padding(
