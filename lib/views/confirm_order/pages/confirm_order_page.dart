@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -62,7 +63,28 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   sizes: [],
                   weight: products[i].qty));
             }
-            context.read<CreateOrderBloc>().add(
+
+            if (nameController.text.isEmpty || nameController.text.length < 4) {
+              Fluttertoast.showToast(
+                  msg: "Please fill your name",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.TOP,
+                  timeInSecForIosWeb: 1,
+                  textColor: Colors.white,
+                  backgroundColor: ConstColor.as_salomText,
+                  fontSize: 16.0);
+            } else if (phoneController.text.isEmpty ||
+                phoneController.text.length < 12) {
+              Fluttertoast.showToast(
+                  msg: "Please enter valuable number",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.TOP,
+                  timeInSecForIosWeb: 1,
+                  textColor: Colors.white,
+                  backgroundColor: ConstColor.as_salomText,
+                  fontSize: 16.0);
+            } else{
+              context.read<CreateOrderBloc>().add(
                   Makeorder(
                     good: CreateOrderModel(
                       desc: commentController.text,
@@ -73,6 +95,8 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                     ),
                   ),
                 );
+            }
+            
           },
           child: Container(
             alignment: Alignment.center,
@@ -130,11 +154,19 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   style: Styles.style400sp14Black,
                 ),
                 InputWidget(
+                  validateMode: AutovalidateMode.onUserInteraction,
+                  validator: (val) {
+                    if (val!.isEmpty) return 'Enter valid name';
+                  },
                   hintText: "Введите И.Ф.О",
                   controller: nameController,
                 ),
                 ScreenUtil().setVerticalSpacing(20),
                 InputWidget(
+                  validateMode: AutovalidateMode.onUserInteraction,
+                  validator: (val) {
+                    if (val!.isEmpty) return 'Enter valid number';
+                  },
                   maxLength: 12,
                   inputFormatter: [
                     FilteringTextInputFormatter.digitsOnly,
