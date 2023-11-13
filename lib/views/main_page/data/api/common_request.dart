@@ -11,6 +11,7 @@ import 'package:assalomproject/views/main_page/data/models/category_inner_model.
 import 'package:assalomproject/views/main_page/data/models/filter_model.dart';
 import 'package:assalomproject/views/main_page/data/models/get_all_banners.dart';
 import 'package:assalomproject/views/main_page/data/models/get_sub_banner.dart';
+import 'package:assalomproject/views/main_page/data/models/payment_types_model.dart';
 import 'package:assalomproject/views/main_page/data/models/search_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
@@ -258,6 +259,34 @@ class CommonRequests {
     switch (response.statusCode) {
       case StatusCodes.ok:
         return SuccessfulResponse();
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel();
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
+
+  static Future<ResponseData> payForOrder(int id) async {
+    // try {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var token = _prefs.getString('token');
+
+    print(token);
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getPayments}$id'),
+      headers: {
+        'Authorization': "Bearer $token",
+        'Content-Type': 'application/json'
+      },
+    );
+    print(response.statusCode);
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return PaymentTypesModel.fromJson(response.body);
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:

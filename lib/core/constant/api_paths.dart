@@ -19,4 +19,5 @@ class ApiPaths {
   static String filter = "/filter_subcategory";
   static String createOrder = "/checkout";
   static String getOrders = "/get_orders";
+  static String getPayments = "/get_payments/";
 }
