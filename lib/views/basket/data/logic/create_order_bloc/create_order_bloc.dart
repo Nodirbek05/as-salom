@@ -1,5 +1,4 @@
 import 'package:assalomproject/core/common_models/error_model.dart';
-import 'package:assalomproject/core/common_models/response_data.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/main_page/data/api/common_request.dart';
 import 'package:assalomproject/views/main_page/data/models/created_order_model.dart';

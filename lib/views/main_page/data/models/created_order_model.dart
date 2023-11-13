@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
 
 import 'package:assalomproject/core/common_models/response_data.dart';
 
