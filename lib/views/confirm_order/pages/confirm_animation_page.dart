@@ -1,6 +1,7 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/profile/pages/profile_page.dart';
+import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -44,7 +45,7 @@ class ConfirmAnimationPage extends StatelessWidget {
             ScreenUtil().setVerticalSpacing(10),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, ProfilePage.routeName);
+                Navigator.pushNamed(context, CustomNavigatonBar.routeName);
               },
               child: Container(
                 alignment: Alignment.center,
@@ -54,7 +55,7 @@ class ConfirmAnimationPage extends StatelessWidget {
                     color: ConstColor.as_salomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
-                  "Личный профиль",
+                  "Главная страница",
                   style: Styles.buttonText,
                 ),
               ),

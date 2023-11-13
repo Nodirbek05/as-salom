@@ -29,45 +29,48 @@ class _AdditionalProductsState extends State<AdditionalProducts> {
           final products = state.spesificProducts.data;
           return Column(
             children: List.generate(
-              state.spesificProducts.data!.length - 1,
-              (index) => Padding(
-                padding: EdgeInsets.only(
-                  left: 15.w,
-                  // bottom: 15.h,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      state.spesificProducts.data![index+1].name_ru.toString(),
-                      style: Styles.styles700sp20Black,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        top: 20.h,
-                      ),
-                      height: 310.h,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: products![index+1].goods!.length,
-                        itemBuilder: (context, indx) {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              right: 10.w,
+                state.spesificProducts.data!.length - 1,
+                (index) => products![index + 1].goods!.isNotEmpty
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: 15.w,
+                          // bottom: 15.h,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.spesificProducts.data![index + 1].name_ru
+                                  .toString(),
+                              style: Styles.styles700sp20Black,
                             ),
-                            child: ProductCardWidget(
-                                product: products[index+1].goods![indx],
-                                withHeight: true,
-                                height: 300.h),
-                          );
-                        },
-                      ),
-                    ),
-                    ScreenUtil().setVerticalSpacing(30),
-                  ],
-                ),
-              ),
-            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                top: 20.h,
+                              ),
+                              height: 310.h,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: products![index + 1].goods!.length,
+                                itemBuilder: (context, indx) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                      right: 10.w,
+                                    ),
+                                    child: ProductCardWidget(
+                                        product:
+                                            products[index + 1].goods![indx],
+                                        withHeight: true,
+                                        height: 300.h),
+                                  );
+                                },
+                              ),
+                            ),
+                            ScreenUtil().setVerticalSpacing(30),
+                          ],
+                        ),
+                      )
+                    : const Center()),
           );
         }
         return const Center(

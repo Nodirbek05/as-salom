@@ -169,6 +169,7 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                     child: ProductCardWidget(
                                       product: ProductModel(
+                                        
                                         photo: [products[index].image],
                                         price: products[index].price,
                                         name_ru: products[index].name,

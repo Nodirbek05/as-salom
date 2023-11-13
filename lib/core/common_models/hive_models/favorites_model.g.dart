@@ -19,7 +19,7 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
     return FavoritesModel()
       ..id = fields[0] as int
       ..name = fields[1] as String
-      ..type = fields[2] as String
+      ..type = fields[2] as int
       ..price = fields[3] as String
       ..image = fields[4] as String
       ..discount = fields[5] as String;

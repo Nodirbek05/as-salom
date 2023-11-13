@@ -107,7 +107,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           addDrugToBasket(
                               int.parse(widget.product.id.toString()),
                               widget.product.name_ru.toString(),
-                              "test",
+                              widget.product.type_good!,
                               widget.product.price.toString(),
                               1,
                               widget.product.photo![0].toString());
@@ -132,7 +132,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     style: Styles.style400sp12Grey,
                   ),
                   Text(
-                    "25 кг",
+                    "${getDrugQty(widget.product.id!)} ${getType(widget.product.id!)}",
                     style: Styles.style600sp14Main,
                   ),
                 ],
@@ -145,7 +145,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     style: Styles.style400sp12Grey,
                   ),
                   Text(
-                    "12 000 000 сум",
+                    "${getPrice(widget.product.id!)} сум",
                     style: Styles.style600sp14Main,
                   ),
                 ],
@@ -175,13 +175,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         return Container(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.black.withOpacity(.2),
-                                Colors.transparent
-                              ],
-                            ),
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.black.withOpacity(.2),
+                                  Colors.transparent,
+                                  Colors.transparent,
+                                  Colors.transparent
+                                ],
+                                stops: const [
+                                  0.10,
+                                  0.30,
+                                  0.30,
+                                  0.30
+                                ]),
                             // color: ConstColor.as_salomText,
                             image: DecorationImage(
                                 image: NetworkImage(
@@ -241,7 +248,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   widget.product.photo![0],
                                   int.parse(widget.product.id!.toString()),
                                   widget.product.price!,
-                                  "type of good",
+                                  widget.product.type_good!,
                                   widget.product.discount!,
                                 )
                               : deleteProduct(
@@ -254,12 +261,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           builder: (ctx, box, _) {
                             return isProductSavedInHive(
                                     int.parse(widget.product.id!.toString()))
-                                ? Icon(
+                                ? const Icon(
                                     Icons.favorite,
                                     color: ConstColor.as_salomText,
                                     size: 30,
                                   )
-                                : Icon(
+                                : const Icon(
                                     Icons.favorite_border,
                                     size: 30,
                                     color: Colors.white,
@@ -276,7 +283,122 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 widget.product.name_ru.toString(),
                 style: Styles.styles700sp22Black,
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
+
+              widget.product.type_good == 1
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Цена за шт:",
+                          style: Styles.style700sp18Black,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "${widget.product.price} сум",
+                              style: Styles.style700sp22Main,
+                            ),
+                            const SizedBox(width: 15),
+                            widget.product.discount != null
+                                ? Text(
+                                    "${widget.product.discount} сум",
+                                    style: Styles.style400sp20GreyUnderline,
+                                  )
+                                : const Center()
+                          ],
+                        )
+                      ],
+                    )
+                  : widget.product.type_good == 2
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Цена за ${widget.product.weight} гр:",
+                              style: Styles.style700sp18Black,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "${widget.product.price} сум",
+                                  style: Styles.style700sp22Main,
+                                ),
+                                const SizedBox(width: 15),
+                                widget.product.discount != null
+                                    ? Text(
+                                        "${widget.product.discount} сум",
+                                        style: Styles.style400sp20GreyUnderline,
+                                      )
+                                    : const Center()
+                              ],
+                            )
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Цена:",
+                              style: Styles.style700sp18Black,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "${widget.product.price} сум",
+                                  style: Styles.style700sp22Main,
+                                ),
+                                const SizedBox(width: 15),
+                                widget.product.discount != null
+                                    ? Text(
+                                        "${widget.product.discount} сум",
+                                        style: Styles.style400sp20GreyUnderline,
+                                      )
+                                    : const Center()
+                              ],
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              "Размер:",
+                              style: Styles.style700sp18Black,
+                            ),
+                            SizedBox(height: 10),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 70,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 4,
+                                  itemBuilder: (ctx, indx) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: ConstColor.as_salomText),
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        width: 73,
+                                        height: 70,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text("48-50"),
+                                            Text("L"),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            )
+                          ],
+                        ),
+              const SizedBox(height: 25),
               Text(
                 "Описание товара:",
                 style: Styles.styles700sp20Black,
@@ -358,10 +480,41 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return qty;
   }
 
+  String getType(num id) {
+    int type = 0;
+    final drugBasket = Hive.box<BasketModel>('basketBox').values.toList();
+    for (var prod in drugBasket) {
+      if (prod.id == id) {
+        type = prod.type;
+      }
+    }
+    if (type == 1) {
+      return "шт.";
+    } else if (type == 2) {
+      return "кг.";
+    } else if (type == 3) {
+      return "размер.";
+    }
+    return "";
+  }
+
+  String getPrice(num id) {
+    num sum = 0;
+    final drugBasket = Hive.box<BasketModel>('basketBox').values.toList();
+    for (var prod in drugBasket) {
+      if (prod.id == id) {
+        for (var i = 0; i < prod.qty; i++) {
+          sum += prod.price != "null" ? int.parse(prod.price) : 0;
+        }
+      }
+    }
+    return sum.toString();
+  }
+
   void addDrugToBasket(
     int productId,
     String name,
-    String type,
+    int type,
     String price,
     int qty,
     String image,
@@ -377,7 +530,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     box.add(product);
   }
 
-  void addToBox(String name, String image, int id, String price, String type,
+  void addToBox(String name, String image, int id, String price, int type,
       String discount) {
     final product = FavoritesModel()
       ..name = name

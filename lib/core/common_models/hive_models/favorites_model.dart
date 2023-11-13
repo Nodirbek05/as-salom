@@ -9,7 +9,7 @@ class FavoritesModel extends HiveObject {
   @HiveField(1)
   late String name;
   @HiveField(2)
-  late String type;
+  late int type;
   @HiveField(3)
   late String price;
   @HiveField(4)

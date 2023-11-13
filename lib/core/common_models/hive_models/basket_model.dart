@@ -11,7 +11,7 @@ class BasketModel extends HiveObject {
   @HiveField(2)
   late int qty;
   @HiveField(3)
-  late String type;
+  late int type;
   @HiveField(4)
   late String price;
   @HiveField(5)

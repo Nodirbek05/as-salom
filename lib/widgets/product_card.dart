@@ -60,11 +60,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       height: 110,
                     ),
                     Text(
-                      widget.product!.discount ?? '19 000 сум',
+                      widget.product!.price ?? '19 000 сум',
                       style: Styles.style600sp14Main,
                     ),
                     Text(
-                      widget.product!.price ?? '34 000 сум',
+                      widget.product!.discount ?? '34 000 сум',
                       style: Styles.style400sp12GreyUnderline,
                     ),
                     Text(
@@ -137,7 +137,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         int.parse(
                                             widget.product!.id.toString()),
                                         widget.product!.name_ru.toString(),
-                                        "test",
+                                        widget.product!.type_good!,
                                         widget.product!.price.toString(),
                                         1,
                                         widget.product!.photo![0].toString());
@@ -165,7 +165,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.photo![0],
                         int.parse(widget.product!.id!.toString()),
                         widget.product!.price!,
-                        "type of good",
+                        widget.product!.type_good!,
                         widget.product!.discount!,
                       )
                     : deleteProduct(int.parse(widget.product!.id!.toString()));
@@ -212,7 +212,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     }
   }
 
-  void addToBox(String name, String image, int id, String price, String type,
+  void addToBox(String name, String image, int id, String price, int type,
       String discount) {
     final product = FavoritesModel()
       ..name = name
@@ -252,7 +252,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   void addDrugToBasket(
     int productId,
     String name,
-    String type,
+    int type,
     String price,
     int qty,
     String image,

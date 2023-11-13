@@ -28,43 +28,46 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
           return const Center(child: CupertinoActivityIndicator());
         } else if (state is GetSpesificProductsSuccess) {
           final products = state.spesificProducts.data![widget.index].goods;
-          return Padding(
-            padding: EdgeInsets.only(
-              left: 15.w,
-              // bottom: 15.h,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  state.spesificProducts.data![widget.index].name_ru.toString(),
-                  style: Styles.styles700sp20Black,
-                ),
-                Container(
+          return products!.isNotEmpty
+              ? Padding(
                   padding: EdgeInsets.only(
-                    top: 20.h,
+                    left: 15.w,
+                    // bottom: 15.h,
                   ),
-                  height: 285.h,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: products!.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        state.spesificProducts.data![widget.index].name_ru
+                            .toString(),
+                        style: Styles.styles700sp20Black,
+                      ),
+                      Container(
                         padding: EdgeInsets.only(
-                          right: 10.w,
+                          top: 20.h,
                         ),
-                        child: ProductCardWidget(
-                            product: products[index],
-                            withHeight: true,
-                            height: 300.h),
-                      );
-                    },
+                        height: 285.h,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: products!.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                right: 10.w,
+                              ),
+                              child: ProductCardWidget(
+                                  product: products[index],
+                                  withHeight: true,
+                                  height: 300.h),
+                            );
+                          },
+                        ),
+                      ),
+                      ScreenUtil().setVerticalSpacing(30),
+                    ],
                   ),
-                ),
-                ScreenUtil().setVerticalSpacing(30),
-              ],
-            ),
-          );
+                )
+              : const Center();
         }
         return const Center(
           child: CupertinoActivityIndicator(),

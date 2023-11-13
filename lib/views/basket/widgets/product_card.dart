@@ -65,10 +65,10 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                       widget.product.name,
                       style: Styles.style500sp14Black,
                     ),
-                    Text(
-                      widget.product.type,
-                      style: Styles.style400sp13Grey,
-                    ),
+                    // Text(
+                    //   widget.product.type,
+                    //   style: Styles.style400sp13Grey,
+                    // ),
                   ],
                 ),
               ],
@@ -176,7 +176,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
   void addDrugToBasket(
     int productId,
     String name,
-    String type,
+    int type,
     String price,
     int qty,
   ) {

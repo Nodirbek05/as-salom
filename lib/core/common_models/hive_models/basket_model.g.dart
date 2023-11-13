@@ -20,7 +20,7 @@ class BasketModelAdapter extends TypeAdapter<BasketModel> {
       ..id = fields[0] as int
       ..name = fields[1] as String
       ..qty = fields[2] as int
-      ..type = fields[3] as String
+      ..type = fields[3] as int
       ..price = fields[4] as String
       ..image = fields[5] as String;
   }

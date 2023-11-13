@@ -175,7 +175,7 @@ class CategoryModel {
 
 class ProductModel {
   num? id;
-  dynamic type_good;
+  int? type_good;
   String? category_id;
   String? subcategory_id;
   String? name_ru;
@@ -198,6 +198,7 @@ class ProductModel {
   dynamic quantity;
   String? weight_bruto;
   Pivot? pivot;
+  
   ProductModel({
     this.id,
     this.type_good,
@@ -220,14 +221,15 @@ class ProductModel {
     this.photo,
     this.created_at,
     this.updated_at,
-    this.quantity,
+     this.quantity,
     this.weight_bruto,
     this.pivot,
   });
+  
 
   ProductModel copyWith({
     num? id,
-    dynamic type_good,
+    int? type_good,
     String? category_id,
     String? subcategory_id,
     String? name_ru,
@@ -281,87 +283,85 @@ class ProductModel {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-
-    if (id != null) {
+  
+    if(id != null){
       result.addAll({'id': id});
     }
-    if (type_good != null) {
+    if(type_good != null){
       result.addAll({'type_good': type_good});
     }
-    if (category_id != null) {
+    if(category_id != null){
       result.addAll({'category_id': category_id});
     }
-    if (subcategory_id != null) {
+    if(subcategory_id != null){
       result.addAll({'subcategory_id': subcategory_id});
     }
-    if (name_ru != null) {
+    if(name_ru != null){
       result.addAll({'name_ru': name_ru});
     }
-    if (name_uz != null) {
+    if(name_uz != null){
       result.addAll({'name_uz': name_uz});
     }
-    if (name_en != null) {
+    if(name_en != null){
       result.addAll({'name_en': name_en});
     }
-    if (slug != null) {
+    if(slug != null){
       result.addAll({'slug': slug});
     }
-    if (price != null) {
+    if(price != null){
       result.addAll({'price': price});
     }
-    if (discount != null) {
+    if(discount != null){
       result.addAll({'discount': discount});
     }
-    if (weight != null) {
+    if(weight != null){
       result.addAll({'weight': weight});
     }
-    if (weight_max != null) {
+    if(weight_max != null){
       result.addAll({'weight_max': weight_max});
     }
-    if (ikpu != null) {
+    if(ikpu != null){
       result.addAll({'ikpu': ikpu});
     }
-    if (barcode != null) {
+    if(barcode != null){
       result.addAll({'barcode': barcode});
     }
-    if (nds != null) {
+    if(nds != null){
       result.addAll({'nds': nds});
     }
-    if (desc_ru != null) {
+    if(desc_ru != null){
       result.addAll({'desc_ru': desc_ru});
     }
-    if (desc_uz != null) {
+    if(desc_uz != null){
       result.addAll({'desc_uz': desc_uz});
     }
-    if (desc_en != null) {
+    if(desc_en != null){
       result.addAll({'desc_en': desc_en});
     }
-    if (photo != null) {
+    if(photo != null){
       result.addAll({'photo': photo});
     }
-    if (created_at != null) {
+    if(created_at != null){
       result.addAll({'created_at': created_at});
     }
-    if (updated_at != null) {
+    if(updated_at != null){
       result.addAll({'updated_at': updated_at});
     }
-    if (quantity != null) {
-      result.addAll({'quantity': quantity});
-    }
-    if (weight_bruto != null) {
+    result.addAll({'quantity': quantity});
+    if(weight_bruto != null){
       result.addAll({'weight_bruto': weight_bruto});
     }
-    if (pivot != null) {
+    if(pivot != null){
       result.addAll({'pivot': pivot!.toMap()});
     }
-
+  
     return result;
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       id: map['id'],
-      type_good: map['type_good'],
+      type_good: map['type_good']?.toInt(),
       category_id: map['category_id'],
       subcategory_id: map['subcategory_id'],
       name_ru: map['name_ru'],
@@ -381,7 +381,7 @@ class ProductModel {
       photo: List<String>.from(map['photo']),
       created_at: map['created_at'],
       updated_at: map['updated_at'],
-      quantity: map['quantity'],
+      quantity: map['quantity'] ?? null,
       weight_bruto: map['weight_bruto'],
       pivot: map['pivot'] != null ? Pivot.fromMap(map['pivot']) : null,
     );
@@ -389,8 +389,7 @@ class ProductModel {
 
   String toJson() => json.encode(toMap());
 
-  factory ProductModel.fromJson(String source) =>
-      ProductModel.fromMap(json.decode(source));
+  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -400,60 +399,60 @@ class ProductModel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is ProductModel &&
-        other.id == id &&
-        other.type_good == type_good &&
-        other.category_id == category_id &&
-        other.subcategory_id == subcategory_id &&
-        other.name_ru == name_ru &&
-        other.name_uz == name_uz &&
-        other.name_en == name_en &&
-        other.slug == slug &&
-        other.price == price &&
-        other.discount == discount &&
-        other.weight == weight &&
-        other.weight_max == weight_max &&
-        other.ikpu == ikpu &&
-        other.barcode == barcode &&
-        other.nds == nds &&
-        other.desc_ru == desc_ru &&
-        other.desc_uz == desc_uz &&
-        other.desc_en == desc_en &&
-        listEquals(other.photo, photo) &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at &&
-        other.quantity == quantity &&
-        other.weight_bruto == weight_bruto &&
-        other.pivot == pivot;
+      other.id == id &&
+      other.type_good == type_good &&
+      other.category_id == category_id &&
+      other.subcategory_id == subcategory_id &&
+      other.name_ru == name_ru &&
+      other.name_uz == name_uz &&
+      other.name_en == name_en &&
+      other.slug == slug &&
+      other.price == price &&
+      other.discount == discount &&
+      other.weight == weight &&
+      other.weight_max == weight_max &&
+      other.ikpu == ikpu &&
+      other.barcode == barcode &&
+      other.nds == nds &&
+      other.desc_ru == desc_ru &&
+      other.desc_uz == desc_uz &&
+      other.desc_en == desc_en &&
+      listEquals(other.photo, photo) &&
+      other.created_at == created_at &&
+      other.updated_at == updated_at &&
+      other.quantity == quantity &&
+      other.weight_bruto == weight_bruto &&
+      other.pivot == pivot;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        type_good.hashCode ^
-        category_id.hashCode ^
-        subcategory_id.hashCode ^
-        name_ru.hashCode ^
-        name_uz.hashCode ^
-        name_en.hashCode ^
-        slug.hashCode ^
-        price.hashCode ^
-        discount.hashCode ^
-        weight.hashCode ^
-        weight_max.hashCode ^
-        ikpu.hashCode ^
-        barcode.hashCode ^
-        nds.hashCode ^
-        desc_ru.hashCode ^
-        desc_uz.hashCode ^
-        desc_en.hashCode ^
-        photo.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode ^
-        quantity.hashCode ^
-        weight_bruto.hashCode ^
-        pivot.hashCode;
+      type_good.hashCode ^
+      category_id.hashCode ^
+      subcategory_id.hashCode ^
+      name_ru.hashCode ^
+      name_uz.hashCode ^
+      name_en.hashCode ^
+      slug.hashCode ^
+      price.hashCode ^
+      discount.hashCode ^
+      weight.hashCode ^
+      weight_max.hashCode ^
+      ikpu.hashCode ^
+      barcode.hashCode ^
+      nds.hashCode ^
+      desc_ru.hashCode ^
+      desc_uz.hashCode ^
+      desc_en.hashCode ^
+      photo.hashCode ^
+      created_at.hashCode ^
+      updated_at.hashCode ^
+      quantity.hashCode ^
+      weight_bruto.hashCode ^
+      pivot.hashCode;
   }
 }
 
