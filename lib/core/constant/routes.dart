@@ -78,17 +78,17 @@ abstract class Routes {
       case FavoritesPage.routeName:
         return MaterialPageRoute(builder: (_) => const FavoritesPage());
       case ProfilePage.routeName:
-        return MaterialPageRoute(
-            builder: (_) => const ProfilePage());
+        return MaterialPageRoute(builder: (_) => const ProfilePage());
 
       case BasketPage.routeName:
         return MaterialPageRoute(builder: (_) => BasketPage());
 
       case ChoosePaymentPage.routeName:
+        final id = settings.arguments as int;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => CreateOrderBloc(),
-                  child: const ChoosePaymentPage(),
+                  child: ChoosePaymentPage(id: id),
                 ));
 
       case InsideCatFirstPage.routeName:

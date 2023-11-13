@@ -3,7 +3,6 @@ import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
-import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,8 +12,9 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class ChoosePaymentPage extends StatefulWidget {
+  final int id;
   static const routeName = "/choosePayment";
-  const ChoosePaymentPage({super.key});
+  const ChoosePaymentPage({super.key, required this.id});
 
   @override
   State<ChoosePaymentPage> createState() => _ChoosePaymentPageState();
@@ -33,8 +33,6 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage> {
 
   @override
   Widget build(BuildContext context) {
-  
-
     return Scaffold(
       bottomSheet: Container(
         padding: EdgeInsets.symmetric(
