@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 
 class InputWidget extends StatefulWidget {
   final TextEditingController controller;
+  final String? Function(String?)? validator;
   final String? label;
+  final AutovalidateMode? validateMode;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool? isVisible;
@@ -18,7 +20,9 @@ class InputWidget extends StatefulWidget {
       {super.key,
       required this.controller,
       this.label,
+      this.validator,
       this.maxLines,
+      this.validateMode,
       this.suffixIcon,
       this.maxLength,
       this.hintText,
@@ -37,9 +41,11 @@ class _InputWidgetState extends State<InputWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.label != null ? Text(widget.label.toString()) : SizedBox(),
+        widget.label != null ? Text(widget.label.toString()) : const SizedBox(),
         const SizedBox(height: 7),
         TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: widget.validator,
           maxLength: widget.maxLength,
           maxLines: widget.maxLines,
           keyboardType: widget.inputType,
@@ -55,6 +61,9 @@ class _InputWidgetState extends State<InputWidget> {
             prefix: widget.prefixIcon,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: ConstColor.as_salomText,
+              ),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
@@ -62,6 +71,13 @@ class _InputWidgetState extends State<InputWidget> {
               ),
               borderRadius: BorderRadius.circular(10),
             ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: ConstColor.redColor,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+
             // labelText: widget.label,
             // labelStyle: Styles.style400sp14Black,
           ),
