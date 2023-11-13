@@ -9,7 +9,11 @@ class CreateOrderState extends Equatable {
 
 class CreateOrderInitial extends CreateOrderState {}
 
-class CreateOrderSuccess extends CreateOrderState {}
+class CreateOrderSuccess extends CreateOrderState {
+  final CreatedOrderModel data;
+
+  const CreateOrderSuccess({required this.data});
+}
 
 class CreateOrderFail extends CreateOrderState {
   final ErrorModel errorModel;

@@ -2,6 +2,7 @@ import 'package:assalomproject/core/common_models/error_model.dart';
 import 'package:assalomproject/core/common_models/response_data.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/main_page/data/api/common_request.dart';
+import 'package:assalomproject/views/main_page/data/models/created_order_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -17,8 +18,8 @@ class CreateOrderBloc extends Bloc<CreateOrderEvent, CreateOrderState> {
       Makeorder event, Emitter<CreateOrderState> emit) async {
     emit(CreateOrderInitial());
     final response = await CommonRequests.createOrder(event.good);
-    if (response is SuccessfulResponse) {
-      emit(CreateOrderSuccess());
+    if (response is CreatedOrderModel) {
+      emit(CreateOrderSuccess(data: response));
       print("CREATE ORDER SUCCESS");
     }
   }

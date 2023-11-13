@@ -211,7 +211,8 @@ class BasketPage extends StatelessWidget {
       body: BlocListener<CreateOrderBloc, CreateOrderState>(
         listener: (context, state) {
           if (state is CreateOrderSuccess) {
-            Navigator.pushNamed(context, ChoosePaymentPage.routeName);
+            Navigator.pushNamed(context, ChoosePaymentPage.routeName,
+                arguments: state.data.order.id);
           }
         },
         child: CustomScrollView(
