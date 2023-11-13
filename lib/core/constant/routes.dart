@@ -84,11 +84,10 @@ abstract class Routes {
         return MaterialPageRoute(builder: (_) => BasketPage());
 
       case ChoosePaymentPage.routeName:
-        final id = settings.arguments as int;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => CreateOrderBloc(),
-                  child: ChoosePaymentPage(id: id),
+                  child: const ChoosePaymentPage(),
                 ));
 
       case InsideCatFirstPage.routeName:

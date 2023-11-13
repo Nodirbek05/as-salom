@@ -12,9 +12,8 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class ChoosePaymentPage extends StatefulWidget {
-  final int id;
   static const routeName = "/choosePayment";
-  const ChoosePaymentPage({super.key, required this.id});
+  const ChoosePaymentPage({super.key, });
 
   @override
   State<ChoosePaymentPage> createState() => _ChoosePaymentPageState();
