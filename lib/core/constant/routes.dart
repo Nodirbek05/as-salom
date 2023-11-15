@@ -20,6 +20,7 @@ import 'package:assalomproject/views/main_page/data/models/spesific_products.dar
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/payment_bloc/payment_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
+import 'package:assalomproject/views/product_detail/get_pro_with_slug_bloc/get_product_with_slug_bloc.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/data/logic/update_name_bloc/update_name_bloc.dart';
@@ -117,9 +118,15 @@ abstract class Routes {
       case ConfirmAnimationPage.routeName:
         return MaterialPageRoute(builder: (_) => const ConfirmAnimationPage());
       case ProductDetailPage.routeName:
-        final product = settings.arguments as ProductModel;
+        final product = settings.arguments as ProductDetailPage;
         return MaterialPageRoute(
-            builder: (_) => ProductDetailPage(product: product));
+            builder: (_) => BlocProvider(
+                  create: (context) => GetProductWithSlugBloc(),
+                  child: ProductDetailPage(
+                    product: product.product,
+                    slug: product.slug,
+                  ),
+                ));
       case SplashScreen.routeName:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
 

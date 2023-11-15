@@ -1,7 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
 
-
 part 'favorites_model.g.dart';
+
 @HiveType(typeId: 1)
 class FavoritesModel extends HiveObject {
   @HiveField(0)
@@ -16,5 +16,8 @@ class FavoritesModel extends HiveObject {
   late String image;
   @HiveField(5)
   late String discount;
-
+  @HiveField(6)
+   String? size;
+  @HiveField(7)
+   String? kg;
 }

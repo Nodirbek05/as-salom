@@ -25,9 +25,12 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(20.r),
       onTap: () {
         Navigator.pushNamed(context, ProductDetailPage.routeName,
-            arguments: widget.product);
+            arguments: ProductDetailPage(
+                product: widget.product!, slug: widget.product!.slug!));
+        print("SLUGGGGGGGG:${widget.product!.slug!}");
       },
       child: Stack(
         children: [
@@ -140,7 +143,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         widget.product!.type_good!,
                                         widget.product!.price.toString(),
                                         1,
-                                        widget.product!.photo![0].toString());
+                                        widget.product!.photo![0].toString(),
+                                        widget.product!.sizes!.isNotEmpty
+                                            ? widget.product!.sizes![0].id!
+                                                .toString()
+                                            : "null",
+                                        widget.product!.weight != null
+                                            ? widget.product!.weight!
+                                            : "null");
                                   },
                                   width: 140,
                                 );
@@ -159,6 +169,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             child: InkWell(
               borderRadius: BorderRadius.circular(20.r),
               onTap: () {
+                print(widget.product!.sizes![0].id.toString);
                 !isProductSavedInHive(int.parse(widget.product!.id.toString()))
                     ? addToBox(
                         widget.product!.name_ru!,
@@ -167,7 +178,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.price!,
                         widget.product!.type_good!,
                         widget.product!.discount!,
-                      )
+                        widget.product!.sizes![0].id.toString())
                     : deleteProduct(int.parse(widget.product!.id!.toString()));
               },
               child: ValueListenableBuilder(
@@ -213,14 +224,15 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   }
 
   void addToBox(String name, String image, int id, String price, int type,
-      String discount) {
+      String discount, String size) {
     final product = FavoritesModel()
       ..name = name
       ..id = id
       ..image = image
       ..price = price
       ..discount = discount
-      ..type = type;
+      ..type = type
+      ..size = size;
 
     final box = Hive.box<FavoritesModel>('favoritesBox');
     box.add(product);
@@ -256,6 +268,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     String price,
     int qty,
     String image,
+    String size,
+    String kg,
   ) {
     final product = BasketModel()
       ..id = productId
@@ -263,7 +277,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ..type = type
       ..price = price
       ..image = image
-      ..qty = qty;
+      ..qty = qty
+      ..size = size
+      ..kg = kg;
+
     final box = Hive.box<BasketModel>('basketBox');
     box.add(product);
   }

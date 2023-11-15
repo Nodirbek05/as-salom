@@ -196,7 +196,7 @@ class ProductModel {
   List<String>? photo;
   String? created_at;
   String? updated_at;
-  dynamic? quantity;
+  dynamic quantity;
   String? weight_bruto;
   Pivot? pivot;
   List<SizeData>? sizes;
@@ -251,7 +251,7 @@ class ProductModel {
     List<String>? photo,
     String? created_at,
     String? updated_at,
-    dynamic? quantity,
+    dynamic quantity,
     String? weight_bruto,
     Pivot? pivot,
     List<SizeData>? sizes,
@@ -361,7 +361,7 @@ class ProductModel {
       result.addAll({'pivot': pivot!.toMap()});
     }
     if(sizes != null){
-      result.addAll({'sizes': sizes!.map((x) => x?.toMap()).toList()});
+      result.addAll({'sizes': sizes!.map((x) => x.toMap()).toList()});
     }
   
     return result;

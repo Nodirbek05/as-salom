@@ -28,8 +28,10 @@ class FavoritesPage extends StatelessWidget {
               builder: (ctx, box, _) {
                 final products = box.values.toList().cast<FavoritesModel>();
                 if (products.isEmpty) {
-                  return const Center(
-                    child: Text("NO DATA"),
+                  return  Center(
+                    child: Text("В избранном пока пусто",
+                    style: Styles.style600sp18Black,
+                    ),
                   );
                 }
 
@@ -59,6 +61,7 @@ class FavoritesPage extends StatelessWidget {
                           photo: [products[index].image],
                           type_good: products[index].type,
                           price: products[index].price,
+                          
                         ),
                         withHeight: false,
                       );

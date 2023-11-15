@@ -51,7 +51,7 @@ class _AdditionalProductsState extends State<AdditionalProducts> {
                               height: 310.h,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: products![index + 1].goods!.length,
+                                itemCount: products[index + 1].goods!.length,
                                 itemBuilder: (context, indx) {
                                   return Padding(
                                     padding: EdgeInsets.only(

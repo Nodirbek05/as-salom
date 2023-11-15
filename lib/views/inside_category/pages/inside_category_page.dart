@@ -162,6 +162,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                             photo: [products.data![index].photo![0]],
                             type_good: products.data![index].type_good,
                             price: products.data![index].price,
+                            sizes: products.data![index].sizes!
                           ),
                           withHeight: false,
                         );

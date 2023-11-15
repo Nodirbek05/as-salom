@@ -7,7 +7,7 @@ import 'package:assalomproject/views/main_page/data/models/spesific_products.dar
 
 class GetProWithSlugModel extends ResponseData {
   ProductModel? good;
-  RandomGoods? random_goods;
+  List<RandomGoods>? random_goods;
   GetProWithSlugModel({
     this.good,
     this.random_goods,
@@ -15,7 +15,7 @@ class GetProWithSlugModel extends ResponseData {
 
   GetProWithSlugModel copyWith({
     ProductModel? good,
-    RandomGoods? random_goods,
+    List<RandomGoods>? random_goods,
   }) {
     return GetProWithSlugModel(
       good: good ?? this.good,
@@ -26,35 +26,31 @@ class GetProWithSlugModel extends ResponseData {
   Map<String, dynamic> toMap() {
     return {
       'good': good?.toMap(),
-      'random_goods': random_goods?.toMap(),
+      'random_goods': random_goods?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory GetProWithSlugModel.fromMap(Map<String, dynamic> map) {
     return GetProWithSlugModel(
       good: map['good'] != null ? ProductModel.fromMap(map['good']) : null,
-      random_goods: map['random_goods'] != null
-          ? RandomGoods.fromMap(map['random_goods'])
-          : null,
+      random_goods: map['random_goods'] != null ? List<RandomGoods>.from(map['random_goods']?.map((x) => RandomGoods.fromMap(x))) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory GetProWithSlugModel.fromJson(String source) =>
-      GetProWithSlugModel.fromMap(json.decode(source));
+  factory GetProWithSlugModel.fromJson(String source) => GetProWithSlugModel.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'GetProWithSlugModel(good: $good, random_goods: $random_goods)';
+  String toString() => 'GetProWithSlugModel(good: $good, random_goods: $random_goods)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is GetProWithSlugModel &&
-        other.good == good &&
-        other.random_goods == random_goods;
+      other.good == good &&
+      listEquals(other.random_goods, random_goods);
   }
 
   @override
@@ -83,7 +79,7 @@ class RandomGoods extends ResponseData {
   List<String>? photo;
   String? created_at;
   String? updated_at;
-  String? quantity;
+  num? quantity;
   String? weight_bruto;
   List<SizeData>? sizes;
   RandomGoods({
@@ -135,7 +131,7 @@ class RandomGoods extends ResponseData {
     List<String>? photo,
     String? created_at,
     String? updated_at,
-    String? quantity,
+    num? quantity,
     String? weight_bruto,
     List<SizeData>? sizes,
   }) {

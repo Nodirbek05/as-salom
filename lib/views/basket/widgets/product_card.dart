@@ -179,12 +179,16 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
     int type,
     String price,
     int qty,
+    String size,
+    String weight,
   ) {
     final product = BasketModel()
       ..id = productId
       ..name = name
       ..type = type
       ..price = price
+      ..size = size
+      ..kg = weight
       ..qty = qty;
     final box = Hive.box<BasketModel>('basketBox');
     box.add(product);

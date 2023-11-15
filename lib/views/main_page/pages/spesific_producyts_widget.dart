@@ -49,7 +49,7 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
                         height: 285.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: products!.length,
+                          itemCount: products.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: EdgeInsets.only(

@@ -20,7 +20,9 @@ class BasketPage extends StatelessWidget {
     price = 0;
     for (var i = 0; i < data.length; i++) {
       for (var a = 0; a < data[i].qty; a++) {
-        price += int.parse(data[i].price.toString());
+        data[i].price != "null"
+            ? price += int.parse(data[i].price.toString())
+            : price = 0;
       }
     }
   }
@@ -30,8 +32,7 @@ class BasketPage extends StatelessWidget {
     final product = basketBox.values.toList().cast<BasketModel>();
     getPrice(product);
     return Scaffold(
-      bottomSheet: price != 0
-          ? Container(
+      bottomSheet:  Container(
               height: 80.h,
               width: double.infinity,
               decoration: BoxDecoration(
@@ -119,11 +120,11 @@ class BasketPage extends StatelessWidget {
                                                     ScreenUtil()
                                                         .setHorizontalSpacing(
                                                             10),
-                                                    Text(
+                                                product[indx].price!="null" ?    Text(
                                                       "${int.parse(product[indx].price) * product[indx].qty} сум",
                                                       style: Styles
                                                           .style400sp14Black,
-                                                    ),
+                                                    ): const Center()
                                                   ],
                                                 ),
                                               ],
@@ -181,7 +182,7 @@ class BasketPage extends StatelessWidget {
                 ],
               ),
             )
-          : const Center(),
+          ,
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         automaticallyImplyLeading: false,

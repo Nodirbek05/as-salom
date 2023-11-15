@@ -156,6 +156,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   validateMode: AutovalidateMode.onUserInteraction,
                   validator: (val) {
                     if (val!.isEmpty) return 'Enter valid name';
+                    return null;
                   },
                   hintText: "Введите И.Ф.О",
                   controller: nameController,
@@ -165,6 +166,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   validateMode: AutovalidateMode.onUserInteraction,
                   validator: (val) {
                     if (val!.isEmpty) return 'Enter valid number';
+                    return null;
                   },
                   maxLength: 12,
                   inputFormatter: [

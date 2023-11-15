@@ -3,19 +3,29 @@ import 'package:assalomproject/core/common_models/hive_models/favorites_model.da
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
+import 'package:assalomproject/views/product_detail/get_pro_with_slug_bloc/get_product_with_slug_bloc.dart';
 import 'package:assalomproject/widgets/main_button.dart';
+import 'package:assalomproject/widgets/product_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final ProductModel product;
+  final String slug;
 
   static const routeName = "/productDetailPage";
 
-  const ProductDetailPage({super.key, required this.product});
+  const ProductDetailPage({
+    super.key,
+    required this.product,
+    required this.slug,
+  });
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -23,14 +33,28 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
   final PageController _pageController1 = PageController(viewportFraction: 1.0);
+  int selectedSize = 0;
+
+  @override
+  void initState() {
+    context.read<GetProductWithSlugBloc>().add(
+          GetProductWithSlugData(
+            slug: widget.slug,
+          ),
+        );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     // print(widget.product.)
     return Scaffold(
       bottomSheet: Container(
+        margin: EdgeInsets.only(
+          bottom: 10.h
+        ),
         color: Colors.white,
-        height: 60.h,
+        height: 70.h,
         width: double.infinity,
         child: ValueListenableBuilder(
             valueListenable: Hive.box<BasketModel>('basketBox').listenable(),
@@ -83,7 +107,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, BasketPage.routeName);
+                          },
                           child: Container(
                             alignment: Alignment.center,
                             height: 50.h,
@@ -111,6 +137,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               widget.product.price.toString(),
                               1,
                               widget.product.photo![0].toString());
+                              widget.product.sizes![selectedSize].id;
+                              widget.product.weight!;
                         },
                         width: double.infinity,
                       ),
@@ -284,7 +312,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 style: Styles.styles700sp22Black,
               ),
               const SizedBox(height: 20),
-
               widget.product.type_good == 1
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -357,23 +384,33 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     : const Center()
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 25,
                             ),
                             Text(
                               "Размер:",
                               style: Styles.style700sp18Black,
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             SizedBox(
                               width: double.infinity,
                               height: 70,
                               child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: widget.product.sizes!.length,
-                                  itemBuilder: (ctx, indx) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(right: 10),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: widget.product.sizes!.length,
+                                itemBuilder: (ctx, indx) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: InkWell(
+                                      onTap: () {
+                                        selectedSize = int.parse(widget
+                                            .product.sizes![indx].id!
+                                            .toString());
+                                        setState(() {
+                                          selectedSize;
+                                        });
+                                      },
+                                      borderRadius: BorderRadius.circular(10.r),
                                       child: Container(
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
@@ -383,8 +420,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                           borderRadius:
                                               BorderRadius.circular(15),
                                         ),
-                                        width: 73,
-                                        height: 70,
+                                        width: selectedSize ==
+                                                widget.product.sizes![indx].id!
+                                            ? 80
+                                            : 73,
+                                        height: selectedSize ==
+                                                widget.product.sizes![indx].id!
+                                            ? 80
+                                            : 70,
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
@@ -398,9 +441,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                           ],
                                         ),
                                       ),
-                                    );
-                                  }),
-                            )
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           ],
                         ),
               const SizedBox(height: 25),
@@ -416,21 +461,47 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 style: Styles.styles700sp20Black,
               ),
               const SizedBox(height: 25),
-              // SizedBox(
-              //   height: 300,
-              //   child: ListView.builder(
-              //     scrollDirection: Axis.horizontal,
-              //     itemCount: 5,
-              //     itemBuilder: (context, index) {
-              //       return Padding(
-              //         padding: EdgeInsets.only(
-              //           right: 10.w,
-              //         ),
-              //         child: ProductCardWidget(withHeight: true, height: 300.h),
-              //       );
-              //     },
-              //   ),
-              // ),
+              BlocBuilder<GetProductWithSlugBloc, GetProductWithSlugState>(
+                builder: (context, state) {
+                  if (state is GetProductWithSlugFailed) {
+                    return const Center(
+                      child: CupertinoActivityIndicator(),
+                    );
+                  } else if (state is GetProductWithSlugSuccess) {
+                    final randomGoods = state.dataModel.random_goods;
+                    return SizedBox(
+                      height: 300,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: randomGoods!.length,
+                        itemBuilder: (context, ranIndex) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              right: 10.w,
+                            ),
+                            child: ProductCardWidget(
+                              withHeight: true,
+                              product: ProductModel(
+                                name_ru: randomGoods[ranIndex].name_ru,
+                                id: randomGoods[ranIndex].id,
+                                photo: randomGoods[ranIndex].photo,
+                                type_good: int.parse(
+                                    randomGoods[ranIndex].type_good.toString()),
+                                slug: randomGoods[ranIndex].slug,
+                                weight: randomGoods[ranIndex].weight,
+                                sizes: randomGoods[ranIndex].sizes
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: CupertinoActivityIndicator(),
+                  );
+                },
+              ),
               const SizedBox(height: 100),
             ],
           ),
@@ -443,9 +514,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     final box = Hive.box<BasketModel>('basketBox').values.toList();
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG Quantity increase");
         product.qty++;
-        print("DRUG Quantity ${product.qty}");
         break;
       }
     }
@@ -455,9 +524,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     final box = Hive.box<BasketModel>('basketBox').values.toList();
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG Quantity decrease");
         product.qty--;
-        print("DRUG Quantity ${product.qty}");
         break;
       }
     }
@@ -554,7 +621,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     final listProducts = Hive.box<FavoritesModel>('favoritesBox');
     for (var product in box) {
       if (drugId == product.id) {
-        print("Product REMOVED FROM BASKET");
         listProducts.delete(product.key);
         break;
       }
@@ -578,7 +644,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     final listProducts = Hive.box<BasketModel>('basketBox');
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG REMOVED FROM BASKET");
         listProducts.delete(product.key);
         break;
       }

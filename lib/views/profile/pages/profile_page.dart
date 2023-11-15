@@ -24,12 +24,12 @@ class _ProfilePageState extends State<ProfilePage>
     Tab(text: 'Личные данные'),
   ];
 
-  late TabController _tabController;
+  late TabController tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: myTabs.length);
+    tabController = TabController(vsync: this, length: myTabs.length);
   }
 
   @override
