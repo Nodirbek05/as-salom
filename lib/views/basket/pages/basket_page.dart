@@ -203,14 +203,31 @@ class BasketPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ScreenUtil().setVerticalSpacing(200.h),
-                        // Lottie.asset(
-                        //     'assets/animation/pharmacy_basket_empty.json',
-                        //     width: 200.w,
-                        //     height: 200.w),
-                        ScreenUtil().setVerticalSpacing(20.h),
+                       Container(
+                          height: 100.h,
+                          width: 100.h,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  "assets/images/basket.png",
+                                ),
+                                fit: BoxFit.contain),
+                          ),
+                        ),
+                        // ScreenUtil().setVerticalSpacing(20.h),
                         Text(
-                          'Корзина пока пуста...',
+                          'В вашей корзине пока пусто',
                           style: Styles.style500sp16Black,
+                        ),
+
+                        ScreenUtil().setVerticalSpacing(20),
+                        SizedBox(
+                          width: 330.w,
+                          child: Text(
+                            "Начните с товаров на главной странице или найдите нужный товар через поиск",
+                            style: Styles.style400sp16Black,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                     ),

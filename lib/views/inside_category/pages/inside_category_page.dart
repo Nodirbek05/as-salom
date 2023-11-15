@@ -13,7 +13,7 @@ import 'package:flutter_svg/svg.dart';
 
 class InsideCategoryPage extends StatefulWidget {
   static const routeName = "/insideCategoryPage";
-  InsideCategoryPage({super.key, required this.name, required this.id});
+  const InsideCategoryPage({super.key, required this.name, required this.id});
 
   final String name;
   final int id;
@@ -26,6 +26,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
   final GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
   @override
   void initState() {
+    print("WIDGET ID IS COMING HERE:${widget.id}");
     context.read<GetCatProductsBloc>().add(GetProducts(id: widget.id));
     super.initState();
   }
@@ -111,27 +112,32 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
               widget.name,
               style: Styles.styles700sp20Black,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Фильтры",
-                      style: Styles.style400sp15Black,
-                    ),
-                    ScreenUtil().setHorizontalSpacing(5),
-                    GestureDetector(
-                      onTap: () {
-                        drawerKey.currentState!.openDrawer();
-                      },
-                      child: SvgPicture.asset(
-                        ConstIcons.filter,
+            Padding(
+              padding: EdgeInsets.only(
+                bottom:10.h,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Фильтры",
+                        style: Styles.style400sp15Black,
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      ScreenUtil().setHorizontalSpacing(5),
+                      GestureDetector(
+                        onTap: () {
+                          drawerKey.currentState!.openDrawer();
+                        },
+                        child: SvgPicture.asset(
+                          ConstIcons.filter,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
               builder: (context, state) {

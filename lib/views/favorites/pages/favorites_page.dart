@@ -3,6 +3,7 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -28,9 +29,33 @@ class FavoritesPage extends StatelessWidget {
               builder: (ctx, box, _) {
                 final products = box.values.toList().cast<FavoritesModel>();
                 if (products.isEmpty) {
-                  return  Center(
-                    child: Text("В избранном пока пусто",
-                    style: Styles.style600sp18Black,
+                  return Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ScreenUtil().setVerticalSpacing(200),
+                        Container(
+                          height: 100.h,
+                          width: 100.h,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  "assets/images/favorites.png",
+                                ),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        Text(
+                          "В избранном пока пусто",
+                          style: Styles.style600sp18Black,
+                        ),
+                        ScreenUtil().setVerticalSpacing(20),
+                        Text(
+                          "Добавьте понравившиеся товары, чтобы не потерять их.",
+                          style: Styles.style400sp16Black,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   );
                 }
@@ -61,7 +86,6 @@ class FavoritesPage extends StatelessWidget {
                           photo: [products[index].image],
                           type_good: products[index].type,
                           price: products[index].price,
-                          
                         ),
                         withHeight: false,
                       );

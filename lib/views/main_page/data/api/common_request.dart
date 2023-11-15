@@ -126,9 +126,9 @@ class CommonRequests {
   }
 
   static Future<ResponseData> filterCat(int id) async {
-    try {
+    // try {
       final response = await http.get(
-        Uri.parse('${ApiPaths.filter}/$id'),
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.filter}/$id'),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.body);
@@ -140,9 +140,9 @@ class CommonRequests {
         default:
           throw ErrorModel.fromJson(response.body);
       }
-    } catch (e) {
-      return ResponseError.noInternet;
-    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
   }
 
   static Future<ResponseData> getSpesificProducts() async {
