@@ -184,6 +184,13 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+  static final style400sp12White = TextStyle(
+    color: ConstColor.mainWhite,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
+
   static final style400sp14Black = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 14.sp,
@@ -233,6 +240,14 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+  static final styles700sp16BlackUnder = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    fontFamily: interFontFamily,
+    decoration: TextDecoration.underline
+  );
+
   static final styles400sp14Black = TextStyle(
     color: ConstColor.mainBlack,
     fontSize: 14.sp,
@@ -272,6 +287,13 @@ abstract class Styles {
     color: ConstColor.mainBlack,
     fontSize: 18.sp,
     fontWeight: FontWeight.w500,
+    fontFamily: interFontFamily,
+  );
+
+  static final style700sp13White = TextStyle(
+    color: ConstColor.mainWhite,
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w700,
     fontFamily: interFontFamily,
   );
 

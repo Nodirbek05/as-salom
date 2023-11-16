@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
@@ -44,6 +45,7 @@ class _OrdersPageState extends State<OrdersPage> {
                 );
               } else if (state is GetOrdersSuccess) {
                 final orders = state.orderModel.data;
+
                 return Column(
                   children: [
                     ...List.generate(
@@ -129,7 +131,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                   left: 20.w,
                                 ),
                                 child: Text(
-                                    "Дата оформления:${orders[index].created_at}",
+                                    "Дата оформления:${DateFormat('dd.MM.yyyy HH:mm').format(DateTime.parse(orders[index].created_at!).toLocal())}",
                                     style: Styles.style500sp14Black),
                               ),
                               openOrder != index
@@ -212,10 +214,19 @@ class _OrdersPageState extends State<OrdersPage> {
                                           ...List.generate(
                                               orders[index].products!.length,
                                               (idx) {
-                                                sizeData.clear();
-                                                for (var i = 0; i < orders[index].products![idx].sizes!.length; i++) {
-                                                    sizeData.add(orders[index].products![idx].sizes![i].size_id!);
-                                                }
+                                            sizeData.clear();
+                                            for (var i = 0;
+                                                i <
+                                                    orders[index]
+                                                        .products![idx]
+                                                        .sizes!
+                                                        .length;
+                                                i++) {
+                                              sizeData.add(orders[index]
+                                                  .products![idx]
+                                                  .sizes![i]
+                                                  .size_id!);
+                                            }
                                             return Padding(
                                               padding: EdgeInsets.only(
                                                 bottom: 10.h,

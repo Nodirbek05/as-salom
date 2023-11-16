@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainButtonWidget extends StatelessWidget {
   final String text;
+  final bool textStyle;
   final VoidCallback onTap;
   final double width;
   final double? height;
@@ -13,6 +14,7 @@ class MainButtonWidget extends StatelessWidget {
       required this.text,
       required this.onTap,
       required this.width,
+      required this.textStyle,
       this.height});
 
   @override
@@ -31,7 +33,8 @@ class MainButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(50.r)),
         child: Text(
           text,
-          style: Styles.buttonText,
+          style:
+              textStyle == true ? Styles.buttonText : Styles.style700sp13White,
         ),
       ),
     );

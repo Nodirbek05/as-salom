@@ -35,6 +35,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   final PageController _pageController1 = PageController(viewportFraction: 1.0);
   int selectedSize = 0;
 
+  String firstHalf = "";
+  String secondHalf = "";
+  bool flag = true;
+
   @override
   void initState() {
     context.read<GetProductWithSlugBloc>().add(
@@ -50,9 +54,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     // print(widget.product.)
     return Scaffold(
       bottomSheet: Container(
-        margin: EdgeInsets.only(
-          bottom: 10.h
-        ),
+        margin: EdgeInsets.only(bottom: 10.h),
         color: Colors.white,
         height: 70.h,
         width: double.infinity,
@@ -128,6 +130,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: MainButtonWidget(
+                        height: 30.h,
+                        textStyle: true,
                         text: "В корзину",
                         onTap: () {
                           addDrugToBasket(
@@ -137,8 +141,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               widget.product.price.toString(),
                               1,
                               widget.product.photo![0].toString());
-                              widget.product.sizes![selectedSize].id;
-                              widget.product.weight!;
+                          selectedSize != 0
+                              ? widget.product.sizes![selectedSize].id
+                              : "null";
+                          widget.product.weight!;
                         },
                         width: double.infinity,
                       ),
@@ -179,7 +185,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ],
               ),
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.arrow_forward))
+                  onPressed: () {
+                    Navigator.pushNamed(context, BasketPage.routeName);
+                  },
+                  icon: const Icon(Icons.arrow_forward))
             ],
           ),
         ),
@@ -454,7 +463,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 style: Styles.styles700sp20Black,
               ),
               const SizedBox(height: 15),
+
               Text(widget.product.desc_ru.toString()),
+              ScreenUtil().setVerticalSpacing(10),
+              // Text(
+              //   "Развернуть",
+              //   style: Styles.styles700sp16BlackUnder,
+              // ),
               const SizedBox(height: 40),
               Text(
                 "Похожие товары",
@@ -482,15 +497,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             child: ProductCardWidget(
                               withHeight: true,
                               product: ProductModel(
-                                name_ru: randomGoods[ranIndex].name_ru,
-                                id: randomGoods[ranIndex].id,
-                                photo: randomGoods[ranIndex].photo,
-                                type_good: int.parse(
-                                    randomGoods[ranIndex].type_good.toString()),
-                                slug: randomGoods[ranIndex].slug,
-                                weight: randomGoods[ranIndex].weight,
-                                sizes: randomGoods[ranIndex].sizes
-                              ),
+                                  name_ru: randomGoods[ranIndex].name_ru,
+                                  id: randomGoods[ranIndex].id,
+                                  photo: randomGoods[ranIndex].photo,
+                                  type_good: int.parse(randomGoods[ranIndex]
+                                      .type_good
+                                      .toString()),
+                                  slug: randomGoods[ranIndex].slug,
+                                  weight: randomGoods[ranIndex].weight,
+                                  sizes: randomGoods[ranIndex].sizes),
                             ),
                           );
                         },

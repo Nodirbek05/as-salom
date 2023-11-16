@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class ConstColor{
+abstract class    ConstColor{
   static const Color splash_screen_color = Color(0xffF9F9F9);
   static const Color mainBlack = Color(0xFF101828);
   static const Color mainWhite = Color(0xFFFFFFFF);

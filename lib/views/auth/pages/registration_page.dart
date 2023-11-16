@@ -86,7 +86,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
     return Scaffold(
       bottomSheet: Container(
-        // height:96.h,
+        padding: EdgeInsets.only(
+          bottom: 15.h,
+        ),
+        height:80.h,
         width: double.infinity,
         decoration: BoxDecoration(
           color: ConstColor.mainWhite,

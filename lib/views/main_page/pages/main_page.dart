@@ -198,10 +198,12 @@ class _MainPageState extends State<MainPage> {
                           child: const SubBannersPage(),
                         ),
                       ),
+                      ScreenUtil().setVerticalSpacing(25),
                       BlocProvider(
                         create: (context) => GetSubCategoriesBloc(),
                         child: const SubCategoriesWidget(),
                       ),
+                       ScreenUtil().setVerticalSpacing(15),
                       BlocProvider(
                         create: (context) => GetSpesificProductsBloc(),
                         child: const AdditionalProducts(),

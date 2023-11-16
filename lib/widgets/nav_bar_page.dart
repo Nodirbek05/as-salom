@@ -1,5 +1,7 @@
+import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
+import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
@@ -14,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class CustomNavigatonBar extends StatefulWidget {
   const CustomNavigatonBar({super.key});
@@ -57,8 +60,12 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
           });
   }
 
+  final basketBox = Hive.box<BasketModel>('basketBox');
+
   @override
   Widget build(BuildContext context) {
+    final product = basketBox.values.toList().cast<BasketModel>();
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: BlocBuilder<GetAllCategoriesBloc, GetAllCategoriesState>(
@@ -121,25 +128,55 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: ConstColor.mainWhite,
         unselectedItemColor: ConstColor.greyColor,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.favorite_border),
             label: 'Favorites',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.menu),
             label: 'Menu',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_sharp),
+            icon: SizedBox(
+              width: 30,
+              child: Stack(
+                children: [
+                  const Icon(Icons.shopping_cart_sharp),
+                  ValueListenableBuilder<Box<BasketModel>>(
+                    valueListenable:
+                        Hive.box<BasketModel>('basketBox').listenable(),
+                    builder: (ctx, box, index) {
+                      final products = box.values.toList().cast<BasketModel>();
+                      if (products.isEmpty) {
+                        return const SizedBox();
+                      } else {
+                        return Positioned(
+                          top: 0,
+                          right: 0,
+                          child: CircleAvatar(
+                            backgroundColor: ConstColor.indigo,
+                            radius: 10,
+                            child: Text(
+                              products.length.toString(),
+                              style: Styles.style400sp12White,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
             label: 'Cart',
           ),
         ],

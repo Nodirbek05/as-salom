@@ -63,7 +63,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       height: 110,
                     ),
                     Text(
-                      widget.product!.price ?? '19 000 сум',
+                      "${widget.product!.price} сум " ?? '19 000 сум',
                       style: Styles.style600sp14Main,
                     ),
                     Text(
@@ -86,7 +86,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               ? Container(
                                   alignment: Alignment.center,
                                   width: double.infinity,
-                                  height: 50.h,
+                                  height: 35.h,
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           color: ConstColor.as_salomText),
@@ -134,6 +134,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                   ),
                                 )
                               : MainButtonWidget(
+                                  height: 35.h,
+                                  textStyle: false,
                                   text: "В корзину",
                                   onTap: () {
                                     addDrugToBasket(
@@ -144,8 +146,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         widget.product!.price.toString(),
                                         1,
                                         widget.product!.photo![0].toString(),
-                                        widget.product!.sizes!.isNotEmpty
-                                            ? widget.product!.sizes![0].id!
+                                        widget.product!.sizes != null &&
+                                                widget
+                                                    .product!.sizes!.isNotEmpty
+                                            ? widget.product!.sizes![0].id
                                                 .toString()
                                             : "null",
                                         widget.product!.weight != null
@@ -169,7 +173,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             child: InkWell(
               borderRadius: BorderRadius.circular(20.r),
               onTap: () {
-                print(widget.product!.sizes![0].id.toString);
+                // print(widget.product!.sizes![0].id.toString);
                 !isProductSavedInHive(int.parse(widget.product!.id.toString()))
                     ? addToBox(
                         widget.product!.name_ru!,
@@ -178,7 +182,13 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.price!,
                         widget.product!.type_good!,
                         widget.product!.discount!,
-                        widget.product!.sizes![0].id.toString())
+                        widget.product!.sizes != null &&
+                                widget.product!.sizes!.isNotEmpty
+                            ? widget.product!.sizes![0].id.toString()
+                            : "null",
+                        widget.product!.weight != null
+                            ? widget.product!.weight!
+                            : "null")
                     : deleteProduct(int.parse(widget.product!.id!.toString()));
               },
               child: ValueListenableBuilder(
@@ -224,7 +234,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   }
 
   void addToBox(String name, String image, int id, String price, int type,
-      String discount, String size) {
+      String discount, String size, String kg) {
     final product = FavoritesModel()
       ..name = name
       ..id = id
@@ -232,6 +242,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ..price = price
       ..discount = discount
       ..type = type
+      ..kg = kg
       ..size = size;
 
     final box = Hive.box<FavoritesModel>('favoritesBox');
