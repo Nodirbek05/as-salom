@@ -86,7 +86,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               ? Container(
                                   alignment: Alignment.center,
                                   width: double.infinity,
-                                  height: 35.h,
+                                  height: 40.h,
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           color: ConstColor.as_salomText),
@@ -98,7 +98,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       IconButton(
-                                        splashRadius: 8.r,
+                                        // splashRadius: 8.r,
                                         onPressed: () {
                                           if (getDrugQty(widget.product!.id!) >
                                               1) {
@@ -120,7 +120,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                               .toString(),
                                           style: Styles.style500sp16Black),
                                       IconButton(
-                                        splashRadius: 8.r,
+                                        // splashRadius: 8.r,
                                         onPressed: () {
                                           increaseQuantity(widget.product!.id!);
                                           setState(() {});

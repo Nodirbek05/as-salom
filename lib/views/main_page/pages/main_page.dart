@@ -119,22 +119,23 @@ class _MainPageState extends State<MainPage> {
                       Padding(
                         padding: EdgeInsets.only(
                           left: 15.w,
-                          bottom: 15.h,
+                          // bottom: 15.h,
                         ),
                         child: Text(
                           "Категории товаров",
                           style: Styles.styles700sp20Black,
                         ),
                       ),
+                     const SizedBox(height: 18,),
                       BlocProvider(
                         create: (context) => GetAllCategoriesBloc(),
                         child: const CategoriesWidget(),
                       ),
-                      ScreenUtil().setVerticalSpacing(18.h),
+                      const SizedBox(height: 18,),
                       Padding(
                         padding: EdgeInsets.only(
                           left: 15.w,
-                          bottom: 15.h,
+                          bottom: 18.h,
                         ),
                         child: Text(
                           "Вам понравится",
@@ -191,6 +192,9 @@ class _MainPageState extends State<MainPage> {
                         create: (context) => GetSpesificProductsBloc(),
                         child: const SpesificProductsWidget(index: 0),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       SizedBox(
                         // height: 200.h,
                         child: BlocProvider(
@@ -203,7 +207,7 @@ class _MainPageState extends State<MainPage> {
                         create: (context) => GetSubCategoriesBloc(),
                         child: const SubCategoriesWidget(),
                       ),
-                      ScreenUtil().setVerticalSpacing(15),
+                      ScreenUtil().setVerticalSpacing(20),
                       BlocProvider(
                         create: (context) => GetSpesificProductsBloc(),
                         child: const AdditionalProducts(),
