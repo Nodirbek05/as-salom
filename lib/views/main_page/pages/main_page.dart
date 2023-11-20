@@ -126,21 +126,12 @@ class _MainPageState extends State<MainPage> {
                           style: Styles.styles700sp20Black,
                         ),
                       ),
-                     const SizedBox(height: 18,),
+                      const SizedBox(
+                        height: 18,
+                      ),
                       BlocProvider(
                         create: (context) => GetAllCategoriesBloc(),
                         child: const CategoriesWidget(),
-                      ),
-                      const SizedBox(height: 18,),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 15.w,
-                          bottom: 18.h,
-                        ),
-                        child: Text(
-                          "Вам понравится",
-                          style: Styles.styles700sp20Black,
-                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -154,35 +145,51 @@ class _MainPageState extends State<MainPage> {
                             final products =
                                 box.values.toList().cast<FavoritesModel>();
                             if (products.isEmpty) {
-                              return const Center(
-                                child: Text("В избранном пока пусто"),
-                              );
+                              return const Center();
                             }
-                            return SizedBox(
-                              height: 310.h,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: products.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                      right: 10.w,
-                                    ),
-                                    child: ProductCardWidget(
-                                      product: ProductModel(
-                                        photo: [products[index].image],
-                                        price: products[index].price,
-                                        name_ru: products[index].name,
-                                        id: products[index].id,
-                                        type_good: products[index].type,
-                                        discount: products[index].discount,
-                                      ),
-                                      withHeight: true,
-                                      height: 310.h,
-                                    ),
-                                  );
-                                },
-                              ),
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 18,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 15.w,
+                                    bottom: 18.h,
+                                  ),
+                                  child: Text(
+                                    "Вам понравится",
+                                    style: Styles.styles700sp20Black,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 310.h,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: products.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                          right: 10.w,
+                                        ),
+                                        child: ProductCardWidget(
+                                          product: ProductModel(
+                                            photo: [products[index].image],
+                                            price: products[index].price,
+                                            name_ru: products[index].name,
+                                            id: products[index].id,
+                                            type_good: products[index].type,
+                                            discount: products[index].discount,
+                                          ),
+                                          withHeight: true,
+                                          height: 310.h,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             );
                           },
                         ),

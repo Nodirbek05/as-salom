@@ -75,11 +75,14 @@ class _InsideCatFirstPageState extends State<InsideCatFirstPage> {
                       height: 123.h,
                       width: 127.w,
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              ApiPaths.imageUrl + stateData[index].photo![0],
-                            ),
-                            fit: BoxFit.cover),
+                        image: stateData[index].photo != null
+                            ? DecorationImage(
+                                image: NetworkImage(
+                                  ApiPaths.imageUrl +
+                                      stateData[index].photo![0],
+                                ),
+                                fit: BoxFit.cover)
+                            : null,
                         borderRadius: BorderRadius.circular(15.r),
                         // color: ConstColor.grey300,
                       ),
