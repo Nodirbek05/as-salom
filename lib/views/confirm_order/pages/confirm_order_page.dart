@@ -82,20 +82,19 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   textColor: Colors.white,
                   backgroundColor: ConstColor.as_salomText,
                   fontSize: 16.0);
-            } else{
+            } else {
               context.read<CreateOrderBloc>().add(
-                  Makeorder(
-                    good: CreateOrderModel(
-                      desc: commentController.text,
-                      name: nameController.text,
-                      phone: phoneController.text,
-                      paymentType: 2,
-                      goods: goods,
+                    Makeorder(
+                      good: CreateOrderModel(
+                        desc: commentController.text,
+                        name: nameController.text,
+                        phone: phoneController.text,
+                        paymentType: 2,
+                        goods: goods,
+                      ),
                     ),
-                  ),
-                );
+                  );
             }
-            
           },
           child: Container(
             alignment: Alignment.center,
@@ -148,9 +147,18 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Ф.И.О получателя*',
-                  style: Styles.style400sp14Black,
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                      text: 'Ф.И.О получателя',
+                      style: Styles.style400sp14Black,
+                    ),
+
+                    TextSpan(
+                      text: '*',
+                      style: Styles.style400sp14Red,
+                    ),
+                  ]),
                 ),
                 InputWidget(
                   validateMode: AutovalidateMode.onUserInteraction,
