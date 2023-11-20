@@ -203,7 +203,7 @@ class _MainPageState extends State<MainPage> {
                         create: (context) => GetSubCategoriesBloc(),
                         child: const SubCategoriesWidget(),
                       ),
-                       ScreenUtil().setVerticalSpacing(15),
+                      ScreenUtil().setVerticalSpacing(15),
                       BlocProvider(
                         create: (context) => GetSpesificProductsBloc(),
                         child: const AdditionalProducts(),

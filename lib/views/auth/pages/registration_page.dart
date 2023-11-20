@@ -382,10 +382,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           : InputWidget(
                               controller: controller,
                               label: "Ваше имя",
-                              // hintText: "Введите ваше имя",
+                              hintText: "Введите ваше имя",
+                              padding:const EdgeInsets.only(
+                                bottom: 30,
+                                left:10,
+                              ),
                             ),
                       ScreenUtil().setVerticalSpacing(20),
                       InputWidget(
+                        padding: const EdgeInsets.only(
+                                bottom: 30,
+                                left:10,
+                              ),
                         maxLength: 12,
                         inputFormatter: [
                           FilteringTextInputFormatter.digitsOnly,

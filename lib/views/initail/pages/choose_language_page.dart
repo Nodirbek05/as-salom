@@ -19,9 +19,12 @@ class LanguagePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "as-salom",
-                style: Styles.asSalomText,
+              SizedBox(
+                height: 25,
+                width: double.infinity,
+                child: Image.asset("assets/images/as-salom.png",
+                fit: BoxFit.contain,
+                ),
               ),
               ScreenUtil().setVerticalSpacing(50),
               Text(

@@ -16,6 +16,7 @@ class InputWidget extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatter;
   final TextInputType? inputType;
   final int? maxLength;
+  final EdgeInsetsGeometry? padding;
   const InputWidget(
       {super.key,
       required this.controller,
@@ -29,6 +30,7 @@ class InputWidget extends StatefulWidget {
       this.inputFormatter,
       this.inputType,
       this.prefixIcon,
+      this.padding,
       this.isVisible});
 
   @override
@@ -44,6 +46,7 @@ class _InputWidgetState extends State<InputWidget> {
         widget.label != null ? Text(widget.label.toString()) : const SizedBox(),
         const SizedBox(height: 7),
         TextFormField(
+          
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: widget.validator,
           maxLength: widget.maxLength,
@@ -56,6 +59,7 @@ class _InputWidgetState extends State<InputWidget> {
           obscuringCharacter: "*",
           obscureText: widget.isVisible ?? false,
           decoration: InputDecoration(
+            contentPadding: widget.padding,
             hintText: widget.hintText,
             suffixIcon: widget.suffixIcon,
             prefix: widget.prefixIcon,
