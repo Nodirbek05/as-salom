@@ -11,6 +11,7 @@ class ChooseButtonLang extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(30),
       onTap: () {
         Navigator.pushNamed(context, RegistrationPage.routeName);
       },
