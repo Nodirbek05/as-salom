@@ -29,7 +29,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       onTap: () {
         Navigator.pushNamed(context, ProductDetailPage.routeName,
             arguments: ProductDetailPage(
-                product: widget.product!, slug: widget.product!.slug!));
+                product: widget.product!, slug: widget.product!.slug??""));
         print("SLUGGGGGGGG:${widget.product!.slug!}");
       },
       child: Stack(
@@ -179,9 +179,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.name_ru!,
                         widget.product!.photo![0],
                         int.parse(widget.product!.id!.toString()),
-                        widget.product!.price!,
-                        widget.product!.type_good!,
-                        widget.product!.discount!,
+                        widget.product!.price ?? "null",
+                        widget.product!.type_good ?? 0,
+                        widget.product!.discount ?? "null",
                         widget.product!.sizes != null &&
                                 widget.product!.sizes!.isNotEmpty
                             ? widget.product!.sizes![0].id.toString()

@@ -10,7 +10,9 @@ import 'package:hive_flutter/adapters.dart';
 
 class BasketProductCardWidget extends StatefulWidget {
   final BasketModel product;
-  const BasketProductCardWidget({super.key, required this.product});
+  final VoidCallback onTap;
+  const BasketProductCardWidget(
+      {super.key, required this.onTap, required this.product});
 
   @override
   State<BasketProductCardWidget> createState() =>
@@ -18,8 +20,22 @@ class BasketProductCardWidget extends StatefulWidget {
 }
 
 class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
+  int price = 0;
+
+  getPrice(BasketModel product) {
+    price = 0;
+
+    for (var a = 0; a < product.qty; a++) {
+      product.price != "null"
+          ? price += int.parse(product.price.toString())
+          : price = 0;
+    }
+    print(price);
+  }
+
   @override
   Widget build(BuildContext context) {
+    getPrice(widget.product);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -38,6 +54,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
               children: [
                 InkWell(
                   onTap: () {
+                    widget.onTap();
                     deleteDrugFromBasket(widget.product.id);
                   },
                   child: SvgPicture.asset(
@@ -77,12 +94,14 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
             Row(
               children: [
                 Text(
-                  widget.product.price,
+                  "$price сум",
                   style: Styles.style600sp14Main,
                 ),
                 const Spacer(),
                 InkWell(
                   onTap: () {
+                    widget.onTap();
+
                     setState(() {
                       int.parse(widget.product.qty.toString()) == 1
                           ? deleteDrugFromBasket(widget.product.id)
@@ -110,6 +129,8 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                 ScreenUtil().setHorizontalSpacing(10),
                 InkWell(
                   onTap: () {
+                    widget.onTap();
+
                     setState(() {
                       increaseQuantity(widget.product.id);
                     });

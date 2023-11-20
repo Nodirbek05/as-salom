@@ -9,9 +9,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hive_flutter/adapters.dart';
 
-class BasketPage extends StatelessWidget {
+class BasketPage extends StatefulWidget {
   static const routeName = "/basketPage";
-  BasketPage({super.key});
+  const BasketPage({super.key});
+
+  @override
+  State<BasketPage> createState() => _BasketPageState();
+}
+
+class _BasketPageState extends State<BasketPage> {
   final basketBox = Hive.box<BasketModel>('basketBox');
 
   int price = 0;
@@ -55,15 +61,15 @@ class BasketPage extends StatelessWidget {
             //         return const SizedBox();
             //       } else {
             //           getPrice(hiveProducts);
-                      
-                    // return 
-                    Text(
-                      "Итого к оплате: $price сум",
-                      style: Styles.style600sp18Black,
-                    // );
-                  // }
-                // }
-                ),
+
+            // return
+            Text(
+              "Итого к оплате: $price сум",
+              style: Styles.style600sp18Black,
+              // );
+              // }
+              // }
+            ),
             ScreenUtil().setVerticalSpacing(15),
             InkWell(
               onTap: () {
@@ -259,7 +265,11 @@ class BasketPage extends StatelessWidget {
                           itemCount: products.length,
                           itemBuilder: (context, index) {
                             final product = products[index];
-                            return BasketProductCardWidget(product: product);
+                            return BasketProductCardWidget(
+                                onTap: () {
+                                  setState(() {});
+                                },
+                                product: product);
                           },
                         ),
                       ),

@@ -41,22 +41,22 @@ class AuthRequests {
 
   static Future<Object> login(String phone) async {
     // try {
-      print('${ApiPaths.basicUrl}${ApiPaths.register}');
-      final response =
-          await http.post(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.login}'),
-              headers: {'Content-Type': 'application/json'},
-              body: json.encode(
-                {'phone': "+998 ${phone.replaceAll("-", " ")}"},
-              ));
-      print(response.body);
-      switch (response.statusCode) {
-        case StatusCodes.ok:
-          return CreateAccountDataModel.fromJson(response.body);
-        case StatusCodes.alreadyTaken:
-          return ErrorModel.fromJson(response.body);
-        default:
-          throw ErrorModel.fromJson(response.body);
-      }
+    print('${ApiPaths.basicUrl}${ApiPaths.register}');
+    final response =
+        await http.post(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.login}'),
+            headers: {'Content-Type': 'application/json'},
+            body: json.encode(
+              {'phone': "+998 ${phone.replaceAll("-", " ")}"},
+            ));
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return CreateAccountDataModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
     // } catch (e) {
     //   return ResponseError.noInternet;
     // }

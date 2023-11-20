@@ -284,9 +284,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   widget.product.name_ru!,
                                   widget.product.photo![0],
                                   int.parse(widget.product.id!.toString()),
-                                  widget.product.price!,
-                                  widget.product.type_good!,
-                                  widget.product.discount!,
+                                  widget.product.price ?? "null",
+                                  widget.product.type_good ?? 0,
+                                  widget.product.discount ?? "null",
                                 )
                               : deleteProduct(
                                   int.parse(widget.product.id!.toString()));

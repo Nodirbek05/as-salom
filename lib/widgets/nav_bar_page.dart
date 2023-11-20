@@ -163,8 +163,8 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                           top: 0,
                           right: 0,
                           child: CircleAvatar(
-                            backgroundColor: ConstColor.indigo,
-                            radius: 10,
+                            backgroundColor: ConstColor.bascketCountColo,
+                            radius: 8,
                             child: Text(
                               products.length.toString(),
                               style: Styles.style400sp12White,
