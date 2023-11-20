@@ -77,7 +77,9 @@ class _InsideCatFirstPageState extends State<InsideCatFirstPage> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
-                              ApiPaths.imageUrl + stateData[index].photo![0],
+                              stateData[index].photo != null
+                                  ? ApiPaths.imageUrl + stateData[index].photo!
+                                  : "https://www.pole-optitec.com/img/entreprises/default.jpg",
                             ),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(15.r),
