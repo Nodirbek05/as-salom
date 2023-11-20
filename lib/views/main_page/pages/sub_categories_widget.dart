@@ -45,6 +45,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                       scrollDirection: Axis.horizontal,
                       itemCount: categories!.length,
                       itemBuilder: (context, index) {
+                        print( ApiPaths.imageUrl +categories[index].photo.toString());
                         return Container(
                           margin: const EdgeInsets.only(right: 10),
                           padding: EdgeInsets.all(10.w),

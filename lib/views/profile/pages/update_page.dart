@@ -10,6 +10,7 @@ import 'package:assalomproject/views/auth/data/logic/verification_bloc/verificat
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/data/logic/update_name_bloc/update_name_bloc.dart';
 import 'package:assalomproject/views/profile/data/models/model_for_update.dart';
+import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,7 +104,8 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
             listener: (context, state) {
               if (state is UpdateNameSuccess) {
                 print("SUCCESFULL");
-                Navigator.pop(context);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, CustomNavigatonBar.routeName, (route) => false);
                 context.read<GetUserProfileBloc>().add(GetProfileEvent());
               } else if (state is UpdateNumberSuccess) {
                 getCode();
@@ -231,7 +233,7 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
                         controller: controller,
                       )
                     : InputWidget(
-                      hintText: widget.data.phone.toString() .substring(5,17),
+                        hintText: widget.data.phone.toString().substring(5, 17),
                         maxLength: 12,
                         inputFormatter: [
                           FilteringTextInputFormatter.digitsOnly,
