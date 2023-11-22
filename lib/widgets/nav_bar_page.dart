@@ -64,7 +64,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
 
   @override
   Widget build(BuildContext context) {
-    final product = basketBox.values.toList().cast<BasketModel>();
+    // final product = basketBox.values.toList().cast<BasketModel>();
 
     return Scaffold(
       key: _scaffoldKey,

@@ -5,6 +5,7 @@ import 'package:assalomproject/views/inside_category/components/filter_drawer.da
 import 'package:assalomproject/views/inside_category/filter_bloc/filter_bloc.dart';
 import 'package:assalomproject/views/inside_category/get_category_products_bloc/get_cat_products_bloc.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
+import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,9 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
     super.initState();
   }
 
+  bool isWorking = false;
+  List<SubCategoryModel> subcategory = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +42,10 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
       drawer: BlocProvider(
         create: (context) => FilterBloc(),
         child: FilterDrawer(
-          id: widget.id,
+          // id: widget.id,
+
+          subCategory: subcategory,
+          // names: ,
         ),
       ),
       appBar: AppBar(
@@ -114,7 +121,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                bottom:10.h,
+                bottom: 10.h,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -142,7 +149,19 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
             BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
               builder: (context, state) {
                 if (state is GetCatProductsSuccess) {
+
+                  print("STATE DATA IS COMING WHAT: ${state.subcategoryModel.subcategory}");
+                  if (!isWorking) {
+                    for (var i = 0;
+                        i < state.subcategoryModel.subcategory!.subcategories!.length;
+                        i++) {
+                      subcategory.add(state.subcategoryModel.subcategory!.subcategories![i]);
+                    }
+                    isWorking = true;
+                  }
+
                   var products = state.subcategoryModel.goods;
+                  // final data = state.subcategoryModel.subcategory!;
                   return Expanded(
                     child: GridView.builder(
                       shrinkWrap: true,
@@ -162,14 +181,13 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                       itemBuilder: (context, index) {
                         return ProductCardWidget(
                           product: ProductModel(
-                            id: products.data![index].id,
-                            discount: products.data![index].discount,
-                            name_ru: products.data![index].name_ru,
-                            photo: [products.data![index].photo![0]],
-                            type_good: products.data![index].type_good,
-                            price: products.data![index].price,
-                            sizes: products.data![index].sizes!
-                          ),
+                              id: products.data![index].id,
+                              discount: products.data![index].discount,
+                              name_ru: products.data![index].name_ru,
+                              photo: [products.data![index].photo![0]],
+                              type_good: products.data![index].type_good,
+                              price: products.data![index].price,
+                              sizes: products.data![index].sizes!),
                           withHeight: false,
                         );
                       },

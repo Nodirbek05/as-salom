@@ -1,5 +1,6 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_cat_first_page.dart';
+import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, InsideCatFirstPage.routeName,
-                        arguments: InsideCatFirstPage(
+                    Navigator.pushNamed(context, InsideCategoryPage.routeName,
+                        arguments: InsideCategoryPage(
                             name: categories[index].name_ru!,
                             id: int.parse(categories[index].id!.toString())));
                   },

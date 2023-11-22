@@ -2,6 +2,8 @@ import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/inside_category/filter_bloc/filter_bloc.dart';
+import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
+import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,21 +11,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class FilterDrawer extends StatefulWidget {
-  const FilterDrawer({super.key, required this.id});
-  final int id;
+  const FilterDrawer({
+    super.key,
+    // required this.id,
+    required this.subCategory
+  });
+  // final int id;
+  final List<SubCategoryModel> subCategory;
 
   @override
   State<FilterDrawer> createState() => _FilterDrawerState();
 }
 
 class _FilterDrawerState extends State<FilterDrawer> {
-
-
   @override
   void initState() {
-  context.read<FilterBloc>().add(FilterData(id: widget.id));
+    context.read<FilterBloc>().add(FilterData(id: 2));
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(

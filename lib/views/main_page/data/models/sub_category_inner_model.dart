@@ -25,7 +25,7 @@ class SubCategoryModelMain extends ResponseData {
     final result = <String, dynamic>{};
 
     if (subcategory != null) {
-      result.addAll({'subcategory': subcategory!.toMap()});
+      result.addAll({'category': subcategory!.toMap()});
     }
     if (goods != null) {
       result.addAll({'goods': goods!.toMap()});
@@ -36,8 +36,8 @@ class SubCategoryModelMain extends ResponseData {
 
   factory SubCategoryModelMain.fromMap(Map<String, dynamic> map) {
     return SubCategoryModelMain(
-      subcategory: map['subcategory'] != null
-          ? CategoryDataModel.fromMap(map['subcategory'])
+      subcategory: map['category'] != null
+          ? CategoryDataModel.fromMap(map['category'])
           : null,
       goods: map['goods'] != null ? CategoryGoods.fromMap(map['goods']) : null,
     );
@@ -50,7 +50,7 @@ class SubCategoryModelMain extends ResponseData {
 
   @override
   String toString() =>
-      'SubCategoryModel(subcategory: $subcategory, goods: $goods)';
+      'SubCategoryModel(category: $subcategory, goods: $goods)';
 
   @override
   bool operator ==(Object other) {

@@ -3,7 +3,8 @@ import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_
 import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
-import 'package:assalomproject/views/confirm_order/pages/Choose_payment_page.dart';
+import 'package:assalomproject/views/confirm_order/confirm_order_by_card_bloc/confirm_order_by_card_bloc.dart';
+import 'package:assalomproject/views/confirm_order/pages/choose_payment_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/paying_by_card_page.dart';
@@ -16,7 +17,6 @@ import 'package:assalomproject/views/inside_category/get_category_products_bloc/
 import 'package:assalomproject/views/inside_category/inside_cat_first_bloc/inside_cat_first_bloc.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_cat_first_page.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
-import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/payment_bloc/payment_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -37,11 +37,14 @@ abstract class Routes {
       case LanguagePage.routeName:
         return MaterialPageRoute(builder: (_) => const LanguagePage());
       case ChoosePaymentPage.routeName:
-        final id = settings.arguments as int;
+        final id = settings.arguments as ChoosePaymentPage;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => PaymentBloc(),
-                  child: ChoosePaymentPage(id: id),
+                  child: ChoosePaymentPage(
+                    id: id.id,
+                    name: id.name,
+                  ),
                 ));
       case CustomNavigatonBar.routeName:
         return MaterialPageRoute(
@@ -114,7 +117,15 @@ abstract class Routes {
         return MaterialPageRoute(builder: (_) => const DrawerPage());
 
       case PayingByCardPage.routeName:
-        return MaterialPageRoute(builder: (_) => const PayingByCardPage());
+        final id = settings.arguments as PayingByCardPage;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => ConfirmOrderByCardBloc(),
+                  child: PayingByCardPage(
+                    id: id.id,
+                    name: id.name,
+                  ),
+                ));
       case ConfirmAnimationPage.routeName:
         return MaterialPageRoute(builder: (_) => const ConfirmAnimationPage());
       case ProductDetailPage.routeName:

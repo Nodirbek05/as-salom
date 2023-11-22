@@ -4,7 +4,7 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
-import 'package:assalomproject/views/confirm_order/pages/Choose_payment_page.dart';
+import 'package:assalomproject/views/confirm_order/pages/choose_payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,16 +72,6 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   textColor: Colors.white,
                   backgroundColor: ConstColor.as_salomText,
                   fontSize: 16.0);
-            } else if (phoneController.text.isEmpty ||
-                phoneController.text.length < 12) {
-              Fluttertoast.showToast(
-                  msg: "Please enter valuable number",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.TOP,
-                  timeInSecForIosWeb: 1,
-                  textColor: Colors.white,
-                  backgroundColor: ConstColor.as_salomText,
-                  fontSize: 16.0);
             } else {
               context.read<CreateOrderBloc>().add(
                     Makeorder(
@@ -134,7 +124,8 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
         listener: (context, state) {
           if (state is CreateOrderSuccess) {
             Navigator.pushNamed(context, ChoosePaymentPage.routeName,
-                arguments: state.data.order.id);
+                arguments: ChoosePaymentPage(
+                    id: state.data.order.id!, name: nameController.text));
           }
         },
         child: Padding(
@@ -153,7 +144,6 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                       text: 'Ф.И.О получателя',
                       style: Styles.style400sp14Black,
                     ),
-
                     TextSpan(
                       text: '*',
                       style: Styles.style400sp14Red,
@@ -172,10 +162,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                 ScreenUtil().setVerticalSpacing(20),
                 InputWidget(
                   validateMode: AutovalidateMode.onUserInteraction,
-                  validator: (val) {
-                    if (val!.isEmpty) return 'Enter valid number';
-                    return null;
-                  },
+
                   maxLength: 12,
                   inputFormatter: [
                     FilteringTextInputFormatter.digitsOnly,

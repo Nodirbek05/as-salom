@@ -1,8 +1,10 @@
+import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class ConfirmAnimationPage extends StatelessWidget {
   static const routeName = "/confirmAnimation";
@@ -45,6 +47,7 @@ class ConfirmAnimationPage extends StatelessWidget {
             InkWell(
               onTap: () {
                 Navigator.pushNamed(context, CustomNavigatonBar.routeName);
+                   Hive.box<BasketModel>('basketBox').clear();
               },
               child: Container(
                 alignment: Alignment.center,

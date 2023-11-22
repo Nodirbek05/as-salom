@@ -1,20 +1,20 @@
-import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
+import 'package:assalomproject/views/confirm_order/pages/paying_by_card_page.dart';
 import 'package:assalomproject/views/main_page/logic/payment_bloc/payment_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ChoosePaymentPage extends StatefulWidget {
   final int id;
+  final String name;
   static const routeName = "/choosePaymentPage";
 
-  const ChoosePaymentPage({super.key, required this.id});
+  const ChoosePaymentPage({super.key, required this.id, required this.name});
 
   @override
   State<ChoosePaymentPage> createState() => _ChoosePaymentPageState();
@@ -82,12 +82,24 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage>
                             child: InkWell(
                               borderRadius: BorderRadius.circular(10.r),
                               onTap: () {
-                                launchUrl(
+                                if (state.paymentTypesModel.data[index].url!
+                                    .contains(
+                                  "payment-card",
+                                )) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    PayingByCardPage.routeName,
+                                    arguments: PayingByCardPage(
+                                        id: widget.id, name: widget.name),
+                                  );
+                                } else {
+                                  launchUrl(
                                     Uri.parse(state
                                         .paymentTypesModel.data[index].url
                                         .toString()),
-                                    mode: LaunchMode.externalApplication);
-                                Hive.box<BasketModel>('basketBox').clear();
+                                    mode: LaunchMode.externalApplication,
+                                  );
+                                }
                               },
                               child: Container(
                                 // padding: EdgeInsets.only(

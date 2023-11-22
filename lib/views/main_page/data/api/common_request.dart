@@ -8,6 +8,7 @@ import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/data/models/category_inner_model.dart';
+import 'package:assalomproject/views/main_page/data/models/confirm_order_by_card_model.dart';
 import 'package:assalomproject/views/main_page/data/models/created_order_model.dart';
 import 'package:assalomproject/views/main_page/data/models/filter_model.dart';
 import 'package:assalomproject/views/main_page/data/models/get_all_banners.dart';
@@ -107,7 +108,7 @@ class CommonRequests {
     print(id);
     // try {
     final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.subCategoryInner}$id'),
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.insideCat}$id'),
       headers: {'Content-Type': 'application/json'},
     );
     print("RESPONSE DATA ${response.body}");
@@ -127,19 +128,19 @@ class CommonRequests {
 
   static Future<ResponseData> filterCat(int id) async {
     // try {
-      final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.filter}/$id'),
-        headers: {'Content-Type': 'application/json'},
-      );
-      print(response.body);
-      switch (response.statusCode) {
-        case StatusCodes.ok:
-          return FilterModel.fromJson(response.body);
-        case StatusCodes.alreadyTaken:
-          return ErrorModel.fromJson(response.body);
-        default:
-          throw ErrorModel.fromJson(response.body);
-      }
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.filter}/$id'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return FilterModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
     // } catch (e) {
     //   return ResponseError.noInternet;
     // }
@@ -261,6 +262,42 @@ class CommonRequests {
       case StatusCodes.ok:
       case StatusCodes.good:
         return CreatedOrderModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel();
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
+
+  static Future<ResponseData> confirmOrById(
+      String name, String phone, int id) async {
+    // try {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+
+    print(token);
+    final response = await http.post(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.confirmCard}/$id'),
+      headers: {
+        'Authorization': "Bearer $token",
+        'Content-Type': 'application/json'
+      },
+      body: json.encode(
+        {
+          'name': name,
+          'phone': phone,
+        },
+      ),
+    );
+    print(response.statusCode);
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+      case StatusCodes.good:
+        return ConfirmOrderByCard.fromJson(response.body);
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:
