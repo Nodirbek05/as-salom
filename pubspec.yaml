@@ -26,6 +26,8 @@ dependencies:
   build_runner: ^2.4.6
   fluttertoast: ^8.2.1
   intl: ^0.18.1
+  easy_localization: ^3.0.3
+
  
 
 dev_dependencies:
@@ -42,6 +44,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/translations/
     # - images/a_dot_ham.jpeg
 
   # fonts:

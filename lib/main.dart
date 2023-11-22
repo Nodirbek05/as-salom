@@ -4,6 +4,7 @@ import 'package:assalomproject/core/constant/routes.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,14 +13,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(BasketModelAdapter());
   Hive.registerAdapter(FavoritesModelAdapter());
   await Hive.openBox<FavoritesModel>("favoritesBox");
   await Hive.openBox<BasketModel>('basketBox');
   SharedPreferences _prefs = await SharedPreferences.getInstance();
-  bool hasRegistered = _prefs.getString('token') != null;
-  runApp(MyApp(hasRegistered: hasRegistered));
+  bool hasRegistered = _prefs.getString('token') == null;
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ru'),
+        Locale('uz'),
+      ],
+      fallbackLocale: const Locale('ru'),
+      startLocale: const Locale('ru'),
+      path: "assets/translations",
+      child: MyApp(hasRegistered: hasRegistered),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,6 +44,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       title: 'As-Salom',
       // initialRoute: SplashScreen.routeName,
@@ -42,9 +59,9 @@ class MyApp extends StatelessWidget {
       home: ScreenUtilInit(
         designSize: const Size(375, 812),
         child: hasRegistered
-            ?  BlocProvider(
+            ? BlocProvider(
                 create: (context) => GetAllCategoriesBloc(),
-                child:const CustomNavigatonBar(),
+                child: const CustomNavigatonBar(),
               )
             : const SplashScreen(),
       ),

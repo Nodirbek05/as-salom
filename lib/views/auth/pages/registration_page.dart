@@ -10,6 +10,7 @@ import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart'
 import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
 import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -271,7 +272,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           };
                   },
                   child: Text(
-                    "Регистрация",
+                    tr('registration'),
                     style: isLogin ? Styles.greyRegister : Styles.registerText,
                   ),
                 ),

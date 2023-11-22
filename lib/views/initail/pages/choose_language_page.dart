@@ -22,8 +22,9 @@ class LanguagePage extends StatelessWidget {
               SizedBox(
                 height: 25,
                 width: double.infinity,
-                child: Image.asset("assets/images/as-salom.png",
-                fit: BoxFit.contain,
+                child: Image.asset(
+                  "assets/images/as-salom.png",
+                  fit: BoxFit.contain,
                 ),
               ),
               ScreenUtil().setVerticalSpacing(50),
@@ -32,11 +33,20 @@ class LanguagePage extends StatelessWidget {
                 style: Styles.chooseText,
               ),
               ScreenUtil().setVerticalSpacing(35),
-              const ChooseButtonLang(langName: "Русский"),
+              const ChooseButtonLang(
+                langName: "Русский",
+                index: 0,
+              ),
               ScreenUtil().setVerticalSpacing(15),
-              const ChooseButtonLang(langName: "O'zbek tili"),
+              const ChooseButtonLang(
+                langName: "O'zbek tili",
+                index: 1,
+              ),
               ScreenUtil().setVerticalSpacing(15),
-              const ChooseButtonLang(langName: "English"),
+              const ChooseButtonLang(
+                langName: "English",
+                index: 2,
+              ),
             ],
           ),
         ),
