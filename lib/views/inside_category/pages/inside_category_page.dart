@@ -1,15 +1,23 @@
+import 'package:assalomproject/core/common_models/error_model.dart';
+import 'package:assalomproject/core/common_models/response_data.dart';
+import 'package:assalomproject/core/common_models/status_codes.dart';
+import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/inside_category/components/filter_drawer.dart';
 import 'package:assalomproject/views/inside_category/filter_bloc/filter_bloc.dart';
 import 'package:assalomproject/views/inside_category/get_category_products_bloc/get_cat_products_bloc.dart';
+import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
+import 'package:assalomproject/views/main_page/data/models/inner_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:flutter_svg/svg.dart';
 
 class InsideCategoryPage extends StatefulWidget {
@@ -24,29 +32,137 @@ class InsideCategoryPage extends StatefulWidget {
 }
 
 class _InsideCategoryPageState extends State<InsideCategoryPage> {
-  final GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
-    print("WIDGET ID IS COMING HERE:${widget.id}");
     context.read<GetCatProductsBloc>().add(GetProducts(id: widget.id));
     super.initState();
   }
 
   bool isWorking = false;
-  List<SubCategoryModel> subcategory = [];
+  // List<SubCategoryModel> subcategory = [];
+  // CategoryGoods? insideProducts;
+  List<ProductModel> insideProducts = [];
+
+  static Future<ResponseData> getInnerProducts(int id) async {
+    print(id);
+    // try {
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.subCategoryInner}$id'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print("SUBCATEGORY RESPONSE DATA ${response.body}");
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return InnerModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: drawerKey,
-      drawer: BlocProvider(
-        create: (context) => FilterBloc(),
-        child: FilterDrawer(
-          // id: widget.id,
+      drawer: BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
+        builder: (context, state) {
+          if (state is GetCatProductsSuccess) {
+            return Drawer(
+              backgroundColor: ConstColor.mainWhite,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0)),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: 50.h,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 10.w,
+                        top: 10.h,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Фильтры",
+                            style: Styles.styles700sp20Black,
+                          ),
+                          const Spacer(),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: SvgPicture.asset(
+                              ConstIcons.xbutton,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 10.w,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Text(
+                          //   filterCat.name_ru!,
+                          //   style: Styles.style500sp14Main,
+                          // ),
+                          ScreenUtil().setVerticalSpacing(5),
+                          ...List.generate(
+                            state.subcategoryModel.subcategory!.subcategories!
+                                .length,
+                            (index) => Padding(
+                              padding: EdgeInsets.only(
+                                bottom: 5.h,
+                              ),
+                              child: InkWell(
+                                onTap: () async {
+                                  insideProducts.clear();
 
-          subCategory: subcategory,
-          // names: ,
-        ),
+                                  getInnerProducts(int.parse(state
+                                          .subcategoryModel
+                                          .subcategory!
+                                          .subcategories![index]
+                                          .id
+                                          .toString()))
+                                      .then((value) => {
+                                            if (value is InnerModel)
+                                              {
+                                                insideProducts
+                                                    .addAll(value.goods.data!),
+                                                setState(() {}),
+                                                Navigator.pop(context),
+                                              }
+                                          });
+                                },
+                                child: Text(
+                                  state.subcategoryModel.subcategory!
+                                      .subcategories![index].name_ru!,
+                                  style: Styles.styles400sp14Black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+          return SizedBox();
+        },
       ),
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
@@ -148,46 +264,45 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
             ),
             BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
               builder: (context, state) {
+                print("STATE $state ==============");
                 if (state is GetCatProductsSuccess) {
-
-                  print("STATE DATA IS COMING WHAT: ${state.subcategoryModel.subcategory}");
-                  if (!isWorking) {
-                    for (var i = 0;
-                        i < state.subcategoryModel.subcategory!.subcategories!.length;
-                        i++) {
-                      subcategory.add(state.subcategoryModel.subcategory!.subcategories![i]);
-                    }
-                    isWorking = true;
-                  }
-
                   var products = state.subcategoryModel.goods;
-                  // final data = state.subcategoryModel.subcategory!;
+                  insideProducts = products!.data!;
+
+                  // if (!isWorking) {
+                  //   insideProducts = products;
+
+                  //   for (var i = 0;
+                  //       i <
+                  //           state.subcategoryModel.subcategory!.subcategories!
+                  //               .length;
+                  //       i++) {
+                  //     subcategory.add(state
+                  //         .subcategoryModel.subcategory!.subcategories![i]);
+                  //   }
+                  //   isWorking = true;
+                  // }
                   return Expanded(
                     child: GridView.builder(
                       shrinkWrap: true,
-                      // padding: EdgeInsets.only(
-                      //   left: 20,
-                      //   // right: 15.w,
-                      // ),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 10,
                         childAspectRatio: 0.64,
-                        //  mainAxisExtent: 300,
                         crossAxisSpacing: 10,
                       ),
-                      itemCount: products!.data!.length,
+                      itemCount: insideProducts.length,
                       itemBuilder: (context, index) {
                         return ProductCardWidget(
                           product: ProductModel(
-                              id: products.data![index].id,
-                              discount: products.data![index].discount,
-                              name_ru: products.data![index].name_ru,
-                              photo: [products.data![index].photo![0]],
-                              type_good: products.data![index].type_good,
-                              price: products.data![index].price,
-                              sizes: products.data![index].sizes!),
+                              id: insideProducts[index].id,
+                              discount: insideProducts[index].discount,
+                              name_ru: insideProducts[index].name_ru,
+                              photo: [insideProducts[index].photo![0]],
+                              type_good: insideProducts[index].type_good,
+                              price: insideProducts[index].price,
+                              sizes: insideProducts[index].sizes!),
                           withHeight: false,
                         );
                       },

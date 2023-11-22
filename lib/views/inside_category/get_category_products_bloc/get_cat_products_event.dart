@@ -11,3 +11,9 @@ class GetProducts extends GetCatProductsEvent {
   final int id;
   const GetProducts({required this.id});
 }
+
+class GetSubCategoryProducts extends GetCatProductsEvent {
+  final int subCategoryId;
+
+  const GetSubCategoryProducts({required this.subCategoryId});
+}

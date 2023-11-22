@@ -13,6 +13,7 @@ import 'package:assalomproject/views/main_page/data/models/created_order_model.d
 import 'package:assalomproject/views/main_page/data/models/filter_model.dart';
 import 'package:assalomproject/views/main_page/data/models/get_all_banners.dart';
 import 'package:assalomproject/views/main_page/data/models/get_sub_banner.dart';
+import 'package:assalomproject/views/main_page/data/models/inner_model.dart';
 import 'package:assalomproject/views/main_page/data/models/payment_types_model.dart';
 import 'package:assalomproject/views/main_page/data/models/search_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
@@ -116,6 +117,27 @@ class CommonRequests {
     switch (response.statusCode) {
       case StatusCodes.ok:
         return SubCategoryModelMain.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
+
+  static Future<ResponseData> getInnerProducts(int id) async {
+    print(id);
+    // try {
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.subCategoryInner}$id'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print("SUBCATEGORY RESPONSE DATA ${response.body}");
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return InnerModel.fromJson(response.body);
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:
