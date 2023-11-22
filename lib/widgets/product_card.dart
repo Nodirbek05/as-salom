@@ -6,6 +6,7 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
 import 'package:assalomproject/widgets/main_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -136,7 +137,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               : MainButtonWidget(
                                   height: 35.h,
                                   textStyle: false,
-                                  text: "В корзину",
+                                  text: "add_box".tr(),
                                   onTap: () {
                                     addDrugToBasket(
                                         int.parse(

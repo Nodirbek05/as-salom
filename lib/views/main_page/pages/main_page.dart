@@ -15,6 +15,7 @@ import 'package:assalomproject/views/main_page/pages/spesific_producyts_widget.d
 import 'package:assalomproject/views/main_page/pages/sub_banner_page.dart';
 import 'package:assalomproject/views/main_page/pages/sub_categories_widget.dart';
 import 'package:assalomproject/widgets/product_card.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,7 +76,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               focusColor: ConstColor.greyColor,
-              hintText: "Поиск товаров",
+              hintText: "search".tr(),
               hintStyle: Styles.styles400sp14Black,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30.r),
@@ -122,7 +123,7 @@ class _MainPageState extends State<MainPage> {
                           // bottom: 15.h,
                         ),
                         child: Text(
-                          "Категории товаров",
+                          "category".tr(),
                           style: Styles.styles700sp20Black,
                         ),
                       ),
@@ -159,7 +160,7 @@ class _MainPageState extends State<MainPage> {
                                     bottom: 18.h,
                                   ),
                                   child: Text(
-                                    "Вам понравится",
+                                    "favorites".tr(),
                                     style: Styles.styles700sp20Black,
                                   ),
                                 ),
@@ -243,6 +244,8 @@ class _MainPageState extends State<MainPage> {
                             id: products[index].id,
                             discount: products[index].discount,
                             name_ru: products[index].name_ru,
+                            name_en: products[index].name_en,
+                            name_uz: products[index].name_uz,
                             photo: products[index].photo,
                             type_good: products[index].type_good,
                             price: products[index].price,

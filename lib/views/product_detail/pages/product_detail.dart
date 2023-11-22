@@ -8,6 +8,7 @@ import 'package:assalomproject/views/main_page/data/models/spesific_products.dar
 import 'package:assalomproject/views/product_detail/get_pro_with_slug_bloc/get_product_with_slug_bloc.dart';
 import 'package:assalomproject/widgets/main_button.dart';
 import 'package:assalomproject/widgets/product_card.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -120,7 +121,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 color: ConstColor.as_salomText,
                                 borderRadius: BorderRadius.circular(50.r)),
                             child: Text(
-                              "Kорзинa",
+                              "box".tr(),
                               style: Styles.buttonText,
                             ),
                           ),
@@ -132,7 +133,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       child: MainButtonWidget(
                         height: 30.h,
                         textStyle: true,
-                        text: "В корзину",
+                        text: "add_box".tr(),
                         onTap: () {
                           addDrugToBasket(
                               int.parse(widget.product.id.toString()),
@@ -162,7 +163,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Итого в корзине:",
+                    "total_box".tr(),
                     style: Styles.style400sp12Grey,
                   ),
                   Text(
@@ -175,7 +176,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Сумма:",
+                    "total_price".tr(),
                     style: Styles.style400sp12Grey,
                   ),
                   Text(
@@ -326,7 +327,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Цена за шт:",
+                          "${"price_for".tr()} шт:",
                           style: Styles.style700sp18Black,
                         ),
                         Row(
@@ -351,7 +352,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Цена за ${widget.product.weight} гр:",
+                              "${"price_for".tr()} ${widget.product.weight} гр:",
                               style: Styles.style700sp18Black,
                             ),
                             Row(
@@ -375,7 +376,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Цена:",
+                              "price".tr(),
                               style: Styles.style700sp18Black,
                             ),
                             Row(
@@ -397,7 +398,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               height: 25,
                             ),
                             Text(
-                              "Размер:",
+                              "size".tr(),
                               style: Styles.style700sp18Black,
                             ),
                             const SizedBox(height: 10),
@@ -459,7 +460,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ),
               const SizedBox(height: 25),
               Text(
-                "Описание товара:",
+                "info_item".tr(),
                 style: Styles.styles700sp20Black,
               ),
               const SizedBox(height: 15),
@@ -472,7 +473,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               // ),
               const SizedBox(height: 40),
               Text(
-                "Похожие товары",
+                "similars".tr(),
                 style: Styles.styles700sp20Black,
               ),
               const SizedBox(height: 25),

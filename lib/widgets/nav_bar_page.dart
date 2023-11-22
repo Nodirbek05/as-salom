@@ -7,6 +7,7 @@ import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_cat_first_page.dart';
+import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/search_bloc/search_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -92,8 +93,8 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                     return ListTile(
                       onTap: () {
                         Navigator.pushNamed(
-                            context, InsideCatFirstPage.routeName,
-                            arguments: InsideCatFirstPage(
+                            context, InsideCategoryPage.routeName,
+                            arguments: InsideCategoryPage(
                                 id: int.parse(
                                     categoryData[index].id!.toString()),
                                 name: categoryData[index].name_ru!));

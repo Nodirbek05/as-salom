@@ -145,7 +145,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 color: ConstColor.mainWhite,
                               )
                             : Text(
-                                isLogin ? "Войти" : "Зарегистрироваться",
+                                isLogin ? "enter".tr() : "auth".tr(),
                                 style: Styles.buttonText,
                               ),
                       ),
@@ -194,7 +194,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                     color: ConstColor.mainWhite,
                                   )
                                 : Text(
-                                    "Получить код",
+                                    "receive_code".tr(),
                                     style: Styles.buttonText,
                                   ),
                           ),
@@ -237,7 +237,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                     color: ConstColor.mainWhite,
                                   )
                                 : Text(
-                                    "Получить код",
+                                    "receive_code".tr(),
                                     style: Styles.buttonText,
                                   ),
                           ),
@@ -295,7 +295,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           };
                   },
                   child: Text(
-                    "Вход в аккаунт",
+                    "enter_account".tr(),
                     style: isLogin ? Styles.registerText : Styles.greyRegister,
                   ),
                 ),
@@ -310,7 +310,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         children: [
                           const SizedBox(height: 20),
                           Text(
-                            'Код отправлен на номер\n +998 ${phoneController.text}',
+                            '${"code_send".tr()}\n +998 ${phoneController.text}',
                             style: Styles.styles400sp16Black,
                             textAlign: TextAlign.center,
                           ),
@@ -366,7 +366,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                           const SizedBox(height: 20),
                           Text(
-                            "Отправить код заново",
+                            "resend_code".tr(),
                             style: Styles.style400sp16Main,
                           )
                         ],
@@ -382,8 +382,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ? const Center()
                           : InputWidget(
                               controller: controller,
-                              label: "Ваше имя",
-                              hintText: "Введите ваше имя",
+                              label: "your_name".tr(),
+                              hintText: "enter_name".tr(),
                               padding:const EdgeInsets.only(
                                 bottom: 30,
                                 left:10,
@@ -406,7 +406,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           style: Styles.style500sp16Black,
                         ),
                         controller: phoneController,
-                        label: "Номер телефона",
+                        label: "phone_number".tr(),
                         // hintText: "Введите ваше Номер",
                       ),
                     ],
