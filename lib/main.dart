@@ -19,8 +19,8 @@ void main() async {
   Hive.registerAdapter(FavoritesModelAdapter());
   await Hive.openBox<FavoritesModel>("favoritesBox");
   await Hive.openBox<BasketModel>('basketBox');
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  bool hasRegistered = _prefs.getString('token') != null;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool hasRegistered = prefs.getString('token') != null;
   runApp(
     EasyLocalization(
       supportedLocales: const [

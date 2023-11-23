@@ -73,7 +73,7 @@ abstract class Routes {
                   child: const RegistrationPage(),
                 ));
       case MainPage.routeName:
-        return MaterialPageRoute(builder: (_) => MainPage());
+        return MaterialPageRoute(builder: (_) => const MainPage());
 
       case InsideCategoryPage.routeName:
         final productModel = settings.arguments as InsideCategoryPage;
