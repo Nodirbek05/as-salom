@@ -37,5 +37,26 @@
     "payment_type": "Payment type",
     "comments": "Comments on the order (optional)",
     "enter_text": "Enter text",
-    "confirm_order": "Confirm order"
+    "confirm_order": "Confirm order",
+    "no_data":"Not specified",
+    "home":"Home",
+    "profile":"Profile",
+    "cart":"Cart",
+    "my_orders":"My Orders",
+    "personal_info":"Personal Info",
+    "order_no":"Order Number:",
+    "status":"Status",
+    "confirmed_date":"Date Confirmed",
+    "order_price":"Order Price",
+    "products":"Products",
+    "log_out":"Log out",
+    "log_out_desc":"Are you sure, to log out from account",
+    "yes":"Yes",
+    "no":"No",
+    "save":"Save",
+    "edit_number":"Edit Number",
+    "edit_name":"Edit name"
+    
+    
+
 }

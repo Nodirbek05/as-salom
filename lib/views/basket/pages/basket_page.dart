@@ -4,6 +4,7 @@ import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/basket/widgets/product_card.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -207,7 +208,7 @@ class _BasketPageState extends State<BasketPage> {
         backgroundColor: ConstColor.mainWhite,
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text("Корзина", style: Styles.appBarText),
+        title: Text("cart".tr(), style: Styles.appBarText),
       ),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),

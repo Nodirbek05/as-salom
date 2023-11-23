@@ -11,6 +11,7 @@ import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/ge
 import 'package:assalomproject/views/profile/data/logic/update_name_bloc/update_name_bloc.dart';
 import 'package:assalomproject/views/profile/data/models/model_for_update.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -125,7 +126,7 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
                     color: ConstColor.as_salomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
-                  "Сохранить",
+                  "save".tr(),
                   style: Styles.buttonText,
                 ),
               ),
@@ -136,7 +137,7 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Редактировать ${widget.data.part}",
+          widget.data.part == "Имя" ? "edit_name".tr() : "edit_number".tr(),
           style: Styles.style600sp18Black,
         ),
         backgroundColor: ConstColor.mainWhite,
@@ -245,7 +246,7 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
                           style: Styles.style500sp16Black,
                         ),
                         controller: controller,
-                        label: "Номер телефона",
+                        label: "phone_number".tr(),
                         // hintText: "Введите ваше Номер",
                       )
               ],

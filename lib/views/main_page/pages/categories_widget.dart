@@ -1,5 +1,6 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
+import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,18 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
   void initState() {
     context.read<GetAllCategoriesBloc>().add(GetCategories());
     super.initState();
+  }
+
+  String _getcategoryByLocale(CategoryDataModel category, Locale locale) {
+    late String? categoryName;
+    if (locale == const Locale('ru')) {
+      categoryName = category.name_ru;
+    } else if (locale == const Locale('uz')) {
+      categoryName = category.name_uz;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    }
+    return categoryName ?? "no_data".tr();
   }
 
   @override
@@ -57,9 +70,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                         borderRadius: BorderRadius.circular(15.r),
                         // color: ConstColor.grey300,
                       ),
-                      child: Text(
-                        categories[index].name_ru.toString(),
-                      ),
+                      child: Text(_getcategoryByLocale(
+                          categories[index], context.locale)),
                     ),
                   ),
                 );

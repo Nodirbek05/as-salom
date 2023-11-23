@@ -5,14 +5,11 @@ import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
-import 'package:assalomproject/views/inside_category/components/filter_drawer.dart';
-import 'package:assalomproject/views/inside_category/filter_bloc/filter_bloc.dart';
 import 'package:assalomproject/views/inside_category/get_category_products_bloc/get_cat_products_bloc.dart';
-import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/data/models/inner_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
-import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/widgets/product_card.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,6 +40,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
   // List<SubCategoryModel> subcategory = [];
   // CategoryGoods? insideProducts;
   List<ProductModel> insideProducts = [];
+  String? name;
 
   static Future<ResponseData> getInnerProducts(int id) async {
     print(id);
@@ -140,6 +138,8 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                               {
                                                 insideProducts
                                                     .addAll(value.goods.data!),
+                                                name = value.subcategory.name_ru
+                                                    .toString(),
                                                 setState(() {}),
                                                 Navigator.pop(context),
                                               }
@@ -198,7 +198,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                 ),
               ),
               focusColor: ConstColor.greyColor,
-              hintText: "Поиск товаров",
+              hintText: "search".tr(),
               hintStyle: Styles.styles400sp14Black,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30.r),
@@ -232,7 +232,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.name,
+              name ?? "",
               style: Styles.styles700sp20Black,
             ),
             Padding(
@@ -245,7 +245,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                   Row(
                     children: [
                       Text(
-                        "Фильтры",
+                        "filter".tr(),
                         style: Styles.style400sp15Black,
                       ),
                       ScreenUtil().setHorizontalSpacing(5),
@@ -268,6 +268,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                 if (state is GetCatProductsSuccess) {
                   var products = state.subcategoryModel.goods;
                   insideProducts = products!.data!;
+                  name = state.subcategoryModel.subcategory!.name_ru.toString();
 
                   // if (!isWorking) {
                   //   insideProducts = products;

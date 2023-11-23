@@ -6,13 +6,13 @@ import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
-import 'package:assalomproject/views/inside_category/pages/inside_cat_first_page.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/search_bloc/search_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/pages/profile_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +34,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
     super.initState();
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<Widget> screens = [
     BlocProvider(
       create: (context) => SearchBloc(),
@@ -130,21 +130,21 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
         backgroundColor: ConstColor.mainWhite,
         unselectedItemColor: ConstColor.greyColor,
         items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'home'.tr(),
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.favorite_border),
-            label: 'Favorites',
+            label: 'favorites'.tr(),
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.menu),
             label: 'Menu',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'profile'.tr(),
           ),
           BottomNavigationBarItem(
             icon: SizedBox(
@@ -178,7 +178,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                 ],
               ),
             ),
-            label: 'Cart',
+            label: 'cart'.tr(),
           ),
         ],
         currentIndex: _selectedIndex,

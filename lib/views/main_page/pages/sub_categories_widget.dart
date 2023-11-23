@@ -1,6 +1,8 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/views/main_page/logic/get_sub_categories_bloc/get_sub_categories_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +22,34 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
     super.initState();
   }
 
+  String _getcategoryByLocale(SubCategoryModel category, Locale locale) {
+    late String? categoryName;
+    if (locale == const Locale('ru')) {
+      categoryName = category.name_ru;
+    } else if (locale == const Locale('uz')) {
+      categoryName = category.name_uz;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    }
+    return categoryName ?? "no_data".tr();
+  }
+
+  String _getSubCategoryByLocale(SubCategoriesModel category, Locale locale) {
+    late String? categoryName;
+    if (locale == const Locale('ru')) {
+      categoryName = category.name_ru;
+    } else if (locale == const Locale('uz')) {
+      categoryName = category.name_uz;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    }
+    return categoryName ?? "no_data".tr();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetSubCategoriesBloc, GetSubCategoriesState>(
@@ -35,7 +65,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    state.data.data!.name_ru.toString(),
+                    _getSubCategoryByLocale(state.data.data!, context.locale),
                     style: Styles.styles700sp20Black,
                   ),
                   const SizedBox(height: 20),
@@ -45,7 +75,8 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                       scrollDirection: Axis.horizontal,
                       itemCount: categories!.length,
                       itemBuilder: (context, index) {
-                        print( ApiPaths.imageUrl +categories[index].photo.toString());
+                        print(ApiPaths.imageUrl +
+                            categories[index].photo.toString());
                         return Container(
                           margin: const EdgeInsets.only(right: 10),
                           padding: EdgeInsets.all(10.w),
@@ -62,7 +93,8 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                             borderRadius: BorderRadius.circular(15.r),
                             // color: ConstColor.grey300,
                           ),
-                          child: Text(categories[index].name_ru.toString()),
+                          child: Text(_getcategoryByLocale(
+                              categories[index], context.locale)),
                         );
                       },
                     ),

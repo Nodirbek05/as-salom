@@ -37,6 +37,24 @@
     "payment_type": "To'lov turi",
     "comments": "Qabul qiluvchining to'liq ismi",
     "enter_text": "Matn kiriting...",
-    "confirm_order": "Buyurtmani tasdiqlash"
+    "confirm_order": "Buyurtmani tasdiqlash",
+    "no_data":"Ko'rsatilmagan",
+    "home":"Asosiy",
+    "profile":"Profil",
+    "cart":"Savat",
+    "my_orders":"Mening buyurtmalarim",
+    "personal_info":"Shaxsiy ma'lumot",
+    "order_no":"Buyurtma raqami",
+    "status":"Holati",
+    "confirmed_date":"Tasdiqlangan vaqti",
+    "order_price":"Buyurtma narxi",
+    "products":"Mahsulotlar",
+    "log_out":"Chiqish",
+    "log_out_desc":"Akkoundan chiqmoqchimisiz?",
+    "yes":"Ha",
+    "no":"Yo'q",
+    "save":"Saqlash",
+    "edit_number":"Raqamni o'zgartirish",
+    "edit_name":"Ismni o'zgartirish"
 
 }

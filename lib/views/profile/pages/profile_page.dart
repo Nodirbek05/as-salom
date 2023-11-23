@@ -4,6 +4,7 @@ import 'package:assalomproject/views/profile/data/logic/get_orders_bloc/get_orde
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/pages/orders_tab_page.dart';
 import 'package:assalomproject/views/profile/pages/profile_tab_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,11 +18,11 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
-  static const List<Tab> myTabs = <Tab>[
+  static List<Tab> myTabs = <Tab>[
     Tab(
-      text: "Мои заказы",
+      text: "my_orders".tr(),
     ),
-    Tab(text: 'Личные данные'),
+    Tab(text: 'personal_indo'.tr()),
   ];
 
   late TabController tabController;
@@ -39,14 +40,14 @@ class _ProfilePageState extends State<ProfilePage>
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: ConstColor.mainWhite,
-          bottom: const TabBar(
+          bottom: TabBar(
               labelColor: ConstColor.as_salomText,
               indicatorColor: ConstColor.as_salomText,
               tabs: myTabs),
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
-            "Profile",
+            "profile".tr(),
             style: Styles.appBarText,
           ),
         ),

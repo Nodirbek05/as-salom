@@ -50,6 +50,30 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     super.initState();
   }
 
+  String _getcategoryByLocale(ProductModel product, Locale locale) {
+    late String? productName;
+    if (locale == const Locale('ru')) {
+      productName = product.name_ru;
+    } else if (locale == const Locale('uz')) {
+      productName = product.name_uz;
+    } else if (locale == const Locale('en')) {
+      productName = product.name_en;
+    }
+    return productName ?? "no_data".tr();
+  }
+
+  String _getDescByLocale(ProductModel product, Locale locale) {
+    late String? productName;
+    if (locale == const Locale('ru')) {
+      productName = product.desc_ru;
+    } else if (locale == const Locale('uz')) {
+      productName = product.desc_uz;
+    } else if (locale == const Locale('en')) {
+      productName = product.desc_en;
+    }
+    return productName ?? "no_data".tr();
+  }
+
   @override
   Widget build(BuildContext context) {
     // print(widget.product.)
@@ -318,7 +342,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
               const SizedBox(height: 20),
               Text(
-                widget.product.name_ru.toString(),
+                _getcategoryByLocale(widget.product, context.locale),
+                // widget.product.name_ru.toString(),
                 style: Styles.styles700sp22Black,
               ),
               const SizedBox(height: 20),
@@ -333,13 +358,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         Row(
                           children: [
                             Text(
-                              "${widget.product.price} сум",
+                              widget.product.price != "null"
+                                  ? "${widget.product.price} сум"
+                                  : "no_data".tr(),
                               style: Styles.style700sp22Main,
                             ),
                             const SizedBox(width: 15),
                             widget.product.discount != null
                                 ? Text(
-                                    "${widget.product.discount} сум",
+                                    widget.product.discount != null
+                                        ? "${widget.product.discount} сум"
+                                        : "no_data".tr(),
                                     style: Styles.style400sp20GreyUnderline,
                                   )
                                 : const Center()
@@ -358,13 +387,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             Row(
                               children: [
                                 Text(
-                                  "${widget.product.price} сум",
+                                  widget.product.price != "null"
+                                      ? "${widget.product.price} сум"
+                                      : "no_data".tr(),
                                   style: Styles.style700sp22Main,
                                 ),
                                 const SizedBox(width: 15),
                                 widget.product.discount != null
                                     ? Text(
-                                        "${widget.product.discount} сум",
+                                        widget.product.discount != null
+                                            ? "${widget.product.discount} сум"
+                                            : "no_data".tr(),
                                         style: Styles.style400sp20GreyUnderline,
                                       )
                                     : const Center()
@@ -382,13 +415,17 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             Row(
                               children: [
                                 Text(
-                                  "${widget.product.price} сум",
+                                  widget.product.price != "null"
+                                      ? "${widget.product.price} сум"
+                                      : "no_data".tr(),
                                   style: Styles.style700sp22Main,
                                 ),
                                 const SizedBox(width: 15),
                                 widget.product.discount != null
                                     ? Text(
-                                        "${widget.product.discount} сум",
+                                        widget.product.discount != null
+                                            ? "${widget.product.discount} сум"
+                                            : "no_data".tr(),
                                         style: Styles.style400sp20GreyUnderline,
                                       )
                                     : const Center()
@@ -402,60 +439,68 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               style: Styles.style700sp18Black,
                             ),
                             const SizedBox(height: 10),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 70,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: widget.product.sizes!.length,
-                                itemBuilder: (ctx, indx) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: InkWell(
-                                      onTap: () {
-                                        selectedSize = int.parse(widget
-                                            .product.sizes![indx].id!
-                                            .toString());
-                                        setState(() {
-                                          selectedSize;
-                                        });
+                            widget.product.sizes != null
+                                ? SizedBox(
+                                    width: double.infinity,
+                                    height: 70,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: widget.product.sizes!.length,
+                                      itemBuilder: (ctx, indx) {
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 10),
+                                          child: InkWell(
+                                            onTap: () {
+                                              selectedSize = int.parse(widget
+                                                  .product.sizes![indx].id!
+                                                  .toString());
+                                              setState(() {
+                                                selectedSize;
+                                              });
+                                            },
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: ConstColor
+                                                        .as_salomText),
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                              ),
+                                              width: selectedSize ==
+                                                      widget.product
+                                                          .sizes![indx].id!
+                                                  ? 80
+                                                  : 73,
+                                              height: selectedSize ==
+                                                      widget.product
+                                                          .sizes![indx].id!
+                                                  ? 80
+                                                  : 70,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Text(widget.product
+                                                      .sizes![indx].number
+                                                      .toString()),
+                                                  Text(widget.product
+                                                      .sizes![indx].name_ru
+                                                      .toString()),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
                                       },
-                                      borderRadius: BorderRadius.circular(10.r),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: ConstColor.as_salomText),
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                        width: selectedSize ==
-                                                widget.product.sizes![indx].id!
-                                            ? 80
-                                            : 73,
-                                        height: selectedSize ==
-                                                widget.product.sizes![indx].id!
-                                            ? 80
-                                            : 70,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(widget
-                                                .product.sizes![indx].number
-                                                .toString()),
-                                            Text(widget
-                                                .product.sizes![indx].name_ru
-                                                .toString()),
-                                          ],
-                                        ),
-                                      ),
                                     ),
-                                  );
-                                },
-                              ),
-                            ),
+                                  )
+                                : Center()
                           ],
                         ),
               const SizedBox(height: 25),
@@ -465,7 +510,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
               const SizedBox(height: 15),
 
-              Text(widget.product.desc_ru.toString()),
+              Text(_getDescByLocale(widget.product, context.locale)),
               ScreenUtil().setVerticalSpacing(10),
               // Text(
               //   "Развернуть",
@@ -479,10 +524,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               const SizedBox(height: 25),
               BlocBuilder<GetProductWithSlugBloc, GetProductWithSlugState>(
                 builder: (context, state) {
+                  print(state);
                   if (state is GetProductWithSlugFailed) {
-                    return const Center(
-                      child: CupertinoActivityIndicator(),
-                    );
+                    return const Center();
                   } else if (state is GetProductWithSlugSuccess) {
                     final randomGoods = state.dataModel.random_goods;
                     return SizedBox(

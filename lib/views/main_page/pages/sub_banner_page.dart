@@ -1,6 +1,8 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/main_page/data/models/get_sub_banner.dart';
 import 'package:assalomproject/views/main_page/logic/get_sub_banners_bloc/get_sub_banners_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,6 +19,18 @@ class _SubBannersPageState extends State<SubBannersPage> {
   void initState() {
     context.read<GetSubBannersBloc>().add(GetSubBannersEventData());
     super.initState();
+  }
+
+  String _getcategoryByLocale(SubBanners category, Locale locale) {
+    late String? categoryName;
+    if (locale == const Locale('ru')) {
+      categoryName = category.name_ru;
+    } else if (locale == const Locale('uz')) {
+      categoryName = category.name_uz;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    }
+    return categoryName ?? "no_data".tr();
   }
 
   @override
@@ -61,7 +75,8 @@ class _SubBannersPageState extends State<SubBannersPage> {
                             top: 10.h,
                           ),
                           child: Text(
-                            subBanners[index].name_ru!,
+                            _getcategoryByLocale(
+                                subBanners[index], context.locale),
                             style: Styles.styles700sp16Black,
                           ),
                         ),

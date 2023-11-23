@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ScreenUtilInit(
         designSize: const Size(375, 812),
-        child: hasRegistered
+        child: !hasRegistered
             ? BlocProvider(
                 create: (context) => GetAllCategoriesBloc(),
                 child: const CustomNavigatonBar(),

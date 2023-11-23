@@ -5,6 +5,7 @@ import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
 import 'package:assalomproject/views/profile/data/models/model_for_update.dart';
 import 'package:assalomproject/views/profile/pages/update_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,7 +79,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                 ),
                 ScreenUtil().setVerticalSpacing(25.h),
                 Text(
-                  "Номер телефона",
+                  "phone_number".tr(),
                   style: Styles.style600sp14Black,
                 ),
                 ScreenUtil().setVerticalSpacing(10.h),
@@ -137,7 +138,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
-                                  "Вы уверены, что хотите выйти из профиль?",
+                                  "log_out_desc".tr(),
                                   style: Styles.style700sp22Main,
                                   textAlign: TextAlign.center,
                                 ),
@@ -158,7 +159,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                                         width: 150,
                                         height: 50,
                                         child: Text(
-                                          "No",
+                                          "no".tr(),
                                           style: Styles.style600sp20White,
                                         ),
                                       ),
@@ -184,7 +185,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                                         width: 150,
                                         height: 50,
                                         child: Text(
-                                          "Yes",
+                                          "yes".tr(),
                                           style: Styles.style600sp20White,
                                         ),
                                       ),
@@ -208,7 +209,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                         ),
                         color: ConstColor.dotColor),
                     child: Text(
-                      'Выйти с аккаута',
+                      'log_out'.tr(),
                       style: Styles.style600sp14Black,
                     ),
                   ),

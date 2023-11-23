@@ -1,6 +1,8 @@
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/logic/get_spesific_products_bloc/get_spesific_products_bloc.dart';
 import 'package:assalomproject/widgets/product_card.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +20,18 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
   void initState() {
     context.read<GetSpesificProductsBloc>().add(GetSpesificProductsDataEvent());
     super.initState();
+  }
+
+  String _getcategoryByLocale(CategoryModel category, Locale locale) {
+    late String? categoryName;
+    if (locale == const Locale('ru')) {
+      categoryName = category.name_ru;
+    } else if (locale == const Locale('uz')) {
+      categoryName = category.name_uz;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    }
+    return categoryName ?? "no_data".tr();
   }
 
   @override
@@ -38,8 +52,11 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        state.spesificProducts.data![widget.index].name_ru
-                            .toString(),
+                        _getcategoryByLocale(
+                            state.spesificProducts.data![widget.index],
+                            context.locale),
+                        // .name_ru
+                        //     .toString(),
                         style: Styles.styles700sp20Black,
                       ),
                       Container(

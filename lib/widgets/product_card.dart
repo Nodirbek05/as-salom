@@ -23,6 +23,18 @@ class ProductCardWidget extends StatefulWidget {
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
+  String _getcategoryByLocale(ProductModel product, Locale locale) {
+    late String? productName;
+    if (locale == const Locale('ru')) {
+      productName = product.name_ru;
+    } else if (locale == const Locale('uz')) {
+      productName = product.name_uz;
+    } else if (locale == const Locale('en')) {
+      productName = product.name_en;
+    }
+    return productName ?? "no_data".tr();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -30,7 +42,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       onTap: () {
         Navigator.pushNamed(context, ProductDetailPage.routeName,
             arguments: ProductDetailPage(
-                product: widget.product!, slug: widget.product!.slug??""));
+                product: widget.product!, slug: widget.product!.slug ?? ""));
         print("SLUGGGGGGGG:${widget.product!.slug!}");
       },
       child: Stack(
@@ -64,17 +76,18 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       height: 110,
                     ),
                     Text(
-                      "${widget.product!.price} сум " ?? '19 000 сум',
+                      widget.product!.price != null
+                          ? "${widget.product!.price} сум "
+                          : "no_data".tr(),
                       style: Styles.style600sp14Main,
                     ),
                     Text(
-                      widget.product!.discount ?? '34 000 сум',
+                      widget.product!.discount ?? "no_data".tr(),
                       style: Styles.style400sp12GreyUnderline,
                     ),
                     Text(
-                      widget.product!.name_ru ??
-                          'Молоко 2,5 % “Простоквашино”...',
-                      maxLines: 2,
+                      _getcategoryByLocale(widget.product!, context.locale),
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.styles400sp16Black,
                     ),
@@ -142,7 +155,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                     addDrugToBasket(
                                         int.parse(
                                             widget.product!.id.toString()),
-                                        widget.product!.name_ru.toString(),
+                                        _getcategoryByLocale(
+                                            widget.product!, context.locale),
                                         widget.product!.type_good!,
                                         widget.product!.price.toString(),
                                         1,
@@ -180,16 +194,16 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.name_ru!,
                         widget.product!.photo![0],
                         int.parse(widget.product!.id!.toString()),
-                        widget.product!.price ?? "null",
+                        widget.product!.price ?? "no_data".tr(),
                         widget.product!.type_good ?? 0,
-                        widget.product!.discount ?? "null",
+                        widget.product!.discount ?? "no_data".tr(),
                         widget.product!.sizes != null &&
                                 widget.product!.sizes!.isNotEmpty
                             ? widget.product!.sizes![0].id.toString()
-                            : "null",
+                            : "no_data".tr(),
                         widget.product!.weight != null
                             ? widget.product!.weight!
-                            : "null")
+                            : "no_data".tr())
                     : deleteProduct(int.parse(widget.product!.id!.toString()));
               },
               child: ValueListenableBuilder(

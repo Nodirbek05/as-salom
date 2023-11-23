@@ -2,8 +2,8 @@ import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/profile/data/logic/get_orders_bloc/get_orders_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -45,7 +45,6 @@ class _OrdersPageState extends State<OrdersPage> {
                 );
               } else if (state is GetOrdersSuccess) {
                 final orders = state.orderModel.data;
-
                 return Column(
                   children: [
                     ...List.generate(
@@ -60,7 +59,6 @@ class _OrdersPageState extends State<OrdersPage> {
                             bottom: 15.h,
                           ),
                           width: double.infinity,
-                          // height: openOrder == index ? 260.h : null,
                           decoration: BoxDecoration(
                             border: Border.all(color: ConstColor.dotColor),
                             borderRadius: BorderRadius.circular(20.r),
@@ -80,7 +78,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                   ),
                                 ),
                                 child: Text(
-                                  "Номер заказа: ${orders[index].id}",
+                                  "${'order_no'.tr()}: ${orders[index].id}",
                                   style: Styles.style500sp14Black,
                                 ),
                               ),
@@ -92,7 +90,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Статус:",
+                                      "status".tr(),
                                       style: Styles.style500sp14Black,
                                     ),
                                     ScreenUtil().setHorizontalSpacing(5),
@@ -131,7 +129,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                   left: 20.w,
                                 ),
                                 child: Text(
-                                    "Дата оформления:${DateFormat('dd.MM.yyyy HH:mm').format(DateTime.parse(orders[index].created_at!).toLocal())}",
+                                    "${'confirmed_date'.tr()}:${DateFormat('dd.MM.yyyy HH:mm').format(DateTime.parse(orders[index].created_at!).toLocal())}",
                                     style: Styles.style500sp14Black),
                               ),
                               openOrder != index
@@ -143,11 +141,11 @@ class _OrdersPageState extends State<OrdersPage> {
                                         left: 20.w,
                                       ),
                                       child: Text(
-                                        "Сумма заказа: ${orders[index].total_price}",
+                                        "${'order_price'.tr()}: ${orders[index].total_price}",
                                         style: Styles.style500sp14Black,
                                       ),
                                     )
-                                  : SizedBox(),
+                                  : const SizedBox(),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -174,7 +172,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                               ),
                                             ),
                                             child: Text(
-                                              "Подробнее",
+                                              "more".tr(),
                                               style: Styles.style700sp16Main,
                                             ),
                                           )
@@ -197,17 +195,17 @@ class _OrdersPageState extends State<OrdersPage> {
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),
                                           Text(
-                                            "Способ оплаты:${orders[index].payment_type}",
+                                            "${'payment_type'.tr()}:${orders[index].payment_type}",
                                             style: Styles.style500sp14Black,
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),
                                           Text(
-                                            "Сумма заказа:${orders[index].total_price} сум",
+                                            "${'order_price'.tr()}:${orders[index].total_price} сум",
                                             style: Styles.style700sp18Black,
                                           ),
                                           ScreenUtil().setVerticalSpacing(15),
                                           Text(
-                                            "Товары",
+                                            "products".tr(),
                                             style: Styles.styles700sp20Black,
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),
