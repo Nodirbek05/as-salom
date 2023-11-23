@@ -1,10 +1,8 @@
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
-import 'package:assalomproject/views/inside_category/get_category_products_bloc/get_cat_products_bloc.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 

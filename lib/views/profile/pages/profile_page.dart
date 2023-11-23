@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage>
     Tab(
       text: "my_orders".tr(),
     ),
-    Tab(text: 'personal_indo'.tr()),
+    Tab(text: 'personal_info'.tr()),
   ];
 
   late TabController tabController;
