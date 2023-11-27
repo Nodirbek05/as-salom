@@ -20,4 +20,6 @@ class BasketModel extends HiveObject {
    String? size;
   @HiveField(7)
    String? kg;
+  @HiveField(8)
+   String? slug;
 }

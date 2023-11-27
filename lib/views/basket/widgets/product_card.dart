@@ -198,15 +198,8 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
     return qty;
   }
 
-  void addDrugToBasket(
-    int productId,
-    String name,
-    int type,
-    String price,
-    int qty,
-    String size,
-    String weight,
-  ) {
+  void addDrugToBasket(int productId, String name, int type, String price,
+      int qty, String size, String weight, String slug) {
     final product = BasketModel()
       ..id = productId
       ..name = name
@@ -214,7 +207,8 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
       ..price = price
       ..size = size
       ..kg = weight
-      ..qty = qty;
+      ..qty = qty
+      ..slug = slug;
     final box = Hive.box<BasketModel>('basketBox');
     box.add(product);
   }

@@ -87,6 +87,7 @@ class FavoritesPage extends StatelessWidget {
                           photo: [products[index].image],
                           type_good: products[index].type,
                           price: products[index].price,
+                          slug: products[index].slug
                         ),
                         withHeight: false,
                       );

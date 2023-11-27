@@ -89,6 +89,7 @@ abstract class Routes {
               ),
             ],
             child: InsideCategoryPage(
+              isCat: productModel.isCat,
               id: productModel.id,
               name: productModel.name,
             ),

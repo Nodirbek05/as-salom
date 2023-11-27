@@ -182,6 +182,7 @@ class _MainPageState extends State<MainPage> {
                                             id: products[index].id,
                                             type_good: products[index].type,
                                             discount: products[index].discount,
+                                            slug: products[index].slug,
                                           ),
                                           withHeight: true,
                                           height: 310.h,
@@ -249,7 +250,7 @@ class _MainPageState extends State<MainPage> {
                             photo: products[index].photo,
                             type_good: products[index].type_good,
                             price: products[index].price,
-                            slug: products[index].slug
+                            slug: products[index].slug,
                           ),
                           withHeight: false,
                         );

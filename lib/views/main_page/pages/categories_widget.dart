@@ -54,6 +54,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                       context,
                       InsideCategoryPage.routeName,
                       arguments: InsideCategoryPage(
+                        isCat: true,
                         name: categories[index].name_ru!,
                         id: int.parse(
                           categories[index].id!.toString(),
