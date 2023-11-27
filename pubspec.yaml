@@ -28,6 +28,7 @@ dependencies:
   intl: ^0.18.1
   easy_localization: ^3.0.3
   shimmer: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
 
  
 
@@ -38,6 +39,12 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   hive_generator: ^2.0.1
   url_launcher: ^6.2.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/as-salom_logo.png"
+
 
 flutter:
   uses-material-design: true
