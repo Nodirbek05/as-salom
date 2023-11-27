@@ -1,3 +1,4 @@
+import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/logic/get_spesific_products_bloc/get_spesific_products_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SpesificProductsWidget extends StatefulWidget {
   final int index;
@@ -39,7 +41,7 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
     return BlocBuilder<GetSpesificProductsBloc, GetSpesificProductsState>(
       builder: (context, state) {
         if (state is GetSpesificProductsInitial) {
-          return const Center(child: CupertinoActivityIndicator());
+          return Center(child: shimmerWidget());
         } else if (state is GetSpesificProductsSuccess) {
           final products = state.spesificProducts.data![widget.index].goods;
           return products!.isNotEmpty
@@ -73,9 +75,10 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
                                 right: 10.w,
                               ),
                               child: ProductCardWidget(
-                                  product: products[index],
-                                  withHeight: true,
-                                  height: 300.h),
+                                product: products[index],
+                                withHeight: true,
+                                height: 300.h,
+                              ),
                             );
                           },
                         ),
@@ -84,12 +87,58 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
                     ],
                   ),
                 )
-              : const Center();
+              : shimmerWidget();
         }
-        return const Center(
-          child: CupertinoActivityIndicator(),
-        );
+        return shimmerWidget();
       },
+    );
+  }
+
+  Shimmer shimmerWidget() {
+    return Shimmer.fromColors(
+      baseColor: ConstColor.dotColor,
+      highlightColor: ConstColor.lightGrey,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 15.w,
+          // bottom: 15.h,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 20,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                10.r,
+              )),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                top: 20.h,
+              ),
+              height: 285.h,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      right: 10.w,
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.r)),
+                      height: 200.h,
+                    ),
+                  );
+                },
+              ),
+            ),
+            ScreenUtil().setVerticalSpacing(30),
+          ],
+        ),
+      ),
     );
   }
 }

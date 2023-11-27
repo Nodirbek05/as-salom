@@ -1,4 +1,5 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
+import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
 import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CategoriesWidget extends StatefulWidget {
   const CategoriesWidget({super.key});
@@ -84,7 +86,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             maxLines: 1,
                           ),
                           SizedBox(
-                            height: 90.h,
+                            height: 85.h,
+                            width: 90.h,
                             child: Image.network(
                               ApiPaths.imageUrl +
                                   categories[index].photo.toString(),
@@ -100,10 +103,53 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
             ),
           );
         }
-        return const Center(
-          child: CupertinoActivityIndicator(),
-        );
+        return shimmerWidget();
       },
     );
+  }
+
+  Shimmer shimmerWidget() {
+    return Shimmer.fromColors(
+        baseColor: ConstColor.dotColor,
+        highlightColor: ConstColor.lightGrey,
+        child: SizedBox(
+          height: 130.h,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 4,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: 15.w,
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(10.w),
+                  height: 123.h,
+                  width: 127.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                    color: ConstColor.grey300,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "",
+                        style: Styles.style500sp14Black,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      SizedBox(
+                        height: 90.h,
+                        width: 90.h,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      );
   }
 }

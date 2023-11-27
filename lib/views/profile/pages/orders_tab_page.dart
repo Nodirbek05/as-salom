@@ -269,14 +269,14 @@ class _OrdersPageState extends State<OrdersPage> {
                                                           .setVerticalSpacing(
                                                               5),
                                                       Text(
-                                                          "Размер: ${sizeData.join(", ")}",
+                                                          "${"size".tr()} ${sizeData.join(", ")}",
                                                           style: Styles
                                                               .style400sp12Black),
                                                       ScreenUtil()
                                                           .setVerticalSpacing(
                                                               5),
                                                       Text(
-                                                        "Количество: ${orders[index].products![idx].product_count}",
+                                                        "${"volume".tr()}: ${orders[index].products![idx].product_count}",
                                                         style: Styles
                                                             .style400sp12Black,
                                                       ),
@@ -284,7 +284,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                                           .setVerticalSpacing(
                                                               5),
                                                       Text(
-                                                        "Цена: ${orders[index].products![idx].product_price}",
+                                                        "${"price".tr()} ${orders[index].products![idx].product_price}",
                                                         style: Styles
                                                             .style400sp12Black,
                                                       ),
