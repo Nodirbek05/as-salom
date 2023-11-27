@@ -241,12 +241,20 @@ abstract class Styles {
   );
 
   static final styles700sp16BlackUnder = TextStyle(
-    color: ConstColor.mainBlack,
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w700,
-    fontFamily: interFontFamily,
-    decoration: TextDecoration.underline
-  );
+      color: ConstColor.mainBlack,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w700,
+      fontFamily: interFontFamily,
+      decoration: TextDecoration.underline);
+
+  static final styles700sp16BlueUnder = TextStyle(
+      color: ConstColor.as_salomText,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w700,
+      fontFamily: interFontFamily,
+      decoration: TextDecoration.underline,
+      decorationColor: ConstColor.as_salomText
+      );
 
   static final styles400sp14Black = TextStyle(
     color: ConstColor.mainBlack,

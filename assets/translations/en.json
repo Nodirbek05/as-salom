@@ -68,5 +68,6 @@
     "check_status" : "You can track its status in your personal profile",
     "main_page" : "Main Page",
     "menu" : "Menu",
-    "volume" : "Quantity:"
+    "volume" : "Quantity:",
+    "less":"less"
 }

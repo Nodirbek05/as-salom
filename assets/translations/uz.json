@@ -68,6 +68,7 @@
     "check_status": "Uning holatini shaxsiy profilingizda kuzatishingiz mumkin",
     "main_page" : "Asosiy sahifaga o'tish",
     "menu" : "Menyu",
-    "volume" : "Miqdori:"
+    "volume" : "Miqdori:",
+    "less":"kamroq"
 
 }

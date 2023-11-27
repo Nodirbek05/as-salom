@@ -48,7 +48,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
         );
 
-        print("GET PRODUCT WITH SLUG IS WORKING");
+    print("GET PRODUCT WITH SLUG IS WORKING");
     super.initState();
   }
 
@@ -238,22 +238,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       itemBuilder: (context, index) {
                         return Container(
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.black.withOpacity(.2),
-                                  Colors.transparent,
-                                  Colors.transparent,
-                                  Colors.transparent
-                                ],
-                                stops: const [
-                                  0.10,
-                                  0.30,
-                                  0.30,
-                                  0.30
-                                ]),
-                            // color: ConstColor.as_salomText,
                             image: DecorationImage(
                                 image: NetworkImage(
                                   ApiPaths.imageUrl +
@@ -265,6 +249,28 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           width: double.infinity,
                         );
                       },
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black.withOpacity(.2),
+                              Colors.transparent,
+                              Colors.transparent,
+                              Colors.transparent
+                            ],
+                            stops: const [
+                              0.10,
+                              0.60,
+                              0.60,
+                              0.60
+                            ]),
+                        // color: ConstColor.as_salomText,
+                      ),
+                      height: 115.h,
+                      width: double.infinity,
                     ),
                     Positioned(
                       bottom: 20,
@@ -511,13 +517,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 style: Styles.styles700sp20Black,
               ),
               const SizedBox(height: 15),
-
-              Text(_getDescByLocale(widget.product, context.locale)),
+              Text(flag &&
+                      _getDescByLocale(widget.product, context.locale).length >
+                          320
+                  ? "${_getDescByLocale(widget.product, context.locale).substring(0, 320)}..."
+                  : _getDescByLocale(widget.product, context.locale)),
               ScreenUtil().setVerticalSpacing(10),
-              // Text(
-              //   "Развернуть",
-              //   style: Styles.styles700sp16BlackUnder,
-              // ),
+              _getDescByLocale(widget.product, context.locale).length > 320
+                  ? TextButton(
+                      onPressed: () {
+                        setState(() {
+                          flag = !flag;
+                        });
+                      },
+                      child: Text(
+                        flag ? "more".tr() : "less".tr(),
+                        style: Styles.styles700sp16BlueUnder,
+                      ))
+                  : const Center(),
               const SizedBox(height: 40),
               Text(
                 "similars".tr(),
