@@ -200,7 +200,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),
                                           Text(
-                                            "${'order_price'.tr()}:${orders[index].total_price} сум",
+                                            "${'order_price'.tr()}:${orders[index].total_price} ${"sum".tr()}",
                                             style: Styles.style700sp18Black,
                                           ),
                                           ScreenUtil().setVerticalSpacing(15),

@@ -108,6 +108,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                         Navigator.pushNamed(
                             context, InsideCategoryPage.routeName,
                             arguments: InsideCategoryPage(
+                                isCat: true,
                                 id: int.parse(
                                     categoryData[index].id!.toString()),
                                 name: categoryData[index].name_ru!));

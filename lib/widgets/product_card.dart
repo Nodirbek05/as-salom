@@ -77,7 +77,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                     ),
                     Text(
                       widget.product!.price != null
-                          ? "${widget.product!.price} сум "
+                          ? "${widget.product!.price} ${"sum".tr()} "
                           : "no_data".tr(),
                       style: Styles.style600sp14Main,
                     ),
@@ -169,6 +169,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                             : "null",
                                         widget.product!.weight != null
                                             ? widget.product!.weight!
+                                            : "null",
+                                        widget.product!.slug != null
+                                            ? widget.product!.slug!
                                             : "null");
                                   },
                                   width: 140,
@@ -203,7 +206,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             : "no_data".tr(),
                         widget.product!.weight != null
                             ? widget.product!.weight!
-                            : "no_data".tr())
+                            : "no_data".tr(),
+                        widget.product!.slug ?? "",
+                      )
                     : deleteProduct(int.parse(widget.product!.id!.toString()));
               },
               child: ValueListenableBuilder(
@@ -249,7 +254,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   }
 
   void addToBox(String name, String image, int id, String price, int type,
-      String discount, String size, String kg) {
+      String discount, String size, String kg, String slug) {
     final product = FavoritesModel()
       ..name = name
       ..id = id
@@ -258,7 +263,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ..discount = discount
       ..type = type
       ..kg = kg
-      ..size = size;
+      ..size = size
+      ..slug = slug;
 
     final box = Hive.box<FavoritesModel>('favoritesBox');
     box.add(product);
@@ -287,16 +293,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     return qty;
   }
 
-  void addDrugToBasket(
-    int productId,
-    String name,
-    int type,
-    String price,
-    int qty,
-    String image,
-    String size,
-    String kg,
-  ) {
+  void addDrugToBasket(int productId, String name, int type, String price,
+      int qty, String image, String size, String kg, String slug) {
     final product = BasketModel()
       ..id = productId
       ..name = name
@@ -305,7 +303,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ..image = image
       ..qty = qty
       ..size = size
-      ..kg = kg;
+      ..kg = kg
+      ..slug = slug;
 
     final box = Hive.box<BasketModel>('basketBox');
     box.add(product);

@@ -6,9 +6,9 @@ import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/inside_category/get_category_products_bloc/get_cat_products_bloc.dart';
-import 'package:assalomproject/views/inside_category/pages/widgets/inside_cat_widget.dart';
 import 'package:assalomproject/views/main_page/data/models/inner_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
+import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/views/main_page/logic/search_bloc/search_bloc.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -21,10 +21,12 @@ import 'package:flutter_svg/svg.dart';
 
 class InsideCategoryPage extends StatefulWidget {
   static const routeName = "/insideCategoryPage";
-  const InsideCategoryPage({super.key, required this.name, required this.id});
+  const InsideCategoryPage(
+      {super.key, required this.name, required this.id, required this.isCat});
 
   final String name;
   final int id;
+  final bool isCat;
 
   @override
   State<InsideCategoryPage> createState() => _InsideCategoryPageState();
@@ -38,6 +40,18 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
   // CategoryGoods? insideProducts;
   List<ProductModel> insideProducts = [];
   String? name;
+
+  String _getcategoryByLocale(SubCategoryModel category, Locale locale) {
+    late String? categoryName;
+    if (locale == const Locale('ru')) {
+      categoryName = category.name_ru;
+    } else if (locale == const Locale('uz')) {
+      categoryName = category.name_uz;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    }
+    return categoryName ?? "no_data".tr();
+  }
 
   static Future<ResponseData> getInnerProducts(int id) async {
     print(id);
@@ -60,6 +74,12 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
     // }
   }
 
+  @override
+  void initState() {
+    context.read<GetCatProductsBloc>().add(GetProducts(id: widget.id));
+    super.initState();
+  }
+
   var query = TextEditingController();
   List<ProductModel> products = [];
 
@@ -67,7 +87,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: drawerKey,
-      drawer: BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
+     drawer:   widget.isCat == true ? BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
         builder: (context, state) {
           if (state is GetCatProductsSuccess) {
             return Drawer(
@@ -89,7 +109,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                       child: Row(
                         children: [
                           Text(
-                            "Фильтры",
+                            "filter".tr(),
                             style: Styles.styles700sp20Black,
                           ),
                           const Spacer(),
@@ -146,8 +166,11 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                           });
                                 },
                                 child: Text(
-                                  state.subcategoryModel.subcategory!
-                                      .subcategories![index].name_ru!,
+                                  _getcategoryByLocale(
+                                    state.subcategoryModel.subcategory!
+                                        .subcategories![index],
+                                    context.locale,
+                                  ),
                                   style: Styles.styles400sp14Black,
                                 ),
                               ),
@@ -161,9 +184,9 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
               ),
             );
           }
-          return SizedBox();
+          return const SizedBox();
         },
-      ),
+      ) : null,
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         bottom: PreferredSize(
@@ -190,9 +213,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
               if (query.isNotEmpty) {
                 context.read<SearchBloc>().add(SearchProduct(query: query));
               }
-              setState(() {
-                
-              });
+              setState(() {});
             },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
@@ -240,7 +261,106 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
             }
           }
           return products.isEmpty || query.text.isEmpty
-              ? InsideCatWidget(id: widget.id, name: widget.name)
+              ? Padding(
+                  padding: EdgeInsets.only(
+                    top: 20.h,
+                    left: 15.w,
+                    right: 15.w,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.isCat == true ? widget.name : "",
+                        style: Styles.styles700sp20Black,
+                      ),
+                      widget.isCat == true
+                          ? Padding(
+                              padding: EdgeInsets.only(
+                                bottom: 10.h,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "filter".tr(),
+                                        style: Styles.style400sp15Black,
+                                      ),
+                                      ScreenUtil().setHorizontalSpacing(5),
+                                      GestureDetector(
+                                        onTap: () {
+                                          drawerKey.currentState!.openDrawer();
+                                        },
+                                        child: SvgPicture.asset(
+                                          ConstIcons.filter,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          : const SizedBox(),
+                      BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
+                        builder: (context, state) {
+                          print("STATE $state ==============");
+                          if (state is GetCatProductsSuccess) {
+                            var products = state.subcategoryModel.goods;
+                            insideProducts = products!.data!;
+                            name = state.subcategoryModel.subcategory!.name_ru
+                                .toString();
+
+                            // if (!isWorking) {
+                            //   insideProducts = products;
+
+                            //   for (var i = 0;
+                            //       i <
+                            //           state.subcategoryModel.subcategory!.subcategories!
+                            //               .length;
+                            //       i++) {
+                            //     subcategory.add(state
+                            //         .subcategoryModel.subcategory!.subcategories![i]);
+                            //   }
+                            //   isWorking = true;
+                            // }
+                            return Expanded(
+                              child: GridView.builder(
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 10,
+                                  childAspectRatio: 0.64,
+                                  crossAxisSpacing: 10,
+                                ),
+                                itemCount: insideProducts.length,
+                                itemBuilder: (context, index) {
+                                  return ProductCardWidget(
+                                    product: ProductModel(
+                                      id: insideProducts[index].id,
+                                      discount: insideProducts[index].discount,
+                                      name_ru: insideProducts[index].name_ru,
+                                      photo: [insideProducts[index].photo![0]],
+                                      type_good:
+                                          insideProducts[index].type_good,
+                                      price: insideProducts[index].price,
+                                      sizes: insideProducts[index].sizes!,
+                                      slug: insideProducts[index].slug,
+                                    ),
+                                    withHeight: false,
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                          return const SizedBox();
+                        },
+                      ),
+                    ],
+                  ),
+                )
               : SizedBox(
                   height: double.infinity,
                   width: double.infinity,
@@ -258,16 +378,15 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                       itemBuilder: (context, index) {
                         return ProductCardWidget(
                           product: ProductModel(
-                            id: products[index].id,
-                            discount: products[index].discount,
-                            name_ru: products[index].name_ru,
-                            name_en: products[index].name_en,
-                            name_uz: products[index].name_uz,
-                            photo: products[index].photo,
-                            type_good: products[index].type_good,
-                            price: products[index].price,
-                            slug: products[index].slug
-                          ),
+                              id: products[index].id,
+                              discount: products[index].discount,
+                              name_ru: products[index].name_ru,
+                              name_en: products[index].name_en,
+                              name_uz: products[index].name_uz,
+                              photo: products[index].photo,
+                              type_good: products[index].type_good,
+                              price: products[index].price,
+                              slug: products[index].slug),
                           withHeight: false,
                         );
                       },

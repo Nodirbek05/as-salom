@@ -65,10 +65,10 @@ class _InsideCatFirstPageState extends State<InsideCatFirstPage> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, InsideCategoryPage.routeName,
-                          arguments: InsideCategoryPage(
-                              id: int.parse(stateData[index].id.toString()),
-                              name: state.modelData.category.name_ru!));
+                      // Navigator.pushNamed(context, InsideCategoryPage.routeName,
+                      //     arguments: InsideCategoryPage(
+                      //         id: int.parse(stateData[index].id.toString()),
+                      //         name: state.modelData.category.name_ru!));
                     },
                     child: Container(
                       padding: EdgeInsets.all(10.w),

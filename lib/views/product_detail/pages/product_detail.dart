@@ -206,7 +206,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     style: Styles.style400sp12Grey,
                   ),
                   Text(
-                    "${getPrice(widget.product.id!)} сум",
+                    "${getPrice(widget.product.id!)} ${"sum".tr()}",
                     style: Styles.style600sp14Main,
                   ),
                 ],
@@ -320,6 +320,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   widget.product.price ?? "null",
                                   widget.product.type_good ?? 0,
                                   widget.product.discount ?? "null",
+                                  widget.product.slug ?? "",
                                 )
                               : deleteProduct(
                                   int.parse(widget.product.id!.toString()));
@@ -367,7 +368,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           children: [
                             Text(
                               widget.product.price != "null"
-                                  ? "${widget.product.price} сум"
+                                  ? "${widget.product.price} ${"sum".tr()}"
                                   : "no_data".tr(),
                               style: Styles.style700sp22Main,
                             ),
@@ -375,7 +376,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             widget.product.discount != null
                                 ? Text(
                                     widget.product.discount != null
-                                        ? "${widget.product.discount} сум"
+                                        ? "${widget.product.discount} ${"sum".tr()}"
                                         : "no_data".tr(),
                                     style: Styles.style400sp20GreyUnderline,
                                   )
@@ -396,7 +397,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               children: [
                                 Text(
                                   widget.product.price != "null"
-                                      ? "${widget.product.price} сум"
+                                      ? "${widget.product.price} ${"sum".tr()}"
                                       : "no_data".tr(),
                                   style: Styles.style700sp22Main,
                                 ),
@@ -404,7 +405,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 widget.product.discount != null
                                     ? Text(
                                         widget.product.discount != null
-                                            ? "${widget.product.discount} сум"
+                                            ? "${widget.product.discount} ${"sum".tr()}"
                                             : "no_data".tr(),
                                         style: Styles.style400sp20GreyUnderline,
                                       )
@@ -424,7 +425,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               children: [
                                 Text(
                                   widget.product.price != "null"
-                                      ? "${widget.product.price} сум"
+                                      ? "${widget.product.price} ${"sum".tr()}"
                                       : "no_data".tr(),
                                   style: Styles.style700sp22Main,
                                 ),
@@ -432,7 +433,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 widget.product.discount != null
                                     ? Text(
                                         widget.product.discount != null
-                                            ? "${widget.product.discount} сум"
+                                            ? "${widget.product.discount} ${"sum".tr()}"
                                             : "no_data".tr(),
                                         style: Styles.style400sp20GreyUnderline,
                                       )
@@ -569,7 +570,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                       .toString()),
                                   slug: randomGoods[ranIndex].slug,
                                   weight: randomGoods[ranIndex].weight,
-                                  sizes: randomGoods[ranIndex].sizes),
+                                  sizes: randomGoods[ranIndex].sizes,
+                                  
+                                  ),
                             ),
                           );
                         },
@@ -682,14 +685,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   void addToBox(String name, String image, int id, String price, int type,
-      String discount) {
+      String discount, String slug) {
     final product = FavoritesModel()
       ..name = name
       ..id = id
       ..image = image
       ..price = price
       ..discount = discount
-      ..type = type;
+      ..type = type
+      ..slug = slug;
 
     final box = Hive.box<FavoritesModel>('favoritesBox');
     box.add(product);

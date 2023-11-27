@@ -65,7 +65,7 @@ class _BasketPageState extends State<BasketPage> {
 
             // return
             Text(
-              "${"total_payment".tr()} $price сум",
+              "${"total_payment".tr()} $price ${"sum".tr()}",
               style: Styles.style600sp18Black,
               // );
               // }
