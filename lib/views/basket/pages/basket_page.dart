@@ -246,7 +246,7 @@ class _BasketPageState extends State<BasketPage> {
                         ),
                         // ScreenUtil().setVerticalSpacing(20.h),
                         Text(
-                          'В вашей корзине пока пусто',
+                          'empty_basket'.tr(),
                           style: Styles.style500sp16Black,
                         ),
 
@@ -254,7 +254,7 @@ class _BasketPageState extends State<BasketPage> {
                         SizedBox(
                           width: 330.w,
                           child: Text(
-                            "Начните с товаров на главной странице или найдите нужный товар через поиск",
+                            "choose_pro".tr(),
                             style: Styles.style400sp16Black,
                             textAlign: TextAlign.center,
                           ),

@@ -69,5 +69,7 @@
     "main_page" : "Main Page",
     "menu" : "Menu",
     "volume" : "Quantity:",
-    "less":"less"
+    "less":"less",
+    "empty_basket" : "Your basket is empty",
+    "choose_pro" : "Start with the products on the main page or find the product you need through the search"
 }

@@ -69,6 +69,8 @@
     "main_page" : "Asosiy sahifaga o'tish",
     "menu" : "Menyu",
     "volume" : "Miqdori:",
-    "less":"kamroq"
+    "less":"kamroq",
+    "empty_basket" : "Sizning savatingiz bo'sh",
+    "choose_pro" : "Asosiy sahifadagi mahsulotlardan boshlang yoki qidiruv orqali kerakli mahsulotni toping"
 
 }
