@@ -47,6 +47,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             slug: widget.slug,
           ),
         );
+
+        print("GET PRODUCT WITH SLUG IS WORKING");
     super.initState();
   }
 

@@ -7,6 +7,7 @@ import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
 import 'package:assalomproject/views/favorites/pages/favorites_page.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
+import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/search_bloc/search_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/main_page.dart';
@@ -48,7 +49,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
     ),
     BlocProvider(
       create: (context) => CreateOrderBloc(),
-      child: BasketPage(),
+      child: const BasketPage(),
     ),
   ];
 
@@ -62,6 +63,18 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   }
 
   final basketBox = Hive.box<BasketModel>('basketBox');
+
+  String _getcategoryByLocale(CategoryDataModel category, Locale locale) {
+    late String? categoryName;
+    if (locale == const Locale('ru')) {
+      categoryName = category.name_ru;
+    } else if (locale == const Locale('uz')) {
+      categoryName = category.name_uz;
+    } else if (locale == const Locale('en')) {
+      categoryName = category.name_en;
+    }
+    return categoryName ?? "no_data".tr();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +120,13 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      title: Text(categoryData[index].name_ru!),
+                      title: Text(
+                        _getcategoryByLocale(
+                          categoryData[index],
+                          context.locale,
+                        ),
+                        style: Styles.style500sp14Black,
+                      ),
                       trailing: const Icon(
                         Icons.arrow_forward_ios,
                         size: 15,
@@ -127,23 +146,32 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
       ),
       body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
+        type: BottomNavigationBarType.fixed,
         backgroundColor: ConstColor.mainWhite,
         unselectedItemColor: ConstColor.greyColor,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: _selectedIndex == 0
+                ? const Icon(Icons.home)
+                : const Icon(Icons.home_outlined),
             label: 'home'.tr(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
+            icon: _selectedIndex == 1
+                ? const Icon(Icons.favorite)
+                : const Icon(Icons.favorite_border),
             label: 'favorites'.tr(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Menu',
+            icon: const Icon(Icons.menu),
+            label: 'menu'.tr(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: _selectedIndex == 3
+                ? const Icon(Icons.person)
+                : const Icon(Icons.person_2_outlined),
             label: 'profile'.tr(),
           ),
           BottomNavigationBarItem(
@@ -151,7 +179,9 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
               width: 30,
               child: Stack(
                 children: [
-                  const Icon(Icons.shopping_cart_sharp),
+                  _selectedIndex == 4
+                      ? const Icon(Icons.shopping_cart_sharp)
+                      : const Icon(Icons.shopping_cart_outlined),
                   ValueListenableBuilder<Box<BasketModel>>(
                     valueListenable:
                         Hive.box<BasketModel>('basketBox').listenable(),

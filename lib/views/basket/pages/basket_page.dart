@@ -65,7 +65,7 @@ class _BasketPageState extends State<BasketPage> {
 
             // return
             Text(
-              "Итого к оплате: $price сум",
+              "${"total_payment".tr()} $price сум",
               style: Styles.style600sp18Black,
               // );
               // }
@@ -92,7 +92,7 @@ class _BasketPageState extends State<BasketPage> {
                             Row(
                               children: [
                                 Text(
-                                  "Состав заказа:",
+                                  "order_list".tr(),
                                   style: Styles.style600sp18Black,
                                 ),
                                 const Spacer(),
@@ -128,9 +128,14 @@ class _BasketPageState extends State<BasketPage> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Text(
-                                            product[indx].name,
-                                            style: Styles.style400sp14Black,
+                                          SizedBox(
+                                            width: 130.w,
+                                            child: Text(
+                                              product[indx].name,
+                                              style: Styles.style400sp14Black,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            ),
                                           ),
                                           const Spacer(),
                                           Row(
@@ -138,15 +143,19 @@ class _BasketPageState extends State<BasketPage> {
                                               Text(
                                                 "х${product[indx].qty}",
                                                 style: Styles.style400sp14Grey,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                               ScreenUtil()
                                                   .setHorizontalSpacing(10),
                                               product[indx].price != "null"
-                                                  ? Text(
-                                                      "${int.parse(product[indx].price) * product[indx].qty} сум",
-                                                      style: Styles
-                                                          .style400sp14Black,
-                                                    )
+                                                  ? SizedBox(
+                                                    width: 90.w,
+                                                    child: Text(
+                                                        "${int.parse(product[indx].price) * product[indx].qty} ${"sum".tr()}",
+                                                        style: Styles
+                                                            .style400sp14Black,
+                                                      ),
+                                                  )
                                                   : const Center()
                                             ],
                                           ),
@@ -158,7 +167,7 @@ class _BasketPageState extends State<BasketPage> {
                                 )),
                             const Spacer(),
                             Text(
-                              "*Оплаченный заказ отмене не подлежит",
+                              "not_cancel".tr(),
                               style: Styles.style400sp14Red,
                             ),
                             ScreenUtil().setVerticalSpacing(10),
@@ -176,7 +185,7 @@ class _BasketPageState extends State<BasketPage> {
                                     color: ConstColor.as_salomText,
                                     borderRadius: BorderRadius.circular(50.r)),
                                 child: Text(
-                                  "Подтвердить",
+                                  "confirm".tr(),
                                   style: Styles.buttonText,
                                 ),
                               ),
@@ -196,7 +205,7 @@ class _BasketPageState extends State<BasketPage> {
                     color: ConstColor.as_salomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
-                  "Оформить заказ",
+                  "create_order".tr(),
                   style: Styles.buttonText,
                 ),
               ),

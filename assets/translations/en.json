@@ -55,5 +55,17 @@
     "no": "No",
     "save": "Save",
     "edit_number": "Edit Number",
-    "edit_name": "Edit name"
+    "edit_name": "Edit name",
+    "pay_for_order": "Proced payment",
+    "enter_fio" : "Enter F.I.O",
+    "payment_by_card" : "Payment by Card",
+    "first_info" : "1) Please transfer the order amount to the card:",
+    "pro_price": "Price of the order",
+    "second_info" : "2) Send a screenshot of the payment to our manager:",
+    "third_info" : "3) Leave your phone number for confirmation and feedback:",
+    "your_number" :"Your phone number",
+    "confirm_info": "Your order has been successfully placed and will be delivered within 1 - 3 days",
+    "check_status" : "You can track its status in your personal profile",
+    "main_page" : "Main Page",
+    "menu" : "Menu"
 }

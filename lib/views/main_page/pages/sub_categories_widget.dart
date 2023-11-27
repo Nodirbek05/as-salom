@@ -1,5 +1,6 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/views/main_page/logic/get_sub_categories_bloc/get_sub_categories_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -77,24 +78,56 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                       itemBuilder: (context, index) {
                         print(ApiPaths.imageUrl +
                             categories[index].photo.toString());
-                        return Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          padding: EdgeInsets.all(10.w),
-                          height: 123.h,
-                          width: 127.w,
-                          decoration: BoxDecoration(
-                            // color: Colors.red,
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                  ApiPaths.imageUrl +
-                                      categories[index].photo.toString(),
+                        return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              InsideCategoryPage.routeName,
+                              arguments: InsideCategoryPage(
+                                name: categories[index].name_ru!,
+                                id: int.parse(
+                                  categories[index].category_id!.toString(),
                                 ),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(15.r),
-                            // color: ConstColor.grey300,
+                              ),
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            padding: EdgeInsets.all(10.w),
+                            height: 123.h,
+                            width: 127.w,
+                            decoration: BoxDecoration(
+                              // color: Colors.red,
+
+                              borderRadius: BorderRadius.circular(15.r),
+                              // color: ConstColor.grey300,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _getcategoryByLocale(
+                                    categories[index],
+                                    context.locale,
+                                  ),
+                                  style: Styles.style500sp14Black,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(10.r)),
+                                  height: 90.h,
+                                  child: Image.network(
+                                    ApiPaths.imageUrl +
+                                        categories[index].photo.toString(),
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          child: Text(_getcategoryByLocale(
-                              categories[index], context.locale)),
                         );
                       },
                     ),

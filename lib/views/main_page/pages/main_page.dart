@@ -249,6 +249,7 @@ class _MainPageState extends State<MainPage> {
                             photo: products[index].photo,
                             type_good: products[index].type_good,
                             price: products[index].price,
+                            slug: products[index].slug
                           ),
                           withHeight: false,
                         );

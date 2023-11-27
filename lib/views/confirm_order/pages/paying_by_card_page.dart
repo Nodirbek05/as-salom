@@ -5,6 +5,7 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
 import 'package:assalomproject/views/confirm_order/confirm_order_by_card_bloc/confirm_order_by_card_bloc.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,7 +105,7 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
                     color: ConstColor.as_salomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
-                  "Оформить заказ",
+                  "confirm_order".tr(),
                   style: Styles.buttonText,
                 ),
               ),
@@ -123,7 +124,7 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
         ),
         centerTitle: true,
         title: Text(
-          "Оформление заказа",
+          "payment_by_card".tr(),
           style: Styles.appBarText,
         ),
       ),
@@ -140,13 +141,13 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  "1) Пожалуйста, перечислите сумму заказа на карту:",
+                  "first_info".tr(),
                   style: Styles.style400sp16Black,
                 ),
               ),
               ScreenUtil().setVerticalSpacing(5),
               Text(
-                "Сумма заказа: $price сум",
+                "${"pro_price".tr()} $price ${"sum".tr()}",
                 style: Styles.style500sp14Main,
               ),
               SizedBox(
@@ -172,7 +173,7 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  "2) Отправьте скриншот оплаты нашему менеджеру:",
+                  "second_info".tr(),
                   style: Styles.style400sp16Black,
                 ),
               ),
@@ -207,7 +208,7 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  "3) Оставьте ваш номер телефона для подтверждения и обратной связи:",
+                  "third_info".tr(),
                   style: Styles.style400sp16Black,
                 ),
               ),
@@ -215,7 +216,7 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
               RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                    text: 'Ваш номер телефона',
+                    text: 'your_number'.tr(),
                     style: Styles.style400sp14Black,
                   ),
                   TextSpan(

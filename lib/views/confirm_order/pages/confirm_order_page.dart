@@ -5,6 +5,7 @@ import 'package:assalomproject/views/auth/components/input_widget.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/confirm_order/pages/choose_payment_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,7 +95,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                 color: ConstColor.as_salomText,
                 borderRadius: BorderRadius.circular(50.r)),
             child: Text(
-              "Оплатить заказ",
+              "pay_for_order".tr(),
               style: Styles.buttonText,
             ),
           ),
@@ -116,7 +117,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
         centerTitle: true,
         backgroundColor: ConstColor.mainWhite,
         title: Text(
-          "Оформление заказа",
+          "order_confirm".tr(),
           style: Styles.appBarText,
         ),
       ),
@@ -141,7 +142,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                 RichText(
                   text: TextSpan(children: [
                     TextSpan(
-                      text: 'Ф.И.О получателя',
+                      text: 'fio'.tr(),
                       style: Styles.style400sp14Black,
                     ),
                     TextSpan(
@@ -156,7 +157,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                     if (val!.isEmpty) return 'Enter valid name';
                     return null;
                   },
-                  hintText: "Введите И.Ф.О",
+                  hintText: "enter_fio".tr(),
                   controller: nameController,
                 ),
                 ScreenUtil().setVerticalSpacing(20),
@@ -174,18 +175,18 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                     style: Styles.style500sp16Black,
                   ),
                   controller: phoneController,
-                  label: "Номер телефона",
+                  label: "phone_number".tr(),
                   // hintText: "Введите ваше Номер",
                 ),
                 ScreenUtil().setVerticalSpacing(20),
                 Text(
-                  "Комментарий к заказу (необязательно)",
+                  "comments".tr(),
                   style: Styles.style400sp14Black,
                 ),
                 InputWidget(
                   controller: commentController,
                   maxLines: 3,
-                  hintText: 'Введите текст...',
+                  hintText: 'enter_text'.tr(),
                 ),
                 ScreenUtil().setVerticalSpacing(30)
               ],

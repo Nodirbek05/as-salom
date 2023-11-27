@@ -3,6 +3,7 @@ import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -78,9 +79,12 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.product.name,
-                      style: Styles.style500sp14Black,
+                    SizedBox(
+                      width: 200.w,
+                      child: Text(
+                        widget.product.name,
+                        style: Styles.style500sp14Black,
+                      ),
                     ),
                     // Text(
                     //   widget.product.type,
@@ -94,7 +98,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
             Row(
               children: [
                 Text(
-                  "$price сум",
+                  "$price ${"sum".tr()}",
                   style: Styles.style600sp14Main,
                 ),
                 const Spacer(),

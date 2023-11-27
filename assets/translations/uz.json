@@ -55,6 +55,18 @@
     "no":"Yo'q",
     "save":"Saqlash",
     "edit_number":"Raqamni o'zgartirish",
-    "edit_name":"Ismni o'zgartirish"
+    "edit_name":"Ismni o'zgartirish",
+    "pay_for_order": "Buyurtma uchun to'lov",
+    "enter_fio": "F.I.O ni kiriting",
+    "payment_by_card" : "Karta bilan to'lash",
+    "first_info" : "1) Iltimos, buyurtma miqdorini kartaga o'tkazing:",
+    "pro_price": "Buyurtma narxi",
+    "second_info": "2) Bizning menejerimizga to'lovning skrinshotini yuboring:",
+    "third_info" : "3) Tasdiqlash va fikr-mulohaza uchun telefon raqamingizni qoldiring:",
+    "your_number" : "Sizning telefon raqamingiz",
+    "confirm_info" : "Buyurtmangiz muvaffaqiyatli joylashtirildi va 1-3 kun ichida yetkazib beriladi",
+    "check_status": "Uning holatini shaxsiy profilingizda kuzatishingiz mumkin",
+    "main_page" : "Asosiy sahifaga o'tish",
+    "menu" : "Menyu"
 
 }

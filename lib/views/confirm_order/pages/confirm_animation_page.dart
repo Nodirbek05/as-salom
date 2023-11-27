@@ -2,6 +2,7 @@ import 'package:assalomproject/core/common_models/hive_models/basket_model.dart'
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -29,7 +30,7 @@ class ConfirmAnimationPage extends StatelessWidget {
             SizedBox(
               width: 310.w,
               child: Text(
-                "Ваш заказ успешно оформлен и будет доставленв течение 1 - 3 суток",
+                "confirm_info".tr(),
                 textAlign: TextAlign.center,
                 style: Styles.style600sp20Black,
               ),
@@ -38,7 +39,7 @@ class ConfirmAnimationPage extends StatelessWidget {
             SizedBox(
               width: 310.w,
               child: Text(
-                "Вы можете отслеживать его статус в личном профиле",
+                "check_status".tr(),
                 textAlign: TextAlign.center,
                 style: Styles.style400sp16Black,
               ),
@@ -57,7 +58,7 @@ class ConfirmAnimationPage extends StatelessWidget {
                     color: ConstColor.as_salomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
-                  "Главная страница",
+                  "main_page".tr(),
                   style: Styles.buttonText,
                 ),
               ),

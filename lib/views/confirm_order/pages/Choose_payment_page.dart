@@ -3,6 +3,7 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/paying_by_card_page.dart';
 import 'package:assalomproject/views/main_page/logic/payment_bloc/payment_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,7 +66,7 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage>
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20, bottom: 10),
                       child: Text(
-                        "Способ оплаты",
+                        "payment_type".tr(),
                         style: Styles.style400sp14Black,
                       ),
                     ),

@@ -2,6 +2,7 @@ import 'package:assalomproject/core/common_models/hive_models/favorites_model.da
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/widgets/product_card.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -17,7 +18,7 @@ class FavoritesPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          "Избранное",
+          "favorites".tr(),
           style: Styles.appBarText,
         ),
       ),
@@ -46,12 +47,12 @@ class FavoritesPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "В избранном пока пусто",
+                          "empty_fav".tr(),
                           style: Styles.style600sp18Black,
                         ),
                         ScreenUtil().setVerticalSpacing(20),
                         Text(
-                          "Добавьте понравившиеся товары, чтобы не потерять их.",
+                          "add_fav".tr(),
                           style: Styles.style400sp16Black,
                           textAlign: TextAlign.center,
                         ),

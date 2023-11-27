@@ -410,7 +410,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         // hintText: "Введите ваше Номер",
                       ),
                     ],
-                  )
+                  ),
           ],
         ),
       ),

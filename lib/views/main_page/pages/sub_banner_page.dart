@@ -76,7 +76,7 @@ class _SubBannersPageState extends State<SubBannersPage> {
                           ),
                           child: Text(
                             _getcategoryByLocale(
-                                subBanners[index], context.locale),
+                                subBanners[index], context.locale,),
                             style: Styles.styles700sp16Black,
                           ),
                         ),

@@ -1,4 +1,5 @@
 import 'package:assalomproject/core/constant/api_paths.dart';
+import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/inside_category/pages/inside_category_page.dart';
 import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
@@ -47,10 +48,16 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, InsideCategoryPage.routeName,
-                        arguments: InsideCategoryPage(
-                            name: categories[index].name_ru!,
-                            id: int.parse(categories[index].id!.toString())));
+                    Navigator.pushNamed(
+                      context,
+                      InsideCategoryPage.routeName,
+                      arguments: InsideCategoryPage(
+                        name: categories[index].name_ru!,
+                        id: int.parse(
+                          categories[index].id!.toString(),
+                        ),
+                      ),
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.only(
@@ -61,17 +68,31 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                       height: 123.h,
                       width: 127.w,
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              ApiPaths.imageUrl +
-                                  categories[index].photo.toString(),
-                            ),
-                            fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(15.r),
                         // color: ConstColor.grey300,
                       ),
-                      child: Text(_getcategoryByLocale(
-                          categories[index], context.locale)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _getcategoryByLocale(
+                              categories[index],
+                              context.locale,
+                            ),
+                            style: Styles.style500sp14Black,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          SizedBox(
+                            height: 90.h,
+                            child: Image.network(
+                              ApiPaths.imageUrl +
+                                  categories[index].photo.toString(),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
