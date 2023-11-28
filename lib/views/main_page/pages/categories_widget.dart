@@ -48,9 +48,14 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               scrollDirection: Axis.horizontal,
               itemCount: categories.length,
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
+                return Padding(
+                  padding: EdgeInsets.only(
+                    left: 15.w,
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(15.r),
+                    onTap: (){
+                      Navigator.pushNamed(
                       context,
                       InsideCategoryPage.routeName,
                       arguments: InsideCategoryPage(
@@ -61,18 +66,14 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                         ),
                       ),
                     );
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 15.w,
-                    ),
+                    },
                     child: Container(
                       padding: EdgeInsets.all(10.w),
                       height: 123.h,
                       width: 127.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.r),
-                        // color: ConstColor.grey300,
+                        color: Colors.grey.withOpacity(.1),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

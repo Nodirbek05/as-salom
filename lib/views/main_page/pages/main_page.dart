@@ -63,6 +63,7 @@ class _MainPageState extends State<MainPage> {
               if (query.isNotEmpty) {
                 context.read<SearchBloc>().add(SearchProduct(query: query));
               }
+              setState(() {});
             },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
