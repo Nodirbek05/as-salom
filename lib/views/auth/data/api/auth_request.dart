@@ -25,11 +25,13 @@ class AuthRequests {
                   'device_name': deviceName,
                 },
               ));
-      print(response.body);
+      print(response.body.toString() + "RESPONSE OF CREATEF");
+      print(response.statusCode.toString() + "RESPONSE OF CREATEF");
       switch (response.statusCode) {
         case StatusCodes.ok:
           return CreatedAccountModel.fromJson(response.body);
         case StatusCodes.alreadyTaken:
+        case StatusCodes.alreadyTaken2:
           return ErrorModel.fromJson(response.body);
         default:
           throw ErrorModel.fromJson(response.body);

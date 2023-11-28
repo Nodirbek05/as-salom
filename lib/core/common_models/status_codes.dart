@@ -52,6 +52,7 @@ class StatusCodes {
   /// an unauthorized client. This response code is probably the most well known
   /// due to its frequent occurrence on the web.
   static const alreadyTaken = 409;
+  static const alreadyTaken2 = 422;
 
   /// 502 Bad Gateway
   ///

@@ -122,13 +122,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       onTap: () {
                         if (pinController.text.length < 4) {
                           Fluttertoast.showToast(
-                            msg: "Please enter valuable name",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.TOP,
-                            timeInSecForIosWeb: 1,
-                            textColor: Colors.white,
-                            backgroundColor: ConstColor.as_salomText,
-                            fontSize: 16.0);
+                              msg: "Please enter valuable name",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.TOP,
+                              timeInSecForIosWeb: 1,
+                              textColor: Colors.white,
+                              backgroundColor: ConstColor.as_salomText,
+                              fontSize: 16.0);
                         } else {
                           setState(() {
                             isLoading = true;
@@ -168,6 +168,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               hasSms = true;
                               isLoading = false;
                             });
+                          } else if (state is RegisterFail) {
+                              setState(() {
+                              isLoading = false;
+                            });
+                            Fluttertoast.showToast(
+                                msg: state.errorModel.error.toString(),
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.TOP,
+                                timeInSecForIosWeb: 1,
+                                textColor: Colors.white,
+                                backgroundColor: ConstColor.redColor,
+                                fontSize: 16.0);
                           }
                         },
                         child: InkWell(
