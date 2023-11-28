@@ -12,6 +12,7 @@ import 'package:assalomproject/views/auth/data/logic/verification_bloc/verificat
 import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -90,7 +91,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         padding: EdgeInsets.only(
           bottom: 15.h,
         ),
-        height:80.h,
+        height: 80.h,
         width: double.infinity,
         decoration: BoxDecoration(
           color: ConstColor.mainWhite,
@@ -120,7 +121,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     child: InkWell(
                       onTap: () {
                         if (pinController.text.length < 4) {
-                          print("VALIDATION");
+                          Fluttertoast.showToast(
+                            msg: "Please enter valuable name",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.TOP,
+                            timeInSecForIosWeb: 1,
+                            textColor: Colors.white,
+                            backgroundColor: ConstColor.as_salomText,
+                            fontSize: 16.0);
                         } else {
                           setState(() {
                             isLoading = true;
@@ -165,7 +173,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         child: InkWell(
                           onTap: () {
                             if (phoneController.text.length < 12) {
-                              print("VALIDATION");
+                              Fluttertoast.showToast(
+                                  msg: "Please enter valuable number",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.TOP,
+                                  timeInSecForIosWeb: 1,
+                                  textColor: Colors.white,
+                                  backgroundColor: ConstColor.as_salomText,
+                                  fontSize: 16.0);
                             } else {
                               setState(() {
                                 isLoading = true;
@@ -214,7 +229,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         child: InkWell(
                           onTap: () {
                             if (phoneController.text.length < 12) {
-                              print("VALIDATION");
+                              Fluttertoast.showToast(
+                                  msg: "Please enter valuable number",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.TOP,
+                                  timeInSecForIosWeb: 1,
+                                  textColor: Colors.white,
+                                  backgroundColor: ConstColor.as_salomText,
+                                  fontSize: 16.0);
                             } else {
                               setState(() {
                                 isLoading = true;
@@ -384,17 +406,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               controller: controller,
                               label: "your_name".tr(),
                               hintText: "enter_name".tr(),
-                              padding:const EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                 bottom: 30,
-                                left:10,
+                                left: 10,
                               ),
                             ),
                       ScreenUtil().setVerticalSpacing(20),
                       InputWidget(
                         padding: const EdgeInsets.only(
-                                bottom: 30,
-                                left:10,
-                              ),
+                          bottom: 30,
+                          left: 10,
+                        ),
                         maxLength: 12,
                         inputFormatter: [
                           FilteringTextInputFormatter.digitsOnly,

@@ -48,6 +48,7 @@ class _MainPageState extends State<MainPage> {
         ),
         automaticallyImplyLeading: false,
         centerTitle: true,
+        surfaceTintColor: ConstColor.mainWhite,
         title: Container(
           height: 50.h,
           width: 400.w,

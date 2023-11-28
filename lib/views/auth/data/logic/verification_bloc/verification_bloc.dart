@@ -19,7 +19,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     if (response is SuccessfulResponse) {
       emit(VerificationSuccess());
     } else if (response is ErrorModel) {
-      emit(VerificationFail());
+      emit(VerificationFail(errorMessage: response.message!));
     }
   }
 }

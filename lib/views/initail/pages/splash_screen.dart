@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:assalomproject/core/constant/icons_page.dart';
-import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,15 +44,12 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             child: Center(
-              child: Text(
-                "as-salom",
-                style: Styles.tooBoldtext60,
-              ),
+              child: SvgPicture.asset(ConstIcons.asSalomLogo,),
             ),
           ),
           Positioned(
             right: 0,
-            bottom: 50,
+            bottom: 100,
             child: SvgPicture.asset(
               ConstIcons.a,
             ),

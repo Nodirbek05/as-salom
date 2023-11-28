@@ -1,5 +1,6 @@
 import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
+import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/routes.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
       // initialRoute: SplashScreen.routeName,
       onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
+        primaryColor: ConstColor.mainWhite,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,

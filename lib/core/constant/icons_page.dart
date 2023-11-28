@@ -6,4 +6,6 @@ abstract class ConstIcons {
   static const String card = 'assets/icons/card.svg';
   static const String filter = 'assets/icons/filter.svg';
   static const String a = 'assets/icons/a.svg';
+  static const String asSalomLogo = 'assets/icons/as_salom_logo.svg';
+
 }

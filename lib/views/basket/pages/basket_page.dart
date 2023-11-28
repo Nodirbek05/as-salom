@@ -41,9 +41,18 @@ class _BasketPageState extends State<BasketPage> {
     getPrice(product);
     return Scaffold(
       bottomSheet: Container(
-        height: 110.h,
+        height: 90.h,
         width: double.infinity,
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          color: ConstColor.mainWhite,
           // color: Colors.amber,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(5.r),
@@ -71,20 +80,20 @@ class _BasketPageState extends State<BasketPage> {
               // }
               // }
             ),
-            ScreenUtil().setVerticalSpacing(15),
+            ScreenUtil().setVerticalSpacing(9),
             InkWell(
               onTap: () {
                 showDialog<void>(
                   context: context,
                   builder: (parentContext) {
                     return AlertDialog(
+                      surfaceTintColor: ConstColor.mainWhite,
                       backgroundColor: ConstColor.mainWhite,
                       insetPadding: EdgeInsets.symmetric(
                         horizontal: 15.w,
                       ),
                       // title: const Text('Basic dialog title'),
                       content: SizedBox(
-                        // color: ConstColor.mainWhite,
                         height: 500.h,
                         width: 350.w,
                         child: Column(
@@ -117,7 +126,7 @@ class _BasketPageState extends State<BasketPage> {
                                       margin: EdgeInsets.only(
                                         bottom: 10.h,
                                       ),
-                                      height: 40.h,
+                                      height: 50.h,
                                       width: double.infinity,
                                       decoration: const BoxDecoration(
                                         border: Border(
@@ -149,13 +158,13 @@ class _BasketPageState extends State<BasketPage> {
                                                   .setHorizontalSpacing(10),
                                               product[indx].price != "null"
                                                   ? SizedBox(
-                                                    width: 90.w,
-                                                    child: Text(
+                                                      width: 90.w,
+                                                      child: Text(
                                                         "${int.parse(product[indx].price) * product[indx].qty} ${"sum".tr()}",
                                                         style: Styles
                                                             .style400sp14Black,
                                                       ),
-                                                  )
+                                                    )
                                                   : const Center()
                                             ],
                                           ),

@@ -11,4 +11,8 @@ final class VerificationInitial extends VerificationState {}
 
 final class VerificationSuccess extends VerificationState {}
 
-final class VerificationFail extends VerificationState {}
+final class VerificationFail extends VerificationState {
+  final String errorMessage;
+
+  const VerificationFail({required this.errorMessage});
+}
