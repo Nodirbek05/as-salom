@@ -71,5 +71,8 @@
     "volume" : "Quantity:",
     "less":"less",
     "empty_basket" : "Your basket is empty",
-    "choose_pro" : "Start with the products on the main page or find the product you need through the search"
+    "choose_pro" : "Start with the products on the main page or find the product you need through the search",
+    "empty_order" : "You have no completed orders yet",
+    "empty_order_info" : "Find the products you need through the search and start shopping"
+
 }

@@ -87,106 +87,109 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: drawerKey,
-     drawer:   widget.isCat == true ? BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
-        builder: (context, state) {
-          if (state is GetCatProductsSuccess) {
-            return Drawer(
-              backgroundColor: ConstColor.mainWhite,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0)),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: 50.h,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
+      drawer: widget.isCat == true
+          ? BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
+              builder: (context, state) {
+                if (state is GetCatProductsSuccess) {
+                  return Drawer(
+                    backgroundColor: ConstColor.mainWhite,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0)),
+                    child: Padding(
                       padding: EdgeInsets.only(
-                        left: 10.w,
-                        top: 10.h,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            "filter".tr(),
-                            style: Styles.styles700sp20Black,
-                          ),
-                          const Spacer(),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: SvgPicture.asset(
-                              ConstIcons.xbutton,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 10.w,
+                        top: 50.h,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   filterCat.name_ru!,
-                          //   style: Styles.style500sp14Main,
-                          // ),
-                          ScreenUtil().setVerticalSpacing(5),
-                          ...List.generate(
-                            state.subcategoryModel.subcategory!.subcategories!
-                                .length,
-                            (index) => Padding(
-                              padding: EdgeInsets.only(
-                                bottom: 5.h,
-                              ),
-                              child: InkWell(
-                                onTap: () async {
-                                  insideProducts.clear();
-
-                                  getInnerProducts(int.parse(state
-                                          .subcategoryModel
-                                          .subcategory!
-                                          .subcategories![index]
-                                          .id
-                                          .toString()))
-                                      .then((value) => {
-                                            if (value is InnerModel)
-                                              {
-                                                insideProducts
-                                                    .addAll(value.goods.data!),
-                                                name = value.subcategory.name_ru
-                                                    .toString(),
-                                                setState(() {}),
-                                                Navigator.pop(context),
-                                              }
-                                          });
-                                },
-                                child: Text(
-                                  _getcategoryByLocale(
-                                    state.subcategoryModel.subcategory!
-                                        .subcategories![index],
-                                    context.locale,
-                                  ),
-                                  style: Styles.styles400sp14Black,
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 10.w,
+                              top: 10.h,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "filter".tr(),
+                                  style: Styles.styles700sp20Black,
                                 ),
-                              ),
+                                const Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: SvgPicture.asset(
+                                    ConstIcons.xbutton,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 10.w,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Text(
+                                //   filterCat.name_ru!,
+                                //   style: Styles.style500sp14Main,
+                                // ),
+                                ScreenUtil().setVerticalSpacing(5),
+                                ...List.generate(
+                                  state.subcategoryModel.subcategory!
+                                      .subcategories!.length,
+                                  (index) => Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 5.h,
+                                    ),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        insideProducts.clear();
+
+                                        getInnerProducts(int.parse(state
+                                                .subcategoryModel
+                                                .subcategory!
+                                                .subcategories![index]
+                                                .id
+                                                .toString()))
+                                            .then((value) => {
+                                                  if (value is InnerModel)
+                                                    {
+                                                      insideProducts.addAll(
+                                                          value.goods.data!),
+                                                      name = value
+                                                          .subcategory.name_ru
+                                                          .toString(),
+                                                      setState(() {}),
+                                                      Navigator.pop(context),
+                                                    }
+                                                });
+                                      },
+                                      child: Text(
+                                        _getcategoryByLocale(
+                                          state.subcategoryModel.subcategory!
+                                              .subcategories![index],
+                                          context.locale,
+                                        ),
+                                        style: Styles.styles400sp14Black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            );
-          }
-          return const SizedBox();
-        },
-      ) : null,
+                  );
+                }
+                return const SizedBox();
+              },
+            )
+          : null,
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
         bottom: PreferredSize(
@@ -261,71 +264,85 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
             }
           }
           return products.isEmpty || query.text.isEmpty
-              ? Padding(
-                  padding: EdgeInsets.only(
-                    top: 20.h,
-                    left: 15.w,
-                    right: 15.w,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: 10.h,
+                        left: 15.w,
+                      ),
+                      child: Text(
                         widget.isCat == true ? widget.name : "",
                         style: Styles.styles700sp20Black,
                       ),
-                      widget.isCat == true
-                          ? Padding(
+                    ),
+                    widget.isCat == true
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                              bottom: 10.h,
+                              right: 15.w,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "filter".tr(),
+                                      style: Styles.style400sp15Black,
+                                    ),
+                                    ScreenUtil().setHorizontalSpacing(5),
+                                    GestureDetector(
+                                      onTap: () {
+                                        drawerKey.currentState!.openDrawer();
+                                      },
+                                      child: SvgPicture.asset(
+                                        ConstIcons.filter,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox(),
+                    BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
+                      builder: (context, state) {
+                        print("STATE $state ==============");
+                        if (state is GetCatProductsSuccess) {
+                          var products = state.subcategoryModel.goods;
+                          insideProducts = products!.data!;
+                          name = state.subcategoryModel.subcategory!.name_ru
+                              .toString();
+
+                          // if (!isWorking) {
+                          //   insideProducts = products;
+
+                          //   for (var i = 0;
+                          //       i <
+                          //           state.subcategoryModel.subcategory!.subcategories!
+                          //               .length;
+                          //       i++) {
+                          //     subcategory.add(state
+                          //         .subcategoryModel.subcategory!.subcategories![i]);
+                          //   }
+                          //   isWorking = true;
+                          // }
+                          return Expanded(
+                            child: Padding(
                               padding: EdgeInsets.only(
-                                bottom: 10.h,
+                                left: 15.w,
+                                right: 15.w,
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "filter".tr(),
-                                        style: Styles.style400sp15Black,
-                                      ),
-                                      ScreenUtil().setHorizontalSpacing(5),
-                                      GestureDetector(
-                                        onTap: () {
-                                          drawerKey.currentState!.openDrawer();
-                                        },
-                                        child: SvgPicture.asset(
-                                          ConstIcons.filter,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            )
-                          : const SizedBox(),
-                      BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
-                        builder: (context, state) {
-                          print("STATE $state ==============");
-                          if (state is GetCatProductsSuccess) {
-                            var products = state.subcategoryModel.goods;
-                            insideProducts = products!.data!;
-                            name = state.subcategoryModel.subcategory!.name_ru
-                                .toString();
-
-                            // if (!isWorking) {
-                            //   insideProducts = products;
-
-                            //   for (var i = 0;
-                            //       i <
-                            //           state.subcategoryModel.subcategory!.subcategories!
-                            //               .length;
-                            //       i++) {
-                            //     subcategory.add(state
-                            //         .subcategoryModel.subcategory!.subcategories![i]);
-                            //   }
-                            //   isWorking = true;
-                            // }
-                            return Expanded(
                               child: GridView.builder(
                                 shrinkWrap: true,
                                 gridDelegate:
@@ -353,13 +370,13 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                   );
                                 },
                               ),
-                            );
-                          }
-                          return const SizedBox();
-                        },
-                      ),
-                    ],
-                  ),
+                            ),
+                          );
+                        }
+                        return const SizedBox();
+                      },
+                    ),
+                  ],
                 )
               : SizedBox(
                   height: double.infinity,

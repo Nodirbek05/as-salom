@@ -71,6 +71,7 @@
     "volume" : "Miqdori:",
     "less":"kamroq",
     "empty_basket" : "Sizning savatingiz bo'sh",
-    "choose_pro" : "Asosiy sahifadagi mahsulotlardan boshlang yoki qidiruv orqali kerakli mahsulotni toping"
-
+    "choose_pro" : "Asosiy sahifadagi mahsulotlardan boshlang yoki qidiruv orqali kerakli mahsulotni toping",
+    "empty_order_info": "Qidiruv orqali kerakli mahsulotlarni toping va xarid qilishni boshlang",
+    "empty_order" : "Sizda hali bajarilgan buyurtmalar yoʻq"
 }

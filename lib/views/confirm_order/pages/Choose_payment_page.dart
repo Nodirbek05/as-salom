@@ -114,13 +114,27 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage>
                                     color: ConstColor.lightGrey,
                                   ),
                                 ),
-                                child: SizedBox(
-                                  height: 32.h,
-                                  width: 85.w,
-                                  child: Image.network(
-                                    state.paymentTypesModel.data[index].icon
-                                        .toString(),
-                                  ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 32.h,
+                                      width: 85.w,
+                                      child: Image.network(
+                                        state.paymentTypesModel.data[index].icon
+                                            .toString(),
+                                      ),
+                                    ),
+                                    state.paymentTypesModel.data[index].url!
+                                            .contains(
+                                      "payment-card",
+                                    )
+                                        ? Text(
+                                            "payment_by_card".tr(),
+                                            style: Styles.style400sp14Black,
+                                          )
+                                        : const SizedBox()
+                                  ],
                                 ),
                               ),
                             ),

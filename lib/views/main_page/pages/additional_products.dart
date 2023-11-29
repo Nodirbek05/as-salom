@@ -73,10 +73,10 @@ class _AdditionalProductsState extends State<AdditionalProducts> {
                                       right: 10.w,
                                     ),
                                     child: ProductCardWidget(
-                                        product:
-                                            products[index + 1].goods![indx],
-                                        withHeight: true,
-                                        height: 300.h),
+                                      product: products[index + 1].goods![indx],
+                                      withHeight: true,
+                                      height: 300.h,
+                                    ),
                                   );
                                 },
                               ),

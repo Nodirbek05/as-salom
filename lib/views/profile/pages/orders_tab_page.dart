@@ -45,6 +45,40 @@ class _OrdersPageState extends State<OrdersPage> {
                 );
               } else if (state is GetOrdersSuccess) {
                 final orders = state.orderModel.data;
+
+
+                if(orders.isEmpty){
+                   return Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ScreenUtil().setVerticalSpacing(170),
+                        Container(
+                          height: 100.h,
+                          width: 100.h,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  "assets/images/order_empty.png",
+                                ),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        Text(
+                          "empty_order".tr(),
+                          style: Styles.style600sp18Black,
+                          textAlign: TextAlign.center,
+                        ),
+                        ScreenUtil().setVerticalSpacing(20),
+                        Text(
+                          "empty_order_info".tr(),
+                          style: Styles.style400sp16Black,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                }
                 return Column(
                   children: [
                     ...List.generate(
@@ -54,7 +88,8 @@ class _OrdersPageState extends State<OrdersPage> {
                           openOrder = null;
                           setState(() {});
                         },
-                        child: Container(
+                        child: 
+                        Container(
                           margin: EdgeInsets.only(
                             bottom: 15.h,
                           ),
