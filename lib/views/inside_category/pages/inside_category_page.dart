@@ -97,7 +97,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                         borderRadius: BorderRadius.circular(0)),
                     child: Padding(
                       padding: EdgeInsets.only(
-                        top: 50.h,
+                        top: 40.h,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +127,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                              left: 10.w,
+                              left: 0.w,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +144,11 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                     padding: EdgeInsets.only(
                                       bottom: 5.h,
                                     ),
-                                    child: InkWell(
+                                    child: ListTile(
+                                      trailing: const Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 20,
+                                      ),
                                       onTap: () async {
                                         insideProducts.clear();
 
@@ -167,7 +171,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                                     }
                                                 });
                                       },
-                                      child: Text(
+                                      title: Text(
                                         _getcategoryByLocale(
                                           state.subcategoryModel.subcategory!
                                               .subcategories![index],
@@ -315,6 +319,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                             ),
                           )
                         : const SizedBox(),
+                    ScreenUtil().setVerticalSpacing(8),
                     BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
                       builder: (context, state) {
                         print("STATE $state ==============");

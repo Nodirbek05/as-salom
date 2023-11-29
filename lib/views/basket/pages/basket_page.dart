@@ -41,7 +41,7 @@ class _BasketPageState extends State<BasketPage> {
     getPrice(product);
     return Scaffold(
       bottomSheet: Container(
-        height: 90.h,
+        height: 95.h,
         width: double.infinity,
         decoration: BoxDecoration(
           boxShadow: [
