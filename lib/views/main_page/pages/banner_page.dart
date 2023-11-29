@@ -42,6 +42,7 @@ class _BannerPageState extends State<BannerPage> {
                 ),
                 height: 140.h,
                 child: PageView.builder(
+                  allowImplicitScrolling: true,
                   controller: _pageController1,
                   scrollDirection: Axis.horizontal,
                   itemCount: bannerData.data!.length,
