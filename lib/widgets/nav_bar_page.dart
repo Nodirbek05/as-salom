@@ -97,45 +97,67 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(0)),
               child: Padding(
-                padding: EdgeInsets.only(
-                  top: 30.h,
-                ),
-                child: ListView.builder(
-                  itemCount: categoryData.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context, InsideCategoryPage.routeName,
-                            arguments: InsideCategoryPage(
-                                isCat: true,
-                                id: int.parse(
-                                    categoryData[index].id!.toString()),
-                                name: categoryData[index].name_ru!));
-                      },
-                      leading: SizedBox(
-                        height: 20.h,
-                        width: 20.w,
-                        child: Image.network(
-                          ApiPaths.imageUrl + categoryData[index].photo!,
-                          fit: BoxFit.cover,
+                  padding: EdgeInsets.only(
+                    top: 30.h,
+                  ),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        onTap: () {},
+                        leading: SizedBox(
+                          height: 20.h,
+                          width: 20.w,
+                          child: Image.network(
+                            "",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        title: Text(
+                          "Order to home",
+                          style: Styles.style500sp14Black,
+                        ),
+                        trailing: const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 15,
                         ),
                       ),
-                      title: Text(
-                        _getcategoryByLocale(
-                          categoryData[index],
-                          context.locale,
-                        ),
-                        style: Styles.style500sp14Black,
-                      ),
-                      trailing: const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                      ),
-                    );
-                  },
-                ),
-              ),
+                      ...List.generate(
+                        categoryData.length,
+                        (index) {
+                          return ListTile(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, InsideCategoryPage.routeName,
+                                  arguments: InsideCategoryPage(
+                                      isCat: true,
+                                      id: int.parse(
+                                          categoryData[index].id!.toString()),
+                                      name: categoryData[index].name_ru!));
+                            },
+                            leading: SizedBox(
+                              height: 20.h,
+                              width: 20.w,
+                              child: Image.network(
+                                ApiPaths.imageUrl + categoryData[index].photo!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            title: Text(
+                              _getcategoryByLocale(
+                                categoryData[index],
+                                context.locale,
+                              ),
+                              style: Styles.style500sp14Black,
+                            ),
+                            trailing: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  )),
             );
           }
           return const Drawer(

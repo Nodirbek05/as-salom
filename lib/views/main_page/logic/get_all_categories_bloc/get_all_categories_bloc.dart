@@ -16,7 +16,7 @@ class GetAllCategoriesBloc
   Future<void> getCategories(
       GetCategories event, Emitter<GetAllCategoriesState> emit) async {
     emit(GetAllCategoriesInitial());
-    final response = await CommonRequests.getCategories();
+    final response = await CommonRequests.getAllCategories();
     if (response is CategoriesModel) {
       emit(GetAllCategoriesSuccess(categoryModel: response));
       print("GET ALL CATEGORIES SUCCESS ${response}");

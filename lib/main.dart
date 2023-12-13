@@ -22,6 +22,8 @@ void main() async {
   await Hive.openBox<BasketModel>('basketBox');
   SharedPreferences _prefs = await SharedPreferences.getInstance();
   bool hasRegistered = _prefs.getString('token') == null;
+
+  
   runApp(
     EasyLocalization(
       supportedLocales: const [

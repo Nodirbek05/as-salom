@@ -25,9 +25,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CommonRequests {
   CommonRequests._();
   static Future<ResponseData> getBanners() async {
+    SharedPreferences _type = await SharedPreferences.getInstance();
+    bool type = _type.getInt("type") == null;
     try {
       final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getBanners}'),
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getBanners}/$type'),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.body);
@@ -47,7 +49,7 @@ class CommonRequests {
   static Future<ResponseData> getSubBanners() async {
     try {
       final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubBanners}'),
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubBanners}/1'),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.body);
@@ -67,7 +69,27 @@ class CommonRequests {
   static Future<ResponseData> getCategories() async {
     try {
       final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}'),
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}/1'),
+        headers: {'Content-Type': 'application/json'},
+      );
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return CategoriesModel.fromJson(response.body);
+        case StatusCodes.alreadyTaken:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> getAllCategories() async {
+    try {
+      final response = await http.get(
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getAllCategories}/1'),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.body);
@@ -171,7 +193,7 @@ class CommonRequests {
   static Future<ResponseData> getSpesificProducts() async {
     // try {
     final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSelection}'),
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSelection}/1'),
       headers: {'Content-Type': 'application/json'},
     );
     print(response.body);
@@ -191,7 +213,7 @@ class CommonRequests {
   static Future<ResponseData> getSubcategories() async {
     // try {
     final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubCategories}'),
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubCategories}/1'),
       headers: {'Content-Type': 'application/json'},
     );
     print(response.body);

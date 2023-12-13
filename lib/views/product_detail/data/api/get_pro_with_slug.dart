@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 class GetProWithSlug {
   GetProWithSlug._();
   static Future<ResponseData> getProSlug(String slug) async {
+
+  
     // try {
 
     final response = await http.get(
