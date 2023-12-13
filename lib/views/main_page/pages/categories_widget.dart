@@ -115,7 +115,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
         baseColor: ConstColor.dotColor,
         highlightColor: ConstColor.lightGrey,
         child: SizedBox(
-          height: 130.h,
+          height: 135.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 4,
@@ -126,7 +126,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                 ),
                 child: Container(
                   padding: EdgeInsets.all(10.w),
-                  height: 123.h,
+                  height: 120.h,
                   width: 127.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.r),

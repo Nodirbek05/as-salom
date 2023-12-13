@@ -186,7 +186,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                         maxLines: 1,
                       ),
                       SizedBox(
-                        height: 90.h,
+                        height: 85.h,
                         width: 90.h,
                       ),
                     ],

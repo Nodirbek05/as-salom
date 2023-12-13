@@ -28,6 +28,11 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController commentController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController roomNumberController = TextEditingController();
+
+  List<String> list = ['One', 'Two', 'Three', 'Four'];
+
+  String dropdownValue = "One";
   final basketBox = Hive.box<BasketModel>('basketBox');
   int? paymentType;
   var phoneFormatter = MaskTextInputFormatter(
@@ -161,23 +166,86 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   controller: nameController,
                 ),
                 ScreenUtil().setVerticalSpacing(20),
-                InputWidget(
-                  validateMode: AutovalidateMode.onUserInteraction,
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Выберите зону",
+                        style: Styles.style400sp14Black,
+                      ),
+                      TextSpan(
+                        text: '*',
+                        style: Styles.style400sp14Red,
+                      ),
+                    ],
+                  ),
+                ),
+                ScreenUtil().setVerticalSpacing(5),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                  ),
+                  height: 65.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                    border: Border.all(
+                      color: ConstColor.as_salomText,
+                    ),
+                  ),
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    underline: const SizedBox(),
+                    elevation: 16,
+                    value: dropdownValue,
+                    icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                    style: Styles.style400sp14Black,
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        dropdownValue = value!;
+                      });
+                    },
+                    items: list.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                ScreenUtil().setVerticalSpacing(20),
+                Text(
+                  "№ комнаты (необязательно)",
+                  style: Styles.style400sp14Black,
+                ),
 
-                  maxLength: 12,
+                InputWidget(
                   inputFormatter: [
                     FilteringTextInputFormatter.digitsOnly,
                     phoneFormatter
                   ],
                   inputType: TextInputType.number,
-                  prefixIcon: Text(
-                    "+998 ",
-                    style: Styles.style500sp16Black,
-                  ),
-                  controller: phoneController,
-                  label: "phone_number".tr(),
-                  // hintText: "Введите ваше Номер",
+                  controller: roomNumberController,
                 ),
+                // InputWidget(
+                //   validateMode: AutovalidateMode.onUserInteraction,
+
+                //   maxLength: 12,
+                //   inputFormatter: [
+                //     FilteringTextInputFormatter.digitsOnly,
+                //     phoneFormatter
+                //   ],
+                //   inputType: TextInputType.number,
+                //   prefixIcon: Text(
+                //     "+998 ",
+                //     style: Styles.style500sp16Black,
+                //   ),
+                //   controller: phoneController,
+                //   label: "phone_number".tr(),
+                //   // hintText: "Введите ваше Номер",
+                // ),
                 ScreenUtil().setVerticalSpacing(20),
                 Text(
                   "comments".tr(),

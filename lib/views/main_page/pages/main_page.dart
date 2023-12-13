@@ -50,10 +50,10 @@ class _MainPageState extends State<MainPage> {
         centerTitle: true,
         surfaceTintColor: ConstColor.mainWhite,
         title: Container(
-          height: 50.h,
+          height: 55.h,
           width: 400.w,
           padding: EdgeInsets.only(
-            // top: 30.h,
+            top: 5.h,
             left: 15.w,
             right: 15.w,
           ),
