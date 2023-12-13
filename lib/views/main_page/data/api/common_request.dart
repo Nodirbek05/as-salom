@@ -25,11 +25,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CommonRequests {
   CommonRequests._();
   static Future<ResponseData> getBanners() async {
-    SharedPreferences _type = await SharedPreferences.getInstance();
-    bool type = _type.getInt("type") == null;
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+    int place = _prefs.getInt("place") ?? 0;
     try {
       final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getBanners}/$type'),
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getBanners}/$place'),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.body);
@@ -47,9 +48,11 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getSubBanners() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int place = _prefs.getInt("place") ?? 0;
     try {
       final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubBanners}/1'),
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubBanners}/$place'),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.body);
@@ -67,9 +70,11 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getCategories() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int place = _prefs.getInt("place") ?? 0;
     try {
       final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}/1'),
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}/$place'),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.body);
@@ -87,9 +92,11 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getAllCategories() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int place = _prefs.getInt("place") ?? 0;
     try {
       final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getAllCategories}/1'),
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getAllCategories}/$place'),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.body);
@@ -191,9 +198,11 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getSpesificProducts() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int place = _prefs.getInt("place") ?? 0;
     // try {
     final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSelection}/1'),
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSelection}/$place'),
       headers: {'Content-Type': 'application/json'},
     );
     print(response.body);
@@ -211,9 +220,11 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getSubcategories() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int place = _prefs.getInt("place") ?? 0;
     // try {
     final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubCategories}/1'),
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubCategories}/$place'),
       headers: {'Content-Type': 'application/json'},
     );
     print(response.body);

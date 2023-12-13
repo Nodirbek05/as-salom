@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomNavigatonBar extends StatefulWidget {
   const CustomNavigatonBar({super.key});
@@ -31,8 +32,17 @@ class CustomNavigatonBar extends StatefulWidget {
 class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   @override
   void initState() {
+    getCache();
     context.read<GetAllCategoriesBloc>().add(GetCategories());
     super.initState();
+  }
+
+  bool isHome = true;
+
+  void getCache() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    isHome = _prefs.getInt("place") == 2;
+    setState(() {});
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -103,17 +113,23 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                   child: Column(
                     children: [
                       ListTile(
-                        onTap: () {},
+                        onTap: () async {
+                          SharedPreferences _prefs =
+                              await SharedPreferences.getInstance();
+                          isHome
+                              ? await _prefs.setInt('place', 1)
+                              : await _prefs.setInt('place', 2);
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              CustomNavigatonBar.routeName, (route) => false);
+                        },
                         leading: SizedBox(
-                          height: 20.h,
-                          width: 20.w,
-                          child: Image.network(
-                            "",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                            height: 20.h,
+                            width: 20.w,
+                            child: isHome
+                                ? const Icon(Icons.home)
+                                : const Icon(Icons.scale_outlined)),
                         title: Text(
-                          "Order to home",
+                          isHome ? "Order to home" : "Товары для заключенных",
                           style: Styles.style500sp14Black,
                         ),
                         trailing: const Icon(
