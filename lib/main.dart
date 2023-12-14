@@ -19,7 +19,9 @@ void main() async {
   Hive.registerAdapter(BasketModelAdapter());
   Hive.registerAdapter(FavoritesModelAdapter());
   await Hive.openBox<FavoritesModel>("favoritesBox");
+  await Hive.openBox<FavoritesModel>("favoritesBoxForHome");
   await Hive.openBox<BasketModel>('basketBox');
+  await Hive.openBox<BasketModel>('basketBoxForHome');
   SharedPreferences _prefs = await SharedPreferences.getInstance();
   bool hasRegistered = _prefs.getString('token') == null;
   _prefs.getInt("place") != null ? null : _prefs.setInt('place', 2);

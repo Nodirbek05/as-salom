@@ -14,6 +14,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PayingByCardPage extends StatefulWidget {
   static const routeName = "/payingByCard";
@@ -31,9 +32,20 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
   TextEditingController phoneController = TextEditingController();
-  final basketBox = Hive.box<BasketModel>('basketBox');
 
   int price = 0;
+  bool isHome = true;
+  String favBox = "";
+  String basketBox = "";
+
+  void getCache() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    isHome = _prefs.getInt("place") == 2;
+    favBox =
+        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+    setState(() {});
+  }
 
   getPrice(List<BasketModel> data) {
     price = 0;
@@ -48,8 +60,15 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
   }
 
   @override
+  void initState() {
+    getCache();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final product = basketBox.values.toList().cast<BasketModel>();
+    final product =
+        Hive.box<BasketModel>(basketBox).values.toList().cast<BasketModel>();
     getPrice(product);
     return Scaffold(
       bottomSheet:

@@ -10,6 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductCardWidget extends StatefulWidget {
   final bool withHeight;
@@ -33,6 +34,25 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       productName = product.name_en;
     }
     return productName ?? "no_data".tr();
+  }
+
+  @override
+  void initState() {
+    getCache();
+    super.initState();
+  }
+
+  bool isHome = true;
+  String favBox = "";
+  String basketBox = "";
+
+  void getCache() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    isHome = _prefs.getInt("place") == 2;
+    favBox =
+        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+    setState(() {});
   }
 
   @override
@@ -93,7 +113,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                     ),
                     ValueListenableBuilder(
                         valueListenable:
-                            Hive.box<BasketModel>('basketBox').listenable(),
+                            Hive.box<BasketModel>(basketBox).listenable(),
                         builder: (ctx, basket, index) {
                           return isProductInHive(
                                   int.parse(widget.product!.id.toString()))
@@ -212,8 +232,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                     : deleteProduct(int.parse(widget.product!.id!.toString()));
               },
               child: ValueListenableBuilder(
-                valueListenable:
-                    Hive.box<FavoritesModel>("favoritesBox").listenable(),
+                valueListenable: Hive.box<FavoritesModel>(favBox).listenable(),
                 builder: (ctx, box, _) {
                   return isProductSavedInHive(
                           int.parse(widget.product!.id!.toString()))
@@ -242,7 +261,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   }
 
   void increaseQuantity(num drugId) {
-    final box = Hive.box<BasketModel>('basketBox').values.toList();
+    final box = Hive.box<BasketModel>(basketBox).values.toList();
     for (var product in box) {
       if (drugId == product.id) {
         print("DRUG Quantity increase");
@@ -266,12 +285,12 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ..size = size
       ..slug = slug;
 
-    final box = Hive.box<FavoritesModel>('favoritesBox');
+    final box = Hive.box<FavoritesModel>(favBox);
     box.add(product);
   }
 
   void decreaseQuantity(num drugId) {
-    final box = Hive.box<BasketModel>('basketBox').values.toList();
+    final box = Hive.box<BasketModel>(basketBox).values.toList();
     for (var product in box) {
       if (drugId == product.id) {
         print("DRUG Quantity decrease");
@@ -284,7 +303,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
 
   num getDrugQty(num drugId) {
     num qty = 0;
-    final drugBasket = Hive.box<BasketModel>('basketBox').values.toList();
+    final drugBasket = Hive.box<BasketModel>(basketBox).values.toList();
     for (var prod in drugBasket) {
       if (prod.id == drugId) {
         qty = prod.qty;
@@ -306,13 +325,13 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ..kg = kg
       ..slug = slug;
 
-    final box = Hive.box<BasketModel>('basketBox');
+    final box = Hive.box<BasketModel>(basketBox);
     box.add(product);
   }
 
   void deleteDrugFromBasket(num drugId) {
-    final box = Hive.box<BasketModel>('basketBox').values.toList();
-    final listProducts = Hive.box<BasketModel>('basketBox');
+    final box = Hive.box<BasketModel>(basketBox).values.toList();
+    final listProducts = Hive.box<BasketModel>(basketBox);
     for (var product in box) {
       if (drugId == product.id) {
         print("DRUG REMOVED FROM BASKET");
@@ -323,8 +342,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   }
 
   void deleteProduct(int drugId) {
-    final box = Hive.box<FavoritesModel>('favoritesBox').values.toList();
-    final listProducts = Hive.box<FavoritesModel>('favoritesBox');
+    final box = Hive.box<FavoritesModel>(favBox).values.toList();
+    final listProducts = Hive.box<FavoritesModel>(favBox);
     for (var product in box) {
       if (drugId == product.id) {
         print("Product REMOVED FROM BASKET");
@@ -335,7 +354,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   }
 
   bool isProductInHive(int productId) {
-    final savedProductList = Hive.box<BasketModel>('basketBox').values.toList();
+    final savedProductList = Hive.box<BasketModel>(basketBox).values.toList();
     var product = null;
     for (var prod in savedProductList) {
       if (prod.id == productId) {
@@ -346,8 +365,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   }
 
   bool isProductSavedInHive(int productId) {
-    final savedProductList =
-        Hive.box<FavoritesModel>('favoritesBox').values.toList();
+    final savedProductList = Hive.box<FavoritesModel>(favBox).values.toList();
     var product = null;
     for (var prod in savedProductList) {
       if (prod.id == productId) {

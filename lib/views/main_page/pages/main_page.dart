@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = "/mainPage";
@@ -33,6 +34,21 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   var query = TextEditingController();
   List<ProductModel> products = [];
+
+  @override
+  void initState() {
+    getCache();
+    super.initState();
+  }
+
+  bool isHome = true;
+
+  void getCache() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    isHome = _prefs.getInt("place") == 2;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,9 +157,10 @@ class _MainPageState extends State<MainPage> {
                           horizontal: 15.w,
                         ),
                         child: ValueListenableBuilder(
-                          valueListenable:
-                              Hive.box<FavoritesModel>("favoritesBox")
-                                  .listenable(),
+                          valueListenable: Hive.box<FavoritesModel>(isHome
+                                  ? "favoritesBoxForHome"
+                                  : "favoritesBox")
+                              .listenable(),
                           builder: (ctx, box, _) {
                             final products =
                                 box.values.toList().cast<FavoritesModel>();

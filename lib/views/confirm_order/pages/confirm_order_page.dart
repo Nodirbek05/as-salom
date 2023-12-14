@@ -35,19 +35,22 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
   List<String> list = ['One', 'Two', 'Three', 'Four'];
 
   String dropdownValue = "One";
-  final basketBox = Hive.box<BasketModel>('basketBox');
   int? paymentType;
   var phoneFormatter = MaskTextInputFormatter(
       mask: '##-###-##-##',
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
 
-
   bool isHome = true;
+  String favBox = "";
+  String basketBox = "";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
+    favBox =
+        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
     setState(() {});
   }
 
@@ -59,7 +62,8 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    final products = basketBox.values.toList().cast<BasketModel>();
+    final products =
+        Hive.box<BasketModel>(basketBox).values.toList().cast<BasketModel>();
     return Scaffold(
       bottomSheet: Container(
         padding: EdgeInsets.symmetric(
@@ -151,7 +155,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                     id: state.data.order.id!, name: nameController.text));
           }
         },
-        child: isHome 
+        child: isHome
             ? Padding(
                 padding: EdgeInsets.only(
                   top: 20.h,
@@ -280,7 +284,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   ),
                 ),
               )
-            :  OrderHomePage(),
+            : OrderHomePage(),
       ),
     );
   }

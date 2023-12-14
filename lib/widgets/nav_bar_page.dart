@@ -38,10 +38,13 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   }
 
   bool isHome = true;
+  String basketBox = "";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
+    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+
     setState(() {});
   }
 
@@ -72,7 +75,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
           });
   }
 
-  final basketBox = Hive.box<BasketModel>('basketBox');
+  // final basketBox = Hive.box<BasketModel>('basketBox');
 
   String _getcategoryByLocale(CategoryDataModel category, Locale locale) {
     late String? categoryName;
@@ -223,7 +226,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                       : const Icon(Icons.shopping_cart_outlined),
                   ValueListenableBuilder<Box<BasketModel>>(
                     valueListenable:
-                        Hive.box<BasketModel>('basketBox').listenable(),
+                        Hive.box<BasketModel>(basketBox).listenable(),
                     builder: (ctx, box, index) {
                       final products = box.values.toList().cast<BasketModel>();
                       if (products.isEmpty) {

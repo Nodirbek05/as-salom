@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BasketPage extends StatefulWidget {
   static const routeName = "/basketPage";
@@ -20,7 +21,18 @@ class BasketPage extends StatefulWidget {
 }
 
 class _BasketPageState extends State<BasketPage> {
-  final basketBox = Hive.box<BasketModel>('basketBox');
+  bool isHome = true;
+  String favBox = "";
+  String basketBox = "";
+
+  void getCache() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    isHome = _prefs.getInt("place") == 2;
+    favBox =
+        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+    setState(() {});
+  }
 
   int price = 0;
 
@@ -37,8 +49,15 @@ class _BasketPageState extends State<BasketPage> {
   }
 
   @override
+  void initState() {
+    getCache();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final product = basketBox.values.toList().cast<BasketModel>();
+    final product =
+        Hive.box<BasketModel>(basketBox).values.toList().cast<BasketModel>();
     getPrice(product);
     return Scaffold(
       bottomSheet: Container(
@@ -250,7 +269,7 @@ class _BasketPageState extends State<BasketPage> {
         slivers: [
           SliverToBoxAdapter(
             child: ValueListenableBuilder<Box<BasketModel>>(
-              valueListenable: Hive.box<BasketModel>('basketBox').listenable(),
+              valueListenable: Hive.box<BasketModel>(basketBox).listenable(),
               builder: (ctx, box, index) {
                 final products = box.values.toList().cast<BasketModel>();
                 if (products.isEmpty) {

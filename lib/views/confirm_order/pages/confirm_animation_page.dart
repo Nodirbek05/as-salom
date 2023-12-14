@@ -6,10 +6,34 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ConfirmAnimationPage extends StatelessWidget {
+class ConfirmAnimationPage extends StatefulWidget {
   static const routeName = "/confirmAnimation";
   const ConfirmAnimationPage({super.key});
+
+  @override
+  State<ConfirmAnimationPage> createState() => _ConfirmAnimationPageState();
+}
+
+class _ConfirmAnimationPageState extends State<ConfirmAnimationPage> {
+  bool isHome = true;
+
+  String basketBox = "";
+
+  void getCache() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    isHome = _prefs.getInt("place") == 2;
+    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getCache();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +72,7 @@ class ConfirmAnimationPage extends StatelessWidget {
             InkWell(
               onTap: () {
                 Navigator.pushNamed(context, CustomNavigatonBar.routeName);
-                   Hive.box<BasketModel>('basketBox').clear();
+                Hive.box<BasketModel>(basketBox).clear();
               },
               child: Container(
                 alignment: Alignment.center,
