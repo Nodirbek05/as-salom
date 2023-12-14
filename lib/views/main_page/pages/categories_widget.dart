@@ -88,7 +88,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             maxLines: 1,
                           ),
                           SizedBox(
-                            height: 85.h,
+                            height: 83.h,
                             width: 90.h,
                             child: Image.network(
                               ApiPaths.imageUrl +
