@@ -22,8 +22,8 @@ class BasketPage extends StatefulWidget {
 
 class _BasketPageState extends State<BasketPage> {
   bool isHome = true;
-  String favBox = "";
-  String basketBox = "";
+  String favBox = "favoritesBoxForHome";
+  String basketBox = "basketBoxForHome";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();

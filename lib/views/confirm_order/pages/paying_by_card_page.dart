@@ -35,8 +35,8 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
 
   int price = 0;
   bool isHome = true;
-  String favBox = "";
-  String basketBox = "";
+   String favBox = "favoritesBoxForHome";
+  String basketBox = "basketBoxForHome";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();

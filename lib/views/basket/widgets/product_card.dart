@@ -25,8 +25,8 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
   int price = 0;
 
   bool isHome = true;
-  String favBox = "";
-  String basketBox = "";
+   String favBox = "favoritesBoxForHome";
+  String basketBox = "basketBoxForHome";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();

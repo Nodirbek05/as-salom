@@ -42,9 +42,8 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
       type: MaskAutoCompletionType.lazy);
 
   bool isHome = true;
-  String favBox = "";
-  String basketBox = "";
-
+  String favBox = "favoritesBoxForHome";
+  String basketBox = "basketBoxForHome";
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;

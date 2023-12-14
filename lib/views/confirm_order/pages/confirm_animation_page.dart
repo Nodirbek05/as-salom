@@ -19,7 +19,8 @@ class ConfirmAnimationPage extends StatefulWidget {
 class _ConfirmAnimationPageState extends State<ConfirmAnimationPage> {
   bool isHome = true;
 
-  String basketBox = "";
+  
+  String basketBox = "basketBoxForHome";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();

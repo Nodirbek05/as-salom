@@ -38,7 +38,8 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   }
 
   bool isHome = true;
-  String basketBox = "";
+
+  String basketBox = "basketBoxForHome";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
