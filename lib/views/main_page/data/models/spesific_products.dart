@@ -177,14 +177,14 @@ class CategoryModel {
 class ProductModel {
   num? id;
   int? type_good;
-  String? category_id;
-  String? subcategory_id;
+  int? category_id;
+  int? subcategory_id;
   String? name_ru;
   String? name_uz;
   String? name_en;
   String? slug;
-  String? price;
-  String? discount;
+  dynamic? price;
+  int? discount;
   String? weight;
   String? weight_max;
   String? ikpu;
@@ -197,7 +197,7 @@ class ProductModel {
   String? created_at;
   String? updated_at;
   dynamic quantity;
-  String? weight_bruto;
+  dynamic? weight_bruto;
   Pivot? pivot;
   List<SizeData>? sizes;
   ProductModel({
@@ -232,14 +232,14 @@ class ProductModel {
   ProductModel copyWith({
     num? id,
     int? type_good,
-    String? category_id,
-    String? subcategory_id,
+    int? category_id,
+    int? subcategory_id,
     String? name_ru,
     String? name_uz,
     String? name_en,
     String? slug,
-    String? price,
-    String? discount,
+    dynamic? price,
+    int? discount,
     String? weight,
     String? weight_max,
     String? ikpu,
@@ -252,7 +252,7 @@ class ProductModel {
     String? created_at,
     String? updated_at,
     dynamic quantity,
-    String? weight_bruto,
+    dynamic? weight_bruto,
     Pivot? pivot,
     List<SizeData>? sizes,
   }) {
@@ -469,16 +469,16 @@ class ProductModel {
 }
 
 class Pivot {
-  String? selection_id;
-  String? good_id;
+  int? selection_id;
+  int? good_id;
   Pivot({
     this.selection_id,
     this.good_id,
   });
 
   Pivot copyWith({
-    String? selection_id,
-    String? good_id,
+    int? selection_id,
+    int? good_id,
   }) {
     return Pivot(
       selection_id: selection_id ?? this.selection_id,

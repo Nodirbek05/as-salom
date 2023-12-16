@@ -52,14 +52,14 @@ class OrdersModel extends ResponseData {
 
 class OrdersData extends ResponseData {
   int? id;
-  String? user_id;
+  dynamic? user_id;
   String? name;
   String? phone;
   String? desc;
   String? payment_type;
-  String? total_price;
+  dynamic? total_price;
   String? status;
-  String? is_active;
+  dynamic? is_active;
   String? status_text;
   String? created_at;
   String? updated_at;
@@ -82,14 +82,14 @@ class OrdersData extends ResponseData {
 
   OrdersData copyWith({
     int? id,
-    String? user_id,
+    dynamic? user_id,
     String? name,
     String? phone,
     String? desc,
     String? payment_type,
-    String? total_price,
+    dynamic? total_price,
     String? status,
-    String? is_active,
+    dynamic? is_active,
     String? status_text,
     String? created_at,
     String? updated_at,

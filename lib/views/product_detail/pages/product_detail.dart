@@ -80,7 +80,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   bool isHome = true;
-   String favBox = "favoritesBoxForHome";
+  String favBox = "favoritesBoxForHome";
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
@@ -335,7 +335,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   int.parse(widget.product.id!.toString()),
                                   widget.product.price ?? "null",
                                   widget.product.type_good ?? 0,
-                                  widget.product.discount ?? "null",
+                                  widget.product.discount.toString(),
                                   widget.product.slug ?? "",
                                 )
                               : deleteProduct(

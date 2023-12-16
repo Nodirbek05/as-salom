@@ -102,7 +102,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       style: Styles.style600sp14Main,
                     ),
                     Text(
-                      widget.product!.discount ?? "no_data".tr(),
+                      widget.product!.discount.toString(),
                       style: Styles.style400sp12GreyUnderline,
                     ),
                     Text(
@@ -219,7 +219,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         int.parse(widget.product!.id!.toString()),
                         widget.product!.price ?? "no_data".tr(),
                         widget.product!.type_good ?? 0,
-                        widget.product!.discount ?? "no_data".tr(),
+                        widget.product!.discount.toString(),
                         widget.product!.sizes != null &&
                                 widget.product!.sizes!.isNotEmpty
                             ? widget.product!.sizes![0].id.toString()

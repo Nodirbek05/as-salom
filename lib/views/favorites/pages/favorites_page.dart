@@ -82,7 +82,7 @@ class FavoritesPage extends StatelessWidget {
                       return ProductCardWidget(
                         product: ProductModel(
                           id: products[index].id,
-                          discount: products[index].discount,
+                          discount: int.parse(products[index].discount),
                           name_ru: products[index].name,
                           photo: [products[index].image],
                           type_good: products[index].type,

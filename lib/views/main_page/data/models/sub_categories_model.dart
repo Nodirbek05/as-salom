@@ -150,7 +150,7 @@ class SubCategoriesModel extends ResponseData {
 
 class SubCategoryModel {
   num? id;
-  String? category_id;
+  int? category_id;
   String? name_uz;
   String? name_ru;
   String? name_en;
@@ -168,7 +168,7 @@ class SubCategoryModel {
 
   SubCategoryModel copyWith({
     num? id,
-    String? category_id,
+    int? category_id,
     String? name_uz,
     String? name_ru,
     String? name_en,

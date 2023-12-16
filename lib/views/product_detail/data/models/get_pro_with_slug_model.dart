@@ -67,7 +67,7 @@ class RandomGoods extends ResponseData {
   String? name_en;
   String? slug;
   String? price;
-  String? discount;
+  dynamic? discount;
   String? weight;
   String? weight_max;
   String? ikpu;
@@ -119,7 +119,7 @@ class RandomGoods extends ResponseData {
     String? name_en,
     String? slug,
     String? price,
-    String? discount,
+    dynamic? discount,
     String? weight,
     String? weight_max,
     String? ikpu,
@@ -384,10 +384,10 @@ class SizeData extends ResponseData {
 }
 
 class PivotData extends ResponseData {
-  String? good_id;
-  String? size_id;
-  String? price;
-  String? quantity;
+  dynamic? good_id;
+  dynamic? size_id;
+  dynamic? price;
+  dynamic? quantity;
   PivotData({
     this.good_id,
     this.size_id,
@@ -396,10 +396,10 @@ class PivotData extends ResponseData {
   });
 
   PivotData copyWith({
-    String? good_id,
-    String? size_id,
-    String? price,
-    String? quantity,
+    dynamic? good_id,
+    dynamic? size_id,
+    dynamic? price,
+    dynamic? quantity,
   }) {
     return PivotData(
       good_id: good_id ?? this.good_id,
