@@ -32,8 +32,7 @@ dependencies:
   yandex_mapkit: ^3.3.3
   location: ^5.0.3
   geolocator: ^10.1.0
-
- 
+  geocoding: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -47,7 +46,6 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/as-salom_logo.png"
-
 
 flutter:
   uses-material-design: true
