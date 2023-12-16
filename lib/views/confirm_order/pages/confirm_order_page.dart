@@ -4,6 +4,7 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
+import 'package:assalomproject/views/confirm_order/logic/bloc/get_location_to_map_bloc.dart';
 import 'package:assalomproject/views/confirm_order/pages/choose_payment_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/order_home_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -283,7 +284,10 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   ),
                 ),
               )
-            : OrderHomePage(),
+            : BlocProvider(
+                create: (context) => GetLocationToMapBloc(),
+                child: OrderHomePage(),
+              ),
       ),
     );
   }
