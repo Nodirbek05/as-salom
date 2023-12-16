@@ -19,7 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 1, milliseconds: 300),
       () {
-        Navigator.pushNamed(context, LanguagePage.routeName);
+        if(mounted){
+                Navigator.pushNamed(context, LanguagePage.routeName);
+        }
 
         super.initState();
       },

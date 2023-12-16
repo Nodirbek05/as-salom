@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
+import 'package:assalomproject/views/confirm_order/logic/bloc/get_location_to_map_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
@@ -25,34 +28,32 @@ class _OrderHomePageState extends State<OrderHomePage> {
     super.initState();
   }
 
-  Future<void> _getLocation() async {
-    Location location = Location();
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-    LocationData _locationData;
+  Future<Position> _getLocation() async {
+    bool isServiceEnabled;
+    LocationPermission permission;
 
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        // Handle the case when the user doesn't enable location services.
-        return;
+    isServiceEnabled = await Geolocator.isLocationServiceEnabled();
+
+    if (!isServiceEnabled && mounted) {
+      'Please enable location';
+      return Future.error('Location service is not enabled');
+    }
+    permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied && mounted) {
+        'We do not have permission to access this location';
+        return Future.error('Location permission denied');
       }
     }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        // Handle the case when the user doesn't grant location permission.
-        return;
-      }
+    if (permission == LocationPermission.deniedForever && mounted) {
+      'We do not have permission to access this location';
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    _locationData = await location.getLocation();
-    // Now you have the user's location in _locationData.
-    print(_locationData.latitude);
-    print(_locationData.longitude);
+    return await Geolocator.getCurrentPosition();
   }
 
   TextEditingController homeController = TextEditingController();
@@ -67,11 +68,18 @@ class _OrderHomePageState extends State<OrderHomePage> {
 
   TextEditingController kvController = TextEditingController();
 
-  late YandexMapController controller;
-  late LocationData _currentLocation;
+  late YandexMapController _yandexMapController;
+  late Position _position;
+
+  Map<String, dynamic> moveLocationData = {
+    'title': '',
+    'longitude': 69.0,
+    'latitude': 41.0,
+  };
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<GetLocationToMapBloc>(context);
     return Padding(
       padding: EdgeInsets.only(
         top: 30.h,
@@ -98,7 +106,36 @@ class _OrderHomePageState extends State<OrderHomePage> {
             child: Stack(
               children: [
                 YandexMap(
-                  onMapCreated: _onMapCreated,
+                  onMapTap: (argument) {},
+                  onObjectTap: (geoObject) {},
+                  onUserLocationAdded: (view) {},
+                  onMapCreated: (YandexMapController controller) async {
+                    _position = await _getLocation();
+                    _yandexMapController = controller;
+                    _yandexMapController.moveCamera(
+                      CameraUpdate.newCameraPosition(
+                        CameraPosition(
+                          target: Point(
+                            latitude: _position.latitude,
+                            longitude: _position.longitude,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  onCameraPositionChanged:
+                      (cameraPosition, reason, finished) async {
+                    if (finished) {
+                      bloc.add(
+                        TryToGetLocationToMapEvent(
+                          {
+                            'lat': cameraPosition.target.latitude,
+                            'lon': cameraPosition.target.longitude,
+                          },
+                        ),
+                      );
+                    }
+                  },
                 ),
                 Positioned(
                   right: 10,

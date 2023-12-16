@@ -1,5 +1,5 @@
 class ApiPaths {
-  static String basicUrl = "https://as-salom.uz/backend/public/api";
+  static String basicUrl = "http://as-salom.uz/backend/public/api";
   static String register = "/registration_app";
   static String getCode = "/get_code";
   static String verification = "/confirm_code";
@@ -10,7 +10,7 @@ class ApiPaths {
   static String getBanners = "/get_banners";
   static String getSubBanners = "/sub_banners";
   static String getCategories = "/get_categories";
-  static String imageUrl = "https://as-salom.uz/assets/images/";
+  static String imageUrl = "http://as-salom.uz/assets/images/";
   static String getSelection = "/get_selection";
   static String getSubCategories = "/get_sub_selection";
   static String search = "/search";
