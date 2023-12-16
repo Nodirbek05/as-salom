@@ -63,7 +63,7 @@ class InnerCategorymodel {
   String? name_uz;
   String? name_en;
   String? name_ru;
-  String? category_id;
+  dynamic category_id;
   String? icon;
   String? photo;
   String? created_at;
@@ -73,7 +73,7 @@ class InnerCategorymodel {
     this.name_uz,
     this.name_en,
     this.name_ru,
-    this.category_id,
+    required this.category_id,
     this.icon,
     this.photo,
     this.created_at,
@@ -85,7 +85,7 @@ class InnerCategorymodel {
     String? name_uz,
     String? name_en,
     String? name_ru,
-    String? category_id,
+    dynamic? category_id,
     String? icon,
     String? photo,
     String? created_at,
@@ -105,37 +105,17 @@ class InnerCategorymodel {
   }
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    if (id != null) {
-      result.addAll({'id': id});
-    }
-    if (name_uz != null) {
-      result.addAll({'name_uz': name_uz});
-    }
-    if (name_en != null) {
-      result.addAll({'name_en': name_en});
-    }
-    if (name_ru != null) {
-      result.addAll({'name_ru': name_ru});
-    }
-    if (category_id != null) {
-      result.addAll({'category_id': category_id});
-    }
-    if (icon != null) {
-      result.addAll({'icon': icon});
-    }
-    if (photo != null) {
-      result.addAll({'photo': photo});
-    }
-    if (created_at != null) {
-      result.addAll({'created_at': created_at});
-    }
-    if (updated_at != null) {
-      result.addAll({'updated_at': updated_at});
-    }
-
-    return result;
+    return {
+      'id': id,
+      'name_uz': name_uz,
+      'name_en': name_en,
+      'name_ru': name_ru,
+      'category_id': category_id,
+      'icon': icon,
+      'photo': photo,
+      'created_at': created_at,
+      'updated_at': updated_at,
+    };
   }
 
   factory InnerCategorymodel.fromMap(Map<String, dynamic> map) {
@@ -144,7 +124,7 @@ class InnerCategorymodel {
       name_uz: map['name_uz'],
       name_en: map['name_en'],
       name_ru: map['name_ru'],
-      category_id: map['category_id'],
+      category_id: map['category_id'] ?? null,
       icon: map['icon'],
       photo: map['photo'],
       created_at: map['created_at'],
@@ -154,8 +134,7 @@ class InnerCategorymodel {
 
   String toJson() => json.encode(toMap());
 
-  factory InnerCategorymodel.fromJson(String source) =>
-      InnerCategorymodel.fromMap(json.decode(source));
+  factory InnerCategorymodel.fromJson(String source) => InnerCategorymodel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -165,29 +144,29 @@ class InnerCategorymodel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is InnerCategorymodel &&
-        other.id == id &&
-        other.name_uz == name_uz &&
-        other.name_en == name_en &&
-        other.name_ru == name_ru &&
-        other.category_id == category_id &&
-        other.icon == icon &&
-        other.photo == photo &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at;
+      other.id == id &&
+      other.name_uz == name_uz &&
+      other.name_en == name_en &&
+      other.name_ru == name_ru &&
+      other.category_id == category_id &&
+      other.icon == icon &&
+      other.photo == photo &&
+      other.created_at == created_at &&
+      other.updated_at == updated_at;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name_uz.hashCode ^
-        name_en.hashCode ^
-        name_ru.hashCode ^
-        category_id.hashCode ^
-        icon.hashCode ^
-        photo.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode;
+      name_uz.hashCode ^
+      name_en.hashCode ^
+      name_ru.hashCode ^
+      category_id.hashCode ^
+      icon.hashCode ^
+      photo.hashCode ^
+      created_at.hashCode ^
+      updated_at.hashCode;
   }
 }
