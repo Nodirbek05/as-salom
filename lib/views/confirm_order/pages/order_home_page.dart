@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -126,25 +127,41 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   onCameraPositionChanged:
                       (cameraPosition, reason, finished) async {
                     if (finished) {
-                      bloc.add(
-                        TryToGetLocationToMapEvent(
-                          {
-                            'lat': cameraPosition.target.latitude,
-                            'lon': cameraPosition.target.longitude,
-                          },
-                        ),
-                      );
+                      // bloc.add(
+                      //   TryToGetLocationToMapEvent(
+                      //     {
+                      //       'lat': cameraPosition.target.latitude,
+                      //       'lon': cameraPosition.target.longitude,
+                      //     },
+                      //   ),
+                      // );
                     }
                   },
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.location_on_rounded,
+                    color: ConstColor.as_salomText,
+                    size: 40,
+                  ),
                 ),
                 Positioned(
                   right: 10,
                   bottom: 10,
                   child: InkWell(
-                    onTap: () {
-                      // Point(
-                      //     latitude: _currentLocation.latitude!,
-                      //     longitude: _currentLocation.longitude!);
+                    onTap: () async {
+                      await _getLocation();
+                      _yandexMapController.moveCamera(
+                        CameraUpdate.newCameraPosition(
+                          CameraPosition(
+                            target: Point(
+                              latitude: _position.latitude,
+                              longitude: _position.longitude,
+                            ),
+                          ),
+                        ),
+                      );
                     },
                     child: const CircleAvatar(
                       radius: 20,
