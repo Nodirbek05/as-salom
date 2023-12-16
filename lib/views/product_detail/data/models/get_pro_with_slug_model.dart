@@ -60,13 +60,13 @@ class GetProWithSlugModel extends ResponseData {
 class RandomGoods extends ResponseData {
   num? id;
   num? type_good;
-  String? category_id;
-  String? subcategory_id;
+  dynamic? category_id;
+  dynamic? subcategory_id;
   String? name_ru;
   String? name_uz;
   String? name_en;
   String? slug;
-  String? price;
+  dynamic? price;
   dynamic? discount;
   String? weight;
   String? weight_max;
@@ -80,7 +80,7 @@ class RandomGoods extends ResponseData {
   String? created_at;
   String? updated_at;
   num? quantity;
-  String? weight_bruto;
+  dynamic? weight_bruto;
   List<SizeData>? sizes;
   RandomGoods({
     this.id,
@@ -112,13 +112,13 @@ class RandomGoods extends ResponseData {
   RandomGoods copyWith({
     num? id,
     num? type_good,
-    String? category_id,
-    String? subcategory_id,
+    dynamic? category_id,
+    dynamic? subcategory_id,
     String? name_ru,
     String? name_uz,
     String? name_en,
     String? slug,
-    String? price,
+    dynamic? price,
     dynamic? discount,
     String? weight,
     String? weight_max,
@@ -132,7 +132,7 @@ class RandomGoods extends ResponseData {
     String? created_at,
     String? updated_at,
     num? quantity,
-    String? weight_bruto,
+    dynamic? weight_bruto,
     List<SizeData>? sizes,
   }) {
     return RandomGoods(
