@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:assalomproject/views/confirm_order/logic/get_location_bloc/get_location_to_map_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,6 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
-import 'package:assalomproject/views/confirm_order/logic/bloc/get_location_to_map_bloc.dart';
 
 class OrderHomePage extends StatefulWidget {
   const OrderHomePage({super.key});

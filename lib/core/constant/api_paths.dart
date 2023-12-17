@@ -20,6 +20,8 @@ class ApiPaths {
   static String createOrder = "/checkout_app";
   static String getOrders = "/get_orders";
   static String getPayments = "/get_payments/";
+  static String getZone = "/get_zones";
+
   static String getWithSlug = "/product/";
   static String confirmCard = "/payment-card";
   static String getAllCategories = "/get_all_categories";

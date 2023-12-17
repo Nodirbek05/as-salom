@@ -4,6 +4,7 @@ import 'package:assalomproject/core/common_models/error_model.dart';
 import 'package:assalomproject/core/common_models/error_response.dart';
 import 'package:assalomproject/core/common_models/response_data.dart';
 import 'package:assalomproject/core/common_models/status_codes.dart';
+import 'package:assalomproject/core/common_models/zone_models.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 import 'package:assalomproject/views/main_page/data/models/categories_model.dart';
@@ -381,6 +382,28 @@ class CommonRequests {
     switch (response.statusCode) {
       case StatusCodes.ok:
         return PaymentTypesModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel();
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
+
+  static Future<ResponseData> getZone() async {
+    // try {
+
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getZone}'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print(response.statusCode);
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return ZoneModels.fromJson(response.body);
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:

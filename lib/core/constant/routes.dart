@@ -4,6 +4,7 @@ import 'package:assalomproject/views/auth/data/logic/verification_bloc/verificat
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/confirm_order/confirm_order_by_card_bloc/confirm_order_by_card_bloc.dart';
+import 'package:assalomproject/views/confirm_order/logic/get_zone_bloc/get_zone_bloc.dart';
 import 'package:assalomproject/views/confirm_order/pages/choose_payment_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
@@ -106,8 +107,15 @@ abstract class Routes {
 
       case ConfirmOrderPage.routeName:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => CreateOrderBloc(),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => CreateOrderBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => GetZoneBloc(),
+                    ),
+                  ],
                   child: const ConfirmOrderPage(),
                 ));
 
