@@ -42,12 +42,13 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
 
-  bool isHome = true;
+  late bool isHome;
   String favBox = "favoritesBoxForHome";
   String basketBox = "basketBoxForHome";
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
+    print(_prefs.getInt('place'));
     favBox =
         _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
     basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
@@ -90,7 +91,8 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   weight: products[i].qty));
             }
 
-            if (nameController.text.isEmpty || nameController.text.length < 4) {
+            if (OrderHomePage.nameController.text.isEmpty &&
+                nameController.text.isEmpty) {
               Fluttertoast.showToast(
                   msg: "Please fill your name",
                   toastLength: Toast.LENGTH_SHORT,
@@ -100,15 +102,39 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   backgroundColor: ConstColor.as_salomText,
                   fontSize: 16.0);
             } else {
+              print(isHome);
               context.read<CreateOrderBloc>().add(
                     Makeorder(
                       good: CreateOrderModel(
-                        desc: commentController.text,
-                        name: nameController.text,
-                        phone: phoneController.text,
-                        paymentType: 2,
-                        goods: goods,
-                      ),
+                          desc: commentController.text,
+                          name: nameController.text.isNotEmpty
+                              ? nameController.text
+                              : OrderHomePage.nameController.text,
+                          phone: phoneController.text,
+                          goods: goods,
+                          placeType: !isHome ? 2 : 1,
+                          roomNumber: !isHome
+                              ? null
+                              : int.parse(roomNumberController.text),
+                          zoneName: !isHome ? null : dropdownValue,
+                          apartment: !isHome
+                              ? int.parse(OrderHomePage.kvController.text)
+                              : null,
+                          enterance: !isHome
+                              ? int.parse(OrderHomePage.podezdController.text)
+                              : null,
+                          floor: !isHome
+                              ? int.parse(OrderHomePage.etajController.text)
+                              : null,
+                          homeNumber: !isHome
+                              ? int.tryParse(OrderHomePage.homeController.text)
+                              : null,
+                          lat: !isHome
+                              ? OrderHomePage.position.latitude.toString()
+                              : null,
+                          lng: !isHome
+                              ? OrderHomePage.position.longitude.toString()
+                              : null),
                     ),
                   );
             }

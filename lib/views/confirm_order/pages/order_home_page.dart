@@ -16,6 +16,15 @@ import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/confirm_order/logic/bloc/get_location_to_map_bloc.dart';
 
 class OrderHomePage extends StatefulWidget {
+  static late Position position;
+  static TextEditingController homeController = TextEditingController();
+  static TextEditingController etajController = TextEditingController();
+  static TextEditingController podezdController = TextEditingController();
+  static TextEditingController kvController = TextEditingController();
+  static TextEditingController commentController = TextEditingController();
+  static TextEditingController nameController = TextEditingController();
+  static TextEditingController adressController = TextEditingController();
+
   const OrderHomePage({super.key});
 
   @override
@@ -57,20 +66,9 @@ class _OrderHomePageState extends State<OrderHomePage> {
     return await Geolocator.getCurrentPosition();
   }
 
-  TextEditingController homeController = TextEditingController();
-
-  TextEditingController etajController = TextEditingController();
-
-  TextEditingController commentController = TextEditingController();
-
   Completer<YandexMapController> completer = Completer<YandexMapController>();
 
-  TextEditingController podezdController = TextEditingController();
-
-  TextEditingController kvController = TextEditingController();
-
   late YandexMapController _yandexMapController;
-  late Position _position;
 
   @override
   Widget build(BuildContext context) {
@@ -81,187 +79,215 @@ class _OrderHomePageState extends State<OrderHomePage> {
         left: 15.w,
         right: 15.w,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Адрес доставки",
-            style: Styles.styles700sp16Black,
-          ),
-          ScreenUtil().setVerticalSpacing(10),
-          Container(
-            height: 200.h,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: ConstColor.as_salomText,
-              borderRadius: BorderRadius.circular(
-                10.r,
-              ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Адрес доставки",
+              style: Styles.styles700sp16Black,
             ),
-            child: Stack(
-              children: [
-                YandexMap(
-                  onMapTap: (argument) {},
-                  onObjectTap: (geoObject) {},
-                  onUserLocationAdded: (view) {},
-                  onMapCreated: (YandexMapController controller) async {
-                    _position = await _getLocation();
-                    // commentController.text = getAddressFromLatLng(
-                    //     _position.latitude, _position.longitude);
-                    _yandexMapController = controller;
-                    _yandexMapController.moveCamera(
-                      CameraUpdate.newCameraPosition(
-                        CameraPosition(
-                          zoom: 17,
-                          target: Point(
-                            latitude: _position.latitude,
-                            longitude: _position.longitude,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  onCameraPositionChanged:
-                      (cameraPosition, reason, finished) async {
-                    if (finished) {
-                      // bloc.add(
-                      //   TryToGetLocationToMapEvent(
-                      //     {
-                      //       'lat': cameraPosition.target.latitude,
-                      //       'lon': cameraPosition.target.longitude,
-                      //     },
-                      //   ),
-                      // );
-                    }
-                  },
+            ScreenUtil().setVerticalSpacing(10),
+            Container(
+              height: 200.h,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: ConstColor.as_salomText,
+                borderRadius: BorderRadius.circular(
+                  10.r,
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.location_on_rounded,
-                    color: ConstColor.as_salomText,
-                    size: 40,
-                  ),
-                ),
-                Positioned(
-                  right: 10,
-                  bottom: 10,
-                  child: InkWell(
-                    onTap: () async {
-                      await _getLocation();
+              ),
+              child: Stack(
+                children: [
+                  YandexMap(
+                    onMapTap: (argument) {},
+                    onObjectTap: (geoObject) {},
+                    onUserLocationAdded: (view) {},
+                    onMapCreated: (YandexMapController controller) async {
+                      OrderHomePage.position = await _getLocation();
                       getLocation(
-                              lat: _position.latitude, lon: _position.longitude)
+                              lat: OrderHomePage.position.latitude,
+                              lon: OrderHomePage.position.longitude)
                           .then((value) {
                         if (value is DataSuccess) {
                           setState(() {
-                            commentController.text =
+                            OrderHomePage.adressController.text =
                                 value.data?.display_name ?? "null";
                           });
                         }
                       });
-                      // print(getAddressFromLatLng(
-                      //     _position.latitude, _position.longitude));
+                      _yandexMapController = controller;
                       _yandexMapController.moveCamera(
                         CameraUpdate.newCameraPosition(
                           CameraPosition(
                             zoom: 17,
                             target: Point(
-                              latitude: _position.latitude,
-                              longitude: _position.longitude,
+                              latitude: OrderHomePage.position.latitude,
+                              longitude: OrderHomePage.position.longitude,
                             ),
                           ),
                         ),
                       );
                     },
-                    child: const CircleAvatar(
-                      radius: 20,
-                      backgroundColor: ConstColor.as_salomText,
+                    onCameraPositionChanged:
+                        (cameraPosition, reason, finished) async {
+                      if (finished) {
+                        // bloc.add(
+                        //   TryToGetLocationToMapEvent(
+                        //     {
+                        //       'lat': cameraPosition.target.latitude,
+                        //       'lon': cameraPosition.target.longitude,
+                        //     },
+                        //   ),
+                        // );
+                      }
+                    },
+                  ),
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.location_on_rounded,
+                      color: ConstColor.as_salomText,
+                      size: 40,
                     ),
                   ),
-                )
+                  Positioned(
+                    right: 10,
+                    bottom: 10,
+                    child: InkWell(
+                      onTap: () async {
+                        await _getLocation();
+                        getLocation(
+                                lat: OrderHomePage.position.latitude,
+                                lon: OrderHomePage.position.longitude)
+                            .then((value) {
+                          if (value is DataSuccess) {
+                            setState(() {
+                              OrderHomePage.adressController.text =
+                                  value.data?.display_name ?? "null";
+                            });
+                          }
+                        });
+                        // print(getAddressFromLatLng(
+                        //     _position.latitude, _position.longitude));
+                        _yandexMapController.moveCamera(
+                          CameraUpdate.newCameraPosition(
+                            CameraPosition(
+                              zoom: 17,
+                              target: Point(
+                                latitude: OrderHomePage.position.latitude,
+                                longitude: OrderHomePage.position.longitude,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: const CircleAvatar(
+                        radius: 20,
+                        backgroundColor: ConstColor.as_salomText,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ScreenUtil().setVerticalSpacing(20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  height: 45.h,
+                  width: 150.w,
+                  child: TextFormField(
+                    controller: OrderHomePage.homeController,
+                    decoration: InputDecoration(
+                      hintText: "Дом",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 45.h,
+                  width: 150.w,
+                  child: TextFormField(
+                    controller: OrderHomePage.etajController,
+                    decoration: InputDecoration(
+                      hintText: "Этаж",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
-          ),
-          ScreenUtil().setVerticalSpacing(20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: 45.h,
-                width: 150.w,
-                child: TextFormField(
-                  controller: homeController,
-                  decoration: InputDecoration(
-                    hintText: "Дом",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+            ScreenUtil().setVerticalSpacing(20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  height: 45.h,
+                  width: 150.w,
+                  child: TextFormField(
+                    controller: OrderHomePage.podezdController,
+                    decoration: InputDecoration(
+                      hintText: "Подъезд",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 45.h,
-                width: 150.w,
-                child: TextFormField(
-                  controller: etajController,
-                  decoration: InputDecoration(
-                    hintText: "Этаж",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                SizedBox(
+                  height: 45.h,
+                  width: 150.w,
+                  child: TextFormField(
+                    controller: OrderHomePage.kvController,
+                    decoration: InputDecoration(
+                      hintText: "Квартира",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          ScreenUtil().setVerticalSpacing(20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: 45.h,
-                width: 150.w,
-                child: TextFormField(
-                  controller: podezdController,
-                  decoration: InputDecoration(
-                    hintText: "Подъезд",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+              ],
+            ),
+            ScreenUtil().setVerticalSpacing(20),
+            Text(
+              "adress".tr(),
+              style: Styles.style400sp14Black,
+            ),
+            TextFormField(
+              maxLines: 2,
+              controller: OrderHomePage.adressController,
+              decoration: InputDecoration(
+                hintText: "Address",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-              SizedBox(
-                height: 45.h,
-                width: 150.w,
-                child: TextFormField(
-                  controller: kvController,
-                  decoration: InputDecoration(
-                    hintText: "Квартира",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          ScreenUtil().setVerticalSpacing(20),
-          Text(
-            "comments".tr(),
-            style: Styles.style400sp14Black,
-          ),
-          TextFormField(
-            maxLines: 5,
-            controller: commentController,
-            decoration: InputDecoration(
-              hintText: "Comments...",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
               ),
             ),
-          ),
-        ],
+             ScreenUtil().setVerticalSpacing(20),
+            Text(
+              "Name".tr(),
+              style: Styles.style400sp14Black,
+            ),
+            TextFormField(
+              maxLines: 1,
+              controller: OrderHomePage.nameController,
+              decoration: InputDecoration(
+                hintText: "Name",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            SizedBox(height: 100)
+          ],
+        ),
       ),
     );
   }
@@ -281,12 +307,12 @@ class _OrderHomePageState extends State<OrderHomePage> {
       if (response.statusCode == 200) {
         return DataSuccess(AddressName.fromJson(response.body));
       } else {
-        return DataError();
+        return const DataError();
       }
     } catch (e) {
       print(e.toString());
 
-      return DataError();
+      return const DataError();
     }
   }
 

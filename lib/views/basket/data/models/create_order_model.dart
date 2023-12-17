@@ -1,15 +1,31 @@
 class CreateOrderModel {
-  String? name;
-  String? phone;
-  String? desc;
-  int? paymentType;
+  String name;
+  String phone;
+  String desc;
   List<GoodModel> goods;
+  int placeType;
+  String? zoneName;
+  int? roomNumber;
+  String? lat;
+  String? lng;
+  int? homeNumber;
+  int? floor;
+  int? enterance;
+  int? apartment;
   CreateOrderModel({
-    this.name,
-    this.phone,
-    this.desc,
-    this.paymentType,
+    required this.name,
+    required this.phone,
+    required this.desc,
     required this.goods,
+    required this.placeType,
+    this.zoneName,
+    this.roomNumber,
+    this.lat,
+    this.lng,
+    this.homeNumber,
+    this.floor,
+    this.enterance,
+    this.apartment,
   });
 }
 
