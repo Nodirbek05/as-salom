@@ -286,7 +286,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
               )
             : BlocProvider(
                 create: (context) => GetLocationToMapBloc(),
-                child: OrderHomePage(),
+                child: const OrderHomePage(),
               ),
       ),
     );
