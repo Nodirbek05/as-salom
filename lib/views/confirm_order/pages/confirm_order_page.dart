@@ -1,4 +1,5 @@
 import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
+import 'package:assalomproject/core/common_models/zone_models.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/auth/components/input_widget.dart';
@@ -6,9 +7,11 @@ import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_
 import 'package:assalomproject/views/basket/data/models/create_order_model.dart';
 
 import 'package:assalomproject/views/confirm_order/logic/get_location_bloc/get_location_to_map_bloc.dart';
+import 'package:assalomproject/views/confirm_order/logic/get_zone_bloc/get_zone_bloc.dart';
 import 'package:assalomproject/views/confirm_order/pages/choose_payment_page.dart';
 import 'package:assalomproject/views/confirm_order/pages/order_home_page.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,12 +46,13 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
 
-  bool isHome = true;
+  late bool isHome;
   String favBox = "favoritesBoxForHome";
   String basketBox = "basketBoxForHome";
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
+    print(_prefs.getInt('place'));
     favBox =
         _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
     basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
@@ -58,6 +62,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
   @override
   void initState() {
     getCache();
+    context.read<GetZoneBloc>().add(GetZoneData());
     super.initState();
   }
 
@@ -91,7 +96,8 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   weight: products[i].qty));
             }
 
-            if (nameController.text.isEmpty || nameController.text.length < 4) {
+            if (OrderHomePage.nameController.text.isEmpty &&
+                nameController.text.isEmpty) {
               Fluttertoast.showToast(
                   msg: "Please fill your name",
                   toastLength: Toast.LENGTH_SHORT,
@@ -101,15 +107,39 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   backgroundColor: ConstColor.as_salomText,
                   fontSize: 16.0);
             } else {
+              print(isHome);
               context.read<CreateOrderBloc>().add(
                     Makeorder(
                       good: CreateOrderModel(
-                        desc: commentController.text,
-                        name: nameController.text,
-                        phone: phoneController.text,
-                        paymentType: 2,
-                        goods: goods,
-                      ),
+                          desc: commentController.text,
+                          name: nameController.text.isNotEmpty
+                              ? nameController.text
+                              : OrderHomePage.nameController.text,
+                          phone: phoneController.text,
+                          goods: goods,
+                          placeType: !isHome ? 2 : 1,
+                          roomNumber: !isHome
+                              ? null
+                              : int.parse(roomNumberController.text),
+                          zoneName: !isHome ? null : dropdownValue,
+                          apartment: !isHome
+                              ? int.parse(OrderHomePage.kvController.text)
+                              : null,
+                          enterance: !isHome
+                              ? int.parse(OrderHomePage.podezdController.text)
+                              : null,
+                          floor: !isHome
+                              ? int.parse(OrderHomePage.etajController.text)
+                              : null,
+                          homeNumber: !isHome
+                              ? int.tryParse(OrderHomePage.homeController.text)
+                              : null,
+                          lat: !isHome
+                              ? OrderHomePage.position.latitude.toString()
+                              : null,
+                          lng: !isHome
+                              ? OrderHomePage.position.longitude.toString()
+                              : null),
                     ),
                   );
             }
@@ -204,7 +234,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                         ),
                       ),
                       ScreenUtil().setVerticalSpacing(5),
-                      Container(
+                        Container(
                         alignment: Alignment.center,
                         padding: EdgeInsets.symmetric(
                           horizontal: 10.w,
@@ -217,26 +247,40 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                             color: ConstColor.as_salomText,
                           ),
                         ),
-                        child: DropdownButton<String>(
-                          isExpanded: true,
-                          underline: const SizedBox(),
-                          elevation: 16,
-                          value: dropdownValue,
-                          icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                          style: Styles.style400sp14Black,
-                          onChanged: (String? value) {
-                            // This is called when the user selects an item.
-                            setState(() {
-                              dropdownValue = value!;
-                            });
-                          },
-                          items: list
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
+                        child: BlocBuilder<GetZoneBloc, GetZoneState>(
+                          builder: (context, state) {
+                            if (state is GetZoneInitial) {
+                              return const Center(
+                                  child: CupertinoActivityIndicator());
+                            } else if (state is GetZoneSuccess) {
+                              String dropdownValue = state.zoneModels.data.first.toString();
+                              return DropdownButton<ZoneData>(
+                                isExpanded: true,
+                                underline: const SizedBox(),
+                                elevation: 16,
+                                value: state.zoneModels.data.first,
+                                icon: const Icon(
+                                    Icons.keyboard_arrow_down_rounded),
+                                style: Styles.style400sp14Black,
+                                onChanged: (ZoneData? value) {
+                                  // This is called when the user selects an item.
+                                  setState(() {
+                                    dropdownValue = value!.name_ru!;
+                                  });
+                                },
+                                items: state.zoneModels.data.map<DropdownMenuItem<ZoneData>>(
+                                    (ZoneData value) {
+                                  return DropdownMenuItem<ZoneData>(
+                                    value: value,
+                                    child: Text(value.name_ru!),
+                                  );
+                                }).toList(),
+                              );
+                            }
+                            return const Center(
+                              child: CupertinoActivityIndicator(),
                             );
-                          }).toList(),
+                          },
                         ),
                       ),
                       ScreenUtil().setVerticalSpacing(20),

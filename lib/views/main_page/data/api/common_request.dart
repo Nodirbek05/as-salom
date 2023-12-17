@@ -290,12 +290,10 @@ class CommonRequests {
       list.add(data);
     }
     print(list);
-    print(order.name);
-    print(order.desc);
-    print(order.phone);
-    print(order.paymentType);
-    print('${ApiPaths.basicUrl}${ApiPaths.createOrder}');
-    print(token);
+    print(order.zoneName);
+    print(order.roomNumber);
+  
+
     final response = await http.post(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.createOrder}'),
       headers: {
@@ -307,7 +305,15 @@ class CommonRequests {
           'name': order.name,
           'phone': order.phone,
           'desc': order.desc,
-          'payment_type': order.paymentType,
+          'payment_type': 2,
+          'zone_name': order.zoneName,
+          'room_number': order.roomNumber,
+          'latitude': order.lat,
+          'longitude': order.lng,
+          'home_number': order.homeNumber,
+          'floor': order.floor,
+          'enterance': order.enterance,
+          'appartment': order.apartment,
           'goods': list
         },
       ),

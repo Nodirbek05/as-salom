@@ -37,13 +37,14 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
     super.initState();
   }
 
-  bool isHome = true;
+  late bool isHome;
 
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
+    print(_prefs.getInt('place'));
     basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
 
     setState(() {});
@@ -120,9 +121,13 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                         onTap: () async {
                           SharedPreferences _prefs =
                               await SharedPreferences.getInstance();
+                          print(_prefs.getInt('place'));
+
                           isHome
                               ? await _prefs.setInt('place', 1)
                               : await _prefs.setInt('place', 2);
+                          print(_prefs.getInt('place'));
+
                           Navigator.pushNamedAndRemoveUntil(context,
                               CustomNavigatonBar.routeName, (route) => false);
                         },
