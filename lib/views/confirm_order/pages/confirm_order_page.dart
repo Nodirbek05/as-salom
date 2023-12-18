@@ -20,6 +20,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class ConfirmOrderPage extends StatefulWidget {
   static const routeName = "/confirmOrder";
@@ -37,9 +38,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController roomNumberController = TextEditingController();
 
-  List<String> list = ['One', 'Two', 'Three', 'Four'];
-
-  String dropdownValue = "One";
+  String? dropdownValue;
   int? paymentType;
   var phoneFormatter = MaskTextInputFormatter(
       mask: '##-###-##-##',
@@ -107,7 +106,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   backgroundColor: ConstColor.as_salomText,
                   fontSize: 16.0);
             } else {
-              print(isHome);
+              print(dropdownValue);
               context.read<CreateOrderBloc>().add(
                     Makeorder(
                       good: CreateOrderModel(
@@ -234,54 +233,20 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                         ),
                       ),
                       ScreenUtil().setVerticalSpacing(5),
-                        Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                        ),
-                        height: 65.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(
-                            color: ConstColor.as_salomText,
-                          ),
-                        ),
-                        child: BlocBuilder<GetZoneBloc, GetZoneState>(
-                          builder: (context, state) {
-                            if (state is GetZoneInitial) {
-                              return const Center(
-                                  child: CupertinoActivityIndicator());
-                            } else if (state is GetZoneSuccess) {
-                              String dropdownValue = state.zoneModels.data.first.toString();
-                              return DropdownButton<ZoneData>(
-                                isExpanded: true,
-                                underline: const SizedBox(),
-                                elevation: 16,
-                                value: state.zoneModels.data.first,
-                                icon: const Icon(
-                                    Icons.keyboard_arrow_down_rounded),
-                                style: Styles.style400sp14Black,
-                                onChanged: (ZoneData? value) {
-                                  // This is called when the user selects an item.
-                                  setState(() {
-                                    dropdownValue = value!.name_ru!;
-                                  });
-                                },
-                                items: state.zoneModels.data.map<DropdownMenuItem<ZoneData>>(
-                                    (ZoneData value) {
-                                  return DropdownMenuItem<ZoneData>(
-                                    value: value,
-                                    child: Text(value.name_ru!),
-                                  );
-                                }).toList(),
-                              );
-                            }
+                      BlocBuilder<GetZoneBloc, GetZoneState>(
+                        builder: (context, state) {
+                          if (state is GetZoneInitial) {
                             return const Center(
-                              child: CupertinoActivityIndicator(),
-                            );
-                          },
-                        ),
+                                child: CupertinoActivityIndicator());
+                          } else if (state is GetZoneSuccess) {
+                            String dropdownValue =
+                                state.zoneModels.data.first.toString();
+                            return sizeDropDown(state.zoneModels.data);
+                          }
+                          return const Center(
+                            child: CupertinoActivityIndicator(),
+                          );
+                        },
                       ),
                       ScreenUtil().setVerticalSpacing(20),
                       Text(
@@ -333,6 +298,65 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                 create: (context) => GetLocationToMapBloc(),
                 child: const OrderHomePage(),
               ),
+      ),
+    );
+  }
+
+  Widget sizeDropDown(List<ZoneData> data) {
+    return DropdownButtonFormField2<String>(
+      value: dropdownValue,
+      // isExpanded: true,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: ConstColor.as_salomText),
+          borderRadius: BorderRadius.circular(7),
+        ),
+      ),
+      hint: const Text(
+        'Введите местоположение',
+        style: TextStyle(fontSize: 14),
+      ),
+      items: data
+          .map(
+            (item) => DropdownMenuItem<String>(
+              value: item.name_ru,
+              child: Text(
+                item.name_ru.toString(),
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      validator: (value) {
+        if (value == null) {
+          return 'Введите местоположение';
+        }
+        return null;
+      },
+      onChanged: (value) {
+        dropdownValue = value;
+        setState(() {});
+        print(value);
+      },
+      onSaved: (value) {
+        dropdownValue = value;
+      },
+      iconStyleData: const IconStyleData(
+        icon: Icon(
+          Icons.arrow_drop_down,
+          color: ConstColor.as_salomText,
+        ),
+        iconSize: 24,
+      ),
+      dropdownStyleData: DropdownStyleData(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(
+            color: ConstColor.as_salomText,
+          ),
+        ),
       ),
     );
   }
