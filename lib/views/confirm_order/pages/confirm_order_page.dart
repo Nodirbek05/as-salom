@@ -105,6 +105,17 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   textColor: Colors.white,
                   backgroundColor: ConstColor.as_salomText,
                   fontSize: 16.0);
+            } else if (!isHome
+                ? false
+                : (dropdownValue == null || dropdownValue!.isEmpty)) {
+              Fluttertoast.showToast(
+                  msg: "Please choose any zone name",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.TOP,
+                  timeInSecForIosWeb: 1,
+                  textColor: Colors.white,
+                  backgroundColor: ConstColor.as_salomText,
+                  fontSize: 16.0);
             } else {
               print(dropdownValue);
               context.read<CreateOrderBloc>().add(
@@ -119,19 +130,31 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                           placeType: !isHome ? 2 : 1,
                           roomNumber: !isHome
                               ? null
-                              : int.parse(roomNumberController.text),
+                              : roomNumberController.text.isNotEmpty
+                                  ? int.parse(roomNumberController.text)
+                                  : null,
                           zoneName: !isHome ? null : dropdownValue,
                           apartment: !isHome
-                              ? int.parse(OrderHomePage.kvController.text)
+                              ? OrderHomePage.kvController.text.isNotEmpty
+                                  ? int.parse(OrderHomePage.kvController.text)
+                                  : null
                               : null,
                           enterance: !isHome
-                              ? int.parse(OrderHomePage.podezdController.text)
+                              ? OrderHomePage.podezdController.text.isNotEmpty
+                                  ? int.parse(
+                                      OrderHomePage.podezdController.text)
+                                  : null
                               : null,
                           floor: !isHome
-                              ? int.parse(OrderHomePage.etajController.text)
+                              ? OrderHomePage.etajController.text.isNotEmpty
+                                  ? int.parse(OrderHomePage.etajController.text)
+                                  : null
                               : null,
                           homeNumber: !isHome
-                              ? int.tryParse(OrderHomePage.homeController.text)
+                              ? OrderHomePage.homeController.text.isNotEmpty
+                                  ? int.tryParse(
+                                      OrderHomePage.homeController.text)
+                                  : null
                               : null,
                           lat: !isHome
                               ? OrderHomePage.position.latitude.toString()

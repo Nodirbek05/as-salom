@@ -17,9 +17,9 @@ class FavoritesModel extends HiveObject {
   @HiveField(5)
   late String discount;
   @HiveField(6)
-   String? size;
+  String? size;
   @HiveField(7)
-   String? kg;
-    @HiveField(8)
-   String? slug;
+  String? kg;
+  @HiveField(8)
+  String? slug;
 }

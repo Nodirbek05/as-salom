@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:assalomproject/views/confirm_order/logic/get_location_bloc/get_location_to_map_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -182,9 +183,10 @@ class _OrderHomePageState extends State<OrderHomePage> {
                           ),
                         );
                       },
-                      child: const CircleAvatar(
+                      child:  const CircleAvatar(
                         radius: 20,
                         backgroundColor: ConstColor.as_salomText,
+                        child: Icon(CupertinoIcons.paperplane),
                       ),
                     ),
                   )

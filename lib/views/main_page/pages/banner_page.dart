@@ -73,24 +73,24 @@ class _BannerPageState extends State<BannerPage> {
               ),
               ScreenUtil().setVerticalSpacing(6),
               //! DOTS ARE HERE
-              // Container(
-              //   margin: EdgeInsets.only(
-              //     top: 10.h,
-              //     bottom: 10.h,
-              //   ),
-              //   alignment: Alignment.bottomCenter,
-              //   height: 4.h,
-              //   child: SmoothPageIndicator(
-              //     controller: _pageController1,
-              //     count: bannerData.data!.length,
-              //     effect: WormEffect(
-              //       dotColor: ConstColor.dotColor,
-              //       activeDotColor: ConstColor.as_salomText,
-              //       dotHeight: ScreenUtil().setWidth(10.0),
-              //       dotWidth: ScreenUtil().setWidth(10.0),
-              //     ),
-              //   ),
-              // ),
+              Container(
+                margin: EdgeInsets.only(
+                  top: 10.h,
+                  bottom: 10.h,
+                ),
+                alignment: Alignment.bottomCenter,
+                height: 4.h,
+                child: SmoothPageIndicator(
+                  controller: _pageController1,
+                  count: bannerData.data!.length,
+                  effect: WormEffect(
+                    dotColor: ConstColor.dotColor,
+                    activeDotColor: ConstColor.as_salomText,
+                    dotHeight: ScreenUtil().setWidth(10.0),
+                    dotWidth: ScreenUtil().setWidth(10.0),
+                  ),
+                ),
+              ),
 
               ScreenUtil().setVerticalSpacing(30),
             ],
