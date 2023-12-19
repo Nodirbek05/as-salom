@@ -1,5 +1,5 @@
 class ApiPaths {
-  static String basicUrl = "http://as-salom.uz/backend/public/api";
+  static String basicUrl = "https://as-salom.uz/backend/public/api";
   static String register = "/registration_app";
   static String getCode = "/get_code";
   static String verification = "/confirm_code";

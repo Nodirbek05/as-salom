@@ -253,6 +253,7 @@ class CommonRequests {
               {'search_text': query},
             ));
     print(response.body);
+    print(response.statusCode);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return SearchModel.fromJson(response.body);
@@ -292,7 +293,6 @@ class CommonRequests {
     print(list);
     print(order.zoneName);
     print(order.roomNumber);
-  
 
     final response = await http.post(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.createOrder}'),

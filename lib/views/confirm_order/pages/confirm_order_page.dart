@@ -94,7 +94,6 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   sizes: [],
                   weight: products[i].qty));
             }
-
             if (OrderHomePage.nameController.text.isEmpty &&
                 nameController.text.isEmpty) {
               Fluttertoast.showToast(
