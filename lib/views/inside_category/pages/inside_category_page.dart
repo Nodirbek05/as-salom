@@ -18,6 +18,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 
 class InsideCategoryPage extends StatefulWidget {
   static const routeName = "/insideCategoryPage";
@@ -342,41 +343,54 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                           //   }
                           //   isWorking = true;
                           // }
-                          return Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: 15.w,
-                                right: 15.w,
-                              ),
-                              child: GridView.builder(
-                                shrinkWrap: true,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 10,
-                                  childAspectRatio: 0.64,
-                                  crossAxisSpacing: 10,
-                                ),
-                                itemCount: insideProducts.length,
-                                itemBuilder: (context, index) {
-                                  return ProductCardWidget(
-                                    product: ProductModel(
-                                      id: insideProducts[index].id,
-                                      discount: insideProducts[index].discount,
-                                      name_ru: insideProducts[index].name_ru,
-                                      photo: [insideProducts[index].photo![0]],
-                                      type_good:
-                                          insideProducts[index].type_good,
-                                      price: insideProducts[index].price,
-                                      sizes: insideProducts[index].sizes!,
-                                      slug: insideProducts[index].slug,
+                          return insideProducts.isEmpty
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  height: 300,
+                                  // width: 200,
+                                  child: LottieBuilder.asset(
+                                    "assets/animations/empty_box.json",
+                                  ),
+                                )
+                              : Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 15.w,
+                                      right: 15.w,
                                     ),
-                                    withHeight: false,
-                                  );
-                                },
-                              ),
-                            ),
-                          );
+                                    child: GridView.builder(
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        mainAxisSpacing: 10,
+                                        childAspectRatio: 0.64,
+                                        crossAxisSpacing: 10,
+                                      ),
+                                      itemCount: insideProducts.length,
+                                      itemBuilder: (context, index) {
+                                        return ProductCardWidget(
+                                          product: ProductModel(
+                                            id: insideProducts[index].id,
+                                            discount:
+                                                insideProducts[index].discount,
+                                            name_ru:
+                                                insideProducts[index].name_ru,
+                                            photo: [
+                                              insideProducts[index].photo![0]
+                                            ],
+                                            type_good:
+                                                insideProducts[index].type_good,
+                                            price: insideProducts[index].price,
+                                            sizes: insideProducts[index].sizes!,
+                                            slug: insideProducts[index].slug,
+                                          ),
+                                          withHeight: false,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                );
                         }
                         return const SizedBox();
                       },
@@ -388,31 +402,39 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                   width: double.infinity,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.64,
-                        crossAxisSpacing: 10,
-                      ),
-                      itemCount: products.length,
-                      itemBuilder: (context, index) {
-                        return ProductCardWidget(
-                          product: ProductModel(
-                              id: products[index].id,
-                              discount: products[index].discount,
-                              name_ru: products[index].name_ru,
-                              name_en: products[index].name_en,
-                              name_uz: products[index].name_uz,
-                              photo: products[index].photo,
-                              type_good: products[index].type_good,
-                              price: products[index].price,
-                              slug: products[index].slug),
-                          withHeight: false,
-                        );
-                      },
-                    ),
+                    child: products.isEmpty
+                        ? Container(
+                            alignment: Alignment.center,
+                            height: 300,
+                            // width: 200,
+                            child: LottieBuilder.asset(
+                                "assets/animations/empty_box.json"),
+                          )
+                        : GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 0.64,
+                              crossAxisSpacing: 10,
+                            ),
+                            itemCount: products.length,
+                            itemBuilder: (context, index) {
+                              return ProductCardWidget(
+                                product: ProductModel(
+                                    id: products[index].id,
+                                    discount: products[index].discount,
+                                    name_ru: products[index].name_ru,
+                                    name_en: products[index].name_en,
+                                    name_uz: products[index].name_uz,
+                                    photo: products[index].photo,
+                                    type_good: products[index].type_good,
+                                    price: products[index].price,
+                                    slug: products[index].slug),
+                                withHeight: false,
+                              );
+                            },
+                          ),
                   ),
                 );
         },
