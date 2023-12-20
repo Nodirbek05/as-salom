@@ -30,9 +30,7 @@ dependencies:
   shimmer: ^3.0.0
   flutter_launcher_icons: ^0.13.1
   yandex_mapkit: ^3.3.3
-  location: ^5.0.3
   geolocator: ^10.1.0
-  geocoding: ^2.1.1
   dropdown_button2: ^2.3.9
   lottie: ^2.7.0
   html: ^0.15.4
