@@ -200,8 +200,8 @@ class _MainPageState extends State<MainPage> {
                                             name_ru: products[index].name,
                                             id: products[index].id,
                                             type_good: products[index].type,
-                                            discount: int.parse(
-                                                products[index].discount),
+                                            discount: products[index].discount!="null"? int.parse(
+                                                products[index].discount):0,
                                             slug: products[index].slug,
                                           ),
                                           withHeight: true,

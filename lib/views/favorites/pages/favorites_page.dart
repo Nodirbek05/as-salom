@@ -81,14 +81,15 @@ class FavoritesPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return ProductCardWidget(
                         product: ProductModel(
-                          id: products[index].id,
-                          discount: int.parse(products[index].discount),
-                          name_ru: products[index].name,
-                          photo: [products[index].image],
-                          type_good: products[index].type,
-                          price: products[index].price,
-                          slug: products[index].slug
-                        ),
+                            id: products[index].id,
+                            discount: products[index].discount != "null"
+                                ? int.parse(products[index].discount)
+                                : 0,
+                            name_ru: products[index].name,
+                            photo: [products[index].image],
+                            type_good: products[index].type,
+                            price: products[index].price,
+                            slug: products[index].slug),
                         withHeight: false,
                       );
                     },
