@@ -103,7 +103,12 @@ abstract class Routes {
         return MaterialPageRoute(builder: (_) => const ProfilePage());
 
       case BasketPage.routeName:
-        return MaterialPageRoute(builder: (_) => BasketPage());
+        final canBack = settings.arguments as bool;
+
+        return MaterialPageRoute(
+            builder: (_) => BasketPage(
+                  canBack: canBack,
+                ));
 
       case ConfirmOrderPage.routeName:
         return MaterialPageRoute(

@@ -217,7 +217,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.name_ru!,
                         widget.product!.photo![0],
                         int.parse(widget.product!.id!.toString()),
-                        widget.product!.price ?? "no_data".tr(),
+                        widget.product!.price.toString() ?? "no_data".tr(),
                         widget.product!.type_good ?? 0,
                         widget.product!.discount.toString(),
                         widget.product!.sizes != null &&

@@ -13,8 +13,9 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BasketPage extends StatefulWidget {
+  final bool canBack;
   static const routeName = "/basketPage";
-  const BasketPage({super.key});
+  const BasketPage({super.key, required this.canBack});
 
   @override
   State<BasketPage> createState() => _BasketPageState();
@@ -260,7 +261,7 @@ class _BasketPageState extends State<BasketPage> {
       ),
       appBar: AppBar(
         backgroundColor: ConstColor.mainWhite,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: widget.canBack,
         centerTitle: true,
         title: Text("cart".tr(), style: Styles.appBarText),
       ),

@@ -64,7 +64,9 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
     ),
     BlocProvider(
       create: (context) => CreateOrderBloc(),
-      child: const BasketPage(),
+      child: const BasketPage(
+        canBack: false,
+      ),
     ),
   ];
 

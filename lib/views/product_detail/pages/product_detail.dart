@@ -102,97 +102,98 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         height: 70.h,
         width: double.infinity,
         child: ValueListenableBuilder(
-            valueListenable: Hive.box<BasketModel>(basketBox).listenable(),
-            builder: (ctx, basket, index) {
-              return isProductInHive(int.parse(widget.product.id.toString()))
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          width: 175,
-                          height: 50.h,
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: ConstColor.as_salomText),
-                              color: ConstColor.mainWhite,
-                              borderRadius: BorderRadius.circular(50.r)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              IconButton(
-                                splashRadius: 8.r,
-                                onPressed: () {
-                                  if (getDrugQty(widget.product.id!) > 1) {
-                                    decreaseQuantity(widget.product.id!);
-                                    setState(() {});
-                                  } else {
-                                    deleteDrugFromBasket(widget.product.id!);
-                                  }
-                                },
-                                icon: const Icon(
-                                  Icons.remove,
-                                  color: ConstColor.as_salomText,
-                                ),
-                              ),
-                              Text(getDrugQty(widget.product.id!).toString(),
-                                  style: Styles.style500sp16Black),
-                              IconButton(
-                                splashRadius: 8.r,
-                                onPressed: () {
-                                  increaseQuantity(widget.product.id!);
+          valueListenable: Hive.box<BasketModel>(basketBox).listenable(),
+          builder: (ctx, basket, index) {
+            return isProductInHive(int.parse(widget.product.id.toString()))
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        width: 175,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: ConstColor.as_salomText),
+                            color: ConstColor.mainWhite,
+                            borderRadius: BorderRadius.circular(50.r)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            IconButton(
+                              splashRadius: 8.r,
+                              onPressed: () {
+                                if (getDrugQty(widget.product.id!) > 1) {
+                                  decreaseQuantity(widget.product.id!);
                                   setState(() {});
-                                },
-                                icon: const Icon(
-                                  Icons.add,
-                                  color: ConstColor.as_salomText,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, BasketPage.routeName);
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50.h,
-                            width: 175.w,
-                            decoration: BoxDecoration(
+                                } else {
+                                  deleteDrugFromBasket(widget.product.id!);
+                                }
+                              },
+                              icon: const Icon(
+                                Icons.remove,
                                 color: ConstColor.as_salomText,
-                                borderRadius: BorderRadius.circular(50.r)),
-                            child: Text(
-                              "box".tr(),
-                              style: Styles.buttonText,
+                              ),
                             ),
+                            Text(getDrugQty(widget.product.id!).toString(),
+                                style: Styles.style500sp16Black),
+                            IconButton(
+                              splashRadius: 8.r,
+                              onPressed: () {
+                                increaseQuantity(widget.product.id!);
+                                setState(() {});
+                              },
+                              icon: const Icon(
+                                Icons.add,
+                                color: ConstColor.as_salomText,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, BasketPage.routeName,
+                              arguments: true);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 50.h,
+                          width: 175.w,
+                          decoration: BoxDecoration(
+                              color: ConstColor.as_salomText,
+                              borderRadius: BorderRadius.circular(50.r)),
+                          child: Text(
+                            "box".tr(),
+                            style: Styles.buttonText,
                           ),
                         ),
-                      ],
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: MainButtonWidget(
-                        height: 30.h,
-                        textStyle: true,
-                        text: "add_box".tr(),
-                        onTap: () {
-                          addDrugToBasket(
-                              int.parse(widget.product.id.toString()),
-                              widget.product.name_ru.toString(),
-                              widget.product.type_good!,
-                              widget.product.price.toString(),
-                              1,
-                              widget.product.photo![0].toString());
-                          selectedSize != 0
-                              ? widget.product.sizes![selectedSize].id
-                              : "null";
-                          widget.product.weight!;
-                        },
-                        width: double.infinity,
                       ),
-                    );
-            }),
+                    ],
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MainButtonWidget(
+                      height: 30.h,
+                      textStyle: true,
+                      text: "add_box".tr(),
+                      onTap: () {
+                        addDrugToBasket(
+                            int.parse(widget.product.id.toString()),
+                            widget.product.name_ru.toString(),
+                            widget.product.type_good!,
+                            widget.product.price.toString(),
+                            1,
+                            widget.product.photo![0].toString());
+                        selectedSize != 0
+                            ? widget.product.sizes![selectedSize].id
+                            : "null";
+                        widget.product.weight!;
+                      },
+                      width: double.infinity,
+                    ),
+                  );
+          },
+        ),
       ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -229,7 +230,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
               IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, BasketPage.routeName);
+                    Navigator.pushNamed(context, BasketPage.routeName,
+                        arguments: true);
                   },
                   icon: const Icon(Icons.arrow_forward))
             ],
@@ -333,7 +335,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   widget.product.name_ru!,
                                   widget.product.photo![0],
                                   int.parse(widget.product.id!.toString()),
-                                  widget.product.price ?? "null",
+                                  widget.product.price.toString() ?? "null",
                                   widget.product.type_good ?? 0,
                                   widget.product.discount.toString(),
                                   widget.product.slug ?? "",
