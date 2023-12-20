@@ -16,6 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:html/parser.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -584,33 +585,42 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     return const Center();
                   } else if (state is GetProductWithSlugSuccess) {
                     final randomGoods = state.dataModel.random_goods;
-                    return SizedBox(
-                      height: 300,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: randomGoods!.length,
-                        itemBuilder: (context, ranIndex) {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              right: 10.w,
+                    return randomGoods!.isNotEmpty
+                        ? SizedBox(
+                            height: 300,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: randomGoods.length,
+                              itemBuilder: (context, ranIndex) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    right: 10.w,
+                                  ),
+                                  child: ProductCardWidget(
+                                    withHeight: true,
+                                    product: ProductModel(
+                                      name_ru: randomGoods[ranIndex].name_ru,
+                                      id: randomGoods[ranIndex].id,
+                                      photo: randomGoods[ranIndex].photo,
+                                      type_good: int.parse(randomGoods[ranIndex]
+                                          .type_good
+                                          .toString()),
+                                      slug: randomGoods[ranIndex].slug,
+                                      weight: randomGoods[ranIndex].weight,
+                                      sizes: randomGoods[ranIndex].sizes,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                            child: ProductCardWidget(
-                              withHeight: true,
-                              product: ProductModel(
-                                name_ru: randomGoods[ranIndex].name_ru,
-                                id: randomGoods[ranIndex].id,
-                                photo: randomGoods[ranIndex].photo,
-                                type_good: int.parse(
-                                    randomGoods[ranIndex].type_good.toString()),
-                                slug: randomGoods[ranIndex].slug,
-                                weight: randomGoods[ranIndex].weight,
-                                sizes: randomGoods[ranIndex].sizes,
-                              ),
-                            ),
+                          )
+                        : Container(
+                            alignment: Alignment.center,
+                            height: 300,
+                            // width: 200,
+                            child: LottieBuilder.asset(
+                                "assets/animations/empty_box.json"),
                           );
-                        },
-                      ),
-                    );
                   }
                   return const Center(
                     child: CupertinoActivityIndicator(),
