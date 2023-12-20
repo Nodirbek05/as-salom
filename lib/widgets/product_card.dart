@@ -43,7 +43,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   }
 
   bool isHome = true;
- String favBox = "favoritesBoxForHome";
+  String favBox = "favoritesBoxForHome";
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
@@ -81,30 +81,36 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              ApiPaths.imageUrl +
-                                  widget.product!.photo![0].toString(),
+                    widget.product!.photo!.isNotEmpty
+                        ? Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                    ApiPaths.imageUrl +
+                                        widget.product!.photo![0].toString(),
+                                  ),
+                                  fit: BoxFit.cover),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
                             ),
-                            fit: BoxFit.cover),
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15)),
-                      ),
-                      height: 110,
-                    ),
+                            height: 110,
+                          )
+                        : const Center(),
                     Text(
-                      widget.product!.price != null && widget.product!.price != 0
+                      widget.product!.price != null &&
+                              widget.product!.price != 0
                           ? "${widget.product!.price} ${"sum".tr()} "
                           : "no_data".tr(),
                       style: Styles.style600sp14Main,
                     ),
-                  widget.product!.discount != null ?  Text(
-                      widget.product!.discount.toString(),
-                      style: Styles.style400sp12GreyUnderline,
-                    ) : const SizedBox(),
+                    widget.product!.discount != null
+                        ? Text(
+                            widget.product!.discount.toString(),
+                            style: Styles.style400sp12GreyUnderline,
+                          )
+                        : const SizedBox(),
                     Text(
                       _getcategoryByLocale(widget.product!, context.locale),
                       maxLines: 1,
