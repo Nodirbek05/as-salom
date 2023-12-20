@@ -104,7 +104,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   textColor: Colors.white,
                   backgroundColor: ConstColor.as_salomText,
                   fontSize: 16.0);
-            } else if (!isHome
+            } else if (isHome
                 ? false
                 : (dropdownValue == null || dropdownValue!.isEmpty)) {
               Fluttertoast.showToast(
@@ -126,39 +126,39 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                               : OrderHomePage.nameController.text,
                           phone: phoneController.text,
                           goods: goods,
-                          placeType: !isHome ? 2 : 1,
-                          roomNumber: !isHome
+                          placeType: isHome ? 2 : 1,
+                          roomNumber: isHome
                               ? null
                               : roomNumberController.text.isNotEmpty
                                   ? int.parse(roomNumberController.text)
                                   : null,
-                          zoneName: !isHome ? null : dropdownValue,
-                          apartment: !isHome
+                          zoneName: isHome ? null : dropdownValue,
+                          apartment: isHome
                               ? OrderHomePage.kvController.text.isNotEmpty
                                   ? int.parse(OrderHomePage.kvController.text)
                                   : null
                               : null,
-                          enterance: !isHome
+                          enterance: isHome
                               ? OrderHomePage.podezdController.text.isNotEmpty
                                   ? int.parse(
                                       OrderHomePage.podezdController.text)
                                   : null
                               : null,
-                          floor: !isHome
+                          floor: isHome
                               ? OrderHomePage.etajController.text.isNotEmpty
                                   ? int.parse(OrderHomePage.etajController.text)
                                   : null
                               : null,
-                          homeNumber: !isHome
+                          homeNumber: isHome
                               ? OrderHomePage.homeController.text.isNotEmpty
                                   ? int.tryParse(
                                       OrderHomePage.homeController.text)
                                   : null
                               : null,
-                          lat: !isHome
+                          lat: isHome
                               ? OrderHomePage.position.latitude.toString()
                               : null,
-                          lng: !isHome
+                          lng: isHome
                               ? OrderHomePage.position.longitude.toString()
                               : null),
                     ),
@@ -207,7 +207,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                     id: state.data.order.id!, name: nameController.text));
           }
         },
-        child: isHome
+        child: !isHome
             ? Padding(
                 padding: EdgeInsets.only(
                   top: 20.h,

@@ -40,53 +40,58 @@ class _AdditionalProductsState extends State<AdditionalProducts> {
         if (state is GetSpesificProductsInitial) {
           return const Center(child: CupertinoActivityIndicator());
         } else if (state is GetSpesificProductsSuccess) {
+          // print("TESTIVIY LOGGGG ${state.spesificProducts.data![-1]}");
           final products = state.spesificProducts.data;
-          return Column(
-            children: List.generate(
-                state.spesificProducts.data!.length - 1,
-                (index) => products![index + 1].goods!.isNotEmpty
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                          left: 15.w,
-                          // bottom: 15.h,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              _getcategoryByLocale(
-                                  state.spesificProducts.data![index + 1],
-                                  context.locale),
-                              style: Styles.styles700sp20Black,
-                            ),
-                            Container(
+          return state.spesificProducts.data!.length > 1
+              ? Column(
+                  children: List.generate(
+                      state.spesificProducts.data!.length - 1,
+                      (index) => products![index + 1].goods!.isNotEmpty
+                          ? Padding(
                               padding: EdgeInsets.only(
-                                top: 20.h,
+                                left: 15.w,
+                                // bottom: 15.h,
                               ),
-                              height: 310.h,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: products[index + 1].goods!.length,
-                                itemBuilder: (context, indx) {
-                                  return Padding(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    _getcategoryByLocale(
+                                        state.spesificProducts.data![index + 1],
+                                        context.locale),
+                                    style: Styles.styles700sp20Black,
+                                  ),
+                                  Container(
                                     padding: EdgeInsets.only(
-                                      right: 10.w,
+                                      top: 20.h,
                                     ),
-                                    child: ProductCardWidget(
-                                      product: products[index + 1].goods![indx],
-                                      withHeight: true,
-                                      height: 300.h,
+                                    height: 310.h,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          products[index + 1].goods!.length,
+                                      itemBuilder: (context, indx) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                            right: 10.w,
+                                          ),
+                                          child: ProductCardWidget(
+                                            product: products[index + 1]
+                                                .goods![indx],
+                                            withHeight: true,
+                                            height: 300.h,
+                                          ),
+                                        );
+                                      },
                                     ),
-                                  );
-                                },
+                                  ),
+                                  ScreenUtil().setVerticalSpacing(30),
+                                ],
                               ),
-                            ),
-                            ScreenUtil().setVerticalSpacing(30),
-                          ],
-                        ),
-                      )
-                    : const Center()),
-          );
+                            )
+                          : const Center()),
+                )
+              : const Center();
         }
         return const Center(
           child: CupertinoActivityIndicator(),

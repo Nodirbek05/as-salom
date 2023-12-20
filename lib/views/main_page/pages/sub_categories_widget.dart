@@ -59,143 +59,147 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
       builder: (context, state) {
         if (state is GetSubCategoriesSuccess) {
           var categories = state.data.data!.subcategories;
-          return Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: SizedBox(
-              width: double.infinity,
-              height: 190.h,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _getSubCategoryByLocale(state.data.data!, context.locale),
-                    style: Styles.styles700sp20Black,
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    height: 130.h,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categories!.length,
-                      itemBuilder: (context, index) {
-                        print(ApiPaths.imageUrl +
-                            categories[index].photo.toString());
-                        return Padding(
-                          padding: EdgeInsets.only(right: 10.w),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(15.r),
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                InsideCategoryPage.routeName,
-                                arguments: InsideCategoryPage(
-                                  isCat: false,
-                                  name: categories[index].name_ru!,
-                                  id: int.parse(
-                                    categories[index].category_id!.toString(),
+          return categories!.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 190.h,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _getSubCategoryByLocale(
+                              state.data.data!, context.locale),
+                          style: Styles.styles700sp20Black,
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          height: 130.h,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: categories!.length,
+                            itemBuilder: (context, index) {
+                              print(ApiPaths.imageUrl +
+                                  categories[index].photo.toString());
+                              return Padding(
+                                padding: EdgeInsets.only(right: 10.w),
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(15.r),
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      InsideCategoryPage.routeName,
+                                      arguments: InsideCategoryPage(
+                                        isCat: false,
+                                        name: categories[index].name_ru!,
+                                        id: int.parse(
+                                          categories[index]
+                                              .category_id!
+                                              .toString(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(10.w),
+                                    height: 123.h,
+                                    width: 127.w,
+                                    decoration: BoxDecoration(
+                                      // color: Colors.red,
+
+                                      borderRadius: BorderRadius.circular(15.r),
+                                      color: Colors.grey.withOpacity(.1),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          _getcategoryByLocale(
+                                            categories[index],
+                                            context.locale,
+                                          ),
+                                          style: Styles.style500sp14Black,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                  ApiPaths.imageUrl +
+                                                      categories[index]
+                                                          .photo
+                                                          .toString(),
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r)),
+                                          height: 85.h,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
                             },
-                            child: Container(
-                              
-                              padding: EdgeInsets.all(10.w),
-                              height: 123.h,
-                              width: 127.w,
-                              decoration: BoxDecoration(
-                                // color: Colors.red,
-                        
-                                borderRadius: BorderRadius.circular(15.r),
-                                color: Colors.grey.withOpacity(.1),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    _getcategoryByLocale(
-                                      categories[index],
-                                      context.locale,
-                                    ),
-                                    style: Styles.style500sp14Black,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                            ApiPaths.imageUrl +
-                                                categories[index]
-                                                    .photo
-                                                    .toString(),
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10.r)),
-                                    height: 85.h,
-                                  )
-                                ],
-                              ),
-                            ),
                           ),
-                        );
-                      },
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          );
+                )
+              : const Center();
         }
         return shimmerWidget();
       },
     );
   }
 
-
-    Shimmer shimmerWidget() {
+  Shimmer shimmerWidget() {
     return Shimmer.fromColors(
-        baseColor: ConstColor.dotColor,
-        highlightColor: ConstColor.lightGrey,
-        child: SizedBox(
-          height: 130.h,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: 15.w,
+      baseColor: ConstColor.dotColor,
+      highlightColor: ConstColor.lightGrey,
+      child: SizedBox(
+        height: 130.h,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.only(
+                left: 15.w,
+              ),
+              child: Container(
+                padding: EdgeInsets.all(10.w),
+                height: 123.h,
+                width: 127.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.r),
+                  color: ConstColor.grey300,
                 ),
-                child: Container(
-                  padding: EdgeInsets.all(10.w),
-                  height: 123.h,
-                  width: 127.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.r),
-                    color: ConstColor.grey300,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "",
-                        style: Styles.style500sp14Black,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      SizedBox(
-                        height: 85.h,
-                        width: 90.h,
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "",
+                      style: Styles.style500sp14Black,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    SizedBox(
+                      height: 85.h,
+                      width: 90.h,
+                    ),
+                  ],
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
-      );
+      ),
+    );
   }
 }
