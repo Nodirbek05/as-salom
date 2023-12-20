@@ -73,11 +73,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   String _getDescByLocale(ProductModel product, Locale locale) {
     late String? productName;
     if (locale == const Locale('ru')) {
-      productName = _parseHtmlString(product.desc_ru!);
+      productName = _parseHtmlString(product.desc_ru??"");
     } else if (locale == const Locale('uz')) {
-      productName = _parseHtmlString(product.desc_uz!);
+      productName = _parseHtmlString(product.desc_uz??"");
     } else if (locale == const Locale('en')) {
-      productName = _parseHtmlString(product.desc_en!);
+      productName = _parseHtmlString(product.desc_en??"");
     }
     return productName ?? "no_data".tr();
   }
