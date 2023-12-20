@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:html/parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -71,13 +72,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   String _getDescByLocale(ProductModel product, Locale locale) {
     late String? productName;
     if (locale == const Locale('ru')) {
-      productName = product.desc_ru;
+      productName = _parseHtmlString(product.desc_ru!);
     } else if (locale == const Locale('uz')) {
-      productName = product.desc_uz;
+      productName = _parseHtmlString(product.desc_uz!);
     } else if (locale == const Locale('en')) {
-      productName = product.desc_en;
+      productName = _parseHtmlString(product.desc_en!);
     }
     return productName ?? "no_data".tr();
+  }
+
+  String _parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String parsedString =
+        parse(document.body!.text).documentElement!.text;
+
+    return parsedString;
   }
 
   bool isHome = true;
