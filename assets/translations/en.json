@@ -73,6 +73,18 @@
     "empty_basket" : "Your basket is empty",
     "choose_pro" : "Start with the products on the main page or find the product you need through the search",
     "empty_order" : "You have no completed orders yet",
-    "empty_order_info" : "Find the products you need through the search and start shopping"
+    "empty_order_info" : "Find the products you need through the search and start shopping",
+    "address" : "Address",
+    "flat": "Flat",
+    "stage": "Stage",
+    "enterance": "Entrance",
+    "delivery_address" : "Address for delivery",
+    "house" : "House",
+    "add_to_busket" : "You added this product to basket",
+    "correct_name" : "Please enter valuable name",
+    "correct_number": "Please enter valuable number",
+    "add_pro" : "Please add any product",
+    "choose_zone" : "Please choose any zone name",
+    "zone" : "Choose any zone"
 
 }

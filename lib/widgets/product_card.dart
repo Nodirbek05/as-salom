@@ -96,15 +96,15 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                       height: 110,
                     ),
                     Text(
-                      widget.product!.price != null
+                      widget.product!.price != null && widget.product!.price != 0
                           ? "${widget.product!.price} ${"sum".tr()} "
                           : "no_data".tr(),
                       style: Styles.style600sp14Main,
                     ),
-                    Text(
+                  widget.product!.discount != null ?  Text(
                       widget.product!.discount.toString(),
                       style: Styles.style400sp12GreyUnderline,
-                    ),
+                    ) : const SizedBox(),
                     Text(
                       _getcategoryByLocale(widget.product!, context.locale),
                       maxLines: 1,

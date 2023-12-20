@@ -235,7 +235,7 @@ class _BasketPageState extends State<BasketPage> {
                         },
                       )
                     : Fluttertoast.showToast(
-                        msg: "Mahsulot qo'shing",
+                        msg: "add_pro".tr(),
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.TOP,
                         timeInSecForIosWeb: 1,

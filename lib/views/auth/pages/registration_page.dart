@@ -122,7 +122,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       onTap: () {
                         if (pinController.text.length < 4) {
                           Fluttertoast.showToast(
-                              msg: "Please enter valuable name",
+                              msg: "correct_name".tr(),
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.TOP,
                               timeInSecForIosWeb: 1,
@@ -186,7 +186,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           onTap: () {
                             if (phoneController.text.length < 12) {
                               Fluttertoast.showToast(
-                                  msg: "Please enter valuable number",
+                                  msg: "correct_number".tr(),
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.TOP,
                                   timeInSecForIosWeb: 1,
@@ -242,7 +242,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           onTap: () {
                             if (phoneController.text.length < 12) {
                               Fluttertoast.showToast(
-                                  msg: "Please enter valuable number",
+                                  msg: "correct_number".tr(),
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.TOP,
                                   timeInSecForIosWeb: 1,

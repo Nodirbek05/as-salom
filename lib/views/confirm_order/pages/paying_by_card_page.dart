@@ -99,7 +99,7 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
                     phoneController.text.length < 12) {
                   print("DATA ENTERING HERE");
                   Fluttertoast.showToast(
-                      msg: "Please enter valuable number",
+                      msg: "correct_number".tr(),
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.TOP,
                       timeInSecForIosWeb: 1,

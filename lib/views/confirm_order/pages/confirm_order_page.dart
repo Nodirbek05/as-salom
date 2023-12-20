@@ -97,7 +97,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
             if (OrderHomePage.nameController.text.isEmpty &&
                 nameController.text.isEmpty) {
               Fluttertoast.showToast(
-                  msg: "Please fill your name",
+                  msg: "correct_name".tr(),
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.TOP,
                   timeInSecForIosWeb: 1,
@@ -108,7 +108,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                 ? false
                 : (dropdownValue == null || dropdownValue!.isEmpty)) {
               Fluttertoast.showToast(
-                  msg: "Please choose any zone name",
+                  msg: "choose_zone".tr(),
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.TOP,
                   timeInSecForIosWeb: 1,
@@ -244,7 +244,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: "Выберите зону",
+                              text: "zone".tr(),
                               style: Styles.style400sp14Black,
                             ),
                             TextSpan(

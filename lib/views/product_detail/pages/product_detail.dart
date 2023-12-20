@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -177,6 +178,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       textStyle: true,
                       text: "add_box".tr(),
                       onTap: () {
+                        Fluttertoast.showToast(
+                            msg: "add_to_busket".tr(),
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.TOP,
+                            timeInSecForIosWeb: 3,
+                            textColor: Colors.white,
+                            backgroundColor: ConstColor.as_salomText,
+                            fontSize: 16.0);
                         addDrugToBasket(
                             int.parse(widget.product.id.toString()),
                             widget.product.name_ru.toString(),

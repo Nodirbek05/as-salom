@@ -137,10 +137,10 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                             height: 20.h,
                             width: 20.w,
                             child: isHome
-                                ? const Icon(Icons.home)
-                                : const Icon(Icons.scale_outlined)),
+                                ? const Icon(Icons.scale_outlined)
+                                : const Icon(Icons.home)),
                         title: Text(
-                          isHome ? "Order to home" : "Товары для заключенных",
+                          isHome ? "Товары для заключенных" : "Order to home",
                           style: Styles.style500sp14Black,
                         ),
                         trailing: const Icon(

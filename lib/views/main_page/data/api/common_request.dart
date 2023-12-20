@@ -20,6 +20,7 @@ import 'package:assalomproject/views/main_page/data/models/search_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_category_inner_model.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +30,9 @@ class CommonRequests {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
 
     int place = _prefs.getInt("place") ?? 0;
+   
     try {
+       debugPrint("I NEED PLACE HERE:${place}");
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getBanners}/$place'),
         headers: {'Content-Type': 'application/json'},

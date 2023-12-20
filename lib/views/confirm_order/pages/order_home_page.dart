@@ -85,7 +85,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Адрес доставки",
+              "delivery_address".tr(),
               style: Styles.styles700sp16Black,
             ),
             ScreenUtil().setVerticalSpacing(10),
@@ -203,7 +203,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   child: TextFormField(
                     controller: OrderHomePage.homeController,
                     decoration: InputDecoration(
-                      hintText: "Дом",
+                      hintText: "flat".tr(),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -216,7 +216,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   child: TextFormField(
                     controller: OrderHomePage.etajController,
                     decoration: InputDecoration(
-                      hintText: "Этаж",
+                      hintText: "stage".tr(),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -235,7 +235,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   child: TextFormField(
                     controller: OrderHomePage.podezdController,
                     decoration: InputDecoration(
-                      hintText: "Подъезд",
+                      hintText: "enterance".tr(),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -248,7 +248,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   child: TextFormField(
                     controller: OrderHomePage.kvController,
                     decoration: InputDecoration(
-                      hintText: "Квартира",
+                      hintText: "house".tr(),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -259,7 +259,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
             ),
             ScreenUtil().setVerticalSpacing(20),
             Text(
-              "adress".tr(),
+              "address".tr(),
               style: Styles.style400sp14Black,
             ),
             TextFormField(
@@ -274,14 +274,14 @@ class _OrderHomePageState extends State<OrderHomePage> {
             ),
              ScreenUtil().setVerticalSpacing(20),
             Text(
-              "Name".tr(),
+              "enter_name".tr(),
               style: Styles.style400sp14Black,
             ),
             TextFormField(
               maxLines: 1,
               controller: OrderHomePage.nameController,
               decoration: InputDecoration(
-                hintText: "Name",
+                hintText: "your_name".tr(),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
