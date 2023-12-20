@@ -1,6 +1,7 @@
 import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
+import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
@@ -18,6 +19,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,7 +46,6 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
-    print(_prefs.getInt('place'));
     basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
 
     setState(() {});
@@ -137,8 +138,14 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                             height: 20.h,
                             width: 20.w,
                             child: isHome
-                                ? const Icon(Icons.scale_outlined)
-                                : const Icon(Icons.home)),
+                                ? SvgPicture.asset(
+                                    ConstIcons.equal,
+                                    color: ConstColor.mainBlack,
+                                  )
+                                : SvgPicture.asset(
+                                    ConstIcons.house,
+                                    color: ConstColor.mainBlack,
+                                  )),
                         title: Text(
                           isHome ? "Товары для заключенных" : "Order to home",
                           style: Styles.style500sp14Black,

@@ -8,5 +8,7 @@ abstract class ConstIcons {
   static const String a = 'assets/icons/a.svg';
   static const String asSalomLogo = 'assets/icons/as_salom_logo.svg';
   static const String mapPin = 'assets/icons/icon_map_pin.svg';
+  static const String equal = "assets/icons/equal.svg";
+  static const String house = "assets/icons/house.svg";
 
 }
