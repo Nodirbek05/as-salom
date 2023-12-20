@@ -261,8 +261,8 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                             return const Center(
                                 child: CupertinoActivityIndicator());
                           } else if (state is GetZoneSuccess) {
-                            String dropdownValue =
-                                state.zoneModels.data.first.toString();
+                            // String dropdownValue =
+                            //     state.zoneModels.data.first.toString();
                             return sizeDropDown(state.zoneModels.data);
                           }
                           return const Center(
@@ -272,7 +272,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                       ),
                       ScreenUtil().setVerticalSpacing(20),
                       Text(
-                        "№ комнаты (необязательно)",
+                        "room_no".tr(),
                         style: Styles.style400sp14Black,
                       ),
 

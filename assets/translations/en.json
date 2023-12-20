@@ -85,6 +85,7 @@
     "correct_number": "Please enter valuable number",
     "add_pro" : "Please add any product",
     "choose_zone" : "Please choose any zone name",
-    "zone" : "Choose any zone"
+    "zone" : "Choose any zone",
+    "room_no" : "Room number(Optional)"
 
 }

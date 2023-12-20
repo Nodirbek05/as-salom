@@ -85,5 +85,6 @@
     "correct_number": "Iltimos to'g'ri ism kiriting",
     "add_pro" : "Iltimos mahsulot qo'shing",
     "choose_zone" : "Iltimos, istalgan zona nomini tanlang",
-    "zone" : "Iltimos, istalgan zona ni tanlang"
+    "zone" : "Iltimos, istalgan zona ni tanlang",
+    "room_no" : "Xona nomeri(Majburiy emas)"
 }
