@@ -430,10 +430,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           !isProductSavedInHive(
                                   int.parse(widget.product.id.toString()))
                               ? addToBox(
-                                  widget.product.name_ru!,
+                                  widget.product.name_ru ?? "",
+                                  widget.product.name_en ?? "",
+                                  widget.product.name_uz ?? "",
+                                  widget.product.desc_en ?? "",
+                                  widget.product.desc_ru ?? "",
+                                  widget.product.desc_uz ?? "",
                                   widget.product.photo![0],
                                   int.parse(widget.product.id!.toString()),
-                                  widget.product.price.toString() ?? "null",
+                                  widget.product.price ?? "null",
                                   widget.product.type_good ?? 0,
                                   widget.product.discount.toString(),
                                   widget.product.slug ?? "",
@@ -850,10 +855,26 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     box.add(product);
   }
 
-  void addToBox(String name, String image, int id, String price, int type,
-      String discount, String slug) {
+  void addToBox(
+      String name_ru,
+      String name_en,
+      String name_uz,
+      String desc_ru,
+      String desc_uz,
+      String desc_en,
+      String image,
+      int id,
+      String price,
+      int type,
+      String discount,
+      String slug) {
     final product = FavoritesModel()
-      ..name = name
+      ..name_ru = name_ru
+      ..name_en = name_en
+      ..name_uz = name_uz
+      ..desc_ru = desc_ru
+      ..desc_en = desc_en
+      ..desc_uz = desc_uz
       ..id = id
       ..image = image
       ..price = price

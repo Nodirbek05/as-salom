@@ -6,10 +6,35 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class FavoritesPage extends StatelessWidget {
+class FavoritesPage extends StatefulWidget {
   static const routeName = "/favoritesPage";
   const FavoritesPage({super.key});
+
+  @override
+  State<FavoritesPage> createState() => _FavoritesPageState();
+}
+
+class _FavoritesPageState extends State<FavoritesPage> {
+  bool isHome = true;
+  String favBox = "favoritesBoxForHome";
+  String basketBox = "basketBoxForHome";
+
+  void getCache() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    isHome = _prefs.getInt("place") == 2;
+    favBox =
+        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getCache();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +51,7 @@ class FavoritesPage extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: ValueListenableBuilder(
               valueListenable:
-                  Hive.box<FavoritesModel>("favoritesBox").listenable(),
+                  Hive.box<FavoritesModel>(favBox).listenable(),
               builder: (ctx, box, _) {
                 final products = box.values.toList().cast<FavoritesModel>();
                 if (products.isEmpty) {
@@ -85,10 +110,15 @@ class FavoritesPage extends StatelessWidget {
                             discount: products[index].discount != "null"
                                 ? int.parse(products[index].discount)
                                 : 0,
-                            name_ru: products[index].name,
+                            name_ru: products[index].name_ru,
+                            name_en: products[index].name_en,
+                            name_uz: products[index].name_uz,
+                            desc_en: products[index].desc_en,
+                            desc_ru: products[index].desc_ru,
+                            desc_uz: products[index].desc_uz,
                             photo: [products[index].image],
                             type_good: products[index].type,
-                            price: int.parse(products[index].price ?? ""),
+                            price: int.parse(products[index].price),
                             slug: products[index].slug),
                         withHeight: false,
                       );

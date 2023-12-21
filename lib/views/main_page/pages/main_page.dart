@@ -197,9 +197,15 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                     child: ProductCardWidget(
                                       product: ProductModel(
+                                        weight: products[index].kg,
                                         photo: [products[index].image],
                                         price: int.parse(products[index].price),
-                                        name_ru: products[index].name,
+                                        name_ru: products[index].name_ru,
+                                        name_en: products[index].name_en,
+                                        name_uz: products[index].name_uz,
+                                        desc_en: products[index].desc_en,
+                                        desc_ru: products[index].desc_ru,
+                                        desc_uz: products[index].desc_uz,
                                         id: products[index].id,
                                         type_good: products[index].type,
                                         discount:
@@ -287,6 +293,7 @@ class _MainPageState extends State<MainPage> {
                 itemBuilder: (context, index) {
                   return ProductCardWidget(
                     product: ProductModel(
+                      sizes: products[index].sizes??[],
                       desc_en: products[index].desc_en,
                       desc_ru: products[index].desc_ru,
                       desc_uz: products[index].desc_uz,
