@@ -17,6 +17,8 @@ class InputWidget extends StatefulWidget {
   final TextInputType? inputType;
   final int? maxLength;
   final EdgeInsetsGeometry? padding;
+  final TextStyle? hintStyle;
+ 
   const InputWidget(
       {super.key,
       required this.controller,
@@ -31,6 +33,7 @@ class InputWidget extends StatefulWidget {
       this.inputType,
       this.prefixIcon,
       this.padding,
+      this.hintStyle,
       this.isVisible});
 
   @override
@@ -40,53 +43,48 @@ class InputWidget extends StatefulWidget {
 class _InputWidgetState extends State<InputWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        widget.label != null ? Text(widget.label.toString()) : const SizedBox(),
-        const SizedBox(height: 7),
-        TextFormField(
-          
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: widget.validator,
-          maxLength: widget.maxLength,
-          maxLines: widget.maxLines,
-          keyboardType: widget.inputType,
-          inputFormatters: widget.inputFormatter,
-          style: Styles.style500sp16Black,
-          cursorColor: ConstColor.as_salomText,
-          controller: widget.controller,
-          obscuringCharacter: "*",
-          obscureText: widget.isVisible ?? false,
-          decoration: InputDecoration(
-            contentPadding: widget.padding,
-            hintText: widget.hintText,
-            suffixIcon: widget.suffixIcon,
-            prefix: widget.prefixIcon,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: ConstColor.as_salomText,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: ConstColor.as_salomText,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: ConstColor.redColor,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-
-            // labelText: widget.label,
-            // labelStyle: Styles.style400sp14Black,
+    return TextFormField(
+      
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: widget.validator,
+      maxLength: widget.maxLength,
+      maxLines: widget.maxLines,
+      keyboardType: widget.inputType,
+      inputFormatters: widget.inputFormatter,
+      style: Styles.style500sp16Black,
+      cursorColor: ConstColor.as_salomText,
+      controller: widget.controller,
+      obscuringCharacter: "*",
+      obscureText: widget.isVisible ?? false,
+      decoration: InputDecoration(
+        
+        hintStyle: widget.hintStyle,
+        contentPadding: widget.padding,
+        hintText: widget.hintText,
+        suffixIcon: widget.suffixIcon,
+        prefix: widget.prefixIcon,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: ConstColor.as_salomText,
           ),
         ),
-      ],
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: ConstColor.as_salomText,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: ConstColor.redColor,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+    
+        // labelText: widget.label,
+        // labelStyle: Styles.style400sp14Black,
+      ),
     );
   }
 }
