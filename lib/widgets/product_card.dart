@@ -10,6 +10,7 @@ import 'package:assalomproject/widgets/main_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,6 +26,9 @@ class ProductCardWidget extends StatefulWidget {
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
+
+  int place = 1;
+
   String _getcategoryByLocale(ProductModel product, Locale locale) {
     late String? productName;
     if (locale == const Locale('ru')) {
@@ -53,6 +57,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     favBox =
         _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
     basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+    
     setState(() {});
   }
 
@@ -85,24 +90,20 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                     widget.product!.photo!.isNotEmpty
                         ? Container(
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                    ApiPaths.imageUrl +
-                                        widget.product!.photo![0].toString(),
-                                  ),
-                                  fit: BoxFit.cover),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15),
-                              ),
-                            ),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                      ApiPaths.imageUrl +
+                                          widget.product!.photo![0].toString(),
+                                    ),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.circular(15.r)),
                             height: 110,
                           )
                         : const Center(),
                     Text(
                       widget.product!.price != null &&
                               widget.product!.price != 0
-                          ? "${NumberFormatter.currency(widget.product!.price)} ${"sum".tr()} "
+                          ? "${NumberFormatter.currency(widget.product!.price).toString()} ${"sum".tr()} "
                           : "no_data".tr(),
                       style: Styles.style600sp14Main,
                     ),
@@ -181,6 +182,15 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                   textStyle: false,
                                   text: "add_box".tr(),
                                   onTap: () {
+                                    Fluttertoast.showToast(
+                                        msg: "add_to_busket".tr(),
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.TOP,
+                                        timeInSecForIosWeb: 1,
+                                        textColor: Colors.white,
+                                        backgroundColor:
+                                            ConstColor.as_salomText,
+                                        fontSize: 16.0);
                                     addDrugToBasket(
                                         int.parse(
                                             widget.product!.id.toString()),
@@ -196,7 +206,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                             ? widget.product!.sizes![0].id
                                                 .toString()
                                             : "null",
-                                        widget.product!.weight != null
+                                         widget.product!.weight != null
                                             ? widget.product!.weight!
                                             : "null",
                                         widget.product!.slug != null
@@ -226,7 +236,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.name_ru!,
                         widget.product!.photo![0],
                         int.parse(widget.product!.id!.toString()),
-                        widget.product!.price.toString() ?? "no_data".tr(),
+                        widget.product?.price.toString() ?? "",
                         widget.product!.type_good ?? 0,
                         widget.product!.discount.toString(),
                         widget.product!.sizes != null &&

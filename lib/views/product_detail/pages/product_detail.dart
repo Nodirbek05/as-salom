@@ -194,7 +194,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             msg: "add_to_busket".tr(),
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.TOP,
-                            timeInSecForIosWeb: 3,
+                            timeInSecForIosWeb: 1,
                             textColor: Colors.white,
                             backgroundColor: ConstColor.as_salomText,
                             fontSize: 16.0);
@@ -390,69 +390,82 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Text(
-                _getcategoryByLocale(widget.product, context.locale),
-                // widget.product.name_ru.toString(),
-                style: Styles.styles700sp22Black,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 10.w,
+                  right: 10.w,
+                ),
+                child: Text(
+                  _getcategoryByLocale(widget.product, context.locale),
+                  // widget.product.name_ru.toString(),
+                  style: Styles.styles700sp22Black,
+                ),
               ),
               const SizedBox(height: 20),
               widget.product.type_good == 1
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${"price_for".tr()} шт:",
-                          style: Styles.style700sp18Black,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              widget.product.price != "null"
-                                  ? "${NumberFormatter.currency(widget.product.price)} ${"sum".tr()}"
-                                  : "no_data".tr(),
-                              style: Styles.style700sp22Main,
-                            ),
-                            const SizedBox(width: 15),
-                            widget.product.discount != null
-                                ? Text(
-                                    widget.product.discount != null
-                                        ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
-                                        : "no_data".tr(),
-                                    style: Styles.style400sp20GreyUnderline,
-                                  )
-                                : const Center()
-                          ],
-                        )
-                      ],
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${"price_for".tr()} шт:",
+                            style: Styles.style700sp18Black,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                widget.product.price != "null"
+                                    ? "${NumberFormatter.currency(widget.product.price)} ${"sum".tr()}"
+                                    : 0.toString(),
+                                style: Styles.style700sp22Main,
+                              ),
+                              const SizedBox(width: 15),
+                              widget.product.discount != null
+                                  ? Text(
+                                      widget.product.discount != null
+                                          ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
+                                          : "no_data".tr(),
+                                      style: Styles.style400sp20GreyUnderline,
+                                    )
+                                  : const Center()
+                            ],
+                          )
+                        ],
+                      ),
                     )
                   : widget.product.type_good == 2
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${"price_for".tr()} ${widget.product.weight} гр:",
-                              style: Styles.style700sp18Black,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  widget.product.price != "null"
-                                      ? "${NumberFormatter.currency(widget.product.price)} ${"sum".tr()}"
-                                      : "no_data".tr(),
-                                  style: Styles.style700sp22Main,
-                                ),
-                                const SizedBox(width: 15),
-                                widget.product.discount != null
-                                    ? Text(
-                                        widget.product.discount != null
-                                            ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
-                                            : "no_data".tr(),
-                                        style: Styles.style400sp20GreyUnderline,
-                                      )
-                                    : const Center()
-                              ],
-                            )
-                          ],
+                      ? Padding(
+                          padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${"price_for".tr()} ${widget.product.weight} гр:",
+                                style: Styles.style700sp18Black,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    widget.product.price != "null"
+                                        ? "${NumberFormatter.currency(widget.product.price)} ${"sum".tr()}"
+                                        : "no_data".tr(),
+                                    style: Styles.style700sp22Main,
+                                  ),
+                                  const SizedBox(width: 15),
+                                  widget.product.discount != null
+                                      ? Text(
+                                          widget.product.discount != null
+                                              ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
+                                              : "no_data".tr(),
+                                          style:
+                                              Styles.style400sp20GreyUnderline,
+                                        )
+                                      : const Center()
+                                ],
+                              )
+                            ],
+                          ),
                         )
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -514,8 +527,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                               alignment: Alignment.center,
                                               decoration: BoxDecoration(
                                                 border: Border.all(
-                                                    color: ConstColor
-                                                        .as_salomText),
+                                                  color: selectedSize ==
+                                                          widget.product
+                                                              .sizes![indx].id
+                                                      ? ConstColor.as_salomText
+                                                      : ConstColor.lightGrey,
+                                                ),
                                                 color: Colors.white,
                                                 borderRadius:
                                                     BorderRadius.circular(15),
@@ -553,16 +570,27 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ],
                         ),
               const SizedBox(height: 25),
-              Text(
-                "info_item".tr(),
-                style: Styles.styles700sp20Black,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 10.w,
+                ),
+                child: Text(
+                  "info_item".tr(),
+                  style: Styles.styles700sp20Black,
+                ),
               ),
               const SizedBox(height: 15),
-              Text(flag &&
-                      _getDescByLocale(widget.product, context.locale).length >
-                          320
-                  ? "${_getDescByLocale(widget.product, context.locale).substring(0, 320)}..."
-                  : _getDescByLocale(widget.product, context.locale)),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 10.w,
+                  right: 10.w
+                ),
+                child: Text(flag &&
+                        _getDescByLocale(widget.product, context.locale).length >
+                            320
+                    ? "${_getDescByLocale(widget.product, context.locale).substring(0, 320)}..."
+                    : _getDescByLocale(widget.product, context.locale)),
+              ),
               ScreenUtil().setVerticalSpacing(10),
               _getDescByLocale(widget.product, context.locale).length > 320
                   ? TextButton(
@@ -577,9 +605,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ))
                   : const Center(),
               const SizedBox(height: 40),
-              Text(
-                "similars".tr(),
-                style: Styles.styles700sp20Black,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 10.w,
+                ),
+                child: Text(
+                  "similars".tr(),
+                  style: Styles.styles700sp20Black,
+                ),
               ),
               const SizedBox(height: 25),
               BlocBuilder<GetProductWithSlugBloc, GetProductWithSlugState>(
@@ -603,6 +636,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   child: ProductCardWidget(
                                     withHeight: true,
                                     product: ProductModel(
+                                      price: randomGoods[ranIndex].price,
                                       name_ru: randomGoods[ranIndex].name_ru,
                                       id: randomGoods[ranIndex].id,
                                       photo: randomGoods[ranIndex].photo,
@@ -625,7 +659,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 height: 300,
                                 // width: 200,
                                 child: LottieBuilder.asset(
-                                    "assets/animations/empty_box.json"),
+                                    "assets/animations/empty_box2.json"),
                               ),
                               const SizedBox(
                                 height: 20,

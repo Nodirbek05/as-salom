@@ -198,7 +198,7 @@ class _MainPageState extends State<MainPage> {
                                     child: ProductCardWidget(
                                       product: ProductModel(
                                         photo: [products[index].image],
-                                        price: products[index].price,
+                                        price:  int.parse(products[index].price!),
                                         name_ru: products[index].name,
                                         id: products[index].id,
                                         type_good: products[index].type,
@@ -259,7 +259,7 @@ class _MainPageState extends State<MainPage> {
                   height: 300,
                   // width: 200,
                   child:
-                      LottieBuilder.asset("assets/animations/empty_box.json"),
+                      LottieBuilder.asset("assets/animations/empty_box2.json"),
                 ),
                 const SizedBox(
                   height: 20,

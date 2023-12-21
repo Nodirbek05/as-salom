@@ -5,11 +5,13 @@ import 'package:assalomproject/views/confirm_order/logic/get_location_bloc/get_l
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import 'package:assalomproject/core/constant/constant_color.dart';
@@ -37,6 +39,11 @@ class _OrderHomePageState extends State<OrderHomePage> {
     _getLocation();
     super.initState();
   }
+
+  var phoneFormatter = MaskTextInputFormatter(
+      mask: '##-###-##-##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
 
   Future<Position> _getLocation() async {
     bool isServiceEnabled;
@@ -182,7 +189,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                           ),
                         );
                       },
-                      child:  const CircleAvatar(
+                      child: const CircleAvatar(
                         radius: 20,
                         backgroundColor: ConstColor.as_salomText,
                         child: Icon(CupertinoIcons.paperplane),
@@ -200,6 +207,11 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   height: 45.h,
                   width: 150.w,
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      phoneFormatter
+                    ],
                     controller: OrderHomePage.homeController,
                     decoration: InputDecoration(
                       hintText: "flat".tr(),
@@ -213,6 +225,11 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   height: 45.h,
                   width: 150.w,
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      phoneFormatter
+                    ],
                     controller: OrderHomePage.etajController,
                     decoration: InputDecoration(
                       hintText: "stage".tr(),
@@ -232,6 +249,11 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   height: 45.h,
                   width: 150.w,
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      phoneFormatter
+                    ],
                     controller: OrderHomePage.podezdController,
                     decoration: InputDecoration(
                       hintText: "enterance".tr(),
@@ -245,6 +267,11 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   height: 45.h,
                   width: 150.w,
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      phoneFormatter
+                    ],
                     controller: OrderHomePage.kvController,
                     decoration: InputDecoration(
                       hintText: "house".tr(),
@@ -271,7 +298,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                 ),
               ),
             ),
-             ScreenUtil().setVerticalSpacing(20),
+            ScreenUtil().setVerticalSpacing(20),
             Text(
               "enter_name".tr(),
               style: Styles.style400sp14Black,

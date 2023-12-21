@@ -156,7 +156,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                                             color: ConstColor.as_salomText,
                                             borderRadius:
                                                 BorderRadius.circular(30)),
-                                        width: 150,
+                                        width: 120,
                                         height: 50,
                                         child: Text(
                                           "no".tr(),
@@ -182,7 +182,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                                             color: ConstColor.greyColor,
                                             borderRadius:
                                                 BorderRadius.circular(30)),
-                                        width: 150,
+                                        width: 120,
                                         height: 50,
                                         child: Text(
                                           "yes".tr(),

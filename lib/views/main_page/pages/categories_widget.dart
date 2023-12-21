@@ -54,18 +54,18 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                   ),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(15.r),
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(
-                      context,
-                      InsideCategoryPage.routeName,
-                      arguments: InsideCategoryPage(
-                        isCat: true,
-                        name: categories[index].name_ru!,
-                        id: int.parse(
-                          categories[index].id!.toString(),
+                        context,
+                        InsideCategoryPage.routeName,
+                        arguments: InsideCategoryPage(
+                          isCat: true,
+                          name: categories[index].name_ru!,
+                          id: int.parse(
+                            categories[index].id!.toString(),
+                          ),
                         ),
-                      ),
-                    );
+                      );
                     },
                     child: Container(
                       padding: EdgeInsets.all(10.w),
@@ -87,14 +87,18 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
-                          SizedBox(
-                            height: 83.h,
-                            width: 90.h,
-                            child: Image.network(
-                              ApiPaths.imageUrl +
-                                  categories[index].photo.toString(),
+                          ScreenUtil().setVerticalSpacing(4),
+                          Container(
+                            height: 80.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                              image: NetworkImage(
+                                ApiPaths.imageUrl +
+                                    categories[index].photo.toString(),
+                              ),
                               fit: BoxFit.cover,
-                            ),
+                            )),
                           ),
                         ],
                       ),
@@ -112,46 +116,46 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
 
   Shimmer shimmerWidget() {
     return Shimmer.fromColors(
-        baseColor: ConstColor.dotColor,
-        highlightColor: ConstColor.lightGrey,
-        child: SizedBox(
-          height: 135.h,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: 15.w,
+      baseColor: ConstColor.dotColor,
+      highlightColor: ConstColor.lightGrey,
+      child: SizedBox(
+        height: 135.h,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.only(
+                left: 15.w,
+              ),
+              child: Container(
+                padding: EdgeInsets.all(10.w),
+                height: 120.h,
+                width: 127.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.r),
+                  color: ConstColor.grey300,
                 ),
-                child: Container(
-                  padding: EdgeInsets.all(10.w),
-                  height: 120.h,
-                  width: 127.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.r),
-                    color: ConstColor.grey300,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "",
-                        style: Styles.style500sp14Black,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      SizedBox(
-                        height: 90.h,
-                        width: 90.h,
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "",
+                      style: Styles.style500sp14Black,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    SizedBox(
+                      height: 90.h,
+                      width: 90.h,
+                    ),
+                  ],
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
-      );
+      ),
+    );
   }
 }

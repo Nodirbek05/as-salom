@@ -147,7 +147,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                                     color: ConstColor.mainBlack,
                                   )),
                         title: Text(
-                          isHome ? "Товары для заключенных" : "Order to home",
+                          isHome ? "to_zone".tr() : "to_home".tr(),
                           style: Styles.style500sp14Black,
                         ),
                         trailing: const Icon(

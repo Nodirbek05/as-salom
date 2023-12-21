@@ -15,6 +15,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_svg/svg.dart';
@@ -53,6 +54,11 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
     }
     return categoryName ?? "no_data".tr();
   }
+
+
+   
+
+  
 
   static Future<ResponseData> getInnerProducts(int id) async {
     print(id);
@@ -146,6 +152,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                       bottom: 5.h,
                                     ),
                                     child: ListTile(
+                                      selectedColor: ConstColor.as_salomText,
                                       trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         size: 20,
@@ -351,7 +358,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                       height: 300,
                                       // width: 200,
                                       child: LottieBuilder.asset(
-                                        "assets/animations/empty_box.json",
+                                        "assets/animations/empty_box2.json",
                                       ),
                                     ),
                                     const SizedBox(
@@ -383,6 +390,9 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                       itemBuilder: (context, index) {
                                         return ProductCardWidget(
                                           product: ProductModel(
+                                            desc_en: insideProducts[index].desc_en,
+                                            desc_ru: insideProducts[index].desc_ru,
+                                            desc_uz: insideProducts[index].desc_uz,
                                             id: insideProducts[index].id,
                                             discount:
                                                 insideProducts[index].discount,
@@ -424,14 +434,14 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                 height: 300,
                                 // width: 200,
                                 child: LottieBuilder.asset(
-                                    "assets/animations/empty_box.json"),
+                                    "assets/animations/empty_box2.json"),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Text(
-                                "Data is Empty",
-                                style: TextStyle(color: ConstColor.mainBlack),
+                               Text(
+                                "empty_data".tr(),
+                                style: const TextStyle(color: ConstColor.mainBlack),
                               ),
                             ],
                           )

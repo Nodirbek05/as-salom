@@ -87,5 +87,7 @@
     "choose_zone" : "Iltimos, istalgan zona nomini tanlang",
     "zone" : "Iltimos, istalgan zona ni tanlang",
     "room_no" : "Xona nomeri(Majburiy emas)",
-    "empty_data": "Ma'lumot bo'sh"
+    "empty_data": "Ma'lumot bo'sh",
+    "to_home" : "Uy uchun buyurtma qilish",
+    "to_zone": "Qamoqxona uchun buyurtma"
 }

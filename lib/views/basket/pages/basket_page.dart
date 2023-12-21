@@ -63,14 +63,14 @@ class _BasketPageState extends State<BasketPage> {
     getPrice(product);
     return Scaffold(
       bottomSheet: Container(
-        height: 95.h,
+        height: 120.h,
         width: double.infinity,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 5,
-              blurRadius: 7,
+              blurRadius: 4,
               offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
@@ -83,7 +83,7 @@ class _BasketPageState extends State<BasketPage> {
         ),
         child: Column(
           children: [
-            ScreenUtil().setVerticalSpacing(10),
+            ScreenUtil().setVerticalSpacing(20.h),
             // ValueListenableBuilder(
             //     valueListenable:
             //         Hive.box<BasketModel>('basketBox').listenable(),
@@ -102,7 +102,7 @@ class _BasketPageState extends State<BasketPage> {
               // }
               // }
             ),
-            ScreenUtil().setVerticalSpacing(9),
+            ScreenUtil().setVerticalSpacing(18),
             InkWell(
               onTap: () {
                 product.isNotEmpty

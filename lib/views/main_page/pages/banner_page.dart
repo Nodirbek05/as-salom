@@ -39,6 +39,8 @@ class _BannerPageState extends State<BannerPage> {
               Container(
                 padding: EdgeInsets.only(
                   top: 20.h,
+                  left: 5.w,
+                  right: 5.w,
                 ),
                 height: 140.h,
                 child: PageView.builder(
