@@ -97,7 +97,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                 ApiPaths.imageUrl +
                                     categories[index].photo.toString(),
                               ),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                             )),
                           ),
                         ],

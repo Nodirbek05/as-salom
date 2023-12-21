@@ -15,7 +15,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_svg/svg.dart';
@@ -54,11 +53,6 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
     }
     return categoryName ?? "no_data".tr();
   }
-
-
-   
-
-  
 
   static Future<ResponseData> getInnerProducts(int id) async {
     print(id);
@@ -390,9 +384,12 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                       itemBuilder: (context, index) {
                                         return ProductCardWidget(
                                           product: ProductModel(
-                                            desc_en: insideProducts[index].desc_en,
-                                            desc_ru: insideProducts[index].desc_ru,
-                                            desc_uz: insideProducts[index].desc_uz,
+                                            desc_en:
+                                                insideProducts[index].desc_en,
+                                            desc_ru:
+                                                insideProducts[index].desc_ru,
+                                            desc_uz:
+                                                insideProducts[index].desc_uz,
                                             id: insideProducts[index].id,
                                             discount:
                                                 insideProducts[index].discount,
@@ -439,9 +436,10 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                               Text(
+                              Text(
                                 "empty_data".tr(),
-                                style: const TextStyle(color: ConstColor.mainBlack),
+                                style: const TextStyle(
+                                    color: ConstColor.mainBlack),
                               ),
                             ],
                           )
@@ -457,6 +455,9 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                             itemBuilder: (context, index) {
                               return ProductCardWidget(
                                 product: ProductModel(
+                                    desc_en: products[index].desc_en,
+                                    desc_ru: products[index].desc_ru,
+                                    desc_uz: products[index].desc_uz,
                                     id: products[index].id,
                                     discount: products[index].discount,
                                     name_ru: products[index].name_ru,

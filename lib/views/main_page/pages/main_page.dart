@@ -129,7 +129,7 @@ class _MainPageState extends State<MainPage> {
           }
           // return products.isEmpty || query.text.isEmpty
           //     ?
-            if (query.text.isEmpty) {
+          if (query.text.isEmpty) {
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,7 +198,7 @@ class _MainPageState extends State<MainPage> {
                                     child: ProductCardWidget(
                                       product: ProductModel(
                                         photo: [products[index].image],
-                                        price:  int.parse(products[index].price!),
+                                        price: int.parse(products[index].price),
                                         name_ru: products[index].name,
                                         id: products[index].id,
                                         type_good: products[index].type,
@@ -250,8 +250,7 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
             );
-          
-          }   else if (products.isEmpty) {
+          } else if (products.isEmpty) {
             return Column(
               children: [
                 Container(
@@ -288,6 +287,9 @@ class _MainPageState extends State<MainPage> {
                 itemBuilder: (context, index) {
                   return ProductCardWidget(
                     product: ProductModel(
+                      desc_en: products[index].desc_en,
+                      desc_ru: products[index].desc_ru,
+                      desc_uz: products[index].desc_uz,
                       id: products[index].id,
                       discount: products[index].discount,
                       name_ru: products[index].name_ru,
