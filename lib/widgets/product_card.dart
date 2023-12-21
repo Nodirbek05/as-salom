@@ -26,7 +26,6 @@ class ProductCardWidget extends StatefulWidget {
 }
 
 class _ProductCardWidgetState extends State<ProductCardWidget> {
-
   int place = 1;
 
   String _getcategoryByLocale(ProductModel product, Locale locale) {
@@ -57,7 +56,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     favBox =
         _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
     basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
-    
+
     setState(() {});
   }
 
@@ -166,7 +165,98 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                       IconButton(
                                         // splashRadius: 8.r,
                                         onPressed: () {
-                                          increaseQuantity(widget.product!.id!);
+                                          if (widget.product!.type_good == 2) {
+                                            if (getDrugQty(
+                                                    widget.product!.id!) >=
+                                                12) {
+                                              showDialog<void>(
+                                                context: context,
+                                                builder: (parentContext) {
+                                                  return AlertDialog(
+                                                    surfaceTintColor:
+                                                        ConstColor.mainWhite,
+                                                    backgroundColor:
+                                                        ConstColor.mainWhite,
+                                                    insetPadding:
+                                                        EdgeInsets.symmetric(
+                                                      horizontal: 15.w,
+                                                    ),
+                                                    // title: const Text('Basic dialog title'),
+                                                    content: SizedBox(
+                                                      height: 300.h,
+                                                      width: 350.w,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              IconButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  icon: Icon(Icons
+                                                                      .close)),
+                                                            ],
+                                                          ),
+                                                          Text(
+                                                            "limited_product"
+                                                                .tr(),
+                                                            style: Styles
+                                                                .style600sp22Black,
+                                                          ),
+                                                          Text(
+                                                            "12 000 гр",
+                                                            style: Styles
+                                                                .style600sp22Red,
+                                                          ),
+                                                          InkWell(
+                                                            radius: 50.r,
+                                                            onTap: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: Container(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              height: 55.h,
+                                                              width: 328.w,
+                                                              decoration: BoxDecoration(
+                                                                  color: ConstColor
+                                                                      .as_salomText,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              50.r)),
+                                                              child: Text(
+                                                                "OK",
+                                                                style: Styles
+                                                                    .buttonText,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            } else {
+                                              increaseQuantity(
+                                                  widget.product!.id!);
+                                            }
+                                          } else {
+                                            increaseQuantity(
+                                                widget.product!.id!);
+                                          }
+
                                           setState(() {});
                                         },
                                         icon: const Icon(
@@ -206,7 +296,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                             ? widget.product!.sizes![0].id
                                                 .toString()
                                             : "null",
-                                         widget.product!.weight != null
+                                        widget.product!.weight != null
                                             ? widget.product!.weight!
                                             : "null",
                                         widget.product!.slug != null

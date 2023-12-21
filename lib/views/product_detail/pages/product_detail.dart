@@ -48,13 +48,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   void initState() {
     getCache();
-
     context.read<GetProductWithSlugBloc>().add(
           GetProductWithSlugData(
             slug: widget.slug,
           ),
         );
-
     print("GET PRODUCT WITH SLUG IS WORKING");
     super.initState();
   }
@@ -152,7 +150,84 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             IconButton(
                               splashRadius: 8.r,
                               onPressed: () {
-                                increaseQuantity(widget.product.id!);
+                                if (widget.product.type_good == 2) {
+                                  if (getDrugQty(widget.product.id!) >= 12) {
+                                    showDialog<void>(
+                                      context: context,
+                                      builder: (parentContext) {
+                                        return AlertDialog(
+                                          surfaceTintColor:
+                                              ConstColor.mainWhite,
+                                          backgroundColor: ConstColor.mainWhite,
+                                          insetPadding: EdgeInsets.symmetric(
+                                            horizontal: 15.w,
+                                          ),
+                                          // title: const Text('Basic dialog title'),
+                                          content: SizedBox(
+                                            height: 300.h,
+                                            width: 350.w,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    IconButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        icon:
+                                                            Icon(Icons.close)),
+                                                  ],
+                                                ),
+                                                Text(
+                                                  "limited_product".tr(),
+                                                  style:
+                                                      Styles.style600sp22Black,
+                                                ),
+                                                Text(
+                                                  "12 000 гр",
+                                                  style: Styles.style600sp22Red,
+                                                ),
+                                                InkWell(
+                                                  radius: 50.r,
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    height: 55.h,
+                                                    width: 328.w,
+                                                    decoration: BoxDecoration(
+                                                        color: ConstColor
+                                                            .as_salomText,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    50.r)),
+                                                    child: Text(
+                                                      "OK",
+                                                      style: Styles.buttonText,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    increaseQuantity(widget.product.id!);
+                                  }
+                                } else {
+                                  increaseQuantity(widget.product.id!);
+                                }
+
                                 setState(() {});
                               },
                               icon: const Icon(
@@ -581,12 +656,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
               const SizedBox(height: 15),
               Padding(
-                padding: EdgeInsets.only(
-                  left: 10.w,
-                  right: 10.w
-                ),
+                padding: EdgeInsets.only(left: 10.w, right: 10.w),
                 child: Text(flag &&
-                        _getDescByLocale(widget.product, context.locale).length >
+                        _getDescByLocale(widget.product, context.locale)
+                                .length >
                             320
                     ? "${_getDescByLocale(widget.product, context.locale).substring(0, 320)}..."
                     : _getDescByLocale(widget.product, context.locale)),

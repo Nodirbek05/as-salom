@@ -89,5 +89,6 @@
     "room_no" : "Xona nomeri(Majburiy emas)",
     "empty_data": "Ma'lumot bo'sh",
     "to_home" : "Uy uchun buyurtma qilish",
-    "to_zone": "Qamoqxona uchun buyurtma"
+    "to_zone": "Qamoqxona uchun buyurtma",
+    "limited_product":"Maksimal ruxsat etilgan buyurtma og'irligi:"
 }
