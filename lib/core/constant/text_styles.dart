@@ -209,6 +209,12 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
     fontFamily: interFontFamily,
   );
+  static final style400sp14white = TextStyle(
+    color: ConstColor.mainWhite,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    fontFamily: interFontFamily,
+  );
 
   static final style400sp14Red = TextStyle(
     color: ConstColor.redColor,
@@ -309,7 +315,7 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
-   static final style500sp16Grey = TextStyle(
+  static final style500sp16Grey = TextStyle(
     color: ConstColor.dotColor,
     fontSize: 18.sp,
     fontWeight: FontWeight.w500,

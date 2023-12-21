@@ -41,6 +41,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
   // CategoryGoods? insideProducts;
   List<ProductModel> insideProducts = [];
   String? name;
+  int indexxx = 20;
 
   String _getcategoryByLocale(SubCategoryModel category, Locale locale) {
     late String? categoryName;
@@ -145,41 +146,74 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                     padding: EdgeInsets.only(
                                       bottom: 5.h,
                                     ),
-                                    child: ListTile(
-                                      selectedColor: ConstColor.as_salomText,
-                                      trailing: const Icon(
-                                        Icons.arrow_forward_ios,
-                                        size: 20,
-                                      ),
-                                      onTap: () async {
-                                        insideProducts.clear();
-
-                                        getInnerProducts(int.parse(state
-                                                .subcategoryModel
-                                                .subcategory!
-                                                .subcategories![index]
-                                                .id
-                                                .toString()))
-                                            .then((value) => {
-                                                  if (value is InnerModel)
-                                                    {
-                                                      insideProducts.addAll(
-                                                          value.goods.data!),
-                                                      name = value
-                                                          .subcategory.name_ru
-                                                          .toString(),
-                                                      setState(() {}),
-                                                      Navigator.pop(context),
-                                                    }
-                                                });
-                                      },
-                                      title: Text(
-                                        _getcategoryByLocale(
-                                          state.subcategoryModel.subcategory!
-                                              .subcategories![index],
-                                          context.locale,
+                                    child: Container(
+                                      color: indexxx ==
+                                              state.subcategoryModel
+                                                  .subcategory!.subcategories!
+                                                  .indexOf(state
+                                                      .subcategoryModel
+                                                      .subcategory!
+                                                      .subcategories![index])
+                                          ? ConstColor.as_salomText
+                                          : null,
+                                      child: ListTile(
+                                        selectedColor: ConstColor.as_salomText,
+                                        trailing: const Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 20,
                                         ),
-                                        style: Styles.styles400sp14Black,
+                                        onTap: () async {
+                                          indexxx = state.subcategoryModel
+                                              .subcategory!.subcategories!
+                                              .indexOf(state
+                                                  .subcategoryModel
+                                                  .subcategory!
+                                                  .subcategories![index]);
+                                          insideProducts.clear();
+                                          name = _getcategoryByLocale(
+                                            state.subcategoryModel.subcategory!
+                                                .subcategories![index],
+                                            context.locale,
+                                          );
+
+                                          getInnerProducts(int.parse(state
+                                                  .subcategoryModel
+                                                  .subcategory!
+                                                  .subcategories![index]
+                                                  .id
+                                                  .toString()))
+                                              .then((value) => {
+                                                    if (value is InnerModel)
+                                                      {
+                                                        insideProducts.addAll(
+                                                            value.goods.data!),
+                                                        name = value
+                                                            .subcategory.name_ru
+                                                            .toString(),
+                                                        setState(() {}),
+                                                        Navigator.pop(context),
+                                                      }
+                                                  });
+                                        },
+                                        title: Text(
+                                          _getcategoryByLocale(
+                                            state.subcategoryModel.subcategory!
+                                                .subcategories![index],
+                                            context.locale,
+                                          ),
+                                          style: indexxx ==
+                                                  state
+                                                      .subcategoryModel
+                                                      .subcategory!
+                                                      .subcategories!
+                                                      .indexOf(state
+                                                              .subcategoryModel
+                                                              .subcategory!
+                                                              .subcategories![
+                                                          index])
+                                              ? Styles.style400sp14white
+                                              : Styles.style400sp14Black,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -287,7 +321,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                         left: 15.w,
                       ),
                       child: Text(
-                        widget.isCat == true ? widget.name : "",
+                        widget.isCat == true ? name ?? widget.name : "",
                         style: Styles.styles700sp20Black,
                       ),
                     ),
@@ -328,22 +362,13 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                         if (state is GetCatProductsSuccess) {
                           var products = state.subcategoryModel.goods;
                           insideProducts = products!.data!;
-                          name = state.subcategoryModel.subcategory!.name_ru
-                              .toString();
-
-                          // if (!isWorking) {
-                          //   insideProducts = products;
-
-                          //   for (var i = 0;
-                          //       i <
-                          //           state.subcategoryModel.subcategory!.subcategories!
-                          //               .length;
-                          //       i++) {
-                          //     subcategory.add(state
-                          //         .subcategoryModel.subcategory!.subcategories![i]);
-                          //   }
-                          //   isWorking = true;
-                          // }
+                          // name = state.subcategoryModel.subcategory!.name_ru
+                          //     .toString();
+                          // name = _getcategoryByLocale(
+                          //   state.subcategoryModel.subcategory!
+                          //       .subcategories![index],
+                          //   context.locale,
+                          // );
                           return insideProducts.isEmpty
                               ? Column(
                                   children: [
