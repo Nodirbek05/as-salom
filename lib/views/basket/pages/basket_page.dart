@@ -316,7 +316,7 @@ class _BasketPageState extends State<BasketPage> {
                     children: [
                       Padding(
                         padding:EdgeInsets.symmetric(
-                          horizontal: 10.w,
+                          horizontal: 15.w,
                         ),
                         child: SizedBox(
                           width: double.infinity,

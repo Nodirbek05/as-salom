@@ -656,7 +656,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             children: [
                               Container(
                                 alignment: Alignment.center,
-                                height: 300,
+                                height: 200,
                                 // width: 200,
                                 child: LottieBuilder.asset(
                                     "assets/animations/empty_box2.json"),
