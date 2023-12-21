@@ -208,10 +208,10 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   width: 150.w,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      phoneFormatter
-                    ],
+                    // inputFormatters: [
+                    //   FilteringTextInputFormatter.digitsOnly,
+                    //   phoneFormatter
+                    // ],
                     controller: OrderHomePage.homeController,
                     decoration: InputDecoration(
                       hintText: "flat".tr(),
@@ -226,10 +226,10 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   width: 150.w,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      phoneFormatter
-                    ],
+                    // inputFormatters: [
+                    //   FilteringTextInputFormatter.digitsOnly,
+                    //   phoneFormatter
+                    // ],
                     controller: OrderHomePage.etajController,
                     decoration: InputDecoration(
                       hintText: "stage".tr(),
@@ -250,10 +250,10 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   width: 150.w,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      phoneFormatter
-                    ],
+                    // inputFormatters: [
+                    //   FilteringTextInputFormatter.digitsOnly,
+                    //   phoneFormatter
+                    // ],
                     controller: OrderHomePage.podezdController,
                     decoration: InputDecoration(
                       hintText: "enterance".tr(),
@@ -268,10 +268,10 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   width: 150.w,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      phoneFormatter
-                    ],
+                    // inputFormatters: [
+                    //   FilteringTextInputFormatter.digitsOnly,
+                    //   phoneFormatter
+                    // ],
                     controller: OrderHomePage.kvController,
                     decoration: InputDecoration(
                       hintText: "house".tr(),

@@ -298,6 +298,13 @@ abstract class Styles {
     fontFamily: interFontFamily,
   );
 
+   static final style500sp16Grey = TextStyle(
+    color: ConstColor.dotColor,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: interFontFamily,
+  );
+
   static final style700sp13White = TextStyle(
     color: ConstColor.mainWhite,
     fontSize: 13.sp,

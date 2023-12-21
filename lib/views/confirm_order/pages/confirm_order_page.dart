@@ -230,14 +230,22 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                           ),
                         ]),
                       ),
-                      InputWidget(
-                        validateMode: AutovalidateMode.onUserInteraction,
-                        validator: (val) {
-                          if (val!.isEmpty) return 'Enter valid name';
-                          return null;
-                        },
-                        hintText: "enter_fio".tr(),
-                        controller: nameController,
+                      SizedBox(
+                        height: 55.h,
+                        child: InputWidget(
+                          padding: EdgeInsets.only(
+                            top: 4.h,
+                            left: 15.h,
+                          ),
+                          // validateMode: AutovalidateMode.onUserInteraction,
+                          // validator: (val) {
+                          //   if (val!.isEmpty) return 'Enter valid name';
+                          //   return null;
+                          // },
+                          hintText: "enter_fio".tr(),
+                          hintStyle: Styles.style500sp16Black,
+                          controller: nameController,
+                        ),
                       ),
                       ScreenUtil().setVerticalSpacing(20),
                       RichText(
@@ -263,7 +271,9 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                           } else if (state is GetZoneSuccess) {
                             // String dropdownValue =
                             //     state.zoneModels.data.first.toString();
-                            return sizeDropDown(state.zoneModels.data);
+                            return SizedBox(
+                              height: 50.h,
+                              child: sizeDropDown(state.zoneModels.data));
                           }
                           return const Center(
                             child: CupertinoActivityIndicator(),
@@ -276,13 +286,20 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                         style: Styles.style400sp14Black,
                       ),
 
-                      InputWidget(
-                        inputFormatter: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          phoneFormatter
-                        ],
-                        inputType: TextInputType.number,
-                        controller: roomNumberController,
+                      SizedBox(
+                        height: 50.h,
+                        child: InputWidget(
+                           padding: EdgeInsets.only(
+                            top: 4.h,
+                            left: 15.h,
+                          ),
+                          // inputFormatter: [
+                          //   FilteringTextInputFormatter.digitsOnly,
+                          //   phoneFormatter
+                          // ],
+                          inputType: TextInputType.number,
+                          controller: roomNumberController,
+                        ),
                       ),
                       // InputWidget(
                       //   validateMode: AutovalidateMode.onUserInteraction,
@@ -307,6 +324,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                         style: Styles.style400sp14Black,
                       ),
                       InputWidget(
+                        hintStyle: Styles.style500sp16Black,
                         controller: commentController,
                         maxLines: 3,
                         hintText: 'enter_text'.tr(),
@@ -329,14 +347,28 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
       value: dropdownValue,
       // isExpanded: true,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(
+          bottom: 10.h,
+        
+        ),
+        // contentPadding:  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: ConstColor.as_salomText),
+        ),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: ConstColor.as_salomText),
-          borderRadius: BorderRadius.circular(7),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: ConstColor.as_salomText),
         ),
       ),
-      hint: const Text(
-        'Введите местоположение',
-        style: TextStyle(fontSize: 14),
+    
+      hint: Text(
+        'Выберите зону доставки',
+        style: Styles.style500sp16Black,
       ),
       items: data
           .map(
@@ -344,16 +376,14 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
               value: item.name_ru,
               child: Text(
                 item.name_ru.toString(),
-                style: const TextStyle(
-                  fontSize: 14,
-                ),
+                style: Styles.style500sp16Black,
               ),
             ),
           )
           .toList(),
       validator: (value) {
         if (value == null) {
-          return 'Введите местоположение';
+          return 'Выберите зону доставки';
         }
         return null;
       },
