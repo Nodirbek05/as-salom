@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
@@ -126,158 +127,183 @@ class _MainPageState extends State<MainPage> {
               products.add(state.data.data![i]);
             }
           }
-          return products.isEmpty || query.text.isEmpty
-              ? SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BlocProvider(
-                        create: (context) => GetAllBannersBloc(),
-                        child: const BannerPage(),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 15.w,
-                          // bottom: 15.h,
-                        ),
-                        child: Text(
-                          "category".tr(),
-                          style: Styles.styles700sp20Black,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      BlocProvider(
-                        create: (context) => GetAllCategoriesBloc(),
-                        child: const CategoriesWidget(),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15.w,
-                        ),
-                        child: ValueListenableBuilder(
-                          valueListenable: Hive.box<FavoritesModel>(isHome
-                                  ? "favoritesBoxForHome"
-                                  : "favoritesBox")
-                              .listenable(),
-                          builder: (ctx, box, _) {
-                            final products =
-                                box.values.toList().cast<FavoritesModel>();
-                            if (products.isEmpty) {
-                              return const Center();
-                            }
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 18,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 15.w,
-                                    bottom: 18.h,
-                                  ),
-                                  child: Text(
-                                    "favorites".tr(),
-                                    style: Styles.styles700sp20Black,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 310.h,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: products.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                          right: 10.w,
-                                        ),
-                                        child: ProductCardWidget(
-                                          product: ProductModel(
-                                            photo: [products[index].image],
-                                            price: products[index].price,
-                                            name_ru: products[index].name,
-                                            id: products[index].id,
-                                            type_good: products[index].type,
-                                            discount: products[index].discount!="null"? int.parse(
-                                                products[index].discount):0,
-                                            slug: products[index].slug,
-                                          ),
-                                          withHeight: true,
-                                          height: 310.h,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      ScreenUtil().setVerticalSpacing(35),
-                      BlocProvider(
-                        create: (context) => GetSpesificProductsBloc(),
-                        child: const SpesificProductsWidget(index: 0),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        // height: 200.h,
-                        child: BlocProvider(
-                          create: (context) => GetSubBannersBloc(),
-                          child: const SubBannersPage(),
-                        ),
-                      ),
-                      ScreenUtil().setVerticalSpacing(25),
-                      BlocProvider(
-                        create: (context) => GetSubCategoriesBloc(),
-                        child: const SubCategoriesWidget(),
-                      ),
-                      ScreenUtil().setVerticalSpacing(20),
-                      BlocProvider(
-                        create: (context) => GetSpesificProductsBloc(),
-                        child: const AdditionalProducts(),
-                      ),
-                      ScreenUtil().setVerticalSpacing(30),
-                    ],
+          // return products.isEmpty || query.text.isEmpty
+          //     ?
+            if (query.text.isEmpty) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BlocProvider(
+                    create: (context) => GetAllBannersBloc(),
+                    child: const BannerPage(),
                   ),
-                )
-              : SizedBox(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 0.64,
-                        crossAxisSpacing: 10,
-                      ),
-                      itemCount: products.length,
-                      itemBuilder: (context, index) {
-                        return ProductCardWidget(
-                          product: ProductModel(
-                            id: products[index].id,
-                            discount: products[index].discount,
-                            name_ru: products[index].name_ru,
-                            name_en: products[index].name_en,
-                            name_uz: products[index].name_uz,
-                            photo: products[index].photo,
-                            type_good: products[index].type_good,
-                            price: products[index].price,
-                            slug: products[index].slug,
-                          ),
-                          withHeight: false,
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 15.w,
+                      // bottom: 15.h,
+                    ),
+                    child: Text(
+                      "category".tr(),
+                      style: Styles.styles700sp20Black,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  BlocProvider(
+                    create: (context) => GetAllCategoriesBloc(),
+                    child: const CategoriesWidget(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15.w,
+                    ),
+                    child: ValueListenableBuilder(
+                      valueListenable: Hive.box<FavoritesModel>(
+                              isHome ? "favoritesBoxForHome" : "favoritesBox")
+                          .listenable(),
+                      builder: (ctx, box, _) {
+                        final products =
+                            box.values.toList().cast<FavoritesModel>();
+                        if (products.isEmpty) {
+                          return const Center();
+                        }
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 15.w,
+                                bottom: 18.h,
+                              ),
+                              child: Text(
+                                "favorites".tr(),
+                                style: Styles.styles700sp20Black,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 310.h,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: products.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                      right: 10.w,
+                                    ),
+                                    child: ProductCardWidget(
+                                      product: ProductModel(
+                                        photo: [products[index].image],
+                                        price: products[index].price,
+                                        name_ru: products[index].name,
+                                        id: products[index].id,
+                                        type_good: products[index].type,
+                                        discount:
+                                            products[index].discount != "null"
+                                                ? int.parse(
+                                                    products[index].discount)
+                                                : 0,
+                                        slug: products[index].slug,
+                                      ),
+                                      withHeight: true,
+                                      height: 310.h,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         );
                       },
                     ),
                   ),
-                );
+                  ScreenUtil().setVerticalSpacing(35),
+                  BlocProvider(
+                    create: (context) => GetSpesificProductsBloc(),
+                    child: const SpesificProductsWidget(index: 0),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    // height: 200.h,
+                    child: BlocProvider(
+                      create: (context) => GetSubBannersBloc(),
+                      child: const SubBannersPage(),
+                    ),
+                  ),
+                  ScreenUtil().setVerticalSpacing(25),
+                  BlocProvider(
+                    create: (context) => GetSubCategoriesBloc(),
+                    child: const SubCategoriesWidget(),
+                  ),
+                  ScreenUtil().setVerticalSpacing(20),
+                  BlocProvider(
+                    create: (context) => GetSpesificProductsBloc(),
+                    child: const AdditionalProducts(),
+                  ),
+                  ScreenUtil().setVerticalSpacing(30),
+                ],
+              ),
+            );
+          
+          }   else if (products.isEmpty) {
+            return Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  height: 300,
+                  // width: 200,
+                  child:
+                      LottieBuilder.asset("assets/animations/empty_box.json"),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "empty_data".tr(),
+                  style: const TextStyle(color: ConstColor.mainBlack),
+                ),
+              ],
+            );
+          }
+
+          return SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.64,
+                  crossAxisSpacing: 10,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return ProductCardWidget(
+                    product: ProductModel(
+                      id: products[index].id,
+                      discount: products[index].discount,
+                      name_ru: products[index].name_ru,
+                      name_en: products[index].name_en,
+                      name_uz: products[index].name_uz,
+                      photo: products[index].photo,
+                      type_good: products[index].type_good,
+                      price: products[index].price,
+                      slug: products[index].slug,
+                    ),
+                    withHeight: false,
+                  );
+                },
+              ),
+            ),
+          );
         },
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
+import 'package:assalomproject/core/constant/number_formater.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/basket/widgets/product_card.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
@@ -95,7 +96,7 @@ class _BasketPageState extends State<BasketPage> {
 
             // return
             Text(
-              "${"total_payment".tr()} $price ${"sum".tr()}",
+              "${"total_payment".tr()} ${NumberFormatter.currency(price)} ${"sum".tr()}",
               style: Styles.style600sp18Black,
               // );
               // }
@@ -313,20 +314,25 @@ class _BasketPageState extends State<BasketPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height - 280,
-                        child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: products.length,
-                          itemBuilder: (context, index) {
-                            final product = products[index];
-                            return BasketProductCardWidget(
-                                onTap: () {
-                                  setState(() {});
-                                },
-                                product: product);
-                          },
+                      Padding(
+                        padding:EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                        ),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height - 280,
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: products.length,
+                            itemBuilder: (context, index) {
+                              final product = products[index];
+                              return BasketProductCardWidget(
+                                  onTap: () {
+                                    setState(() {});
+                                  },
+                                  product: product);
+                            },
+                          ),
                         ),
                       ),
                     ],

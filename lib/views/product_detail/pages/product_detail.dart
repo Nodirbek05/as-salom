@@ -2,6 +2,7 @@ import 'package:assalomproject/core/common_models/hive_models/basket_model.dart'
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
+import 'package:assalomproject/core/constant/number_formater.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
@@ -73,11 +74,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   String _getDescByLocale(ProductModel product, Locale locale) {
     late String? productName;
     if (locale == const Locale('ru')) {
-      productName = _parseHtmlString(product.desc_ru!);
+      productName = _parseHtmlString(product.desc_ru ?? "");
     } else if (locale == const Locale('uz')) {
-      productName = _parseHtmlString(product.desc_uz!);
+      productName = _parseHtmlString(product.desc_uz ?? "");
     } else if (locale == const Locale('en')) {
-      productName = _parseHtmlString(product.desc_en!);
+      productName = _parseHtmlString(product.desc_en ?? "");
     }
     return productName ?? "no_data".tr();
   }
@@ -135,10 +136,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               onPressed: () {
                                 if (getDrugQty(widget.product.id!) > 1) {
                                   decreaseQuantity(widget.product.id!);
-                                  setState(() {});
                                 } else {
                                   deleteDrugFromBasket(widget.product.id!);
                                 }
+
+                                setState(() {});
                               },
                               icon: const Icon(
                                 Icons.remove,
@@ -206,7 +208,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         selectedSize != 0
                             ? widget.product.sizes![selectedSize].id
                             : "null";
-                        widget.product.weight!;
+                        widget.product.weight ?? "";
+
+                        setState(() {});
                       },
                       width: double.infinity,
                     ),
@@ -242,7 +246,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     style: Styles.style400sp12Grey,
                   ),
                   Text(
-                    "${getPrice(widget.product.id!)} ${"sum".tr()}",
+                    "${NumberFormatter.currency(int.parse(getPrice(widget.product.id!)))} ${"sum".tr()}",
                     style: Styles.style600sp14Main,
                   ),
                 ],
@@ -404,7 +408,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           children: [
                             Text(
                               widget.product.price != "null"
-                                  ? "${widget.product.price} ${"sum".tr()}"
+                                  ? "${NumberFormatter.currency(widget.product.price)} ${"sum".tr()}"
                                   : "no_data".tr(),
                               style: Styles.style700sp22Main,
                             ),
@@ -412,7 +416,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             widget.product.discount != null
                                 ? Text(
                                     widget.product.discount != null
-                                        ? "${widget.product.discount} ${"sum".tr()}"
+                                        ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
                                         : "no_data".tr(),
                                     style: Styles.style400sp20GreyUnderline,
                                   )
@@ -433,7 +437,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               children: [
                                 Text(
                                   widget.product.price != "null"
-                                      ? "${widget.product.price} ${"sum".tr()}"
+                                      ? "${NumberFormatter.currency(widget.product.price)} ${"sum".tr()}"
                                       : "no_data".tr(),
                                   style: Styles.style700sp22Main,
                                 ),
@@ -441,7 +445,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 widget.product.discount != null
                                     ? Text(
                                         widget.product.discount != null
-                                            ? "${widget.product.discount} ${"sum".tr()}"
+                                            ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
                                             : "no_data".tr(),
                                         style: Styles.style400sp20GreyUnderline,
                                       )
@@ -461,7 +465,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               children: [
                                 Text(
                                   widget.product.price != "null"
-                                      ? "${widget.product.price} ${"sum".tr()}"
+                                      ? "${NumberFormatter.currency(widget.product.price)} ${"sum".tr()}"
                                       : "no_data".tr(),
                                   style: Styles.style700sp22Main,
                                 ),
@@ -469,7 +473,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 widget.product.discount != null
                                     ? Text(
                                         widget.product.discount != null
-                                            ? "${widget.product.discount} ${"sum".tr()}"
+                                            ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
                                             : "no_data".tr(),
                                         style: Styles.style400sp20GreyUnderline,
                                       )
@@ -614,12 +618,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               },
                             ),
                           )
-                        : Container(
-                            alignment: Alignment.center,
-                            height: 300,
-                            // width: 200,
-                            child: LottieBuilder.asset(
-                                "assets/animations/empty_box.json"),
+                        : Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                height: 300,
+                                // width: 200,
+                                child: LottieBuilder.asset(
+                                    "assets/animations/empty_box.json"),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "empty_data".tr(),
+                                style: const TextStyle(
+                                    color: ConstColor.mainBlack),
+                              ),
+                            ],
                           );
                   }
                   return const Center(

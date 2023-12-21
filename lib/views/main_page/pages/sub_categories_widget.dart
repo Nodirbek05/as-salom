@@ -78,7 +78,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                           height: 130.h,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: categories!.length,
+                            itemCount: categories.length,
                             itemBuilder: (context, index) {
                               print(ApiPaths.imageUrl +
                                   categories[index].photo.toString());

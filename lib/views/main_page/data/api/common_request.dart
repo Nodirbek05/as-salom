@@ -30,9 +30,9 @@ class CommonRequests {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
 
     int place = _prefs.getInt("place") ?? 0;
-   
+
     try {
-       debugPrint("I NEED PLACE HERE:${place}");
+      debugPrint("I NEED PLACE HERE:${place}");
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getBanners}/$place'),
         headers: {'Content-Type': 'application/json'},
@@ -249,12 +249,16 @@ class CommonRequests {
     // try {
     // SharedPreferences _prefs = await SharedPreferences.getInstance();
     // var token = _prefs.getString('token');
-    final response =
-        await http.post(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.search}'),
-            headers: {'Content-Type': 'application/json'},
-            body: json.encode(
-              {'search_text': query},
-            ));
+
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    int place = _prefs.getInt("place") ?? 0;
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.search}/$place'),
+      headers: {'Content-Type': 'application/json'},
+      // body: json.encode(
+      //   {'search_text': query},
+      // ),
+    );
     print(response.body);
     print(response.statusCode);
     switch (response.statusCode) {

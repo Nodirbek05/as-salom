@@ -344,13 +344,25 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                           //   isWorking = true;
                           // }
                           return insideProducts.isEmpty
-                              ? Container(
-                                  alignment: Alignment.center,
-                                  height: 300,
-                                  // width: 200,
-                                  child: LottieBuilder.asset(
-                                    "assets/animations/empty_box.json",
-                                  ),
+                              ? Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 300,
+                                      // width: 200,
+                                      child: LottieBuilder.asset(
+                                        "assets/animations/empty_box.json",
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      "empty_data".tr(),
+                                      style: const TextStyle(
+                                          color: ConstColor.mainBlack),
+                                    ),
+                                  ],
                                 )
                               : Expanded(
                                   child: Padding(
@@ -403,12 +415,25 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: products.isEmpty
-                        ? Container(
-                            alignment: Alignment.center,
-                            height: 300,
-                            // width: 200,
-                            child: LottieBuilder.asset(
-                                "assets/animations/empty_box.json"),
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                height: 300,
+                                // width: 200,
+                                child: LottieBuilder.asset(
+                                    "assets/animations/empty_box.json"),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text(
+                                "Data is Empty",
+                                style: TextStyle(color: ConstColor.mainBlack),
+                              ),
+                            ],
                           )
                         : GridView.builder(
                             gridDelegate:

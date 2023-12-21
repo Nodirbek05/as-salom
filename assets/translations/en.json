@@ -86,6 +86,7 @@
     "add_pro" : "Please add any product",
     "choose_zone" : "Please choose any zone name",
     "zone" : "Choose any zone",
-    "room_no" : "Room number(Optional)"
+    "room_no" : "Room number(Optional)",
+    "empty_data": "Data is empty"
 
 }

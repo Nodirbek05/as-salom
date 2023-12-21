@@ -86,5 +86,6 @@
     "add_pro" : "Iltimos mahsulot qo'shing",
     "choose_zone" : "Iltimos, istalgan zona nomini tanlang",
     "zone" : "Iltimos, istalgan zona ni tanlang",
-    "room_no" : "Xona nomeri(Majburiy emas)"
+    "room_no" : "Xona nomeri(Majburiy emas)",
+    "empty_data": "Ma'lumot bo'sh"
 }

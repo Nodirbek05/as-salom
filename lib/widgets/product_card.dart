@@ -2,6 +2,7 @@ import 'package:assalomproject/core/common_models/hive_models/basket_model.dart'
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
+import 'package:assalomproject/core/constant/number_formater.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
@@ -101,13 +102,15 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                     Text(
                       widget.product!.price != null &&
                               widget.product!.price != 0
-                          ? "${widget.product!.price} ${"sum".tr()} "
+                          ? "${NumberFormatter.currency(widget.product!.price)} ${"sum".tr()} "
                           : "no_data".tr(),
                       style: Styles.style600sp14Main,
                     ),
                     widget.product!.discount != null
                         ? Text(
-                            widget.product!.discount.toString(),
+                            widget.product!.discount != null
+                                ? "${NumberFormatter.currency(widget.product!.discount)} ${"sum".tr()}"
+                                : "no_data".tr(),
                             style: Styles.style400sp12GreyUnderline,
                           )
                         : const SizedBox(),

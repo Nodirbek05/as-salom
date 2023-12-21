@@ -2,6 +2,7 @@ import 'package:assalomproject/core/common_models/hive_models/basket_model.dart'
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
+import 'package:assalomproject/core/constant/number_formater.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -118,11 +119,12 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
             Row(
               children: [
                 Text(
-                  "$price ${"sum".tr()}",
+                  "${NumberFormatter.currency(price)} ${"sum".tr()}",
                   style: Styles.style600sp14Main,
                 ),
                 const Spacer(),
                 InkWell(
+                  borderRadius: BorderRadius.circular(25.r),
                   onTap: () {
                     widget.onTap();
 
@@ -152,6 +154,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                 Text(widget.product.qty.toString()),
                 ScreenUtil().setHorizontalSpacing(10),
                 InkWell(
+                  borderRadius: BorderRadius.circular(25.r),
                   onTap: () {
                     widget.onTap();
 

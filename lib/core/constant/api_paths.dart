@@ -13,7 +13,7 @@ class ApiPaths {
   static String imageUrl = "https://backend.as-salom.uz/public/images/";
   static String getSelection = "/get_selection";
   static String getSubCategories = "/get_sub_selection";
-  static String search = "/search";
+  static String search = "/search_app";
   static String insideCat = "/category_inner/";
   static String subCategoryInner = "/subcategory_inner/";
   static String filter = "/filter_subcategory";
