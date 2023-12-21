@@ -14,8 +14,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class BasketProductCardWidget extends StatefulWidget {
   final BasketModel product;
   final VoidCallback onTap;
+  final int price;
   const BasketProductCardWidget(
-      {super.key, required this.onTap, required this.product});
+      {super.key, required this.onTap, required this.product, required this.price});
 
   @override
   State<BasketProductCardWidget> createState() =>
@@ -23,10 +24,10 @@ class BasketProductCardWidget extends StatefulWidget {
 }
 
 class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
-  int price = 0;
+
 
   bool isHome = true;
-   String favBox = "favoritesBoxForHome";
+  String favBox = "favoritesBoxForHome";
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
@@ -41,20 +42,11 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
   @override
   void initState() {
     getCache();
-    getPrice(widget.product);
+    
     super.initState();
   }
 
-  getPrice(BasketModel product) {
-    price = 0;
-
-    for (var a = 0; a < product.qty; a++) {
-      product.price != "null"
-          ? price += int.parse(product.price.toString())
-          : price = 0;
-    }
-    print(price);
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +111,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
             Row(
               children: [
                 Text(
-                  "${NumberFormatter.currency(price)} ${"sum".tr()}",
+                  "${NumberFormatter.currency(widget.price)} ${"sum".tr()}",
                   style: Styles.style600sp14Main,
                 ),
                 const Spacer(),
