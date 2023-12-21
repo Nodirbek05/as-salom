@@ -72,6 +72,18 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
     fontFamily: interFontFamily,
   );
+  static final style600sp22Black = TextStyle(
+    color: ConstColor.mainBlack,
+    fontSize: 22.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
+  static final style600sp22Red = TextStyle(
+    color: ConstColor.redColor,
+    fontSize: 22.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: interFontFamily,
+  );
 
   static final style400sp13Grey = TextStyle(
     color: ConstColor.greyColor,
@@ -253,8 +265,7 @@ abstract class Styles {
       fontWeight: FontWeight.w700,
       fontFamily: interFontFamily,
       decoration: TextDecoration.underline,
-      decorationColor: ConstColor.as_salomText
-      );
+      decorationColor: ConstColor.as_salomText);
 
   static final styles400sp14Black = TextStyle(
     color: ConstColor.mainBlack,

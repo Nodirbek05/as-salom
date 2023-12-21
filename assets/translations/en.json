@@ -89,5 +89,6 @@
     "room_no": "Room number(Optional)",
     "empty_data": "Data is empty",
     "to_home": "Order to home",
-    "to_zone": "Order to zone"
+    "to_zone": "Order to zone",
+    "limited_product":"Maximum permissible order weight:"
 }

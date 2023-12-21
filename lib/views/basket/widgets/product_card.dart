@@ -16,7 +16,10 @@ class BasketProductCardWidget extends StatefulWidget {
   final VoidCallback onTap;
   final int price;
   const BasketProductCardWidget(
-      {super.key, required this.onTap, required this.product, required this.price});
+      {super.key,
+      required this.onTap,
+      required this.product,
+      required this.price});
 
   @override
   State<BasketProductCardWidget> createState() =>
@@ -24,8 +27,6 @@ class BasketProductCardWidget extends StatefulWidget {
 }
 
 class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
-
-
   bool isHome = true;
   String favBox = "favoritesBoxForHome";
   String basketBox = "basketBoxForHome";
@@ -42,11 +43,8 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
   @override
   void initState() {
     getCache();
-    
     super.initState();
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -149,10 +147,76 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                   borderRadius: BorderRadius.circular(25.r),
                   onTap: () {
                     widget.onTap();
-
-                    setState(() {
+                    if (widget.product.type == 2) {
+                      if (getDrugQty(widget.product.id) >= 12) {
+                        showDialog<void>(
+                          context: context,
+                          builder: (parentContext) {
+                            return AlertDialog(
+                              surfaceTintColor: ConstColor.mainWhite,
+                              backgroundColor: ConstColor.mainWhite,
+                              insetPadding: EdgeInsets.symmetric(
+                                horizontal: 15.w,
+                              ),
+                              // title: const Text('Basic dialog title'),
+                              content: SizedBox(
+                                height: 300.h,
+                                width: 350.w,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            icon: Icon(Icons.close)),
+                                      ],
+                                    ),
+                                    Text(
+                                      "limited_product".tr(),
+                                      style: Styles.style600sp22Black,
+                                    ),
+                                    Text(
+                                      "12 000 гр",
+                                      style: Styles.style600sp22Red,
+                                    ),
+                                    InkWell(
+                                      radius: 50.r,
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 55.h,
+                                        width: 328.w,
+                                        decoration: BoxDecoration(
+                                            color: ConstColor.as_salomText,
+                                            borderRadius:
+                                                BorderRadius.circular(50.r)),
+                                        child: Text(
+                                          "OK",
+                                          style: Styles.buttonText,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        increaseQuantity(widget.product.id);
+                      }
+                    } else {
                       increaseQuantity(widget.product.id);
-                    });
+                    }
+
+                    setState(() {});
                   },
                   child: Container(
                     alignment: Alignment.center,
