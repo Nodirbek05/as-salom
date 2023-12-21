@@ -50,6 +50,16 @@ class _BasketPageState extends State<BasketPage> {
     print(price);
   }
 
+  int getSingleProPrice(BasketModel product) {
+    int priceSingle = 0;
+    for (var a = 0; a < product.qty; a++) {
+      product.price != "null"
+          ? priceSingle += int.parse(product.price.toString())
+          : priceSingle = 0;
+    }
+    return priceSingle;
+  }
+
   @override
   void initState() {
     getCache();
@@ -58,8 +68,15 @@ class _BasketPageState extends State<BasketPage> {
 
   @override
   Widget build(BuildContext context) {
-    final product =
-        Hive.box<BasketModel>(basketBox).values.toList().cast<BasketModel>();
+    final product = isHome
+        ? Hive.box<BasketModel>("basketBoxForHome")
+            .values
+            .toList()
+            .cast<BasketModel>()
+        : Hive.box<BasketModel>("basketBox")
+            .values
+            .toList()
+            .cast<BasketModel>();
     getPrice(product);
     return Scaffold(
       bottomSheet: Container(
@@ -315,7 +332,7 @@ class _BasketPageState extends State<BasketPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding:EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 15.w,
                         ),
                         child: SizedBox(
@@ -326,7 +343,9 @@ class _BasketPageState extends State<BasketPage> {
                             itemCount: products.length,
                             itemBuilder: (context, index) {
                               final product = products[index];
+
                               return BasketProductCardWidget(
+                                  price: getSingleProPrice(product),
                                   onTap: () {
                                     setState(() {});
                                   },
