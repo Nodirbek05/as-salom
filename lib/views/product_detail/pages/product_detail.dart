@@ -438,7 +438,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   widget.product.desc_uz ?? "",
                                   widget.product.photo![0],
                                   int.parse(widget.product.id!.toString()),
-                                  widget.product.price ?? "null",
+                                  widget.product.price.toString(),
                                   widget.product.type_good ?? 0,
                                   widget.product.discount.toString(),
                                   widget.product.slug ?? "",
