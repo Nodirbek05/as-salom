@@ -183,7 +183,7 @@ class ProductModel {
   String? name_uz;
   String? name_en;
   String? slug;
-  dynamic? price;
+  dynamic price;
   int? discount;
   String? weight;
   String? weight_max;
