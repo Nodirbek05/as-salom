@@ -293,7 +293,8 @@ class _MainPageState extends State<MainPage> {
                 itemBuilder: (context, index) {
                   return ProductCardWidget(
                     product: ProductModel(
-                      sizes: products[index].sizes??[],
+                      weight: products[index].weight,
+                      sizes: products[index].sizes,
                       desc_en: products[index].desc_en,
                       desc_ru: products[index].desc_ru,
                       desc_uz: products[index].desc_uz,

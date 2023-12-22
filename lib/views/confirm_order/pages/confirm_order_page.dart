@@ -243,7 +243,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                           //   return null;
                           // },
                           hintText: "enter_fio".tr(),
-                          hintStyle: Styles.style500sp16Black,
+                          hintStyle: Styles.style400sp16Black,
                           controller: nameController,
                         ),
                       ),
@@ -283,7 +283,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                       ScreenUtil().setVerticalSpacing(20),
                       Text(
                         "room_no".tr(),
-                        style: Styles.style400sp14Black,
+                        style: Styles.style400sp16Black,
                       ),
 
                       SizedBox(
@@ -324,7 +324,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                         style: Styles.style400sp14Black,
                       ),
                       InputWidget(
-                        hintStyle: Styles.style500sp16Black,
+                        hintStyle: Styles.style400sp16Black,
                         controller: commentController,
                         maxLines: 3,
                         hintText: 'enter_text'.tr(),
@@ -368,7 +368,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
     
       hint: Text(
         'Выберите зону доставки',
-        style: Styles.style500sp16Black,
+        style: Styles.style400sp16Black,
       ),
       items: data
           .map(
@@ -376,7 +376,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
               value: item.name_ru,
               child: Text(
                 item.name_ru.toString(),
-                style: Styles.style500sp16Black,
+                style: Styles.style400sp16Black,
               ),
             ),
           )
