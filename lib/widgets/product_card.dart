@@ -1,10 +1,14 @@
+import 'package:assalomproject/core/common_models/error_model.dart';
 import 'package:assalomproject/core/common_models/hive_models/basket_model.dart';
 import 'package:assalomproject/core/common_models/hive_models/favorites_model.dart';
+import 'package:assalomproject/core/common_models/response_data.dart';
+import 'package:assalomproject/core/common_models/status_codes.dart';
 import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/number_formater.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
+import 'package:assalomproject/views/product_detail/data/models/get_pro_with_slug_model.dart';
 import 'package:assalomproject/views/product_detail/pages/product_detail.dart';
 import 'package:assalomproject/widgets/main_button.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class ProductCardWidget extends StatefulWidget {
   final bool withHeight;
@@ -40,6 +45,29 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     return productName ?? "no_data".tr();
   }
 
+  Future<ResponseData> getProSlug(String slug) async {
+    // try {
+
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getWithSlug}$slug'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return GetProWithSlugModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
+
   @override
   void initState() {
     getCache();
@@ -65,10 +93,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     return InkWell(
       borderRadius: BorderRadius.circular(20.r),
       onTap: () {
-        Navigator.pushNamed(context, ProductDetailPage.routeName,
-            arguments: ProductDetailPage(
-                product: widget.product!, slug: widget.product!.slug ?? ""));
-        print("SLUGGGGGGGG:${widget.product!.slug!}");
+        getProSlug(widget.product?.slug ?? "").then((res) {
+          if (res is GetProWithSlugModel) {
+            Navigator.pushNamed(context, ProductDetailPage.routeName,
+                arguments: ProductDetailPage(
+                    product: res.good!, slug: widget.product!.slug ?? ""));
+            print("SLUGGGGGGGG:${widget.product!.slug!}");
+          }
+        });
       },
       child: Stack(
         children: [
