@@ -32,6 +32,7 @@ void main() async {
         Locale('en'),
         Locale('ru'),
         Locale('uz'),
+        Locale('uzk'),
       ],
       fallbackLocale: const Locale('ru'),
       startLocale: const Locale('ru'),

@@ -132,7 +132,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           )
                         : const Center(),
                     Text(
-                      widget.product!.price != null &&
+                      widget.product!.price != "null" &&
                               widget.product!.price != 0
                           ? "${NumberFormatter.currency(widget.product!.price).toString()} ${"sum".tr()} "
                           : "no_data".tr(),

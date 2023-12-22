@@ -30,8 +30,11 @@ class _ChooseButtonLangState extends State<ChooseButtonLang> {
           context.setLocale(const Locale("uz"));
 
           Navigator.pushNamed(context, RegistrationPage.routeName);
-        } else {
+        } else if(widget.index == 2) {
           context.setLocale(const Locale("en"));
+          Navigator.pushNamed(context, RegistrationPage.routeName);
+        } else if (widget.index == 3) {
+                context.setLocale(const Locale("uzk"));
           Navigator.pushNamed(context, RegistrationPage.routeName);
         }
       },

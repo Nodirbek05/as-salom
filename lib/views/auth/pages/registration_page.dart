@@ -10,6 +10,8 @@ import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart'
 import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
 import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:circular_countdown_timer/countdown_text_format.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -35,10 +37,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController controller = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController pinController = TextEditingController();
+  CountDownController countDownController = CountDownController();
 
   bool isLogin = false;
   bool hasSms = false;
   bool isLoading = false;
+  bool isResendAvailable = false;
   final focusNode = FocusNode();
 
   static Future<ResponseData> getCode() async {
@@ -169,7 +173,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               isLoading = false;
                             });
                           } else if (state is RegisterFail) {
-                              setState(() {
+                            setState(() {
                               isLoading = false;
                             });
                             Fluttertoast.showToast(
@@ -399,10 +403,55 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
+
+                          // Row(
+                          //   children: [
+                          //     Text(
+                          //   "You may receive code in 1 minute",
+                          //   style: Styles.style400sp16Main,
+                          // ),
+                          //     CircularCountDownTimer(
+                          //       duration: 60,
+                          //       initialDuration: 1,
+                          //       controller: countDownController,
+                          //       width: 25.w,
+                          //       height: 25.w,
+                          //       ringColor: ConstColor.mainWhite,
+                          //       ringGradient: null,
+                          //       fillColor: ConstColor.mainWhite,
+                          //       fillGradient: null,
+                          //       backgroundColor: ConstColor.mainWhite,
+                          //       backgroundGradient: null,
+                          //       strokeWidth: 2.0,
+                          //       strokeCap: StrokeCap.round,
+                          //       textStyle: TextStyle(
+                          //           fontWeight: FontWeight.w400,
+                          //           fontSize: 14.sp,
+                          //           color: ConstColor.as_salomText),
+                          //       textFormat: CountdownTextFormat.SS,
+                          //       isReverse: true,
+                          //       isReverseAnimation: false,
+                          //       isTimerTextShown: true,
+                          //       autoStart: true,
+                          //       onStart: () {
+                          //         debugPrint('Countdown Started');
+                          //       },
+                          //       onComplete: () {
+                          //         setState(() {
+                          //           isResendAvailable = true;
+                          //         });
+                          //       },
+                          //       onChange: (String timeStamp) {
+                          //         debugPrint('Countdown Changed $timeStamp');
+                          //       },
+                          //     ),
+                          //   ],
+                          // ),
+
                           Text(
                             "resend_code".tr(),
                             style: Styles.style400sp16Main,
-                          )
+                          ),
                         ],
                       ),
                     ),

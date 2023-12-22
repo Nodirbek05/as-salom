@@ -149,7 +149,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                             BorderRadius.circular(20.r),
                                       ),
                                       child: Text(
-                                        "${orders[index].status_text}",
+                                        "${orders[index].status}",
                                         style: orders[index].status == "new"
                                             ? Styles.style500sp12Black
                                             : Styles.style500sp12White,

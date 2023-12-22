@@ -120,47 +120,47 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
               context.read<CreateOrderBloc>().add(
                     Makeorder(
                       good: CreateOrderModel(
-                          desc: commentController.text,
-                          name: nameController.text.isNotEmpty
-                              ? nameController.text
-                              : OrderHomePage.nameController.text,
-                          phone: phoneController.text,
-                          goods: goods,
-                          placeType: isHome ? 2 : 1,
-                          roomNumber: isHome
-                              ? null
-                              : roomNumberController.text.isNotEmpty
-                                  ? int.parse(roomNumberController.text)
-                                  : null,
-                          zoneName: isHome ? null : dropdownValue,
-                          apartment: isHome
-                              ? OrderHomePage.kvController.text.isNotEmpty
-                                  ? int.parse(OrderHomePage.kvController.text)
-                                  : null
-                              : null,
-                          enterance: isHome
-                              ? OrderHomePage.podezdController.text.isNotEmpty
-                                  ? int.parse(
-                                      OrderHomePage.podezdController.text)
-                                  : null
-                              : null,
-                          floor: isHome
-                              ? OrderHomePage.etajController.text.isNotEmpty
-                                  ? int.parse(OrderHomePage.etajController.text)
-                                  : null
-                              : null,
-                          homeNumber: isHome
-                              ? OrderHomePage.homeController.text.isNotEmpty
-                                  ? int.tryParse(
-                                      OrderHomePage.homeController.text)
-                                  : null
-                              : null,
-                          lat: isHome
-                              ? OrderHomePage.position.latitude.toString()
-                              : null,
-                          lng: isHome
-                              ? OrderHomePage.position.longitude.toString()
-                              : null),
+                        desc: commentController.text,
+                        name: nameController.text.isNotEmpty
+                            ? nameController.text
+                            : OrderHomePage.nameController.text,
+                        phone: phoneController.text,
+                        goods: goods,
+                        placeType: isHome ? 2 : 1,
+                        roomNumber: isHome
+                            ? null
+                            : roomNumberController.text.isNotEmpty
+                                ? int.parse(roomNumberController.text)
+                                : null,
+                        zoneName: isHome ? null : dropdownValue,
+                        apartment: isHome
+                            ? OrderHomePage.kvController.text.isNotEmpty
+                                ? int.parse(OrderHomePage.kvController.text)
+                                : null
+                            : null,
+                        enterance: isHome
+                            ? OrderHomePage.podezdController.text.isNotEmpty
+                                ? int.parse(OrderHomePage.podezdController.text)
+                                : null
+                            : null,
+                        floor: isHome
+                            ? OrderHomePage.etajController.text.isNotEmpty
+                                ? int.parse(OrderHomePage.etajController.text)
+                                : null
+                            : null,
+                        homeNumber: isHome
+                            ? OrderHomePage.homeController.text.isNotEmpty
+                                ? int.tryParse(
+                                    OrderHomePage.homeController.text)
+                                : null
+                            : null,
+                        lat: isHome
+                            ? OrderHomePage.position.latitude.toString()
+                            : null,
+                        lng: isHome
+                            ? OrderHomePage.position.longitude.toString()
+                            : null,
+                      ),
                     ),
                   );
             }
@@ -272,8 +272,8 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                             // String dropdownValue =
                             //     state.zoneModels.data.first.toString();
                             return SizedBox(
-                              height: 50.h,
-                              child: sizeDropDown(state.zoneModels.data));
+                                height: 50.h,
+                                child: sizeDropDown(state.zoneModels.data));
                           }
                           return const Center(
                             child: CupertinoActivityIndicator(),
@@ -289,7 +289,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                       SizedBox(
                         height: 50.h,
                         child: InputWidget(
-                           padding: EdgeInsets.only(
+                          padding: EdgeInsets.only(
                             top: 4.h,
                             left: 15.h,
                           ),
@@ -349,7 +349,6 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(
           bottom: 10.h,
-        
         ),
         // contentPadding:  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         enabledBorder: OutlineInputBorder(
@@ -365,7 +364,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
           borderSide: const BorderSide(color: ConstColor.as_salomText),
         ),
       ),
-    
+
       hint: Text(
         'Выберите зону доставки',
         style: Styles.style400sp16Black,

@@ -107,6 +107,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     // print(widget.product.)
     return Scaffold(
       bottomSheet: Container(
+        padding: EdgeInsets.only(
+          left: 10.w,
+          right: 10.w,
+        ),
         margin: EdgeInsets.only(bottom: 10.h),
         color: Colors.white,
         height: 70.h,
@@ -160,12 +164,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                               ConstColor.mainWhite,
                                           backgroundColor: ConstColor.mainWhite,
                                           insetPadding: EdgeInsets.symmetric(
-                                            horizontal: 15.w,
+                                            horizontal: 10.w,
                                           ),
                                           // title: const Text('Basic dialog title'),
-                                          content: SizedBox(
+                                          content: Container(
+                                            margin: EdgeInsets.only(
+                                              left: 10.w,
+                                            ),
                                             height: 300.h,
-                                            width: 350.w,
+                                            width: double.infinity,
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -180,14 +187,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                                           Navigator.pop(
                                                               context);
                                                         },
-                                                        icon:
-                                                            Icon(Icons.close)),
+                                                        icon: const Icon(
+                                                            Icons.close)),
                                                   ],
                                                 ),
                                                 Text(
                                                   "limited_product".tr(),
                                                   style:
                                                       Styles.style600sp22Black,
+                                                  textAlign: TextAlign.center,
                                                 ),
                                                 Text(
                                                   "12 000 гр",

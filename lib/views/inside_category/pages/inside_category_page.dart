@@ -157,6 +157,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                           ? ConstColor.as_salomText
                                           : null,
                                       child: ListTile(
+                                        titleAlignment: ListTileTitleAlignment.center,
                                         selectedColor: ConstColor.as_salomText,
                                         trailing: const Icon(
                                           Icons.arrow_forward_ios,

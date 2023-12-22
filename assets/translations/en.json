@@ -90,5 +90,6 @@
     "empty_data": "Data is empty",
     "to_home": "Order to home",
     "to_zone": "Order to zone",
-    "limited_product":"Maximum permissible order weight:"
+    "limited_product":"Maximum permissible order weight:",
+    "enter_address": "Enter address"
 }

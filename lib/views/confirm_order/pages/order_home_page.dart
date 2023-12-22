@@ -82,7 +82,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
     final bloc = BlocProvider.of<GetLocationToMapBloc>(context);
     return Padding(
       padding: EdgeInsets.only(
-        top: 30.h,
+        top: 15.h,
         left: 15.w,
         right: 15.w,
       ),
@@ -214,10 +214,24 @@ class _OrderHomePageState extends State<OrderHomePage> {
                     // ],
                     controller: OrderHomePage.homeController,
                     decoration: InputDecoration(
-                      hintText: "flat".tr(),
+                      contentPadding: EdgeInsets.only(top: 4.h, left: 10.w),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
+                      ),
                       border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
                         borderRadius: BorderRadius.circular(10),
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
+                      ),
+                      hintText: "flat".tr(),
+                      hintStyle: Styles.style400sp16Black,
                     ),
                   ),
                 ),
@@ -232,11 +246,24 @@ class _OrderHomePageState extends State<OrderHomePage> {
                     // ],
                     controller: OrderHomePage.etajController,
                     decoration: InputDecoration(
-                      hintText: "stage".tr(),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
+                        contentPadding: EdgeInsets.only(top: 4.h, left: 10.w),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              const BorderSide(color: ConstColor.as_salomText),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: ConstColor.as_salomText),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              const BorderSide(color: ConstColor.as_salomText),
+                        ),
+                        hintText: "stage".tr(),
+                        hintStyle: Styles.style400sp16Black),
                   ),
                 ),
               ],
@@ -257,8 +284,22 @@ class _OrderHomePageState extends State<OrderHomePage> {
                     controller: OrderHomePage.podezdController,
                     decoration: InputDecoration(
                       hintText: "enterance".tr(),
-                      border: OutlineInputBorder(
+                      hintStyle: Styles.style400sp16Black,
+                      contentPadding: EdgeInsets.only(top: 4.h, left: 10.w),
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
                       ),
                     ),
                   ),
@@ -275,8 +316,22 @@ class _OrderHomePageState extends State<OrderHomePage> {
                     controller: OrderHomePage.kvController,
                     decoration: InputDecoration(
                       hintText: "house".tr(),
-                      border: OutlineInputBorder(
+                      hintStyle: Styles.style400sp16Black,
+                      contentPadding: EdgeInsets.only(top: 4.h, left: 10.w),
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            const BorderSide(color: ConstColor.as_salomText),
                       ),
                     ),
                   ),
@@ -288,13 +343,27 @@ class _OrderHomePageState extends State<OrderHomePage> {
               "address".tr(),
               style: Styles.style400sp14Black,
             ),
+            ScreenUtil().setVerticalSpacing(5),
             TextFormField(
-              maxLines: 2,
+              readOnly: true,
+              maxLines: 4,
               controller: OrderHomePage.adressController,
               decoration: InputDecoration(
-                hintText: "Address",
-                border: OutlineInputBorder(
+                
+                hintText: "enter_address".tr(),
+                hintStyle: Styles.style400sp16Black,
+                contentPadding: EdgeInsets.only(top: 8.h, left: 10.w),
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: ConstColor.as_salomText),
                 ),
               ),
             ),
@@ -303,17 +372,29 @@ class _OrderHomePageState extends State<OrderHomePage> {
               "enter_name".tr(),
               style: Styles.style400sp14Black,
             ),
+                ScreenUtil().setVerticalSpacing(5),
             TextFormField(
               maxLines: 1,
               controller: OrderHomePage.nameController,
               decoration: InputDecoration(
                 hintText: "your_name".tr(),
-                border: OutlineInputBorder(
+                hintStyle: Styles.style400sp16Black,
+                contentPadding: EdgeInsets.only(top: 4.h, left: 10.w),
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: ConstColor.as_salomText),
                 ),
               ),
             ),
-            SizedBox(height: 100)
+            const SizedBox(height: 100)
           ],
         ),
       ),

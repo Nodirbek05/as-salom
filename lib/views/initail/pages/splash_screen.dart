@@ -19,8 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 1, milliseconds: 300),
       () {
-        if(mounted){
-                Navigator.pushNamed(context, LanguagePage.routeName);
+        if (mounted) {
+          Navigator.pushNamed(context, LanguagePage.routeName);
         }
 
         super.initState();
@@ -46,7 +46,9 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             child: Center(
-              child: SvgPicture.asset(ConstIcons.asSalomLogo,),
+              child: SvgPicture.asset(
+                ConstIcons.asSalomLogo,
+              ),
             ),
           ),
           Positioned(

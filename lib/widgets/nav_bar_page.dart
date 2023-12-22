@@ -116,7 +116,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                   borderRadius: BorderRadius.circular(0)),
               child: Padding(
                   padding: EdgeInsets.only(
-                    top: 30.h,
+                    top: 50.h,
                   ),
                   child: Column(
                     children: [
@@ -171,9 +171,9 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                             leading: SizedBox(
                               height: 20.h,
                               width: 20.w,
-                              child: Image.network(
-                                ApiPaths.imageUrl + categoryData[index].photo!,
-                                fit: BoxFit.cover,
+                              child: SvgPicture.network(
+                                ApiPaths.imageUrl + categoryData[index].icon!,
+                                color: ConstColor.mainBlack,
                               ),
                             ),
                             title: Text(

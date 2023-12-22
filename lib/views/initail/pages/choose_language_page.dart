@@ -44,6 +44,11 @@ class LanguagePage extends StatelessWidget {
               ),
               ScreenUtil().setVerticalSpacing(15),
               const ChooseButtonLang(
+                langName: "Узбек тили",
+                index: 3,
+              ),
+              ScreenUtil().setVerticalSpacing(15),
+              const ChooseButtonLang(
                 langName: "English",
                 index: 2,
               ),
