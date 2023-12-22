@@ -65,6 +65,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       productName = product.name_uz;
     } else if (locale == const Locale('en')) {
       productName = product.name_en;
+    } else if(locale == const Locale('fr')){
+      productName = product.name_oz;
     }
     return productName ?? "no_data".tr();
   }
@@ -77,6 +79,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       productName = _parseHtmlString(product.desc_uz ?? "");
     } else if (locale == const Locale('en')) {
       productName = _parseHtmlString(product.desc_en ?? "");
+    } else if (locale == const Locale('fr')){
+      productName = _parseHtmlString(product.desc_oz ?? "");
     }
     return productName ?? "no_data".tr();
   }
@@ -722,6 +726,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   child: ProductCardWidget(
                                     withHeight: true,
                                     product: ProductModel(
+                                    
                                       price: randomGoods[ranIndex].price,
                                       name_ru: randomGoods[ranIndex].name_ru,
                                       id: randomGoods[ranIndex].id,

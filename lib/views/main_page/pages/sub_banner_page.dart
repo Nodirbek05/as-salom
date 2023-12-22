@@ -29,6 +29,8 @@ class _SubBannersPageState extends State<SubBannersPage> {
       categoryName = category.name_uz;
     } else if (locale == const Locale('en')) {
       categoryName = category.name_en;
+    } else if(locale == const Locale('fr')){
+      categoryName = category.name_oz;
     }
     return categoryName ?? "no_data".tr();
   }

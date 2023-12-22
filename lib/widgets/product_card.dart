@@ -41,6 +41,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       productName = product.name_uz;
     } else if (locale == const Locale('en')) {
       productName = product.name_en;
+    } else if (locale == const Locale('fr')) {
+      productName = product.name_oz;
     }
     return productName ?? "no_data".tr();
   }
@@ -358,9 +360,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.name_ru ?? "",
                         widget.product!.name_en ?? "",
                         widget.product!.name_uz ?? "",
+                        widget.product!.name_oz ?? "",
                         widget.product!.desc_ru ?? "",
                         widget.product!.desc_uz ?? "",
                         widget.product!.desc_en ?? "",
+                        widget.product!.desc_oz ?? "",
                         widget.product!.photo![0],
                         int.parse(widget.product!.id!.toString()),
                         widget.product!.price.toString(),
@@ -422,9 +426,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       String name_ru,
       String name_en,
       String name_uz,
+      String name_oz,
       String desc_ru,
       String desc_uz,
       String desc_en,
+      String desc_oz,
       String image,
       int id,
       String price,
@@ -437,9 +443,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ..name_ru = name_ru
       ..name_en = name_en
       ..name_uz = name_uz
+      ..name_oz = name_oz
       ..desc_ru = desc_ru
       ..desc_en = desc_en
       ..desc_uz = desc_uz
+      ..desc_oz = desc_oz
       ..id = id
       ..image = image
       ..price = price

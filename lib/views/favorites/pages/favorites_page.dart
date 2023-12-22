@@ -74,6 +74,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         Text(
                           "empty_fav".tr(),
                           style: Styles.style600sp18Black,
+                          textAlign: TextAlign.center,
                         ),
                         ScreenUtil().setVerticalSpacing(20),
                         Text(

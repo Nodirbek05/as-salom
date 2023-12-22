@@ -197,6 +197,7 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                     child: ProductCardWidget(
                                       product: ProductModel(
+                                        quantity: products[index],
                                         weight: products[index].kg,
                                         photo: [products[index].image],
                                         price: products[index].price != "null"
@@ -295,6 +296,8 @@ class _MainPageState extends State<MainPage> {
                 itemBuilder: (context, index) {
                   return ProductCardWidget(
                     product: ProductModel(
+                      quantity: products[index].quantity,
+                      name_oz: products[index].name_oz,
                       weight: products[index].weight,
                       sizes: products[index].sizes,
                       desc_en: products[index].desc_en,

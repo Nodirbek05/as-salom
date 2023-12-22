@@ -21,22 +21,24 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
       ..name_ru = fields[1] as String
       ..name_uz = fields[2] as String
       ..name_en = fields[3] as String
-      ..desc_ru = fields[4] as String
-      ..desc_uz = fields[5] as String
-      ..desc_en = fields[6] as String
-      ..type = fields[7] as int
-      ..price = fields[8] as String
-      ..image = fields[9] as String
-      ..discount = fields[10] as String
-      ..size = fields[11] as String?
-      ..kg = fields[12] as String?
-      ..slug = fields[13] as String?;
+      ..name_oz = fields[4] as String
+      ..desc_ru = fields[5] as String
+      ..desc_uz = fields[6] as String
+      ..desc_en = fields[7] as String
+      ..desc_oz = fields[8] as String
+      ..type = fields[9] as int
+      ..price = fields[10] as String
+      ..image = fields[11] as String
+      ..discount = fields[12] as String
+      ..size = fields[13] as String?
+      ..kg = fields[14] as String?
+      ..slug = fields[15] as String?;
   }
 
   @override
   void write(BinaryWriter writer, FavoritesModel obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -46,24 +48,28 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
       ..writeByte(3)
       ..write(obj.name_en)
       ..writeByte(4)
-      ..write(obj.desc_ru)
+      ..write(obj.name_oz)
       ..writeByte(5)
-      ..write(obj.desc_uz)
+      ..write(obj.desc_ru)
       ..writeByte(6)
-      ..write(obj.desc_en)
+      ..write(obj.desc_uz)
       ..writeByte(7)
-      ..write(obj.type)
+      ..write(obj.desc_en)
       ..writeByte(8)
-      ..write(obj.price)
+      ..write(obj.desc_oz)
       ..writeByte(9)
-      ..write(obj.image)
+      ..write(obj.type)
       ..writeByte(10)
-      ..write(obj.discount)
+      ..write(obj.price)
       ..writeByte(11)
-      ..write(obj.size)
+      ..write(obj.image)
       ..writeByte(12)
-      ..write(obj.kg)
+      ..write(obj.discount)
       ..writeByte(13)
+      ..write(obj.size)
+      ..writeByte(14)
+      ..write(obj.kg)
+      ..writeByte(15)
       ..write(obj.slug);
   }
 

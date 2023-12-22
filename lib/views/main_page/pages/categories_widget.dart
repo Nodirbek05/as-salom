@@ -32,6 +32,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
       categoryName = category.name_uz;
     } else if (locale == const Locale('en')) {
       categoryName = category.name_en;
+    } else if(locale == const Locale('fr')){
+      categoryName = category.name_oz;
     }
     return categoryName ?? "no_data".tr();
   }
@@ -78,14 +80,17 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            _getcategoryByLocale(
-                              categories[index],
-                              context.locale,
+                          SizedBox(
+                            width: 100.w,
+                            child: Text(
+                              _getcategoryByLocale(
+                                categories[index],
+                                context.locale,
+                              ),
+                              style: Styles.style500sp14Black,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
-                            style: Styles.style500sp14Black,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
                           ),
                           ScreenUtil().setVerticalSpacing(4),
                           Container(

@@ -59,6 +59,7 @@ class CategoryDataModel {
   String? name_uz;
   String? name_en;
   String? name_ru;
+  String? name_oz;
   String? icon;
   String? photo;
   String? created_at;
@@ -70,6 +71,7 @@ class CategoryDataModel {
     this.name_uz,
     this.name_en,
     this.name_ru,
+    this.name_oz,
     this.icon,
     this.photo,
     this.created_at,
@@ -83,6 +85,7 @@ class CategoryDataModel {
     String? name_uz,
     String? name_en,
     String? name_ru,
+    String? name_oz,
     String? icon,
     String? photo,
     String? created_at,
@@ -95,6 +98,7 @@ class CategoryDataModel {
       name_uz: name_uz ?? this.name_uz,
       name_en: name_en ?? this.name_en,
       name_ru: name_ru ?? this.name_ru,
+      name_oz: name_oz ?? this.name_oz,
       icon: icon ?? this.icon,
       photo: photo ?? this.photo,
       created_at: created_at ?? this.created_at,
@@ -110,11 +114,12 @@ class CategoryDataModel {
       'name_uz': name_uz,
       'name_en': name_en,
       'name_ru': name_ru,
+      'name_oz': name_oz,
       'icon': icon,
       'photo': photo,
       'created_at': created_at,
       'updated_at': updated_at,
-      'subcategories': subcategories?.map((x) => x.toMap()).toList(),
+      'subcategories': subcategories?.map((x) => x?.toMap())?.toList(),
       'goods': goods?.toMap(),
     };
   }
@@ -125,57 +130,56 @@ class CategoryDataModel {
       name_uz: map['name_uz'],
       name_en: map['name_en'],
       name_ru: map['name_ru'],
+      name_oz: map['name_oz'],
       icon: map['icon'],
       photo: map['photo'],
       created_at: map['created_at'],
       updated_at: map['updated_at'],
-      subcategories: map['subcategories'] != null
-          ? List<SubCategoryModel>.from(
-              map['subcategories']?.map((x) => SubCategoryModel.fromMap(x)))
-          : null,
+      subcategories: map['subcategories'] != null ? List<SubCategoryModel>.from(map['subcategories']?.map((x) => SubCategoryModel.fromMap(x))) : null,
       goods: map['goods'] != null ? CategoryGoods.fromMap(map['goods']) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CategoryDataModel.fromJson(String source) =>
-      CategoryDataModel.fromMap(json.decode(source));
+  factory CategoryDataModel.fromJson(String source) => CategoryDataModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'CategoryDataModel(id: $id, name_uz: $name_uz, name_en: $name_en, name_ru: $name_ru, icon: $icon, photo: $photo, created_at: $created_at, updated_at: $updated_at, subcategories: $subcategories, goods: $goods)';
+    return 'CategoryDataModel(id: $id, name_uz: $name_uz, name_en: $name_en, name_ru: $name_ru, name_oz: $name_oz, icon: $icon, photo: $photo, created_at: $created_at, updated_at: $updated_at, subcategories: $subcategories, goods: $goods)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is CategoryDataModel &&
-        other.id == id &&
-        other.name_uz == name_uz &&
-        other.name_en == name_en &&
-        other.name_ru == name_ru &&
-        other.icon == icon &&
-        other.photo == photo &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at &&
-        listEquals(other.subcategories, subcategories) &&
-        other.goods == goods;
+      other.id == id &&
+      other.name_uz == name_uz &&
+      other.name_en == name_en &&
+      other.name_ru == name_ru &&
+      other.name_oz == name_oz &&
+      other.icon == icon &&
+      other.photo == photo &&
+      other.created_at == created_at &&
+      other.updated_at == updated_at &&
+      listEquals(other.subcategories, subcategories) &&
+      other.goods == goods;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name_uz.hashCode ^
-        name_en.hashCode ^
-        name_ru.hashCode ^
-        icon.hashCode ^
-        photo.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode ^
-        subcategories.hashCode ^
-        goods.hashCode;
+      name_uz.hashCode ^
+      name_en.hashCode ^
+      name_ru.hashCode ^
+      name_oz.hashCode ^
+      icon.hashCode ^
+      photo.hashCode ^
+      created_at.hashCode ^
+      updated_at.hashCode ^
+      subcategories.hashCode ^
+      goods.hashCode;
   }
 }
 

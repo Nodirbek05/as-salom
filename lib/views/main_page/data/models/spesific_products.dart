@@ -60,6 +60,7 @@ class SpesificProductsModel extends ResponseData {
 class CategoryModel {
   num? id;
   String? name_uz;
+  String? name_oz;
   String? name_ru;
   String? name_en;
   String? created_at;
@@ -68,6 +69,7 @@ class CategoryModel {
   CategoryModel({
     this.id,
     this.name_uz,
+    this.name_oz,
     this.name_ru,
     this.name_en,
     this.created_at,
@@ -78,6 +80,7 @@ class CategoryModel {
   CategoryModel copyWith({
     num? id,
     String? name_uz,
+    String? name_oz,
     String? name_ru,
     String? name_en,
     String? created_at,
@@ -87,6 +90,7 @@ class CategoryModel {
     return CategoryModel(
       id: id ?? this.id,
       name_uz: name_uz ?? this.name_uz,
+      name_oz: name_oz ?? this.name_oz,
       name_ru: name_ru ?? this.name_ru,
       name_en: name_en ?? this.name_en,
       created_at: created_at ?? this.created_at,
@@ -96,81 +100,65 @@ class CategoryModel {
   }
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    if (id != null) {
-      result.addAll({'id': id});
-    }
-    if (name_uz != null) {
-      result.addAll({'name_uz': name_uz});
-    }
-    if (name_ru != null) {
-      result.addAll({'name_ru': name_ru});
-    }
-    if (name_en != null) {
-      result.addAll({'name_en': name_en});
-    }
-    if (created_at != null) {
-      result.addAll({'created_at': created_at});
-    }
-    if (updated_at != null) {
-      result.addAll({'updated_at': updated_at});
-    }
-    if (goods != null) {
-      result.addAll({'goods': goods!.map((x) => x.toMap()).toList()});
-    }
-
-    return result;
+    return {
+      'id': id,
+      'name_uz': name_uz,
+      'name_oz': name_oz,
+      'name_ru': name_ru,
+      'name_en': name_en,
+      'created_at': created_at,
+      'updated_at': updated_at,
+      'goods': goods?.map((x) => x?.toMap())?.toList(),
+    };
   }
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
     return CategoryModel(
       id: map['id'],
       name_uz: map['name_uz'],
+      name_oz: map['name_oz'],
       name_ru: map['name_ru'],
       name_en: map['name_en'],
       created_at: map['created_at'],
       updated_at: map['updated_at'],
-      goods: map['goods'] != null
-          ? List<ProductModel>.from(
-              map['goods']?.map((x) => ProductModel.fromMap(x)))
-          : null,
+      goods: map['goods'] != null ? List<ProductModel>.from(map['goods']?.map((x) => ProductModel.fromMap(x))) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CategoryModel.fromJson(String source) =>
-      CategoryModel.fromMap(json.decode(source));
+  factory CategoryModel.fromJson(String source) => CategoryModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, name_uz: $name_uz, name_ru: $name_ru, name_en: $name_en, created_at: $created_at, updated_at: $updated_at, goods: $goods)';
+    return 'CategoryModel(id: $id, name_uz: $name_uz, name_oz: $name_oz, name_ru: $name_ru, name_en: $name_en, created_at: $created_at, updated_at: $updated_at, goods: $goods)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is CategoryModel &&
-        other.id == id &&
-        other.name_uz == name_uz &&
-        other.name_ru == name_ru &&
-        other.name_en == name_en &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at &&
-        listEquals(other.goods, goods);
+      other.id == id &&
+      other.name_uz == name_uz &&
+      other.name_oz == name_oz &&
+      other.name_ru == name_ru &&
+      other.name_en == name_en &&
+      other.created_at == created_at &&
+      other.updated_at == updated_at &&
+      listEquals(other.goods, goods);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name_uz.hashCode ^
-        name_ru.hashCode ^
-        name_en.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode ^
-        goods.hashCode;
+      name_uz.hashCode ^
+      name_oz.hashCode ^
+      name_ru.hashCode ^
+      name_en.hashCode ^
+      created_at.hashCode ^
+      updated_at.hashCode ^
+      goods.hashCode;
   }
 }
 
@@ -182,6 +170,7 @@ class ProductModel {
   String? name_ru;
   String? name_uz;
   String? name_en;
+  String? name_oz;
   String? slug;
   dynamic price;
   int? discount;
@@ -193,10 +182,11 @@ class ProductModel {
   String? desc_ru;
   String? desc_uz;
   String? desc_en;
+  String? desc_oz;
   List<String>? photo;
   String? created_at;
   String? updated_at;
-  dynamic quantity;
+  dynamic? quantity;
   dynamic? weight_bruto;
   Pivot? pivot;
   List<SizeData>? sizes;
@@ -208,8 +198,9 @@ class ProductModel {
     this.name_ru,
     this.name_uz,
     this.name_en,
+    this.name_oz,
     this.slug,
-    this.price,
+    required this.price,
     this.discount,
     this.weight,
     this.weight_max,
@@ -219,6 +210,7 @@ class ProductModel {
     this.desc_ru,
     this.desc_uz,
     this.desc_en,
+    this.desc_oz,
     this.photo,
     this.created_at,
     this.updated_at,
@@ -227,7 +219,11 @@ class ProductModel {
     this.pivot,
     this.sizes,
   });
- 
+
+  
+
+
+
 
   ProductModel copyWith({
     num? id,
@@ -237,6 +233,7 @@ class ProductModel {
     String? name_ru,
     String? name_uz,
     String? name_en,
+    String? name_oz,
     String? slug,
     dynamic? price,
     int? discount,
@@ -248,10 +245,11 @@ class ProductModel {
     String? desc_ru,
     String? desc_uz,
     String? desc_en,
+    String? desc_oz,
     List<String>? photo,
     String? created_at,
     String? updated_at,
-    dynamic quantity,
+    dynamic? quantity,
     dynamic? weight_bruto,
     Pivot? pivot,
     List<SizeData>? sizes,
@@ -264,6 +262,7 @@ class ProductModel {
       name_ru: name_ru ?? this.name_ru,
       name_uz: name_uz ?? this.name_uz,
       name_en: name_en ?? this.name_en,
+      name_oz: name_oz ?? this.name_oz,
       slug: slug ?? this.slug,
       price: price ?? this.price,
       discount: discount ?? this.discount,
@@ -275,6 +274,7 @@ class ProductModel {
       desc_ru: desc_ru ?? this.desc_ru,
       desc_uz: desc_uz ?? this.desc_uz,
       desc_en: desc_en ?? this.desc_en,
+      desc_oz: desc_oz ?? this.desc_oz,
       photo: photo ?? this.photo,
       created_at: created_at ?? this.created_at,
       updated_at: updated_at ?? this.updated_at,
@@ -286,99 +286,50 @@ class ProductModel {
   }
 
   Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-  
-    if(id != null){
-      result.addAll({'id': id});
-    }
-    if(type_good != null){
-      result.addAll({'type_good': type_good});
-    }
-    if(category_id != null){
-      result.addAll({'category_id': category_id});
-    }
-    if(subcategory_id != null){
-      result.addAll({'subcategory_id': subcategory_id});
-    }
-    if(name_ru != null){
-      result.addAll({'name_ru': name_ru});
-    }
-    if(name_uz != null){
-      result.addAll({'name_uz': name_uz});
-    }
-    if(name_en != null){
-      result.addAll({'name_en': name_en});
-    }
-    if(slug != null){
-      result.addAll({'slug': slug});
-    }
-    if(price != null){
-      result.addAll({'price': price});
-    }
-    if(discount != null){
-      result.addAll({'discount': discount});
-    }
-    if(weight != null){
-      result.addAll({'weight': weight});
-    }
-    if(weight_max != null){
-      result.addAll({'weight_max': weight_max});
-    }
-    if(ikpu != null){
-      result.addAll({'ikpu': ikpu});
-    }
-    if(barcode != null){
-      result.addAll({'barcode': barcode});
-    }
-    if(nds != null){
-      result.addAll({'nds': nds});
-    }
-    if(desc_ru != null){
-      result.addAll({'desc_ru': desc_ru});
-    }
-    if(desc_uz != null){
-      result.addAll({'desc_uz': desc_uz});
-    }
-    if(desc_en != null){
-      result.addAll({'desc_en': desc_en});
-    }
-    if(photo != null){
-      result.addAll({'photo': photo});
-    }
-    if(created_at != null){
-      result.addAll({'created_at': created_at});
-    }
-    if(updated_at != null){
-      result.addAll({'updated_at': updated_at});
-    }
-    if(quantity != null){
-      result.addAll({'quantity': quantity});
-    }
-    if(weight_bruto != null){
-      result.addAll({'weight_bruto': weight_bruto});
-    }
-    if(pivot != null){
-      result.addAll({'pivot': pivot!.toMap()});
-    }
-    if(sizes != null){
-      result.addAll({'sizes': sizes!.map((x) => x.toMap()).toList()});
-    }
-  
-    return result;
+    return {
+      'id': id,
+      'type_good': type_good,
+      'category_id': category_id,
+      'subcategory_id': subcategory_id,
+      'name_ru': name_ru,
+      'name_uz': name_uz,
+      'name_en': name_en,
+      'name_oz': name_oz,
+      'slug': slug,
+      'price': price,
+      'discount': discount,
+      'weight': weight,
+      'weight_max': weight_max,
+      'ikpu': ikpu,
+      'barcode': barcode,
+      'nds': nds,
+      'desc_ru': desc_ru,
+      'desc_uz': desc_uz,
+      'desc_en': desc_en,
+      'desc_oz': desc_oz,
+      'photo': photo,
+      'created_at': created_at,
+      'updated_at': updated_at,
+      'quantity': quantity,
+      'weight_bruto': weight_bruto,
+      'pivot': pivot?.toMap(),
+      'sizes': sizes?.map((x) => x?.toMap())?.toList(),
+    };
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       id: map['id'],
       type_good: map['type_good']?.toInt(),
-      category_id: map['category_id'],
-      subcategory_id: map['subcategory_id'],
+      category_id: map['category_id']?.toInt(),
+      subcategory_id: map['subcategory_id']?.toInt(),
       name_ru: map['name_ru'],
       name_uz: map['name_uz'],
       name_en: map['name_en'],
+      name_oz: map['name_oz'],
       slug: map['slug'],
-      price: map['price'],
-      discount: map['discount'],
+      price: map['price'] ?? null,
+      discount: map['discount']?.toInt(),
       weight: map['weight'],
       weight_max: map['weight_max'],
       ikpu: map['ikpu'],
@@ -387,6 +338,7 @@ class ProductModel {
       desc_ru: map['desc_ru'],
       desc_uz: map['desc_uz'],
       desc_en: map['desc_en'],
+      desc_oz: map['desc_oz'],
       photo: List<String>.from(map['photo']),
       created_at: map['created_at'],
       updated_at: map['updated_at'],
@@ -403,7 +355,7 @@ class ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, type_good: $type_good, category_id: $category_id, subcategory_id: $subcategory_id, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, slug: $slug, price: $price, discount: $discount, weight: $weight, weight_max: $weight_max, ikpu: $ikpu, barcode: $barcode, nds: $nds, desc_ru: $desc_ru, desc_uz: $desc_uz, desc_en: $desc_en, photo: $photo, created_at: $created_at, updated_at: $updated_at, quantity: $quantity, weight_bruto: $weight_bruto, pivot: $pivot, sizes: $sizes)';
+    return 'ProductModel(id: $id, type_good: $type_good, category_id: $category_id, subcategory_id: $subcategory_id, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, name_oz: $name_oz, slug: $slug, price: $price, discount: $discount, weight: $weight, weight_max: $weight_max, ikpu: $ikpu, barcode: $barcode, nds: $nds, desc_ru: $desc_ru, desc_uz: $desc_uz, desc_en: $desc_en, desc_oz: $desc_oz, photo: $photo, created_at: $created_at, updated_at: $updated_at, quantity: $quantity, weight_bruto: $weight_bruto, pivot: $pivot, sizes: $sizes)';
   }
 
   @override
@@ -418,6 +370,7 @@ class ProductModel {
       other.name_ru == name_ru &&
       other.name_uz == name_uz &&
       other.name_en == name_en &&
+      other.name_oz == name_oz &&
       other.slug == slug &&
       other.price == price &&
       other.discount == discount &&
@@ -429,6 +382,7 @@ class ProductModel {
       other.desc_ru == desc_ru &&
       other.desc_uz == desc_uz &&
       other.desc_en == desc_en &&
+      other.desc_oz == desc_oz &&
       listEquals(other.photo, photo) &&
       other.created_at == created_at &&
       other.updated_at == updated_at &&
@@ -447,6 +401,7 @@ class ProductModel {
       name_ru.hashCode ^
       name_uz.hashCode ^
       name_en.hashCode ^
+      name_oz.hashCode ^
       slug.hashCode ^
       price.hashCode ^
       discount.hashCode ^
@@ -458,6 +413,7 @@ class ProductModel {
       desc_ru.hashCode ^
       desc_uz.hashCode ^
       desc_en.hashCode ^
+      desc_oz.hashCode ^
       photo.hashCode ^
       created_at.hashCode ^
       updated_at.hashCode ^

@@ -57,6 +57,7 @@ class SubBanners extends ResponseData {
   String? photo;
   String? link;
   String? name_ru;
+  String? name_oz;
   String? name_uz;
   String? name_en;
   String? created_at;
@@ -66,6 +67,7 @@ class SubBanners extends ResponseData {
     this.photo,
     this.link,
     this.name_ru,
+    this.name_oz,
     this.name_uz,
     this.name_en,
     this.created_at,
@@ -77,6 +79,7 @@ class SubBanners extends ResponseData {
     String? photo,
     String? link,
     String? name_ru,
+    String? name_oz,
     String? name_uz,
     String? name_en,
     String? created_at,
@@ -87,6 +90,7 @@ class SubBanners extends ResponseData {
       photo: photo ?? this.photo,
       link: link ?? this.link,
       name_ru: name_ru ?? this.name_ru,
+      name_oz: name_oz ?? this.name_oz,
       name_uz: name_uz ?? this.name_uz,
       name_en: name_en ?? this.name_en,
       created_at: created_at ?? this.created_at,
@@ -100,6 +104,7 @@ class SubBanners extends ResponseData {
       'photo': photo,
       'link': link,
       'name_ru': name_ru,
+      'name_oz': name_oz,
       'name_uz': name_uz,
       'name_en': name_en,
       'created_at': created_at,
@@ -113,6 +118,7 @@ class SubBanners extends ResponseData {
       photo: map['photo'],
       link: map['link'],
       name_ru: map['name_ru'],
+      name_oz: map['name_oz'],
       name_uz: map['name_uz'],
       name_en: map['name_en'],
       created_at: map['created_at'],
@@ -127,7 +133,7 @@ class SubBanners extends ResponseData {
 
   @override
   String toString() {
-    return 'SubBanners(id: $id, photo: $photo, link: $link, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, created_at: $created_at, updated_at: $updated_at)';
+    return 'SubBanners(id: $id, photo: $photo, link: $link, name_ru: $name_ru, name_oz: $name_oz, name_uz: $name_uz, name_en: $name_en, created_at: $created_at, updated_at: $updated_at)';
   }
 
   @override
@@ -139,6 +145,7 @@ class SubBanners extends ResponseData {
         other.photo == photo &&
         other.link == link &&
         other.name_ru == name_ru &&
+        other.name_oz == name_oz &&
         other.name_uz == name_uz &&
         other.name_en == name_en &&
         other.created_at == created_at &&
@@ -151,6 +158,7 @@ class SubBanners extends ResponseData {
         photo.hashCode ^
         link.hashCode ^
         name_ru.hashCode ^
+        name_oz.hashCode ^
         name_uz.hashCode ^
         name_en.hashCode ^
         created_at.hashCode ^

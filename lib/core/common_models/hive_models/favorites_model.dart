@@ -14,27 +14,28 @@ class FavoritesModel extends HiveObject {
 
   @HiveField(3)
   late String name_en;
-
   @HiveField(4)
-  late String desc_ru;
-
+  late String name_oz;
   @HiveField(5)
-  late String desc_uz;
-
+  late String desc_ru;
   @HiveField(6)
-  late String desc_en;
+  late String desc_uz;
   @HiveField(7)
-  late int type;
+  late String desc_en;
   @HiveField(8)
-  late String price;
+  late String desc_oz;
   @HiveField(9)
-  late String image;
+  late int type;
   @HiveField(10)
-  late String discount;
+  late String price;
   @HiveField(11)
-  String? size;
+  late String image;
   @HiveField(12)
-  String? kg;
+  late String discount;
   @HiveField(13)
+  String? size;
+  @HiveField(14)
+  String? kg;
+  @HiveField(15)
   String? slug;
 }
