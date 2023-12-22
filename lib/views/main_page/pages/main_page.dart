@@ -199,7 +199,9 @@ class _MainPageState extends State<MainPage> {
                                       product: ProductModel(
                                         weight: products[index].kg,
                                         photo: [products[index].image],
-                                        price: int.parse(products[index].price),
+                                        price: products[index].price != "null"
+                                            ? int.parse(products[index].price)
+                                            : products[index].price,
                                         name_ru: products[index].name_ru,
                                         name_en: products[index].name_en,
                                         name_uz: products[index].name_uz,
