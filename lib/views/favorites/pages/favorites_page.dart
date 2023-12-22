@@ -50,8 +50,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
       body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ValueListenableBuilder(
-              valueListenable:
-                  Hive.box<FavoritesModel>(favBox).listenable(),
+              valueListenable: Hive.box<FavoritesModel>(favBox).listenable(),
               builder: (ctx, box, _) {
                 final products = box.values.toList().cast<FavoritesModel>();
                 if (products.isEmpty) {
@@ -119,7 +118,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             desc_uz: products[index].desc_uz,
                             photo: [products[index].image],
                             type_good: products[index].type,
-                            price: int.parse(products[index].price),
+                            price: products[index].price != "null"
+                                ? int.parse(products[index].price)
+                                : 0,
                             slug: products[index].slug),
                         withHeight: false,
                       );

@@ -44,15 +44,17 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
   int indexxx = 20;
 
   String _getcategoryByLocale(SubCategoryModel category, Locale locale) {
-    late String? categoryName;
+    String categoryName = "no_data".tr();
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru;
+      categoryName = category.name_ru ?? "";
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz;
+      categoryName = category.name_uz ?? "";
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en;
+      categoryName = category.name_en ?? "";
+    }else if (locale == const Locale('fr')) {
+      categoryName = category.name_uz ?? "";
     }
-    return categoryName ?? "no_data".tr();
+    return categoryName;
   }
 
   static Future<ResponseData> getInnerProducts(int id) async {
@@ -157,7 +159,8 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                           ? ConstColor.as_salomText
                                           : null,
                                       child: ListTile(
-                                        titleAlignment: ListTileTitleAlignment.center,
+                                        titleAlignment:
+                                            ListTileTitleAlignment.center,
                                         selectedColor: ConstColor.as_salomText,
                                         trailing: const Icon(
                                           Icons.arrow_forward_ios,

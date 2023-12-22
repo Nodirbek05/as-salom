@@ -4,6 +4,7 @@ import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/views/initail/pages/choose_language_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = "/splashScreen";
@@ -16,6 +17,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    setCache();
     Timer(
       const Duration(seconds: 1, milliseconds: 300),
       () {
@@ -27,6 +29,11 @@ class _SplashScreenState extends State<SplashScreen> {
       },
     );
     super.initState();
+  }
+
+  setCache() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    _prefs.getInt("place") != null ? null : _prefs.setInt('place', 2);
   }
 
   @override

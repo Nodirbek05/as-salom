@@ -26,31 +26,31 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
   }
 
   String _getcategoryByLocale(SubCategoryModel category, Locale locale) {
-    late String? categoryName;
+    String categoryName = "no_data".tr();
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru;
+      categoryName = category.name_ru ?? "";
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz;
+      categoryName = category.name_uz ?? "";
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en;
-    } else if (locale == const Locale('en')) {
-      categoryName = category.name_en;
+      categoryName = category.name_en ?? "";
+    } else if (locale == const Locale('fr')) {
+      categoryName = category.name_uz ?? "";
     }
-    return categoryName ?? "no_data".tr();
+    return categoryName;
   }
 
   String _getSubCategoryByLocale(SubCategoriesModel category, Locale locale) {
-    late String? categoryName;
+    String categoryName = "no_data".tr();
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru;
+      categoryName = category.name_ru ?? "";
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz;
+      categoryName = category.name_uz ?? "";
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en;
-    } else if (locale == const Locale('en')) {
-      categoryName = category.name_en;
+      categoryName = category.name_en ?? "";
+    } else if (locale == const Locale('fr')) {
+      categoryName = category.name_uz ?? "";
     }
-    return categoryName ?? "no_data".tr();
+    return categoryName;
   }
 
   @override
