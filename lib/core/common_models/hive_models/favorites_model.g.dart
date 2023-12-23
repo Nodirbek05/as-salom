@@ -17,7 +17,7 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return FavoritesModel()
-      ..id = fields[0] as int?
+      ..id = fields[0] as String?
       ..name_ru = fields[1] as String?
       ..name_uz = fields[2] as String?
       ..name_en = fields[3] as String?

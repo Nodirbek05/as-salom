@@ -209,7 +209,7 @@ class _MainPageState extends State<MainPage> {
                                         desc_en: products[index].desc_en,
                                         desc_ru: products[index].desc_ru,
                                         desc_uz: products[index].desc_uz,
-                                        id: products[index].id,
+                                        id: int.parse(products[index].id ?? "0"),
                                         type_good: products[index].type,
                                         discount:
                                             products[index].discount != "null"

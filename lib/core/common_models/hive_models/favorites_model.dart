@@ -5,7 +5,7 @@ part 'favorites_model.g.dart';
 @HiveType(typeId: 1)
 class FavoritesModel {
   @HiveField(0)
-  int? id;
+  String? id;
   @HiveField(1)
   String? name_ru;
   @HiveField(2)
