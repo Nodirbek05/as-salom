@@ -108,7 +108,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         product: ProductModel(
                             id: products[index].id,
                             discount: products[index].discount != "null"
-                                ? int.parse(products[index].discount)
+                                ? int.parse(products[index].discount ?? "0")
                                 : 0,
                             name_ru: products[index].name_ru,
                             name_en: products[index].name_en,
@@ -116,10 +116,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             desc_en: products[index].desc_en,
                             desc_ru: products[index].desc_ru,
                             desc_uz: products[index].desc_uz,
-                            photo: [products[index].image],
+                            photo: [products[index].image ?? ""],
                             type_good: products[index].type,
                             price: products[index].price != "null"
-                                ? int.parse(products[index].price)
+                                ? int.parse(products[index].price ?? "0")
                                 : 0,
                             slug: products[index].slug),
                         withHeight: false,

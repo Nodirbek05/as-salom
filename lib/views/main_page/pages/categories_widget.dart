@@ -32,7 +32,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
       categoryName = category.name_uz;
     } else if (locale == const Locale('en')) {
       categoryName = category.name_en;
-    } else if(locale == const Locale('fr')){
+    } else if (locale == const Locale('fr')) {
       categoryName = category.name_oz;
     }
     return categoryName ?? "no_data".tr();
@@ -62,7 +62,10 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                         InsideCategoryPage.routeName,
                         arguments: InsideCategoryPage(
                           isCat: true,
-                          name: categories[index].name_ru!,
+                          name: _getcategoryByLocale(
+                            categories[index],
+                            context.locale,
+                          ),
                           id: int.parse(
                             categories[index].id!.toString(),
                           ),

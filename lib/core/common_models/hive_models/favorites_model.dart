@@ -3,35 +3,33 @@ import 'package:hive_flutter/adapters.dart';
 part 'favorites_model.g.dart';
 
 @HiveType(typeId: 1)
-class FavoritesModel extends HiveObject {
+class FavoritesModel {
   @HiveField(0)
-  late int id;
+  int? id;
   @HiveField(1)
-  late String name_ru;
-
+  String? name_ru;
   @HiveField(2)
-  late String name_uz;
-
+  String? name_uz;
   @HiveField(3)
-  late String name_en;
+  String? name_en;
   @HiveField(4)
-  late String name_oz;
+  String? name_oz;
   @HiveField(5)
-  late String desc_ru;
+  String? desc_ru;
   @HiveField(6)
-  late String desc_uz;
+  String? desc_uz;
   @HiveField(7)
-  late String desc_en;
+  String? desc_en;
   @HiveField(8)
-  late String desc_oz;
+  String? desc_oz;
   @HiveField(9)
-  late int type;
+  int? type;
   @HiveField(10)
-  late String price;
+  String? price;
   @HiveField(11)
-  late String image;
+  String? image;
   @HiveField(12)
-  late String discount;
+  String? discount;
   @HiveField(13)
   String? size;
   @HiveField(14)

@@ -92,7 +92,10 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                                       InsideCategoryPage.routeName,
                                       arguments: InsideCategoryPage(
                                         isCat: false,
-                                        name: categories[index].name_ru!,
+                                        name: _getcategoryByLocale(
+                                          categories[index],
+                                          context.locale,
+                                        ),
                                         id: int.parse(
                                           categories[index]
                                               .category_id!

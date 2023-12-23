@@ -904,7 +904,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     final listProducts = Hive.box<FavoritesModel>(favBox);
     for (var product in box) {
       if (drugId == product.id) {
-        listProducts.delete(product.key);
+        listProducts.delete(product);
         break;
       }
     }

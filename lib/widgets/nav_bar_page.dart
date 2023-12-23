@@ -168,7 +168,10 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                                       isCat: true,
                                       id: int.parse(
                                           categoryData[index].id!.toString()),
-                                      name: categoryData[index].name_ru!));
+                                      name: _getcategoryByLocale(
+                                            categoryData[index],
+                                            context.locale,
+                                          ),));
                             },
                             leading: SizedBox(
                               height: 20.h,

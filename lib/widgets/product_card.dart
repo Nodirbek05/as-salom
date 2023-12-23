@@ -519,7 +519,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     for (var product in box) {
       if (drugId == product.id) {
         print("Product REMOVED FROM BASKET");
-        listProducts.delete(product.key);
+        listProducts.delete(product);
         break;
       }
     }
