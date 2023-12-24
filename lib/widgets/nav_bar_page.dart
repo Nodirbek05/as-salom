@@ -47,8 +47,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
     basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
-
-    setState(() {});
+    // setState(() {});
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -83,17 +82,17 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   // final basketBox = Hive.box<BasketModel>('basketBox');
 
   String _getcategoryByLocale(CategoryDataModel category, Locale locale) {
-    late String? categoryName;
+    String categoryName = "no_data".tr();
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru;
+      categoryName = category.name_ru ?? "";
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz;
+      categoryName = category.name_uz ?? "";
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en;
-    } else if(locale == const Locale('fr')){
-      categoryName = category.name_oz;
+      categoryName = category.name_en ?? "";
+    } else if (locale == const Locale('fr')) {
+      categoryName = category.name_oz ?? "";
     }
-    return categoryName ?? "no_data".tr();
+    return categoryName;
   }
 
   @override
@@ -165,13 +164,14 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                               Navigator.pushNamed(
                                   context, InsideCategoryPage.routeName,
                                   arguments: InsideCategoryPage(
-                                      isCat: true,
-                                      id: int.parse(
-                                          categoryData[index].id!.toString()),
-                                      name: _getcategoryByLocale(
-                                            categoryData[index],
-                                            context.locale,
-                                          ),));
+                                    isCat: true,
+                                    id: int.parse(
+                                        categoryData[index].id!.toString()),
+                                    name: _getcategoryByLocale(
+                                      categoryData[index],
+                                      context.locale,
+                                    ),
+                                  ));
                             },
                             leading: SizedBox(
                               height: 20.h,

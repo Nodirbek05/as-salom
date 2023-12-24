@@ -13,7 +13,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(BasketModelAdapter());
@@ -26,6 +26,7 @@ void main() async {
   bool hasRegistered = _prefs.getString('token') == null;
   _prefs.getInt("place") != null ? null : _prefs.setInt('place', 2);
   await Future.delayed(const Duration(seconds: 1));
+
   runApp(
     EasyLocalization(
       supportedLocales: const [

@@ -41,7 +41,7 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage>
     print("LIFECYCLE WORKED OR NOPE");
     print(state.toString());
     if (state == AppLifecycleState.resumed) {
-      WidgetsBinding.instance.removeObserver(this);
+      // WidgetsBinding.instance.removeObserver(this);
       print("resumed");
       Navigator.pushNamed(context, ConfirmAnimationPage.routeName);
     }
