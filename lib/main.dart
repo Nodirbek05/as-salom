@@ -25,7 +25,7 @@ void main() async {
   SharedPreferences _prefs = await SharedPreferences.getInstance();
   bool hasRegistered = _prefs.getString('token') == null;
   _prefs.getInt("place") != null ? null : _prefs.setInt('place', 2);
-
+  await Future.delayed(const Duration(seconds: 1));
   runApp(
     EasyLocalization(
       supportedLocales: const [
