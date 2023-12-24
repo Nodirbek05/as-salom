@@ -65,7 +65,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       productName = product.name_uz;
     } else if (locale == const Locale('en')) {
       productName = product.name_en;
-    } else if(locale == const Locale('fr')){
+    } else if (locale == const Locale('fr')) {
       productName = product.name_oz;
     }
     return productName ?? "no_data".tr();
@@ -79,7 +79,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       productName = _parseHtmlString(product.desc_uz ?? "");
     } else if (locale == const Locale('en')) {
       productName = _parseHtmlString(product.desc_en ?? "");
-    } else if (locale == const Locale('fr')){
+    } else if (locale == const Locale('fr')) {
       productName = _parseHtmlString(product.desc_oz ?? "");
     }
     return productName ?? "no_data".tr();
@@ -445,11 +445,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   widget.product.name_ru ?? "",
                                   widget.product.name_en ?? "",
                                   widget.product.name_uz ?? "",
+                                  widget.product.name_oz ?? "",
                                   widget.product.desc_en ?? "",
                                   widget.product.desc_ru ?? "",
                                   widget.product.desc_uz ?? "",
+                                  widget.product.desc_oz ?? "",
                                   widget.product.photo![0],
-                                  widget.product.id!.toString(),
+                                  widget.product.id != null
+                                      ? int.parse(widget.product.id.toString())
+                                      : 0,
                                   widget.product.price.toString(),
                                   widget.product.type_good ?? 0,
                                   widget.product.discount.toString(),
@@ -726,7 +730,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   child: ProductCardWidget(
                                     withHeight: true,
                                     product: ProductModel(
-                                    
                                       price: randomGoods[ranIndex].price,
                                       name_ru: randomGoods[ranIndex].name_ru,
                                       id: randomGoods[ranIndex].id,
@@ -857,7 +860,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     int qty,
     String image,
   ) {
-    final product = BasketModel()
+    final product = BasketModel(
+      id: productId,
+      name: name,
+      type: type,
+      price: price,
+      qty: qty,
+      image: image,
+    )
       ..id = productId
       ..name = name
       ..type = type
@@ -872,16 +882,32 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       String name_ru,
       String name_en,
       String name_uz,
+      String name_oz,
       String desc_ru,
       String desc_uz,
       String desc_en,
+      String desc_oz,
       String image,
-      String id,
+      int id,
       String price,
       int type,
       String discount,
       String slug) {
-    final product = FavoritesModel()
+    final product = FavoritesModel(
+      id: id,
+      name_ru: name_ru,
+      type: type,
+      price: price,
+      desc_en: desc_en,
+      desc_uz: desc_uz,
+      desc_ru: desc_ru,
+      desc_oz: desc_oz,
+      discount: discount,
+      image: image,
+      name_en: name_en,
+      name_oz: name_oz,
+      name_uz: name_uz,
+    )
       ..name_ru = name_ru
       ..name_en = name_en
       ..name_uz = name_uz
@@ -926,7 +952,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     final listProducts = Hive.box<BasketModel>(basketBox);
     for (var product in box) {
       if (drugId == product.id) {
-        listProducts.delete(product.key);
+        listProducts.delete(product);
         break;
       }
     }

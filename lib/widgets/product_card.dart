@@ -366,7 +366,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.desc_en ?? "",
                         widget.product!.desc_oz ?? "",
                         widget.product!.photo![0],
-                        widget.product!.id!.toString(),
+                        widget.product!.id != null
+                            ? int.parse(widget.product!.id.toString())
+                            : 0,
                         widget.product!.price.toString(),
                         widget.product!.type_good ?? 0,
                         widget.product!.discount.toString(),
@@ -432,14 +434,30 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       String desc_en,
       String desc_oz,
       String image,
-      String id,
+      int id,
       String price,
       int type,
       String discount,
       String size,
       String kg,
       String slug) {
-    final product = FavoritesModel()
+    final product = FavoritesModel(
+        name_en: name_en,
+        name_uz: name_uz,
+        name_oz: name_oz,
+        name_ru: name_ru,
+        desc_en: desc_en,
+        desc_oz: desc_oz,
+        desc_ru: desc_ru,
+        desc_uz: desc_uz,
+        discount: discount,
+        id: id,
+        image: image,
+        price: price,
+        type: type,
+        kg: kg,
+        size: size,
+        slug: slug)
       ..name_ru = name_ru
       ..name_en = name_en
       ..name_uz = name_uz
@@ -486,7 +504,16 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
 
   void addDrugToBasket(int productId, String name, int type, String price,
       int qty, String image, String size, String kg, String slug) {
-    final product = BasketModel()
+    final product = BasketModel(
+        id: productId,
+        name: name,
+        type: type,
+        price: price,
+        image: image,
+        size: size,
+        qty: qty,
+        kg: kg,
+        slug: slug)
       ..id = productId
       ..name = name
       ..type = type
@@ -507,7 +534,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     for (var product in box) {
       if (drugId == product.id) {
         print("DRUG REMOVED FROM BASKET");
-        listProducts.delete(product.key);
+        listProducts.delete(product);
         break;
       }
     }

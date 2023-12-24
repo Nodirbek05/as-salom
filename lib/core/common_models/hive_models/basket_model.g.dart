@@ -16,16 +16,17 @@ class BasketModelAdapter extends TypeAdapter<BasketModel> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return BasketModel()
-      ..id = fields[0] as int
-      ..name = fields[1] as String
-      ..qty = fields[2] as int
-      ..type = fields[3] as int
-      ..price = fields[4] as String
-      ..image = fields[5] as String
-      ..size = fields[6] as String?
-      ..kg = fields[7] as String?
-      ..slug = fields[8] as String?;
+    return BasketModel(
+      id: fields[0] as int,
+      name: fields[1] as String,
+      qty: fields[2] as int,
+      type: fields[3] as int,
+      price: fields[4] as String,
+      image: fields[5] as String,
+      size: fields[6] as String?,
+      kg: fields[7] as String?,
+      slug: fields[8] as String?,
+    );
   }
 
   @override

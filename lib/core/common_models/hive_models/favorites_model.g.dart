@@ -16,23 +16,24 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return FavoritesModel()
-      ..id = fields[0] as String?
-      ..name_ru = fields[1] as String?
-      ..name_uz = fields[2] as String?
-      ..name_en = fields[3] as String?
-      ..name_oz = fields[4] as String?
-      ..desc_ru = fields[5] as String?
-      ..desc_uz = fields[6] as String?
-      ..desc_en = fields[7] as String?
-      ..desc_oz = fields[8] as String?
-      ..type = fields[9] as int?
-      ..price = fields[10] as String?
-      ..image = fields[11] as String?
-      ..discount = fields[12] as String?
-      ..size = fields[13] as String?
-      ..kg = fields[14] as String?
-      ..slug = fields[15] as String?;
+    return FavoritesModel(
+      id: fields[0] as int,
+      name_ru: fields[1] as String,
+      name_uz: fields[2] as String,
+      name_en: fields[3] as String,
+      name_oz: fields[4] as String,
+      desc_ru: fields[5] as String,
+      desc_uz: fields[6] as String,
+      desc_en: fields[7] as String,
+      desc_oz: fields[8] as String,
+      type: fields[9] as int,
+      price: fields[10] as String,
+      image: fields[11] as String,
+      discount: fields[12] as String,
+      size: fields[13] as String?,
+      kg: fields[14] as String?,
+      slug: fields[15] as String?,
+    );
   }
 
   @override

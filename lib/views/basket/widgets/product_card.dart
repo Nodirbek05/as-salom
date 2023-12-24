@@ -278,8 +278,17 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
   }
 
   void addDrugToBasket(int productId, String name, int type, String price,
-      int qty, String size, String weight, String slug) {
-    final product = BasketModel()
+      int qty, String size, String weight, String slug, String image) {
+    final product = BasketModel(
+        id: productId,
+        name: name,
+        type: type,
+        price: price,
+        qty: qty,
+        image: image,
+        kg: weight,
+        size: size,
+        slug: slug)
       ..id = productId
       ..name = name
       ..type = type
@@ -298,7 +307,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
     for (var product in box) {
       if (drugId == product.id) {
         print("DRUG REMOVED FROM BASKET");
-        listProducts.delete(product.key);
+        listProducts.delete(product);
         break;
       }
     }

@@ -3,23 +3,34 @@ import 'package:hive_flutter/adapters.dart';
 part 'basket_model.g.dart';
 
 @HiveType(typeId: 0)
-class BasketModel extends HiveObject {
+class BasketModel {
   @HiveField(0)
-  late int id;
+  int id;
   @HiveField(1)
-  late String name;
+  String name;
   @HiveField(2)
-  late int qty;
+  int qty;
   @HiveField(3)
-  late int type;
+  int type;
   @HiveField(4)
-  late String price;
+  String price;
   @HiveField(5)
-  late String image;
+  String image;
   @HiveField(6)
-   String? size;
+  String? size;
   @HiveField(7)
-   String? kg;
+  String? kg;
   @HiveField(8)
-   String? slug;
+  String? slug;
+  BasketModel({
+    required this.id,
+    required this.name,
+    required this.qty,
+    required this.type,
+    required this.price,
+    required this.image,
+     this.size,
+     this.kg,
+     this.slug,
+  });
 }

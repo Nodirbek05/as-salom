@@ -5,35 +5,53 @@ part 'favorites_model.g.dart';
 @HiveType(typeId: 1)
 class FavoritesModel {
   @HiveField(0)
-  String? id;
+  int id;
   @HiveField(1)
-  String? name_ru;
+  String name_ru;
   @HiveField(2)
-  String? name_uz;
+  String name_uz;
   @HiveField(3)
-  String? name_en;
+  String name_en;
   @HiveField(4)
-  String? name_oz;
+  String name_oz;
   @HiveField(5)
-  String? desc_ru;
+  String desc_ru;
   @HiveField(6)
-  String? desc_uz;
+  String desc_uz;
   @HiveField(7)
-  String? desc_en;
+  String desc_en;
   @HiveField(8)
-  String? desc_oz;
+  String desc_oz;
   @HiveField(9)
-  int? type;
+  int type;
   @HiveField(10)
-  String? price;
+  String price;
   @HiveField(11)
-  String? image;
+  String image;
   @HiveField(12)
-  String? discount;
+  String discount;
   @HiveField(13)
   String? size;
   @HiveField(14)
   String? kg;
   @HiveField(15)
   String? slug;
+  FavoritesModel({
+    required this.id,
+    required this.name_ru,
+    required this.name_uz,
+    required this.name_en,
+    required this.name_oz,
+    required this.desc_ru,
+    required this.desc_uz,
+    required this.desc_en,
+    required this.desc_oz,
+    required this.type,
+    required this.price,
+    required this.image,
+    required this.discount,
+    this.size,
+    this.kg,
+    this.slug,
+  });
 }
