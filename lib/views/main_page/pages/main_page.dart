@@ -201,7 +201,8 @@ class _MainPageState extends State<MainPage> {
                                         weight: products[index].kg,
                                         photo: [products[index].image ?? ""],
                                         price: products[index].price != "null"
-                                            ? int.parse(products[index].price ?? "0")
+                                            ? int.parse(
+                                                products[index].price ?? "0")
                                             : products[index].price,
                                         name_ru: products[index].name_ru,
                                         name_en: products[index].name_en,
@@ -211,11 +212,11 @@ class _MainPageState extends State<MainPage> {
                                         desc_uz: products[index].desc_uz,
                                         id: products[index].id,
                                         type_good: products[index].type,
-                                        discount:
-                                            products[index].discount != "null"
-                                                ? int.parse(
-                                                    products[index].discount ?? "0")
-                                                : 0,
+                                        discount: products[index].discount !=
+                                                "null"
+                                            ? int.parse(
+                                                products[index].discount ?? "0")
+                                            : 0,
                                         slug: products[index].slug,
                                       ),
                                       withHeight: true,

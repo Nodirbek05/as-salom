@@ -13,7 +13,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(BasketModelAdapter());
@@ -24,7 +24,7 @@ void main() async {
   await Hive.openBox<BasketModel>('basketBoxForHome');
   SharedPreferences _prefs = await SharedPreferences.getInstance();
   bool hasRegistered = _prefs.getString('token') == null;
-  _prefs.getInt("place") != null ? null : _prefs.setInt('place', 2);
+  _prefs.getInt("place") != null ? null : await _prefs.setInt('place', 2);
 
   runApp(
     EasyLocalization(

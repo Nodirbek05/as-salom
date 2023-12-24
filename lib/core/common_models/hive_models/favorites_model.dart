@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 part 'favorites_model.g.dart';
 
 @HiveType(typeId: 1)
-class FavoritesModel {
+class FavoritesModel extends HiveObject{
   @HiveField(0)
   dynamic id;
   @HiveField(1)
