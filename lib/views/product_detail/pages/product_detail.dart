@@ -504,6 +504,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+
+                            Text(
+                            "Вес Brutto : ${widget.product.weight_bruto}гр.",
+                            style: Styles.style400sp14Grey,
+                          ),
                           Text(
                             "${"price_for".tr()} шт:",
                             style: Styles.style700sp18Black,
@@ -563,107 +568,112 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             ],
                           ),
                         )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "price".tr(),
-                              style: Styles.style700sp18Black,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  widget.product.price != "null"
-                                      ? "${NumberFormatter.currency(widget.product.price)} ${"sum".tr()}"
-                                      : "no_data".tr(),
-                                  style: Styles.style700sp22Main,
-                                ),
-                                const SizedBox(width: 15),
-                                widget.product.discount != null
-                                    ? Text(
-                                        widget.product.discount != null
-                                            ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
-                                            : "no_data".tr(),
-                                        style: Styles.style400sp20GreyUnderline,
-                                      )
-                                    : const Center()
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                            Text(
-                              "size".tr(),
-                              style: Styles.style700sp18Black,
-                            ),
-                            const SizedBox(height: 10),
-                            widget.product.sizes != null
-                                ? SizedBox(
-                                    width: double.infinity,
-                                    height: 70,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: widget.product.sizes!.length,
-                                      itemBuilder: (ctx, indx) {
-                                        return Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 10),
-                                          child: InkWell(
-                                            onTap: () {
-                                              selectedSize = int.parse(widget
-                                                  .product.sizes![indx].id!
-                                                  .toString());
-                                              setState(() {
-                                                selectedSize;
-                                              });
-                                            },
-                                            borderRadius:
-                                                BorderRadius.circular(10.r),
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: selectedSize ==
-                                                          widget.product
-                                                              .sizes![indx].id
-                                                      ? ConstColor.as_salomText
-                                                      : ConstColor.lightGrey,
+                      : Padding(
+                          padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "price".tr(),
+                                style: Styles.style700sp18Black,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    widget.product.price != "null"
+                                        ? "${NumberFormatter.currency(widget.product.sizes![0].pivot!.price)} ${"sum".tr()}"
+                                        : "no_data".tr(),
+                                    style: Styles.style700sp22Main,
+                                  ),
+                                  const SizedBox(width: 15),
+                                  widget.product.discount != null
+                                      ? Text(
+                                          widget.product.discount != null
+                                              ? "${NumberFormatter.currency(widget.product.discount)} ${"sum".tr()}"
+                                              : "no_data".tr(),
+                                          style:
+                                              Styles.style400sp20GreyUnderline,
+                                        )
+                                      : const Center()
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              Text(
+                                "size".tr(),
+                                style: Styles.style700sp18Black,
+                              ),
+                              const SizedBox(height: 10),
+                              widget.product.sizes != null
+                                  ? SizedBox(
+                                      width: double.infinity,
+                                      height: 70,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: widget.product.sizes!.length,
+                                        itemBuilder: (ctx, indx) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 10),
+                                            child: InkWell(
+                                              onTap: () {
+                                                selectedSize = int.parse(widget
+                                                    .product.sizes![indx].id!
+                                                    .toString());
+                                                setState(() {
+                                                  selectedSize;
+                                                });
+                                              },
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: selectedSize ==
+                                                            widget.product
+                                                                .sizes![indx].id
+                                                        ? ConstColor
+                                                            .as_salomText
+                                                        : ConstColor.lightGrey,
+                                                  ),
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
                                                 ),
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                              ),
-                                              width: selectedSize ==
-                                                      widget.product
-                                                          .sizes![indx].id!
-                                                  ? 80
-                                                  : 73,
-                                              height: selectedSize ==
-                                                      widget.product
-                                                          .sizes![indx].id!
-                                                  ? 80
-                                                  : 70,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Text(widget.product
-                                                      .sizes![indx].number
-                                                      .toString()),
-                                                  Text(widget.product
-                                                      .sizes![indx].name_ru
-                                                      .toString()),
-                                                ],
+                                                width: selectedSize ==
+                                                        widget.product
+                                                            .sizes![indx].id!
+                                                    ? 80
+                                                    : 73,
+                                                height: selectedSize ==
+                                                        widget.product
+                                                            .sizes![indx].id!
+                                                    ? 80
+                                                    : 70,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Text(widget.product
+                                                        .sizes![indx].number
+                                                        .toString()),
+                                                    Text(widget.product
+                                                        .sizes![indx].name_ru
+                                                        .toString()),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  )
-                                : Center()
-                          ],
+                                          );
+                                        },
+                                      ),
+                                    )
+                                  : Center()
+                            ],
+                          ),
                         ),
               const SizedBox(height: 25),
               Padding(
@@ -711,7 +721,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               const SizedBox(height: 25),
               BlocBuilder<GetProductWithSlugBloc, GetProductWithSlugState>(
                 builder: (context, state) {
-                  print(state);
                   if (state is GetProductWithSlugFailed) {
                     return const Center();
                   } else if (state is GetProductWithSlugSuccess) {
