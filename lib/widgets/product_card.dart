@@ -318,7 +318,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         _getcategoryByLocale(
                                             widget.product!, context.locale),
                                         widget.product!.type_good!,
-                                        widget.product!.price.toString(),
+                                        widget.product!.type_good! == 3
+                                            ? widget
+                                                .product!.sizes![0].pivot!.price
+                                                .toString()
+                                            : widget.product!.price.toString(),
                                         1,
                                         widget.product!.photo![0].toString(),
                                         widget.product!.sizes != null &&
