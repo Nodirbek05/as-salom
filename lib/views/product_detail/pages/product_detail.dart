@@ -311,48 +311,51 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
       ),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "total_box".tr(),
-                    style: Styles.style400sp12Grey,
+          preferredSize: const Size.fromHeight(60),
+          child: ValueListenableBuilder<Box<BasketModel>>(
+              valueListenable: Hive.box<BasketModel>(basketBox).listenable(),
+              builder: (ctx, box, value) {
+                return AppBar(
+                  automaticallyImplyLeading: false,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "total_box".tr(),
+                            style: Styles.style400sp12Grey,
+                          ),
+                          Text(
+                            "${getDrugQty(widget.product.id!)} ${getType(widget.product.id!)}",
+                            style: Styles.style600sp14Main,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "total_price".tr(),
+                            style: Styles.style400sp12Grey,
+                          ),
+                          Text(
+                            "${NumberFormatter.currency(int.parse(getPrice(widget.product.id!)))} ${"sum".tr()}",
+                            style: Styles.style600sp14Main,
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, BasketPage.routeName,
+                                arguments: true);
+                          },
+                          icon: const Icon(Icons.arrow_forward))
+                    ],
                   ),
-                  Text(
-                    "${getDrugQty(widget.product.id!)} ${getType(widget.product.id!)}",
-                    style: Styles.style600sp14Main,
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "total_price".tr(),
-                    style: Styles.style400sp12Grey,
-                  ),
-                  Text(
-                    "${NumberFormatter.currency(int.parse(getPrice(widget.product.id!)))} ${"sum".tr()}",
-                    style: Styles.style600sp14Main,
-                  ),
-                ],
-              ),
-              IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, BasketPage.routeName,
-                        arguments: true);
-                  },
-                  icon: const Icon(Icons.arrow_forward))
-            ],
-          ),
-        ),
-      ),
+                );
+              })),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.h),
