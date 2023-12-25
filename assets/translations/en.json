@@ -91,5 +91,6 @@
     "to_home": "Order to home",
     "to_zone": "Order to zone",
     "limited_product":"Maximum permissible order weight:",
-    "enter_address": "Enter address"
+    "enter_address": "Enter address",
+    "receive_code_again":"You may receive code in"
 }
