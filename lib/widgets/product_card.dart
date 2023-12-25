@@ -134,7 +134,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           )
                         : const Center(),
                     Text(
-                      "${NumberFormatter.currency(widget.product!.price).toString()} ${"sum".tr()} ",
+                      "${NumberFormatter.currency(widget.product!.price)} ${"sum".tr()} ",
                       style: Styles.style600sp14Main,
                     ),
                     widget.product!.discount != null
@@ -370,7 +370,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.id != null
                             ? int.parse(widget.product!.id.toString())
                             : 0,
-                        widget.product!.price.toString(),
+                        widget.product!.type_good! == 3
+                            ? widget.product!.sizes![0].pivot!.price.toString()
+                            : widget.product!.price.toString(),
                         widget.product!.type_good ?? 0,
                         widget.product!.discount.toString(),
                         widget.product!.sizes != null &&
