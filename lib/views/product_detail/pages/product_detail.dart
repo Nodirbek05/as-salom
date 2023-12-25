@@ -757,6 +757,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     right: 10.w,
                                   ),
                                   child: ProductCardWidget(
+                                    fromApi: true,
                                     withHeight: true,
                                     product: ProductModel(
                                       price: randomGoods[ranIndex].price,

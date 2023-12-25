@@ -105,6 +105,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       return ProductCardWidget(
+                        fromApi: false,
                         product: ProductModel(
                             id: products[index].id,
                             discount: products[index].discount != "null"

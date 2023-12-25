@@ -412,6 +412,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                       itemCount: insideProducts.length,
                                       itemBuilder: (context, index) {
                                         return ProductCardWidget(
+                                          fromApi: true,
                                           product: ProductModel(
                                             desc_en:
                                                 insideProducts[index].desc_en,
@@ -483,6 +484,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                             itemCount: products.length,
                             itemBuilder: (context, index) {
                               return ProductCardWidget(
+                                fromApi: true,
                                 product: ProductModel(
                                     desc_en: products[index].desc_en,
                                     desc_ru: products[index].desc_ru,

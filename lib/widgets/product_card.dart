@@ -22,9 +22,14 @@ import 'package:http/http.dart' as http;
 class ProductCardWidget extends StatefulWidget {
   final bool withHeight;
   final double? height;
+  final bool fromApi;
   final ProductModel? product;
   const ProductCardWidget(
-      {super.key, required this.withHeight, this.height, this.product});
+      {super.key,
+      required this.fromApi,
+      required this.withHeight,
+      this.height,
+      this.product});
 
   @override
   State<ProductCardWidget> createState() => _ProductCardWidgetState();
@@ -134,7 +139,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           )
                         : const Center(),
                     Text(
-                      "${NumberFormatter.currency(widget.product!.price)} ${"sum".tr()} ",
+                      widget.fromApi
+                          ? widget.product!.type_good == 3
+                              ? "${NumberFormatter.currency(widget.product!.sizes![0].pivot!.price)} ${"sum".tr()} "
+                              : "${NumberFormatter.currency(widget.product!.price)} ${"sum".tr()} "
+                          : "${NumberFormatter.currency(widget.product!.price)} ${"sum".tr()} ",
                       style: Styles.style600sp14Main,
                     ),
                     widget.product!.discount != null
@@ -366,7 +375,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.desc_uz ?? "",
                         widget.product!.desc_en ?? "",
                         widget.product!.desc_oz ?? "",
-                        widget.product!.photo![0] ,
+                        widget.product!.photo![0],
                         widget.product!.id != null
                             ? int.parse(widget.product!.id.toString())
                             : 0,

@@ -198,6 +198,7 @@ class _MainPageState extends State<MainPage> {
                                       right: 10.w,
                                     ),
                                     child: ProductCardWidget(
+                                      fromApi: false,
                                       product: ProductModel(
                                         quantity: products[index],
                                         weight: products[index].kg,
@@ -298,6 +299,7 @@ class _MainPageState extends State<MainPage> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   return ProductCardWidget(
+                    fromApi: true,
                     product: ProductModel(
                       quantity: products[index].quantity,
                       name_oz: products[index].name_oz,

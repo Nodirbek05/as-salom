@@ -77,6 +77,7 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
                                 right: 10.w,
                               ),
                               child: ProductCardWidget(
+                                fromApi: true,
                                 product: products[index],
                                 withHeight: true,
                                 height: 300.h,

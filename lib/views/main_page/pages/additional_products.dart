@@ -76,6 +76,7 @@ class _AdditionalProductsState extends State<AdditionalProducts> {
                                             right: 10.w,
                                           ),
                                           child: ProductCardWidget(
+                                            fromApi: true,
                                             product: products[index + 1]
                                                 .goods![indx],
                                             withHeight: true,
