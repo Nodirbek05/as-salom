@@ -403,55 +403,78 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
-
+                          TextButton(
+                            onPressed: isResendAvailable
+                                ? () async {
+                                    setState(() {
+                                      isResendAvailable = false;
+                                    });
+                                  }
+                                : () {
+                                    getCode();
+                                  },
+                            child: !isResendAvailable
+                                ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "You may receive code in",
+                                        style: Styles.style400sp16Main,
+                                      ),
+                                      CircularCountDownTimer(
+                                        duration: 60,
+                                        initialDuration: 1,
+                                        controller: countDownController,
+                                        width: 25.w,
+                                        height: 25.w,
+                                        ringColor: ConstColor.mainWhite,
+                                        ringGradient: null,
+                                        fillColor: ConstColor.mainWhite,
+                                        fillGradient: null,
+                                        backgroundColor: ConstColor.mainWhite,
+                                        backgroundGradient: null,
+                                        strokeWidth: 2.0,
+                                        strokeCap: StrokeCap.round,
+                                        textStyle: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14.sp,
+                                            color: ConstColor.as_salomText),
+                                        textFormat: CountdownTextFormat.SS,
+                                        isReverse: true,
+                                        isReverseAnimation: false,
+                                        isTimerTextShown: true,
+                                        autoStart: true,
+                                        onStart: () {
+                                          debugPrint('Countdown Started');
+                                        },
+                                        onComplete: () {
+                                          setState(() {
+                                            isResendAvailable = true;
+                                          });
+                                        },
+                                        onChange: (String timeStamp) {
+                                          debugPrint(
+                                              'Countdown Changed $timeStamp');
+                                        },
+                                      ),
+                                    ],
+                                  )
+                                : Text(
+                                    "resend_code".tr(),
+                                    style: Styles.style400sp16Main,
+                                  ),
+                          ),
                           // Row(
                           //   children: [
                           //     Text(
                           //   "You may receive code in 1 minute",
                           //   style: Styles.style400sp16Main,
                           // ),
-                          //     CircularCountDownTimer(
-                          //       duration: 60,
-                          //       initialDuration: 1,
-                          //       controller: countDownController,
-                          //       width: 25.w,
-                          //       height: 25.w,
-                          //       ringColor: ConstColor.mainWhite,
-                          //       ringGradient: null,
-                          //       fillColor: ConstColor.mainWhite,
-                          //       fillGradient: null,
-                          //       backgroundColor: ConstColor.mainWhite,
-                          //       backgroundGradient: null,
-                          //       strokeWidth: 2.0,
-                          //       strokeCap: StrokeCap.round,
-                          //       textStyle: TextStyle(
-                          //           fontWeight: FontWeight.w400,
-                          //           fontSize: 14.sp,
-                          //           color: ConstColor.as_salomText),
-                          //       textFormat: CountdownTextFormat.SS,
-                          //       isReverse: true,
-                          //       isReverseAnimation: false,
-                          //       isTimerTextShown: true,
-                          //       autoStart: true,
-                          //       onStart: () {
-                          //         debugPrint('Countdown Started');
-                          //       },
-                          //       onComplete: () {
-                          //         setState(() {
-                          //           isResendAvailable = true;
-                          //         });
-                          //       },
-                          //       onChange: (String timeStamp) {
-                          //         debugPrint('Countdown Changed $timeStamp');
-                          //       },
-                          //     ),
-                          //   ],
-                          // ),
 
-                          Text(
-                            "resend_code".tr(),
-                            style: Styles.style400sp16Main,
-                          ),
+                          // Text(
+                          //   "resend_code".tr(),
+                          //   style: Styles.style400sp16Main,
+                          // ),
                         ],
                       ),
                     ),
