@@ -366,7 +366,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         widget.product!.desc_uz ?? "",
                         widget.product!.desc_en ?? "",
                         widget.product!.desc_oz ?? "",
-                        widget.product!.photo![0],
+                        widget.product!.photo![0] ,
                         widget.product!.id != null
                             ? int.parse(widget.product!.id.toString())
                             : 0,
