@@ -418,7 +418,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "You may receive code in",
+                                        "receive_code_again".tr(),
                                         style: Styles.style400sp16Main,
                                       ),
                                       CircularCountDownTimer(
