@@ -506,7 +506,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         children: [
 
                             Text(
-                            "Вес Brutto : ${widget.product.weight_bruto}гр.",
+                            "${"brutto".tr()} : ${widget.product.weight_bruto}гр.",
                             style: Styles.style400sp14Grey,
                           ),
                           Text(
