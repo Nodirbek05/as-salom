@@ -163,6 +163,14 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                       ),
                     ),
                   );
+
+              OrderHomePage.nameController.clear();
+              OrderHomePage.commentController.clear();
+              OrderHomePage.adressController.clear();
+              OrderHomePage.homeController.clear();
+              OrderHomePage.kvController.clear();
+              OrderHomePage.etajController.clear();
+              OrderHomePage.podezdController.clear();
             }
           },
           child: Container(
@@ -410,5 +418,16 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    nameController.clear();
+    commentController.clear();
+    phoneController.clear();
+    roomNumberController.clear();
+    dropdownValue = null;
+
+    super.dispose();
   }
 }
