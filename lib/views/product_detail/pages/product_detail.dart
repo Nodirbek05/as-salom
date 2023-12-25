@@ -40,6 +40,7 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
   final PageController _pageController1 = PageController(viewportFraction: 1.0);
   int selectedSize = 0;
+  int selectedSizePrice = 0;
 
   String firstHalf = "";
   String secondHalf = "";
@@ -286,16 +287,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             backgroundColor: ConstColor.as_salomText,
                             fontSize: 16.0);
                         addDrugToBasket(
-                            int.parse(widget.product.id.toString()),
-                            widget.product.name_ru.toString(),
-                            widget.product.type_good!,
-                            widget.product.price.toString(),
-                            1,
-                            widget.product.photo![0].toString());
-                        selectedSize != 0
-                            ? widget.product.sizes![selectedSize].id
-                            : "null";
-                        widget.product.weight ?? "";
+                          int.parse(widget.product.id.toString()),
+                          widget.product.name_ru.toString(),
+                          widget.product.type_good ?? 0,
+                          widget.product.type_good == 3
+                              ? selectedSizePrice != 0
+                                  ? selectedSizePrice.toString()
+                                  : widget.product.sizes![0].pivot!.price
+                                      .toString()
+                              : widget.product.price.toString(),
+                          1,
+                          widget.product.photo![0].toString(),
+                          selectedSize != 0 ? selectedSize.toString() : "",
+                          widget.product.weight ?? "",
+                        );
 
                         setState(() {});
                       },
@@ -504,8 +509,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
-                            Text(
+                          Text(
                             "${"brutto".tr()} : ${widget.product.weight_bruto}гр.",
                             style: Styles.style400sp14Grey,
                           ),
@@ -580,9 +584,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               Row(
                                 children: [
                                   Text(
-                                    widget.product.price != "null"
-                                        ? "${NumberFormatter.currency(widget.product.sizes![0].pivot!.price)} ${"sum".tr()}"
-                                        : "no_data".tr(),
+                                    selectedSizePrice != 0
+                                        ? "${NumberFormatter.currency(selectedSizePrice)} ${"sum".tr()}"
+                                        : "${NumberFormatter.currency(widget.product.sizes![0].pivot!.price)} ${"sum".tr()}",
                                     style: Styles.style700sp22Main,
                                   ),
                                   const SizedBox(width: 15),
@@ -623,6 +627,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                                     .toString());
                                                 setState(() {
                                                   selectedSize;
+                                                  selectedSizePrice = widget
+                                                              .product
+                                                              .sizes![indx]
+                                                              .pivot!
+                                                              .price !=
+                                                          null
+                                                      ? int.parse(widget
+                                                          .product
+                                                          .sizes![indx]
+                                                          .pivot!
+                                                          .price!
+                                                          .toString())
+                                                      : 0;
                                                 });
                                               },
                                               borderRadius:
@@ -868,20 +885,25 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     String price,
     int qty,
     String image,
+    String? size,
+    String? kg,
   ) {
     final product = BasketModel(
-      id: productId,
-      name: name,
-      type: type,
-      price: price,
-      qty: qty,
-      image: image,
-    )
+        id: productId,
+        name: name,
+        type: type,
+        price: price,
+        qty: qty,
+        image: image,
+        size: size,
+        kg: kg)
       ..id = productId
       ..name = name
       ..type = type
       ..price = price
       ..image = image
+      ..size = size
+      ..kg = kg
       ..qty = qty;
     final box = Hive.box<BasketModel>(basketBox);
     box.add(product);
