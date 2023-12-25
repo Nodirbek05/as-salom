@@ -15,6 +15,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Future<void> search(SearchProduct event, Emitter<SearchState> emit) async {
     emit(SearchInitial());
     final response = await CommonRequests.searchProducts(event.query);
+    print("QUERY IS COMING HERE:${event.query}");
     if (response is SearchModel) {
       emit(SearchSuccess(data: response));
       print("GET SEARCH DATA **************** ${response}");

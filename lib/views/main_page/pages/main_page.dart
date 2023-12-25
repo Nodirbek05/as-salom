@@ -79,7 +79,9 @@ class _MainPageState extends State<MainPage> {
             onChanged: (String query) {
               if (query.isNotEmpty) {
                 context.read<SearchBloc>().add(SearchProduct(query: query));
+             
               }
+                
               setState(() {});
             },
             decoration: InputDecoration(

@@ -253,7 +253,7 @@ class CommonRequests {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     int place = _prefs.getInt("place") ?? 0;
     final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.search}/$place?search_text/$query'),
+      Uri.parse('${ApiPaths.basicUrl}${ApiPaths.search}/$place?search_text=$query'),
       headers: {'Content-Type': 'application/json'},
       // body: json.encode(
       //   {'search_text': query},
