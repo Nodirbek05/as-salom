@@ -102,7 +102,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                     ),
                     widget.product.type == 3
                         ? Text(
-                            "Razmer:${widget.product.selectedSize}",
+                            "${"size_of".tr()}:${widget.product.selectedSize}",
                             style: Styles.style400sp13Grey,
                           )
                         : const SizedBox(),

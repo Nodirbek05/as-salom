@@ -93,5 +93,6 @@
     "limited_product":"Maximum permissible order weight:",
     "enter_address": "Enter address",
     "receive_code_again":"You may receive code in",
-    "brutto": "Gross weight"
+    "brutto": "Gross weight",
+    "size_of" : "Chosen size"
 }
