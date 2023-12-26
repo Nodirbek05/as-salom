@@ -205,7 +205,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                       IconButton(
                                         // splashRadius: 8.r,
                                         onPressed: () {
-                                          if (widget.product!.type_good == 2) {
+                                          if (widget.product!.type_good == 2 && isHome == false) {
                                             if (getDrugQty(
                                                     widget.product!.id!) >=
                                                 12) {
@@ -250,6 +250,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                                                 .tr(),
                                                             style: Styles
                                                                 .style600sp22Black,
+                                                                textAlign: TextAlign.center,
                                                           ),
                                                           Text(
                                                             "12 000 гр",

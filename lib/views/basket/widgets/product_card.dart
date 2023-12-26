@@ -147,7 +147,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                   borderRadius: BorderRadius.circular(25.r),
                   onTap: () {
                     widget.onTap();
-                    if (widget.product.type == 2) {
+                    if (widget.product.type == 2 && isHome == false) {
                       if (getDrugQty(widget.product.id) >= 12) {
                         showDialog<void>(
                           context: context,
@@ -179,6 +179,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                                     Text(
                                       "limited_product".tr(),
                                       style: Styles.style600sp22Black,
+                                      textAlign: TextAlign.center,
                                     ),
                                     Text(
                                       "12 000 гр",

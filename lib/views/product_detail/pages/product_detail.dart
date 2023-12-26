@@ -159,7 +159,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             IconButton(
                               splashRadius: 8.r,
                               onPressed: () {
-                                if (widget.product.type_good == 2) {
+                                if (widget.product.type_good == 2 && isHome == false) {
                                   if (getDrugQty(widget.product.id!) >= 12) {
                                     showDialog<void>(
                                       context: context,
