@@ -22,6 +22,8 @@ class BasketModel extends HiveObject {
   String? kg;
   @HiveField(8)
   String? slug;
+  @HiveField(9)
+  String? selectedSize;
   BasketModel({
     required this.id,
     required this.name,
@@ -32,5 +34,6 @@ class BasketModel extends HiveObject {
      this.size,
      this.kg,
      this.slug,
+     this.selectedSize
   });
 }

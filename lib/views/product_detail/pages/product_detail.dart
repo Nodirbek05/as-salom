@@ -41,6 +41,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   final PageController _pageController1 = PageController(viewportFraction: 1.0);
   int selectedSize = 0;
   int selectedSizePrice = 0;
+  int selectedSizeIndex = 0;
 
   String firstHalf = "";
   String secondHalf = "";
@@ -159,7 +160,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             IconButton(
                               splashRadius: 8.r,
                               onPressed: () {
-                                if (widget.product.type_good == 2) {
+                                if (widget.product.type_good == 2 &&
+                                    isHome == false) {
                                   if (getDrugQty(widget.product.id!) >= 12) {
                                     showDialog<void>(
                                       context: context,
@@ -300,6 +302,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           widget.product.photo![0].toString(),
                           selectedSize != 0 ? selectedSize.toString() : "",
                           widget.product.weight ?? "",
+                          widget.product.sizes![selectedSizeIndex].number
+                              .toString(),
                         );
 
                         setState(() {});
@@ -643,6 +647,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                                           .price!
                                                           .toString())
                                                       : 0;
+
+                                                  widget.product.sizes!
+                                                          .isNotEmpty
+                                                      ? selectedSizeIndex =
+                                                          widget.product.sizes!
+                                                              .indexOf(widget
+                                                                  .product
+                                                                  .sizes![indx])
+                                                      : null;
                                                 });
                                               },
                                               borderRadius:
@@ -882,16 +895,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return sum.toString();
   }
 
-  void addDrugToBasket(
-    int productId,
-    String name,
-    int type,
-    String price,
-    int qty,
-    String image,
-    String? size,
-    String? kg,
-  ) {
+  void addDrugToBasket(int productId, String name, int type, String price,
+      int qty, String image, String? size, String? kg, String? selectedSize) {
     final product = BasketModel(
         id: productId,
         name: name,
@@ -900,7 +905,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         qty: qty,
         image: image,
         size: size,
-        kg: kg)
+        kg: kg,
+        selectedSize: selectedSize)
       ..id = productId
       ..name = name
       ..type = type
@@ -908,7 +914,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       ..image = image
       ..size = size
       ..kg = kg
-      ..qty = qty;
+      ..qty = qty
+      ..selectedSize;
     final box = Hive.box<BasketModel>(basketBox);
     box.add(product);
   }

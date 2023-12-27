@@ -32,6 +32,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
+    print("RAZMER:${widget.product.size}");
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
     favBox =
@@ -91,16 +92,20 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: 200.w,
+                      width: 180.w,
                       child: Text(
                         widget.product.name,
                         style: Styles.style500sp14Black,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    // Text(
-                    //   widget.product.type,
-                    //   style: Styles.style400sp13Grey,
-                    // ),
+                    widget.product.type == 3
+                        ? Text(
+                            "${"size_of".tr()}:${widget.product.selectedSize}",
+                            style: Styles.style400sp13Grey,
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ],
@@ -147,7 +152,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                   borderRadius: BorderRadius.circular(25.r),
                   onTap: () {
                     widget.onTap();
-                    if (widget.product.type == 2) {
+                    if (widget.product.type == 2 && isHome == false) {
                       if (getDrugQty(widget.product.id) >= 12) {
                         showDialog<void>(
                           context: context,
@@ -179,6 +184,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                                     Text(
                                       "limited_product".tr(),
                                       style: Styles.style600sp22Black,
+                                      textAlign: TextAlign.center,
                                     ),
                                     Text(
                                       "12 000 гр",
@@ -277,8 +283,17 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
     return qty;
   }
 
-  void addDrugToBasket(int productId, String name, int type, String price,
-      int qty, String size, String weight, String slug, String image) {
+  void addDrugToBasket(
+      int productId,
+      String name,
+      int type,
+      String price,
+      int qty,
+      String size,
+      String weight,
+      String slug,
+      String image,
+      String selectedSize) {
     final product = BasketModel(
         id: productId,
         name: name,
@@ -288,7 +303,8 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
         image: image,
         kg: weight,
         size: size,
-        slug: slug)
+        slug: slug,
+        selectedSize: selectedSize)
       ..id = productId
       ..name = name
       ..type = type
@@ -296,7 +312,8 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
       ..size = size
       ..kg = weight
       ..qty = qty
-      ..slug = slug;
+      ..slug = slug
+      ..selectedSize = selectedSize;
     final box = Hive.box<BasketModel>(basketBox);
     box.add(product);
   }

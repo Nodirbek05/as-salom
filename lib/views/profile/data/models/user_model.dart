@@ -18,9 +18,9 @@ class ProfileModel extends ResponseData {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
+
     result.addAll({'data': data.toMap()});
-  
+
     return result;
   }
 
@@ -32,7 +32,8 @@ class ProfileModel extends ResponseData {
 
   String toJson() => json.encode(toMap());
 
-  factory ProfileModel.fromJson(String source) => ProfileModel.fromMap(json.decode(source));
+  factory ProfileModel.fromJson(String source) =>
+      ProfileModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'ProfileModel(data: $data)';
@@ -40,9 +41,8 @@ class ProfileModel extends ResponseData {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
-    return other is ProfileModel &&
-      other.data == data;
+
+    return other is ProfileModel && other.data == data;
   }
 
   @override
@@ -97,35 +97,35 @@ class UserDataModel {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
-    if(id != null){
+
+    if (id != null) {
       result.addAll({'id': id});
     }
-    if(name != null){
+    if (name != null) {
       result.addAll({'name': name});
     }
-    if(phone != null){
+    if (phone != null) {
       result.addAll({'phone': phone});
     }
-    if(code != null){
+    if (code != null) {
       result.addAll({'code': code});
     }
-    if(role != null){
+    if (role != null) {
       result.addAll({'role': role});
     }
-    if(is_active != null){
+    if (is_active != null) {
       result.addAll({'is_active': is_active});
     }
-    if(device_name != null){
+    if (device_name != null) {
       result.addAll({'device_name': device_name});
     }
-    if(created_at != null){
+    if (created_at != null) {
       result.addAll({'created_at': created_at});
     }
-    if(updated_at != null){
+    if (updated_at != null) {
       result.addAll({'updated_at': updated_at});
     }
-  
+
     return result;
   }
 
@@ -145,7 +145,8 @@ class UserDataModel {
 
   String toJson() => json.encode(toMap());
 
-  factory UserDataModel.fromJson(String source) => UserDataModel.fromMap(json.decode(source));
+  factory UserDataModel.fromJson(String source) =>
+      UserDataModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -155,29 +156,29 @@ class UserDataModel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is UserDataModel &&
-      other.id == id &&
-      other.name == name &&
-      other.phone == phone &&
-      other.code == code &&
-      other.role == role &&
-      other.is_active == is_active &&
-      other.device_name == device_name &&
-      other.created_at == created_at &&
-      other.updated_at == updated_at;
+        other.id == id &&
+        other.name == name &&
+        other.phone == phone &&
+        other.code == code &&
+        other.role == role &&
+        other.is_active == is_active &&
+        other.device_name == device_name &&
+        other.created_at == created_at &&
+        other.updated_at == updated_at;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
-      phone.hashCode ^
-      code.hashCode ^
-      role.hashCode ^
-      is_active.hashCode ^
-      device_name.hashCode ^
-      created_at.hashCode ^
-      updated_at.hashCode;
+        name.hashCode ^
+        phone.hashCode ^
+        code.hashCode ^
+        role.hashCode ^
+        is_active.hashCode ^
+        device_name.hashCode ^
+        created_at.hashCode ^
+        updated_at.hashCode;
   }
 }

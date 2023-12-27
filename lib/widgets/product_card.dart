@@ -205,7 +205,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                       IconButton(
                                         // splashRadius: 8.r,
                                         onPressed: () {
-                                          if (widget.product!.type_good == 2) {
+                                          if (widget.product!.type_good == 2 &&
+                                              isHome == false) {
                                             if (getDrugQty(
                                                     widget.product!.id!) >=
                                                 12) {
@@ -250,6 +251,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                                                 .tr(),
                                                             style: Styles
                                                                 .style600sp22Black,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                           ),
                                                           Text(
                                                             "12 000 гр",
@@ -345,7 +348,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                             : "null",
                                         widget.product!.slug != null
                                             ? widget.product!.slug!
-                                            : "null");
+                                            : "null",
+                                        widget.product!.type_good == 3
+                                            ? widget.product!.sizes![0].number!
+                                            : "");
                                   },
                                   width: 140,
                                 );
@@ -514,8 +520,17 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     return qty;
   }
 
-  void addDrugToBasket(int productId, String name, int type, String price,
-      int qty, String image, String size, String kg, String slug) {
+  void addDrugToBasket(
+      int productId,
+      String name,
+      int type,
+      String price,
+      int qty,
+      String image,
+      String size,
+      String kg,
+      String slug,
+      String selectedSize) {
     final product = BasketModel(
         id: productId,
         name: name,
@@ -525,7 +540,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
         size: size,
         qty: qty,
         kg: kg,
-        slug: slug)
+        slug: slug,
+        selectedSize: selectedSize)
       ..id = productId
       ..name = name
       ..type = type
@@ -534,7 +550,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ..qty = qty
       ..size = size
       ..kg = kg
-      ..slug = slug;
+      ..slug = slug
+      ..selectedSize = selectedSize;
 
     final box = Hive.box<BasketModel>(basketBox);
     box.add(product);

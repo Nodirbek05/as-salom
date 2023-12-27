@@ -265,10 +265,12 @@ class _MainPageState extends State<MainPage> {
             );
           } else if (products.isEmpty) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   alignment: Alignment.center,
-                  height: 300,
+                  height: 150,
                   // width: 200,
                   child:
                       LottieBuilder.asset("assets/animations/empty_box2.json"),

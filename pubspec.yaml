@@ -48,6 +48,8 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/as-salom_logo.png"
+  remove_alpha_ios: true
+  background_color_ios: "#ffffff"
 
 flutter:
   uses-material-design: true

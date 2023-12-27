@@ -316,24 +316,32 @@ class ProductData extends ResponseData {
 }
 
 class Size extends ResponseData {
-  String? size_id;
-  String? size_quantity;
-  String? size_price;
+  dynamic? size_id;
+  dynamic? size_quantity;
+  dynamic? size_price;
+  String? size_name;
+  String? size_number;
   Size({
     this.size_id,
     this.size_quantity,
     this.size_price,
+    this.size_name,
+    this.size_number,
   });
 
   Size copyWith({
-    String? size_id,
-    String? size_quantity,
-    String? size_price,
+    dynamic? size_id,
+    dynamic? size_quantity,
+    dynamic? size_price,
+    String? size_name,
+    String? size_number,
   }) {
     return Size(
       size_id: size_id ?? this.size_id,
       size_quantity: size_quantity ?? this.size_quantity,
       size_price: size_price ?? this.size_price,
+      size_name: size_name ?? this.size_name,
+      size_number: size_number ?? this.size_number,
     );
   }
 
@@ -342,6 +350,8 @@ class Size extends ResponseData {
       'size_id': size_id,
       'size_quantity': size_quantity,
       'size_price': size_price,
+      'size_name': size_name,
+      'size_number': size_number,
     };
   }
 
@@ -350,6 +360,8 @@ class Size extends ResponseData {
       size_id: map['size_id'],
       size_quantity: map['size_quantity'],
       size_price: map['size_price'],
+      size_name: map['size_name'],
+      size_number: map['size_number'],
     );
   }
 
@@ -358,20 +370,28 @@ class Size extends ResponseData {
   factory Size.fromJson(String source) => Size.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'Size(size_id: $size_id, size_quantity: $size_quantity, size_price: $size_price)';
+  String toString() {
+    return 'Size(size_id: $size_id, size_quantity: $size_quantity, size_price: $size_price, size_name: $size_name, size_number: $size_number)';
+  }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
+  
     return other is Size &&
-        other.size_id == size_id &&
-        other.size_quantity == size_quantity &&
-        other.size_price == size_price;
+      other.size_id == size_id &&
+      other.size_quantity == size_quantity &&
+      other.size_price == size_price &&
+      other.size_name == size_name &&
+      other.size_number == size_number;
   }
 
   @override
-  int get hashCode =>
-      size_id.hashCode ^ size_quantity.hashCode ^ size_price.hashCode;
+  int get hashCode {
+    return size_id.hashCode ^
+      size_quantity.hashCode ^
+      size_price.hashCode ^
+      size_name.hashCode ^
+      size_number.hashCode;
+  }
 }

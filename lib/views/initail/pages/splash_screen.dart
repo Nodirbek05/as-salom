@@ -18,17 +18,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     setCache();
-    Timer(
+    passWithTime();
+    super.initState();
+  }
+
+  Timer passWithTime() {
+    return Timer(
       const Duration(seconds: 1, milliseconds: 300),
       () {
         if (mounted) {
           Navigator.pushNamed(context, LanguagePage.routeName);
         }
-
-        super.initState();
       },
     );
-    super.initState();
   }
 
   setCache() async {
