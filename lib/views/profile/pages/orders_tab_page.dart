@@ -46,9 +46,8 @@ class _OrdersPageState extends State<OrdersPage> {
               } else if (state is GetOrdersSuccess) {
                 final orders = state.orderModel.data;
 
-
-                if(orders.isEmpty){
-                   return Center(
+                if (orders.isEmpty) {
+                  return Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -88,8 +87,7 @@ class _OrdersPageState extends State<OrdersPage> {
                           openOrder = null;
                           setState(() {});
                         },
-                        child: 
-                        Container(
+                        child: Container(
                           margin: EdgeInsets.only(
                             bottom: 15.h,
                           ),
@@ -149,7 +147,17 @@ class _OrdersPageState extends State<OrdersPage> {
                                             BorderRadius.circular(20.r),
                                       ),
                                       child: Text(
-                                        "${orders[index].status}",
+                                        orders[index].status == "new"
+                                            ? "new".tr()
+                                            : orders[index].status == "delivery"
+                                                ? "delivery".tr()
+                                                : orders[index].status ==
+                                                        "waiting"
+                                                    ? "waiting".tr()
+                                                    : orders[index].status ==
+                                                            "completed"
+                                                        ? "delivered".tr()
+                                                        : "cancel".tr(),
                                         style: orders[index].status == "new"
                                             ? Styles.style500sp12Black
                                             : Styles.style500sp12White,
@@ -224,9 +232,12 @@ class _OrdersPageState extends State<OrdersPage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            "F.I.O : ${orders[index].name}",
-                                            style: Styles.style500sp14Black,
+                                          SizedBox(
+                                            width: 200.w,
+                                            child: Text(
+                                              "F.I.O : ${orders[index].name}",
+                                              style: Styles.style500sp14Black,
+                                            ),
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),
                                           Text(
@@ -258,7 +269,8 @@ class _OrdersPageState extends State<OrdersPage> {
                                               sizeData.add(orders[index]
                                                   .products![idx]
                                                   .sizes![i]
-                                                  .size_id!);
+                                                  .size_number!
+                                                  .toString());
                                             }
                                             return Padding(
                                               padding: EdgeInsets.only(
@@ -295,10 +307,16 @@ class _OrdersPageState extends State<OrdersPage> {
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     children: [
-                                                      Text(
-                                                        "${orders[index].products![idx].name_ru}",
-                                                        style: Styles
-                                                            .style500sp14Black,
+                                                      SizedBox(
+                                                        width: 200.w,
+                                                        child: Text(
+                                                          "${orders[index].products![idx].name_ru}",
+                                                          style: Styles
+                                                              .style500sp14Black,
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
                                                       ),
                                                       ScreenUtil()
                                                           .setVerticalSpacing(

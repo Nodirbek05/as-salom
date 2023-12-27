@@ -68,7 +68,7 @@
     "check_status": "Uning holatini shaxsiy profilingizda kuzatishingiz mumkin",
     "main_page": "Asosiy sahifaga o'tish",
     "menu": "Menyu",
-    "volume": "Miqdori:",
+    "volume": "Miqdori",
     "less": "kamroq",
     "empty_basket": "Sizning savatingiz bo'sh",
     "choose_pro": "Asosiy sahifadagi mahsulotlardan boshlang yoki qidiruv orqali kerakli mahsulotni toping",
@@ -94,5 +94,10 @@
     "enter_address" : "Manzilingizni kiriting",
     "receive_code_again":"Siz kodni qabul qilishingiz mumkin",
     "brutto" : "Brutto vazni",
-    "size_of" : "Razmer"
+    "size_of" : "Razmer",
+    "new" : "Yangi",
+    "waiting": "Kutilyapti",
+    "delivery" : "Yo'lda",
+    "delivered" : "Yetkazildi",
+    "cancel" : "Bekor qilindi"
 }

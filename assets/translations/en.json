@@ -44,7 +44,7 @@
     "cart": "Cart",
     "my_orders": "My Orders",
     "personal_info": "Personal Info",
-    "order_no": "Order Number:",
+    "order_no": "Order Number",
     "status": "Status",
     "confirmed_date": "Date Confirmed",
     "order_price": "Order Price",
@@ -68,7 +68,7 @@
     "check_status": "You can track its status in your personal profile",
     "main_page": "Main Page",
     "menu": "Menu",
-    "volume": "Quantity:",
+    "volume": "Quantity",
     "less": "less",
     "empty_basket": "Your basket is empty",
     "choose_pro": "Start with the products on the main page or find the product you need through the search",
@@ -94,5 +94,10 @@
     "enter_address": "Enter address",
     "receive_code_again":"You may receive code in",
     "brutto": "Gross weight",
-    "size_of" : "Chosen size"
+    "size_of" : "Chosen size",
+    "new" : "New",
+    "waiting": "Waiting",
+    "delivery" : "Delivery",
+    "delivered" : "Delivered",
+    "cancel" : "Cancel"
 }
