@@ -50,7 +50,7 @@ class AuthRequests {
             body: json.encode(
               {'phone': "+998 ${phone.replaceAll("-", " ")}"},
             ));
-    print(response.body);
+    print("LOGIN RESPONSE ${response.body}");
     switch (response.statusCode) {
       case StatusCodes.ok:
         return CreateAccountDataModel.fromJson(response.body);

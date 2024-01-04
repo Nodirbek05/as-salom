@@ -48,87 +48,88 @@ class _FavoritesPageState extends State<FavoritesPage> {
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ValueListenableBuilder(
-              valueListenable: Hive.box<FavoritesModel>(favBox).listenable(),
-              builder: (ctx, box, _) {
-                final products = box.values.toList().cast<FavoritesModel>();
-                if (products.isEmpty) {
-                  return Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ScreenUtil().setVerticalSpacing(200),
-                        Container(
-                          height: 100.h,
-                          width: 100.h,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/images/favorites.png",
-                                ),
-                                fit: BoxFit.cover),
-                          ),
-                        ),
-                        Text(
-                          "empty_fav".tr(),
-                          style: Styles.style600sp18Black,
-                          textAlign: TextAlign.center,
-                        ),
-                        ScreenUtil().setVerticalSpacing(20),
-                        Text(
-                          "add_fav".tr(),
-                          style: Styles.style400sp16Black,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+        padding: const EdgeInsets.all(20.0),
+        child: ValueListenableBuilder(
+          valueListenable: Hive.box<FavoritesModel>(favBox).listenable(),
+          builder: (ctx, box, _) {
+            final products = box.values.toList().cast<FavoritesModel>();
+            if (products.isEmpty) {
+              return Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ScreenUtil().setVerticalSpacing(200),
+                    Container(
+                      height: 100.h,
+                      width: 100.h,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                              "assets/images/favorites.png",
+                            ),
+                            fit: BoxFit.cover),
+                      ),
                     ),
-                  );
-                }
+                    Text(
+                      "empty_fav".tr(),
+                      style: Styles.style600sp18Black,
+                      textAlign: TextAlign.center,
+                    ),
+                    ScreenUtil().setVerticalSpacing(20),
+                    Text(
+                      "add_fav".tr(),
+                      style: Styles.style400sp16Black,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
+            }
 
-                return SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: GridView.builder(
-                    // padding: EdgeInsets.only(
-                    //   left: 20,
-                    //   // right: 15.w,
-                    // ),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 0.64,
-                      //  mainAxisExtent: 300,
-                      crossAxisSpacing: 10,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      return ProductCardWidget(
-                        fromApi: false,
-                        product: ProductModel(
-                            id: products[index].id,
-                            discount: products[index].discount != "null"
-                                ? int.parse(products[index].discount ?? "0")
-                                : 0,
-                            name_ru: products[index].name_ru,
-                            name_en: products[index].name_en,
-                            name_uz: products[index].name_uz,
-                            desc_en: products[index].desc_en,
-                            desc_ru: products[index].desc_ru,
-                            desc_uz: products[index].desc_uz,
-                            photo: [products[index].image ?? ""],
-                            type_good: products[index].type,
-                            price: products[index].price != "null"
-                                ? int.parse(products[index].price ?? "0")
-                                : 0,
-                            slug: products[index].slug),
-                        withHeight: false,
-                      );
-                    },
-                  ),
-                );
-              })),
+            return SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: GridView.builder(
+                // padding: EdgeInsets.only(
+                //   left: 20,
+                //   // right: 15.w,
+                // ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.64,
+                  //  mainAxisExtent: 300,
+                  crossAxisSpacing: 10,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return ProductCardWidget(
+                    fromApi: false,
+                    product: ProductModel(
+                        id: products[index].id,
+                        discount: products[index].discount != "null"
+                            ? int.parse(products[index].discount ?? "0")
+                            : 0,
+                        name_ru: products[index].name_ru,
+                        name_en: products[index].name_en,
+                        name_uz: products[index].name_uz,
+                        desc_en: products[index].desc_en,
+                        desc_ru: products[index].desc_ru,
+                        desc_uz: products[index].desc_uz,
+                        photo: [products[index].image ?? ""],
+                        type_good: products[index].type,
+                        price: products[index].price != "null"
+                            ? int.parse(products[index].price ?? "0")
+                            : 0,
+                        slug: products[index].slug),
+                    withHeight: false,
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -289,21 +289,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             backgroundColor: ConstColor.as_salomText,
                             fontSize: 16.0);
                         addDrugToBasket(
-                          int.parse(widget.product.id.toString()),
-                          widget.product.name_ru.toString(),
-                          widget.product.type_good ?? 0,
-                          widget.product.type_good == 3
-                              ? selectedSizePrice != 0
-                                  ? selectedSizePrice.toString()
-                                  : widget.product.sizes![0].pivot!.price
-                                      .toString()
-                              : widget.product.price.toString(),
-                          1,
-                          widget.product.photo![0].toString(),
-                          selectedSize != 0 ? selectedSize.toString() : "",
-                          widget.product.weight ?? "",
-                          widget.product.sizes!.isNotEmpty ? widget.product.sizes![selectedSizeIndex].toString() : ""
-                        );
+                            int.parse(widget.product.id.toString()),
+                            widget.product.name_ru.toString(),
+                            widget.product.type_good ?? 0,
+                            widget.product.type_good == 3
+                                ? selectedSizePrice != 0
+                                    ? selectedSizePrice.toString()
+                                    : widget.product.sizes![0].pivot!.price
+                                        .toString()
+                                : widget.product.price.toString(),
+                            1,
+                            widget.product.photo![0].toString(),
+                            selectedSize != 0 ? selectedSize.toString() : "",
+                            widget.product.weight ?? "",
+                            widget.product.sizes!.isNotEmpty
+                                ? widget
+                                    .product.sizes![selectedSizeIndex].number
+                                    .toString()
+                                : "");
 
                         setState(() {});
                       },
