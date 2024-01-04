@@ -142,7 +142,13 @@ class _OrdersPageState extends State<OrdersPage> {
                                                     : orders[index].status ==
                                                             "waiting"
                                                         ? ConstColor.purpleDeep
-                                                        : ConstColor.redColor,
+                                                        : orders[index]
+                                                                    .status ==
+                                                                "block"
+                                                            ? ConstColor
+                                                                .redColor
+                                                            : ConstColor
+                                                                .newStatus,
                                         borderRadius:
                                             BorderRadius.circular(20.r),
                                       ),
@@ -157,7 +163,11 @@ class _OrdersPageState extends State<OrdersPage> {
                                                     : orders[index].status ==
                                                             "completed"
                                                         ? "delivered".tr()
-                                                        : "cancel".tr(),
+                                                        : orders[index]
+                                                                    .status ==
+                                                                "block"
+                                                            ? "cancel".tr()
+                                                            : "new".tr(),
                                         style: orders[index].status == "new"
                                             ? Styles.style500sp12Black
                                             : Styles.style500sp12White,
@@ -241,7 +251,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),
                                           Text(
-                                            "${'payment_type'.tr()}:${orders[index].payment_type}",
+                                            "${"${"payment_type".tr()}:" }${orders[index].payment_type == "1" ? "Click" : orders[index].payment_type == "2" ? "Payme" : orders[index].payment_type == "3" ? "Uzum" : orders[index].payment_type == "4" ? "Alif" : "Card"}",
                                             style: Styles.style500sp14Black,
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),

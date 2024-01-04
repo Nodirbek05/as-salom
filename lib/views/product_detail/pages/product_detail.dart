@@ -302,8 +302,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           widget.product.photo![0].toString(),
                           selectedSize != 0 ? selectedSize.toString() : "",
                           widget.product.weight ?? "",
-                          widget.product.sizes![selectedSizeIndex].number
-                              .toString(),
+                          widget.product.sizes!.isNotEmpty ? widget.product.sizes![selectedSizeIndex].toString() : ""
                         );
 
                         setState(() {});
