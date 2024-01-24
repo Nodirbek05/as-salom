@@ -17,10 +17,8 @@ class GetSubBannersBloc extends Bloc<GetSubBannersEvent, GetSubBannersState> {
     final response = await CommonRequests.getSubBanners();
     if (response is GetSubBannersModel) {
       emit(GetSubBannersSuccess(subBanners: response));
-      print("GET ALL SUBBanners SUCCESS ${response}");
     } else {
       emit(GetSubBannersFail(errorMessage: response.toString()));
-      print("GET ALL SUBBanners ERROR");
     }
   }
 }

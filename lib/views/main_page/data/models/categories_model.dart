@@ -119,7 +119,7 @@ class CategoryDataModel {
       'photo': photo,
       'created_at': created_at,
       'updated_at': updated_at,
-      'subcategories': subcategories?.map((x) => x?.toMap())?.toList(),
+      'subcategories': subcategories?.map((x) => x.toMap()).toList(),
       'goods': goods?.toMap(),
     };
   }

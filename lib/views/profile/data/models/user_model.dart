@@ -53,9 +53,9 @@ class UserDataModel {
   num? id;
   String? name;
   String? phone;
-  dynamic? code;
-  dynamic? role;
-  dynamic? is_active;
+  dynamic code;
+  dynamic role;
+  dynamic is_active;
   String? device_name;
   String? created_at;
   String? updated_at;
@@ -75,9 +75,9 @@ class UserDataModel {
     num? id,
     String? name,
     String? phone,
-    dynamic? code,
-    dynamic? role,
-    dynamic? is_active,
+    dynamic code,
+    dynamic role,
+    dynamic is_active,
     String? device_name,
     String? created_at,
     String? updated_at,

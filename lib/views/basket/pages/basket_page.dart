@@ -3,6 +3,7 @@ import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/number_formater.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/basket/widgets/product_card.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -121,145 +122,154 @@ class _BasketPageState extends State<BasketPage> {
             ),
             ScreenUtil().setVerticalSpacing(15),
             InkWell(
-              onTap: () {
-                product.isNotEmpty
-                    ? showDialog<void>(
-                        context: context,
-                        builder: (parentContext) {
-                          return AlertDialog(
-                            surfaceTintColor: ConstColor.mainWhite,
-                            backgroundColor: ConstColor.mainWhite,
-                            insetPadding: EdgeInsets.symmetric(
-                              horizontal: 15.w,
-                            ),
-                            // title: const Text('Basic dialog title'),
-                            content: SizedBox(
-                              height: 500.h,
-                              width: 350.w,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "order_list".tr(),
-                                        style: Styles.style600sp18Black,
-                                      ),
-                                      const Spacer(),
-                                      InkWell(
-                                        radius: 30.r,
-                                        onTap: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: SvgPicture.asset(
-                                          ConstIcons.xbutton,
-                                          height: 15.h,
+              onTap: () async {
+                SharedPreferences _prefs =
+                    await SharedPreferences.getInstance();
+                var token = _prefs.getString('token');
+                if (token != null) {
+                  product.isNotEmpty
+                      // ignore: use_build_context_synchronously
+                      ? showDialog<void>(
+                          context: context,
+                          builder: (parentContext) {
+                            return AlertDialog(
+                              surfaceTintColor: ConstColor.mainWhite,
+                              backgroundColor: ConstColor.mainWhite,
+                              insetPadding: EdgeInsets.symmetric(
+                                horizontal: 15.w,
+                              ),
+                              // title: const Text('Basic dialog title'),
+                              content: SizedBox(
+                                height: 500.h,
+                                width: 350.w,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "order_list".tr(),
+                                          style: Styles.style600sp18Black,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  ScreenUtil().setVerticalSpacing(15.h),
-                                  SizedBox(
-                                      height: 350.h,
-                                      child: ListView.builder(
-                                        itemBuilder: (ctx, indx) {
-                                          return Container(
-                                            margin: EdgeInsets.only(
-                                              bottom: 10.h,
-                                            ),
-                                            height: 50.h,
-                                            width: double.infinity,
-                                            decoration: const BoxDecoration(
-                                              border: Border(
-                                                bottom: BorderSide(
-                                                  color: ConstColor.greyColor,
-                                                ),
+                                        const Spacer(),
+                                        InkWell(
+                                          radius: 30.r,
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: SvgPicture.asset(
+                                            ConstIcons.xbutton,
+                                            height: 15.h,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    ScreenUtil().setVerticalSpacing(15.h),
+                                    SizedBox(
+                                        height: 350.h,
+                                        child: ListView.builder(
+                                          itemBuilder: (ctx, indx) {
+                                            return Container(
+                                              margin: EdgeInsets.only(
+                                                bottom: 10.h,
                                               ),
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 130.w,
-                                                  child: Text(
-                                                    product[indx].name,
-                                                    style: Styles
-                                                        .style400sp14Black,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 2,
+                                              height: 50.h,
+                                              width: double.infinity,
+                                              decoration: const BoxDecoration(
+                                                border: Border(
+                                                  bottom: BorderSide(
+                                                    color: ConstColor.greyColor,
                                                   ),
                                                 ),
-                                                const Spacer(),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "х${product[indx].qty}",
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 130.w,
+                                                    child: Text(
+                                                      product[indx].name,
                                                       style: Styles
-                                                          .style400sp14Grey,
+                                                          .style400sp14Black,
                                                       overflow:
                                                           TextOverflow.ellipsis,
+                                                      maxLines: 2,
                                                     ),
-                                                    ScreenUtil()
-                                                        .setHorizontalSpacing(
-                                                            10),
-                                                    product[indx].price !=
-                                                            "null"
-                                                        ? SizedBox(
-                                                            width: 90.w,
-                                                            child: Text(
-                                                              "${int.parse(product[indx].price) * product[indx].qty} ${"sum".tr()}",
-                                                              style: Styles
-                                                                  .style400sp14Black,
-                                                            ),
-                                                          )
-                                                        : const Center()
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                        itemCount: product.length,
-                                      )),
-                                  const Spacer(),
-                                  Text(
-                                    "not_cancel".tr(),
-                                    style: Styles.style400sp14Red,
-                                  ),
-                                  ScreenUtil().setVerticalSpacing(10),
-                                  InkWell(
-                                    radius: 50.r,
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, ConfirmOrderPage.routeName);
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 55.h,
-                                      width: 328.w,
-                                      decoration: BoxDecoration(
-                                          color: ConstColor.as_salomText,
-                                          borderRadius:
-                                              BorderRadius.circular(50.r)),
-                                      child: Text(
-                                        "confirm".tr(),
-                                        style: Styles.buttonText,
+                                                  ),
+                                                  const Spacer(),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "х${product[indx].qty}",
+                                                        style: Styles
+                                                            .style400sp14Grey,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      ScreenUtil()
+                                                          .setHorizontalSpacing(
+                                                              10),
+                                                      product[indx].price !=
+                                                              "null"
+                                                          ? SizedBox(
+                                                              width: 90.w,
+                                                              child: Text(
+                                                                "${int.parse(product[indx].price) * product[indx].qty} ${"sum".tr()}",
+                                                                style: Styles
+                                                                    .style400sp14Black,
+                                                              ),
+                                                            )
+                                                          : const Center()
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                          itemCount: product.length,
+                                        )),
+                                    const Spacer(),
+                                    Text(
+                                      "not_cancel".tr(),
+                                      style: Styles.style400sp14Red,
+                                    ),
+                                    ScreenUtil().setVerticalSpacing(10),
+                                    InkWell(
+                                      radius: 50.r,
+                                      onTap: () {
+                                        Navigator.pushNamed(context,
+                                            ConfirmOrderPage.routeName);
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 55.h,
+                                        width: 328.w,
+                                        decoration: BoxDecoration(
+                                            color: ConstColor.as_salomText,
+                                            borderRadius:
+                                                BorderRadius.circular(50.r)),
+                                        child: Text(
+                                          "confirm".tr(),
+                                          style: Styles.buttonText,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      )
-                    : Fluttertoast.showToast(
-                        msg: "add_pro".tr(),
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.TOP,
-                        timeInSecForIosWeb: 1,
-                        textColor: Colors.white,
-                        backgroundColor: ConstColor.redColor,
-                        fontSize: 16.0);
+                            );
+                          },
+                        )
+                      : Fluttertoast.showToast(
+                          msg: "add_pro".tr(),
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.TOP,
+                          timeInSecForIosWeb: 1,
+                          textColor: Colors.white,
+                          backgroundColor: ConstColor.redColor,
+                          fontSize: 16.0,
+                        );
+                } else {
+                  Navigator.pushNamed(context, RegistrationPage.routeName);
+                }
               },
               child: Container(
                 alignment: Alignment.center,

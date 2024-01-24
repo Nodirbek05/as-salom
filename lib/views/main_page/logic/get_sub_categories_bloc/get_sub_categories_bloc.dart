@@ -19,10 +19,8 @@ class GetSubCategoriesBloc
     final response = await CommonRequests.getSubcategories();
     if (response is SubcategoriesMainModel) {
       emit(GetSubCategoriesSuccess(data: response));
-      print("GET ALL CATEGORIES SUCCESS ${response}");
     } else if (response is ErrorModel) {
       emit(GetSubCategoriesFail(errorDate: response));
-      print("GET ALL PRODUCTS ERROR");
     }
   }
 }

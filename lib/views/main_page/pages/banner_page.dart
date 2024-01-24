@@ -2,7 +2,6 @@ import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/views/main_page/logic/get_all_banners_bloc/get_all_banners_bloc.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,7 +60,6 @@ class _BannerPageState extends State<BannerPage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: bannerData.data!.length,
                   itemBuilder: (context, index) {
-                    print(bannerData.data![index].photo.toString());
                     return Padding(
                       padding: EdgeInsets.only(
                         left: 10.w,
@@ -73,13 +71,12 @@ class _BannerPageState extends State<BannerPage> {
                           if (index == 0) {
                             SharedPreferences _prefs =
                                 await SharedPreferences.getInstance();
-                            print(_prefs.getInt('place'));
 
                             isHome
                                 ? await _prefs.setInt('place', 1)
                                 : await _prefs.setInt('place', 2);
-                            print(_prefs.getInt('place'));
 
+                            // ignore: use_build_context_synchronously
                             Navigator.pushNamedAndRemoveUntil(context,
                                 CustomNavigatonBar.routeName, (route) => false);
                           }

@@ -19,10 +19,8 @@ class GetSpesificProductsBloc
     final response = await CommonRequests.getSpesificProducts();
     if (response is SpesificProductsModel) {
       emit(GetSpesificProductsSuccess(spesificProducts: response));
-      print("GET ALL CATEGORIES SUCCESS ${response.data!.last}");
     } else if (response is ErrorModel) {
       emit(GetSpesificProductsError(errorData: response));
-      print("GET ALL PRODUCTS ERROR");
     }
   }
 }

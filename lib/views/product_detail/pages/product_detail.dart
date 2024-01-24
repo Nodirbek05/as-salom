@@ -55,7 +55,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             slug: widget.slug,
           ),
         );
-    print("GET PRODUCT WITH SLUG IS WORKING");
+    // print("GET PRODUCT WITH SLUG IS WORKING");
     super.initState();
   }
 
@@ -706,7 +706,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                         },
                                       ),
                                     )
-                                  : Center()
+                                  : const Center()
                             ],
                           ),
                         ),

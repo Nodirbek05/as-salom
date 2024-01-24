@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:assalomproject/views/confirm_order/logic/get_location_bloc/get_location_to_map_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
@@ -79,7 +76,6 @@ class _OrderHomePageState extends State<OrderHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<GetLocationToMapBloc>(context);
     return Padding(
       padding: EdgeInsets.only(
         top: 15.h,
@@ -109,7 +105,9 @@ class _OrderHomePageState extends State<OrderHomePage> {
                   YandexMap(
                     onMapTap: (argument) {},
                     onObjectTap: (geoObject) {},
-                    onUserLocationAdded: (view) {},
+                    onUserLocationAdded: (view) {
+                      return null;
+                    },
                     onMapCreated: (YandexMapController controller) async {
                       OrderHomePage.position = await _getLocation();
                       getLocation(
@@ -404,29 +402,26 @@ class _OrderHomePageState extends State<OrderHomePage> {
     required double lat,
     required double lon,
   }) async {
-    print(lat);
-    print(lon);
+   
     try {
       Response response = await http.get(
         Uri.parse(
             "https://nominatim.openstreetmap.org/reverse?lat=$lat&lon=$lon&format=jsonv2"),
       );
-      print(response.body);
       if (response.statusCode == 200) {
         return DataSuccess(AddressName.fromJson(response.body));
       } else {
         return const DataError();
       }
     } catch (e) {
-      print(e.toString());
 
       return const DataError();
     }
   }
 
-  void _onMapCreated(YandexMapController controller) {
-    completer.complete(controller);
-  }
+  // void _onMapCreated(YandexMapController controller) {
+  //   completer.complete(controller);
+  // }
 }
 
 abstract class DataState {
