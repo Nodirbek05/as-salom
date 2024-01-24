@@ -5,7 +5,6 @@ import 'package:assalomproject/views/inside_category/pages/inside_category_page.
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/views/main_page/logic/get_sub_categories_bloc/get_sub_categories_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,8 +79,8 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                             scrollDirection: Axis.horizontal,
                             itemCount: categories.length,
                             itemBuilder: (context, index) {
-                              print(ApiPaths.imageUrl +
-                                  categories[index].photo.toString());
+                              // print(ApiPaths.imageUrl +
+                              //     categories[index].photo.toString());
                               return Padding(
                                 padding: EdgeInsets.only(right: 10.w),
                                 child: InkWell(

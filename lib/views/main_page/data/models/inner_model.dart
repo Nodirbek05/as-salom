@@ -85,7 +85,7 @@ class InnerCategorymodel {
     String? name_uz,
     String? name_en,
     String? name_ru,
-    dynamic? category_id,
+    dynamic category_id,
     String? icon,
     String? photo,
     String? created_at,

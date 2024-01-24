@@ -96,7 +96,7 @@ class SubCategoriesModel extends ResponseData {
       'name_ru': name_ru,
       'name_en': name_en,
       'name_oz': name_oz,
-      'subcategories': subcategories?.map((x) => x?.toMap())?.toList(),
+      'subcategories': subcategories?.map((x) => x.toMap()).toList(),
     };
   }
 

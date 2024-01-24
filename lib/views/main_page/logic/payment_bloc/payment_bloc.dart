@@ -18,10 +18,8 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     final response = await CommonRequests.payForOrder(event.id);
     if (response is PaymentTypesModel) {
       emit(PaymentSuccess(paymentTypesModel: response));
-      print("GET PAYMENIT ${response}");
     } else if (response is ErrorModel) {
       emit(PaymentFail(errorModel: response));
-      print("GET PAYMENIT ERROR");
     }
   }
 }

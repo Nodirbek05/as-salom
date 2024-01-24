@@ -60,14 +60,14 @@ class GetProWithSlugModel extends ResponseData {
 class RandomGoods extends ResponseData {
   num? id;
   num? type_good;
-  dynamic? category_id;
-  dynamic? subcategory_id;
+  dynamic category_id;
+  dynamic subcategory_id;
   String? name_ru;
   String? name_uz;
   String? name_en;
   String? slug;
-  dynamic? price;
-  dynamic? discount;
+  dynamic price;
+  dynamic discount;
   String? weight;
   String? weight_max;
   String? ikpu;
@@ -80,7 +80,7 @@ class RandomGoods extends ResponseData {
   String? created_at;
   String? updated_at;
   num? quantity;
-  dynamic? weight_bruto;
+  dynamic weight_bruto;
   List<SizeData>? sizes;
   RandomGoods({
     this.id,
@@ -112,14 +112,14 @@ class RandomGoods extends ResponseData {
   RandomGoods copyWith({
     num? id,
     num? type_good,
-    dynamic? category_id,
-    dynamic? subcategory_id,
+    dynamic category_id,
+    dynamic subcategory_id,
     String? name_ru,
     String? name_uz,
     String? name_en,
     String? slug,
-    dynamic? price,
-    dynamic? discount,
+    dynamic price,
+    dynamic discount,
     String? weight,
     String? weight_max,
     String? ikpu,
@@ -132,7 +132,7 @@ class RandomGoods extends ResponseData {
     String? created_at,
     String? updated_at,
     num? quantity,
-    dynamic? weight_bruto,
+    dynamic weight_bruto,
     List<SizeData>? sizes,
   }) {
     return RandomGoods(
@@ -384,10 +384,10 @@ class SizeData extends ResponseData {
 }
 
 class PivotData extends ResponseData {
-  dynamic? good_id;
-  dynamic? size_id;
-  dynamic? price;
-  dynamic? quantity;
+  dynamic good_id;
+  dynamic size_id;
+  dynamic price;
+  dynamic quantity;
   PivotData({
     this.good_id,
     this.size_id,
@@ -396,10 +396,10 @@ class PivotData extends ResponseData {
   });
 
   PivotData copyWith({
-    dynamic? good_id,
-    dynamic? size_id,
-    dynamic? price,
-    dynamic? quantity,
+    dynamic good_id,
+    dynamic size_id,
+    dynamic price,
+    dynamic quantity,
   }) {
     return PivotData(
       good_id: good_id ?? this.good_id,

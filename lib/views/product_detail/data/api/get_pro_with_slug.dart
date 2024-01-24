@@ -18,7 +18,7 @@ class GetProWithSlug {
         'Content-Type': 'application/json',
       },
     );
-    print(response.body);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return GetProWithSlugModel.fromJson(response.body);

@@ -108,7 +108,7 @@ class CategoryModel {
       'name_en': name_en,
       'created_at': created_at,
       'updated_at': updated_at,
-      'goods': goods?.map((x) => x?.toMap())?.toList(),
+      'goods': goods?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -186,8 +186,8 @@ class ProductModel {
   List<String>? photo;
   String? created_at;
   String? updated_at;
-  dynamic? quantity;
-  dynamic? weight_bruto;
+  dynamic quantity;
+  dynamic weight_bruto;
   Pivot? pivot;
   List<SizeData>? sizes;
   ProductModel({
@@ -235,7 +235,7 @@ class ProductModel {
     String? name_en,
     String? name_oz,
     String? slug,
-    dynamic? price,
+    dynamic price,
     int? discount,
     String? weight,
     String? weight_max,
@@ -249,8 +249,8 @@ class ProductModel {
     List<String>? photo,
     String? created_at,
     String? updated_at,
-    dynamic? quantity,
-    dynamic? weight_bruto,
+    dynamic quantity,
+    dynamic weight_bruto,
     Pivot? pivot,
     List<SizeData>? sizes,
   }) {
@@ -313,7 +313,7 @@ class ProductModel {
       'quantity': quantity,
       'weight_bruto': weight_bruto,
       'pivot': pivot?.toMap(),
-      'sizes': sizes?.map((x) => x?.toMap())?.toList(),
+      'sizes': sizes?.map((x) => x.toMap()).toList(),
     };
   }
 
