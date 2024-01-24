@@ -42,60 +42,62 @@ class _ProfilePageState extends State<ProfilePage>
     tabController = TabController(vsync: this, length: myTabs.length);
   }
 
+  bool? hasToken;
+
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     hasToken = _prefs.getString('token') != null;
     setState(() {});
   }
 
-  bool hasToken = false;
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: myTabs.length,
-        child: hasToken
-            ? Scaffold(
-                appBar: AppBar(
-                  backgroundColor: ConstColor.mainWhite,
-                  bottom: TabBar(
-                    labelColor: ConstColor.as_salomText,
-                    indicatorColor: ConstColor.as_salomText,
-                    tabs: myTabs,
-                  ),
-                  automaticallyImplyLeading: false,
-                  centerTitle: true,
-                  title: Text(
-                    "profile".tr(),
-                    style: Styles.appBarText,
-                  ),
-                ),
-                body: TabBarView(
-                  children: [
-                    BlocProvider(
-                      create: (context) => GetOrdersBloc(),
-                      child: const OrdersPage(),
+        child: hasToken == null
+            ? const Center()
+            : hasToken!
+                ? Scaffold(
+                    appBar: AppBar(
+                      backgroundColor: ConstColor.mainWhite,
+                      bottom: TabBar(
+                        labelColor: ConstColor.as_salomText,
+                        indicatorColor: ConstColor.as_salomText,
+                        tabs: myTabs,
+                      ),
+                      automaticallyImplyLeading: false,
+                      centerTitle: true,
+                      title: Text(
+                        "profile".tr(),
+                        style: Styles.appBarText,
+                      ),
                     ),
-                    BlocProvider(
-                      create: (context) => GetUserProfileBloc(),
-                      child: const ProfileTabPage(),
-                    )
-                  ],
-                ),
-              )
-            : MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                    create: (context) => LoginBloc(),
-                  ),
-                  BlocProvider(
-                    create: (context) => VerificationBloc(),
-                  ),
-                  BlocProvider(
-                    create: (context) => RegisterBloc(),
-                  ),
-                ],
-                child: const RegistrationPage(),
-              ));
+                    body: TabBarView(
+                      children: [
+                        BlocProvider(
+                          create: (context) => GetOrdersBloc(),
+                          child: const OrdersPage(),
+                        ),
+                        BlocProvider(
+                          create: (context) => GetUserProfileBloc(),
+                          child: const ProfileTabPage(),
+                        )
+                      ],
+                    ),
+                  )
+                : MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) => LoginBloc(),
+                      ),
+                      BlocProvider(
+                        create: (context) => VerificationBloc(),
+                      ),
+                      BlocProvider(
+                        create: (context) => RegisterBloc(),
+                      ),
+                    ],
+                    child: const RegistrationPage(),
+                  ));
   }
 }
