@@ -3,6 +3,10 @@ import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
+import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart';
+import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
+import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
+import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
@@ -40,12 +44,14 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   }
 
   late bool isHome;
+  bool hasToken = false;
 
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     isHome = _prefs.getInt("place") == 2;
+    hasToken = _prefs.getString('token') != null;
     basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
     // setState(() {});
   }
@@ -58,10 +64,11 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
     ),
     const FavoritesPage(),
     const DrawerPage(),
-    BlocProvider(
-      create: (context) => GetUserProfileBloc(),
-      child: const ProfilePage(),
-    ),
+   BlocProvider(
+            create: (context) => GetUserProfileBloc(),
+            child: const ProfilePage(),
+          )
+        ,
     BlocProvider(
       create: (context) => CreateOrderBloc(),
       child: const BasketPage(

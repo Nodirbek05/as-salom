@@ -85,20 +85,14 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 ),
               );
             }
-
             return SizedBox(
               width: double.infinity,
               height: double.infinity,
               child: GridView.builder(
-                // padding: EdgeInsets.only(
-                //   left: 20,
-                //   // right: 15.w,
-                // ),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 10,
                   childAspectRatio: 0.64,
-                  //  mainAxisExtent: 300,
                   crossAxisSpacing: 10,
                 ),
                 itemCount: products.length,

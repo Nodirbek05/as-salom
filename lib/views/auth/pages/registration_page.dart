@@ -11,7 +11,6 @@ import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_
 import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
 import 'package:assalomproject/widgets/nav_bar_page.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:circular_countdown_timer/countdown_text_format.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
