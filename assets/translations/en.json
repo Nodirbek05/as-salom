@@ -99,5 +99,6 @@
     "waiting": "Waiting",
     "delivery" : "Delivery",
     "delivered" : "Delivered",
-    "cancel" : "Cancel"
+    "cancel" : "Cancel",
+    "orderCheck" : "Please register to order anything"
 }

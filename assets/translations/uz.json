@@ -99,5 +99,6 @@
     "waiting": "Kutilyapti",
     "delivery" : "Yo'lda",
     "delivered" : "Yetkazildi",
-    "cancel" : "Bekor qilindi"
+    "cancel" : "Bekor qilindi",
+    "orderCheck": "Buyurtma qilish uchun ro'yxatdan o'tishingiz kerak"
 }

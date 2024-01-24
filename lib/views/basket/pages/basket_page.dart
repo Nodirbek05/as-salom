@@ -268,7 +268,15 @@ class _BasketPageState extends State<BasketPage> {
                           fontSize: 16.0,
                         );
                 } else {
-                  Navigator.pushNamed(context, RegistrationPage.routeName);
+                  Fluttertoast.showToast(
+                          msg: "orderCheck".tr(),
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.TOP,
+                          timeInSecForIosWeb: 1,
+                          textColor: Colors.white,
+                          backgroundColor: ConstColor.redColor,
+                          fontSize: 16.0,
+                        );
                 }
               },
               child: Container(
