@@ -40,8 +40,6 @@ class _OrderHomePageState extends State<OrderHomePage> {
     super.initState();
   }
 
-  
-
   var phoneFormatter = MaskTextInputFormatter(
       mask: '##-###-##-##',
       filter: {"#": RegExp(r'[0-9]')},
@@ -167,9 +165,9 @@ class _OrderHomePageState extends State<OrderHomePage> {
                       onTap: () async {
                         await _getLocation();
                         getLocation(
-                                lat: OrderHomePage.position.latitude,
-                                lon: OrderHomePage.position.longitude)
-                            .then((value) {
+                          lat: OrderHomePage.position.latitude,
+                          lon: OrderHomePage.position.longitude,
+                        ).then((value) {
                           if (value is DataSuccess) {
                             setState(() {
                               OrderHomePage.adressController.text =
@@ -429,9 +427,6 @@ class _OrderHomePageState extends State<OrderHomePage> {
   void _onMapCreated(YandexMapController controller) {
     completer.complete(controller);
   }
-
-
-  
 }
 
 abstract class DataState {
