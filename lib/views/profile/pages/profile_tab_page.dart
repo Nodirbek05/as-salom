@@ -31,9 +31,9 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<GetUserProfileBloc, GetUserProfileState>(
       builder: (context, state) {
-        print(state);
+        // print(state);
         if (state is GetUserProfileSuccess) {
-          print(state.profilData.data.name.toString());
+          // print(state.profilData.data.name.toString());
           return Padding(
             padding: EdgeInsets.only(
               top: 70.h,
@@ -153,7 +153,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                                       child: Container(
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
-                                            color: ConstColor.as_salomText,
+                                            color: ConstColor.assalomText,
                                             borderRadius:
                                                 BorderRadius.circular(30)),
                                         width: 120,
@@ -218,7 +218,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
             ),
           );
         }
-        return Center(
+        return const Center(
           child: CupertinoActivityIndicator(),
         );
       },

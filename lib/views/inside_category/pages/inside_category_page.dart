@@ -46,25 +46,25 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
   String _getcategoryByLocale(SubCategoryModel category, Locale locale) {
     String categoryName = "no_data".tr();
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru ?? "";
+      categoryName = category.nameru ?? "";
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz ?? "";
+      categoryName = category.nameuz ?? "";
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en ?? "";
+      categoryName = category.nameen ?? "";
     }else if (locale == const Locale('fr')) {
-      categoryName = category.name_uz ?? "";
+      categoryName = category.nameuz ?? "";
     }
     return categoryName;
   }
 
   static Future<ResponseData> getInnerProducts(int id) async {
-    print(id);
+    // print(id);
     // try {
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.subCategoryInner}$id'),
       headers: {'Content-Type': 'application/json'},
     );
-    print("SUBCATEGORY RESPONSE DATA ${response.body}");
+    // print("SUBCATEGORY RESPONSE DATA ${response.body}");
     switch (response.statusCode) {
       case StatusCodes.ok:
         return InnerModel.fromJson(response.body);
@@ -156,12 +156,12 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                                       .subcategoryModel
                                                       .subcategory!
                                                       .subcategories![index])
-                                          ? ConstColor.as_salomText
+                                          ? ConstColor.assalomText
                                           : null,
                                       child: ListTile(
                                         titleAlignment:
                                             ListTileTitleAlignment.center,
-                                        selectedColor: ConstColor.as_salomText,
+                                        selectedColor: ConstColor.assalomText,
                                         trailing: const Icon(
                                           Icons.arrow_forward_ios,
                                           size: 20,
@@ -192,7 +192,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                                         insideProducts.addAll(
                                                             value.goods.data!),
                                                         name = value
-                                                            .subcategory.name_ru
+                                                            .subcategory.nameru
                                                             .toString(),
                                                         setState(() {}),
                                                         Navigator.pop(context),
@@ -284,7 +284,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                 width: 72.w,
                 height: 45.h,
                 decoration: BoxDecoration(
-                  color: ConstColor.as_salomText,
+                  color: ConstColor.assalomText,
                   borderRadius: BorderRadius.circular(
                     30.r,
                   ),
@@ -362,7 +362,7 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                     ScreenUtil().setVerticalSpacing(8),
                     BlocBuilder<GetCatProductsBloc, GetCatProductsState>(
                       builder: (context, state) {
-                        print("STATE $state ==============");
+                        // print("STATE $state ==============");
                         if (state is GetCatProductsSuccess) {
                           var products = state.subcategoryModel.goods;
                           insideProducts = products!.data!;
@@ -414,22 +414,22 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                                         return ProductCardWidget(
                                           fromApi: true,
                                           product: ProductModel(
-                                            desc_en:
-                                                insideProducts[index].desc_en,
-                                            desc_ru:
-                                                insideProducts[index].desc_ru,
-                                            desc_uz:
-                                                insideProducts[index].desc_uz,
+                                            descen:
+                                                insideProducts[index].descen,
+                                            descru:
+                                                insideProducts[index].descru,
+                                            descuz:
+                                                insideProducts[index].descuz,
                                             id: insideProducts[index].id,
                                             discount:
                                                 insideProducts[index].discount,
-                                            name_ru:
-                                                insideProducts[index].name_ru,
+                                            nameru:
+                                                insideProducts[index].nameru,
                                             photo: [
                                               insideProducts[index].photo![0]
                                             ],
-                                            type_good:
-                                                insideProducts[index].type_good,
+                                            typegood:
+                                                insideProducts[index].typegood,
                                             price: insideProducts[index].price,
                                             sizes: insideProducts[index].sizes!,
                                             slug: insideProducts[index].slug,
@@ -486,16 +486,16 @@ class _InsideCategoryPageState extends State<InsideCategoryPage> {
                               return ProductCardWidget(
                                 fromApi: true,
                                 product: ProductModel(
-                                    desc_en: products[index].desc_en,
-                                    desc_ru: products[index].desc_ru,
-                                    desc_uz: products[index].desc_uz,
+                                    descen: products[index].descen,
+                                    descru: products[index].descru,
+                                    descuz: products[index].descuz,
                                     id: products[index].id,
                                     discount: products[index].discount,
-                                    name_ru: products[index].name_ru,
-                                    name_en: products[index].name_en,
-                                    name_uz: products[index].name_uz,
+                                    nameru: products[index].nameru,
+                                    nameen: products[index].nameen,
+                                    nameuz: products[index].nameuz,
                                     photo: products[index].photo,
-                                    type_good: products[index].type_good,
+                                    typegood: products[index].typegood,
                                     price: products[index].price,
                                     slug: products[index].slug),
                                 withHeight: false,

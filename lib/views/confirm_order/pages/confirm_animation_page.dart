@@ -23,9 +23,9 @@ class _ConfirmAnimationPageState extends State<ConfirmAnimationPage> {
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
-    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
+    basketBox = prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
 
     setState(() {});
   }
@@ -80,7 +80,7 @@ class _ConfirmAnimationPageState extends State<ConfirmAnimationPage> {
                 height: 50.h,
                 width: 328.w,
                 decoration: BoxDecoration(
-                    color: ConstColor.as_salomText,
+                    color: ConstColor.assalomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
                   "main_page".tr(),

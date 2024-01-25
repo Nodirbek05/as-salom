@@ -29,7 +29,7 @@ class MainButtonWidget extends StatelessWidget {
         height: height ?? 50.h,
         width: width,
         decoration: BoxDecoration(
-            color: ConstColor.as_salomText,
+            color: ConstColor.assalomText,
             borderRadius: BorderRadius.circular(50.r)),
         child: Text(
           text,

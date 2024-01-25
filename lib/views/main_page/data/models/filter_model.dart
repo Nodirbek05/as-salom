@@ -57,69 +57,69 @@ class FilterModel extends ResponseData {
 
 class FliterSubCategoryModel extends ResponseData {
   num? id;
-  String? name_uz;
-  String? name_en;
-  String? name_ru;
+  String? nameuz;
+  String? nameen;
+  String? nameru;
   String? icon;
   String? photo;
-  String? created_at;
-  String? updated_at;
+  String? createdat;
+  String? updatedat;
   FliterSubCategoryModel({
     this.id,
-    this.name_uz,
-    this.name_en,
-    this.name_ru,
+    this.nameuz,
+    this.nameen,
+    this.nameru,
     this.icon,
     this.photo,
-    this.created_at,
-    this.updated_at,
+    this.createdat,
+    this.updatedat,
   });
 
   FliterSubCategoryModel copyWith({
     num? id,
-    String? name_uz,
-    String? name_en,
-    String? name_ru,
+    String? nameuz,
+    String? nameen,
+    String? nameru,
     String? icon,
     String? photo,
-    String? created_at,
-    String? updated_at,
+    String? createdat,
+    String? updatedat,
   }) {
     return FliterSubCategoryModel(
       id: id ?? this.id,
-      name_uz: name_uz ?? this.name_uz,
-      name_en: name_en ?? this.name_en,
-      name_ru: name_ru ?? this.name_ru,
+      nameuz: nameuz ?? this.nameuz,
+      nameen: nameen ?? this.nameen,
+      nameru: nameru ?? this.nameru,
       icon: icon ?? this.icon,
       photo: photo ?? this.photo,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
+      createdat: createdat ?? this.createdat,
+      updatedat: updatedat ?? this.updatedat,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name_uz': name_uz,
-      'name_en': name_en,
-      'name_ru': name_ru,
+      'name_uz': nameuz,
+      'name_en': nameen,
+      'name_ru': nameru,
       'icon': icon,
       'photo': photo,
-      'created_at': created_at,
-      'updated_at': updated_at,
+      'created_at': createdat,
+      'updated_at': updatedat,
     };
   }
 
   factory FliterSubCategoryModel.fromMap(Map<String, dynamic> map) {
     return FliterSubCategoryModel(
       id: map['id'],
-      name_uz: map['name_uz'],
-      name_en: map['name_en'],
-      name_ru: map['name_ru'],
+      nameuz: map['name_uz'],
+      nameen: map['name_en'],
+      nameru: map['name_ru'],
       icon: map['icon'],
       photo: map['photo'],
-      created_at: map['created_at'],
-      updated_at: map['updated_at'],
+      createdat: map['created_at'],
+      updatedat: map['updated_at'],
     );
   }
 
@@ -130,7 +130,7 @@ class FliterSubCategoryModel extends ResponseData {
 
   @override
   String toString() {
-    return 'FliterSubCategoryModel(id: $id, name_uz: $name_uz, name_en: $name_en, name_ru: $name_ru, icon: $icon, photo: $photo, created_at: $created_at, updated_at: $updated_at)';
+    return 'FliterSubCategoryModel(id: $id, name_uz: $nameuz, name_en: $nameen, name_ru: $nameru, icon: $icon, photo: $photo, created_at: $createdat, updated_at: $updatedat)';
   }
 
   @override
@@ -139,24 +139,24 @@ class FliterSubCategoryModel extends ResponseData {
 
     return other is FliterSubCategoryModel &&
         other.id == id &&
-        other.name_uz == name_uz &&
-        other.name_en == name_en &&
-        other.name_ru == name_ru &&
+        other.nameuz == nameuz &&
+        other.nameen == nameen &&
+        other.nameru == nameru &&
         other.icon == icon &&
         other.photo == photo &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at;
+        other.createdat == createdat &&
+        other.updatedat == updatedat;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name_uz.hashCode ^
-        name_en.hashCode ^
-        name_ru.hashCode ^
+        nameuz.hashCode ^
+        nameen.hashCode ^
+        nameru.hashCode ^
         icon.hashCode ^
         photo.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode;
+        createdat.hashCode ^
+        updatedat.hashCode;
   }
 }

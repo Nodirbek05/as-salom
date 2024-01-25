@@ -57,34 +57,34 @@ class SubcategoriesMainModel extends ResponseData {
 
 class SubCategoriesModel extends ResponseData {
   num? id;
-  String? name_uz;
-  String? name_ru;
-  String? name_en;
-  String? name_oz;
+  String? nameuz;
+  String? nameru;
+  String? nameen;
+  String? nameoz;
   List<SubCategoryModel>? subcategories;
   SubCategoriesModel({
     this.id,
-    this.name_uz,
-    this.name_ru,
-    this.name_en,
-    this.name_oz,
+    this.nameuz,
+    this.nameru,
+    this.nameen,
+    this.nameoz,
     this.subcategories,
   });
 
   SubCategoriesModel copyWith({
     num? id,
-    String? name_uz,
-    String? name_ru,
-    String? name_en,
-    String? name_oz,
+    String? nameuz,
+    String? nameru,
+    String? nameen,
+    String? nameoz,
     List<SubCategoryModel>? subcategories,
   }) {
     return SubCategoriesModel(
       id: id ?? this.id,
-      name_uz: name_uz ?? this.name_uz,
-      name_ru: name_ru ?? this.name_ru,
-      name_en: name_en ?? this.name_en,
-      name_oz: name_oz ?? this.name_oz,
+      nameuz: nameuz ?? this.nameuz,
+      nameru: nameru ?? this.nameru,
+      nameen: nameen ?? this.nameen,
+      nameoz: nameoz ?? this.nameoz,
       subcategories: subcategories ?? this.subcategories,
     );
   }
@@ -92,10 +92,10 @@ class SubCategoriesModel extends ResponseData {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name_uz': name_uz,
-      'name_ru': name_ru,
-      'name_en': name_en,
-      'name_oz': name_oz,
+      'name_uz': nameuz,
+      'name_ru': nameru,
+      'name_en': nameen,
+      'name_oz': nameoz,
       'subcategories': subcategories?.map((x) => x.toMap()).toList(),
     };
   }
@@ -103,10 +103,10 @@ class SubCategoriesModel extends ResponseData {
   factory SubCategoriesModel.fromMap(Map<String, dynamic> map) {
     return SubCategoriesModel(
       id: map['id'],
-      name_uz: map['name_uz'],
-      name_ru: map['name_ru'],
-      name_en: map['name_en'],
-      name_oz: map['name_oz'],
+      nameuz: map['name_uz'],
+      nameru: map['name_ru'],
+      nameen: map['name_en'],
+      nameoz: map['name_oz'],
       subcategories: map['subcategories'] != null
           ? List<SubCategoryModel>.from(
               map['subcategories']?.map((x) => SubCategoryModel.fromMap(x)))
@@ -121,7 +121,7 @@ class SubCategoriesModel extends ResponseData {
 
   @override
   String toString() {
-    return 'SubCategoriesModel(id: $id, name_uz: $name_uz, name_ru: $name_ru, name_en: $name_en, name_oz: $name_oz, subcategories: $subcategories)';
+    return 'SubCategoriesModel(id: $id, name_uz: $nameuz, name_ru: $nameru, name_en: $nameen, name_oz: $nameoz, subcategories: $subcategories)';
   }
 
   @override
@@ -130,61 +130,61 @@ class SubCategoriesModel extends ResponseData {
 
     return other is SubCategoriesModel &&
         other.id == id &&
-        other.name_uz == name_uz &&
-        other.name_ru == name_ru &&
-        other.name_en == name_en &&
-        other.name_oz == name_oz &&
+        other.nameuz == nameuz &&
+        other.nameru == nameru &&
+        other.nameen == nameen &&
+        other.nameoz == nameoz &&
         listEquals(other.subcategories, subcategories);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name_uz.hashCode ^
-        name_ru.hashCode ^
-        name_en.hashCode ^
-        name_oz.hashCode ^
+        nameuz.hashCode ^
+        nameru.hashCode ^
+        nameen.hashCode ^
+        nameoz.hashCode ^
         subcategories.hashCode;
   }
 }
 
 class SubCategoryModel {
   num? id;
-  int? category_id;
-  String? name_uz;
-  String? name_ru;
-  String? name_en;
-  String? name_oz;
+  int? categoryid;
+  String? nameuz;
+  String? nameru;
+  String? nameen;
+  String? nameoz;
   String? photo;
   Pivot? pivot;
   SubCategoryModel({
     this.id,
-    this.category_id,
-    this.name_uz,
-    this.name_ru,
-    this.name_en,
-    this.name_oz,
+    this.categoryid,
+    this.nameuz,
+    this.nameru,
+    this.nameen,
+    this.nameoz,
     this.photo,
     this.pivot,
   });
 
   SubCategoryModel copyWith({
     num? id,
-    int? category_id,
-    String? name_uz,
-    String? name_ru,
-    String? name_en,
-    String? name_oz,
+    int? categoryid,
+    String? nameuz,
+    String? nameru,
+    String? nameen,
+    String? nameoz,
     String? photo,
     Pivot? pivot,
   }) {
     return SubCategoryModel(
       id: id ?? this.id,
-      category_id: category_id ?? this.category_id,
-      name_uz: name_uz ?? this.name_uz,
-      name_ru: name_ru ?? this.name_ru,
-      name_en: name_en ?? this.name_en,
-      name_oz: name_oz ?? this.name_oz,
+      categoryid: categoryid ?? this.categoryid,
+      nameuz: nameuz ?? this.nameuz,
+      nameru: nameru ?? this.nameru,
+      nameen: nameen ?? this.nameen,
+      nameoz: nameoz ?? this.nameoz,
       photo: photo ?? this.photo,
       pivot: pivot ?? this.pivot,
     );
@@ -193,11 +193,11 @@ class SubCategoryModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'category_id': category_id,
-      'name_uz': name_uz,
-      'name_ru': name_ru,
-      'name_en': name_en,
-      'name_oz': name_oz,
+      'category_id': categoryid,
+      'name_uz': nameuz,
+      'name_ru': nameru,
+      'name_en': nameen,
+      'name_oz': nameoz,
       'photo': photo,
       'pivot': pivot?.toMap(),
     };
@@ -206,11 +206,11 @@ class SubCategoryModel {
   factory SubCategoryModel.fromMap(Map<String, dynamic> map) {
     return SubCategoryModel(
       id: map['id'],
-      category_id: map['category_id']?.toInt(),
-      name_uz: map['name_uz'],
-      name_ru: map['name_ru'],
-      name_en: map['name_en'],
-      name_oz: map['name_oz'],
+      categoryid: map['category_id']?.toInt(),
+      nameuz: map['name_uz'],
+      nameru: map['name_ru'],
+      nameen: map['name_en'],
+      nameoz: map['name_oz'],
       photo: map['photo'],
       pivot: map['pivot'] != null ? Pivot.fromMap(map['pivot']) : null,
     );
@@ -223,7 +223,7 @@ class SubCategoryModel {
 
   @override
   String toString() {
-    return 'SubCategoryModel(id: $id, category_id: $category_id, name_uz: $name_uz, name_ru: $name_ru, name_en: $name_en, name_oz: $name_oz, photo: $photo, pivot: $pivot)';
+    return 'SubCategoryModel(id: $id, category_id: $categoryid, name_uz: $nameuz, name_ru: $nameru, name_en: $nameen, name_oz: $nameoz, photo: $photo, pivot: $pivot)';
   }
 
   @override
@@ -232,11 +232,11 @@ class SubCategoryModel {
 
     return other is SubCategoryModel &&
         other.id == id &&
-        other.category_id == category_id &&
-        other.name_uz == name_uz &&
-        other.name_ru == name_ru &&
-        other.name_en == name_en &&
-        other.name_oz == name_oz &&
+        other.categoryid == categoryid &&
+        other.nameuz == nameuz &&
+        other.nameru == nameru &&
+        other.nameen == nameen &&
+        other.nameoz == nameoz &&
         other.photo == photo &&
         other.pivot == pivot;
   }
@@ -244,11 +244,11 @@ class SubCategoryModel {
   @override
   int get hashCode {
     return id.hashCode ^
-        category_id.hashCode ^
-        name_uz.hashCode ^
-        name_ru.hashCode ^
-        name_en.hashCode ^
-        name_oz.hashCode ^
+        categoryid.hashCode ^
+        nameuz.hashCode ^
+        nameru.hashCode ^
+        nameen.hashCode ^
+        nameoz.hashCode ^
         photo.hashCode ^
         pivot.hashCode;
   }

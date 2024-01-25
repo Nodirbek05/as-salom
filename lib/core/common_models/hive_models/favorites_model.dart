@@ -7,21 +7,21 @@ class FavoritesModel extends HiveObject{
   @HiveField(0)
   dynamic id;
   @HiveField(1)
-  dynamic name_ru;
+  dynamic nameru;
   @HiveField(2)
-  dynamic name_uz;
+  dynamic nameuz;
   @HiveField(3)
-  dynamic name_en;
+  dynamic nameen;
   @HiveField(4)
-  dynamic name_oz;
+  dynamic nameoz;
   @HiveField(5)
-  dynamic desc_ru;
+  dynamic descru;
   @HiveField(6)
-  dynamic desc_uz;
+  dynamic descuz;
   @HiveField(7)
-  dynamic desc_en;
+  dynamic descen;
   @HiveField(8)
-  dynamic desc_oz;
+  dynamic descoz;
   @HiveField(9)
   dynamic type;
   @HiveField(10)
@@ -38,14 +38,14 @@ class FavoritesModel extends HiveObject{
   dynamic slug;
   FavoritesModel({
      this.id,
-     this.name_ru,
-     this.name_uz,
-     this.name_en,
-     this.name_oz,
-     this.desc_ru,
-     this.desc_uz,
-     this.desc_en,
-     this.desc_oz,
+     this.nameru,
+     this.nameuz,
+     this.nameen,
+     this.nameoz,
+     this.descru,
+     this.descuz,
+     this.descen,
+     this.descoz,
      this.type,
      this.price,
      this.image,

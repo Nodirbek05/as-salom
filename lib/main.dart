@@ -22,9 +22,9 @@ void main() async {
   await Hive.openBox<FavoritesModel>("favoritesBoxForHome");
   await Hive.openBox<BasketModel>('basketBox');
   await Hive.openBox<BasketModel>('basketBoxForHome');
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  bool hasRegistered = _prefs.getString('token') == null;
-  _prefs.getInt("place") != null ? null : _prefs.setInt('place', 2);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool hasRegistered = prefs.getString('token') == null;
+  prefs.getInt("place") != null ? null : prefs.setInt('place', 2);
   await Future.delayed(const Duration(seconds: 1));
 
   runApp(

@@ -52,62 +52,62 @@ class OrdersModel extends ResponseData {
 
 class OrdersData extends ResponseData {
   int? id;
-  dynamic user_id;
+  dynamic userid;
   String? name;
   String? phone;
   String? desc;
-  String? payment_type;
-  dynamic total_price;
+  String? paymenttype;
+  dynamic totalprice;
   String? status;
-  dynamic is_active;
-  String? status_text;
-  String? created_at;
-  String? updated_at;
+  dynamic isactive;
+  String? statustext;
+  String? createdat;
+  String? updatedat;
   List<ProductData>? products;
   OrdersData({
     this.id,
-    this.user_id,
+    this.userid,
     this.name,
     this.phone,
     this.desc,
-    this.payment_type,
-    this.total_price,
+    this.paymenttype,
+    this.totalprice,
     this.status,
-    this.is_active,
-    this.status_text,
-    this.created_at,
-    this.updated_at,
+    this.isactive,
+    this.statustext,
+    this.createdat,
+    this.updatedat,
     this.products,
   });
 
   OrdersData copyWith({
     int? id,
-    dynamic user_id,
+    dynamic userid,
     String? name,
     String? phone,
     String? desc,
-    String? payment_type,
-    dynamic total_price,
+    String? paymenttype,
+    dynamic totalprice,
     String? status,
-    dynamic is_active,
-    String? status_text,
-    String? created_at,
-    String? updated_at,
+    dynamic isactive,
+    String? statustext,
+    String? createdat,
+    String? updatedat,
     List<ProductData>? products,
   }) {
     return OrdersData(
       id: id ?? this.id,
-      user_id: user_id ?? this.user_id,
+      userid: userid ?? this.userid,
       name: name ?? this.name,
       phone: phone ?? this.phone,
       desc: desc ?? this.desc,
-      payment_type: payment_type ?? this.payment_type,
-      total_price: total_price ?? this.total_price,
+      paymenttype: paymenttype ?? this.paymenttype,
+      totalprice: totalprice ?? this.totalprice,
       status: status ?? this.status,
-      is_active: is_active ?? this.is_active,
-      status_text: status_text ?? this.status_text,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
+      isactive: isactive ?? this.isactive,
+      statustext: statustext ?? this.statustext,
+      createdat: createdat ?? this.createdat,
+      updatedat: updatedat ?? this.updatedat,
       products: products ?? this.products,
     );
   }
@@ -115,17 +115,17 @@ class OrdersData extends ResponseData {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'user_id': user_id,
+      'user_id': userid,
       'name': name,
       'phone': phone,
       'desc': desc,
-      'payment_type': payment_type,
-      'total_price': total_price,
+      'payment_type': paymenttype,
+      'total_price': totalprice,
       'status': status,
-      'is_active': is_active,
-      'status_text': status_text,
-      'created_at': created_at,
-      'updated_at': updated_at,
+      'is_active': isactive,
+      'status_text': statustext,
+      'created_at': createdat,
+      'updated_at': updatedat,
       'products': products?.map((x) => x.toMap()).toList(),
     };
   }
@@ -133,17 +133,17 @@ class OrdersData extends ResponseData {
   factory OrdersData.fromMap(Map<String, dynamic> map) {
     return OrdersData(
       id: map['id']?.toInt(),
-      user_id: map['user_id'],
+      userid: map['user_id'],
       name: map['name'],
       phone: map['phone'],
       desc: map['desc'],
-      payment_type: map['payment_type'],
-      total_price: map['total_price'],
+      paymenttype: map['payment_type'],
+      totalprice: map['total_price'],
       status: map['status'],
-      is_active: map['is_active'],
-      status_text: map['status_text'],
-      created_at: map['created_at'],
-      updated_at: map['updated_at'],
+      isactive: map['is_active'],
+      statustext: map['status_text'],
+      createdat: map['created_at'],
+      updatedat: map['updated_at'],
       products: map['products'] != null
           ? List<ProductData>.from(
               map['products']?.map((x) => ProductData.fromMap(x)))
@@ -158,7 +158,7 @@ class OrdersData extends ResponseData {
 
   @override
   String toString() {
-    return 'OrdersData(id: $id, user_id: $user_id, name: $name, phone: $phone, desc: $desc, payment_type: $payment_type, total_price: $total_price, status: $status, is_active: $is_active, status_text: $status_text, created_at: $created_at, updated_at: $updated_at, products: $products)';
+    return 'OrdersData(id: $id, user_id: $userid, name: $name, phone: $phone, desc: $desc, payment_type: $paymenttype, total_price: $totalprice, status: $status, is_active: $isactive, status_text: $statustext, created_at: $createdat, updated_at: $updatedat, products: $products)';
   }
 
   @override
@@ -167,108 +167,108 @@ class OrdersData extends ResponseData {
 
     return other is OrdersData &&
         other.id == id &&
-        other.user_id == user_id &&
+        other.userid == userid &&
         other.name == name &&
         other.phone == phone &&
         other.desc == desc &&
-        other.payment_type == payment_type &&
-        other.total_price == total_price &&
+        other.paymenttype == paymenttype &&
+        other.totalprice == totalprice &&
         other.status == status &&
-        other.is_active == is_active &&
-        other.status_text == status_text &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at &&
+        other.isactive == isactive &&
+        other.statustext == statustext &&
+        other.createdat == createdat &&
+        other.updatedat == updatedat &&
         listEquals(other.products, products);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        user_id.hashCode ^
+        userid.hashCode ^
         name.hashCode ^
         phone.hashCode ^
         desc.hashCode ^
-        payment_type.hashCode ^
-        total_price.hashCode ^
+        paymenttype.hashCode ^
+        totalprice.hashCode ^
         status.hashCode ^
-        is_active.hashCode ^
-        status_text.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode ^
+        isactive.hashCode ^
+        statustext.hashCode ^
+        createdat.hashCode ^
+        updatedat.hashCode ^
         products.hashCode;
   }
 }
 
 class ProductData extends ResponseData {
-  int? type_good;
+  int? typegood;
   String? photo;
-  String? name_ru;
+  String? nameru;
   String? ikpu;
   String? barcode;
   String? nds;
-  int? product_count;
-  int? product_price;
+  int? productcount;
+  int? productprice;
   List<Size>? sizes;
   ProductData({
-    this.type_good,
+    this.typegood,
     this.photo,
-    this.name_ru,
+    this.nameru,
     this.ikpu,
     this.barcode,
     this.nds,
-    this.product_count,
-    this.product_price,
+    this.productcount,
+    this.productprice,
     this.sizes,
   });
 
   ProductData copyWith({
-    int? type_good,
+    int? typegood,
     String? photo,
-    String? name_ru,
+    String? nameru,
     String? ikpu,
     String? barcode,
     String? nds,
-    int? product_count,
-    int? product_price,
+    int? productcount,
+    int? productprice,
     List<Size>? sizes,
   }) {
     return ProductData(
-      type_good: type_good ?? this.type_good,
+      typegood: typegood ?? this.typegood,
       photo: photo ?? this.photo,
-      name_ru: name_ru ?? this.name_ru,
+      nameru: nameru ?? this.nameru,
       ikpu: ikpu ?? this.ikpu,
       barcode: barcode ?? this.barcode,
       nds: nds ?? this.nds,
-      product_count: product_count ?? this.product_count,
-      product_price: product_price ?? this.product_price,
+      productcount: productcount ?? this.productcount,
+      productprice: productprice ?? this.productprice,
       sizes: sizes ?? this.sizes,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'type_good': type_good,
+      'type_good': typegood,
       'photo': photo,
-      'name_ru': name_ru,
+      'name_ru': nameru,
       'ikpu': ikpu,
       'barcode': barcode,
       'nds': nds,
-      'product_count': product_count,
-      'product_price': product_price,
+      'product_count': productcount,
+      'product_price': productprice,
       'sizes': sizes?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory ProductData.fromMap(Map<String, dynamic> map) {
     return ProductData(
-      type_good: map['type_good']?.toInt(),
+      typegood: map['type_good']?.toInt(),
       photo: map['photo'],
-      name_ru: map['name_ru'],
+      nameru: map['name_ru'],
       ikpu: map['ikpu'],
       barcode: map['barcode'],
       nds: map['nds'],
-      product_count: map['product_count']?.toInt(),
-      product_price: map['product_price']?.toInt(),
+      productcount: map['product_count']?.toInt(),
+      productprice: map['product_price']?.toInt(),
       sizes: map['sizes'] != null
           ? List<Size>.from(map['sizes']?.map((x) => Size.fromMap(x)))
           : null,
@@ -282,7 +282,7 @@ class ProductData extends ResponseData {
 
   @override
   String toString() {
-    return 'ProductData(type_good: $type_good, photo: $photo, name_ru: $name_ru, ikpu: $ikpu, barcode: $barcode, nds: $nds, product_count: $product_count, product_price: $product_price, sizes: $sizes)';
+    return 'ProductData(type_good: $typegood, photo: $photo, name_ru: $nameru, ikpu: $ikpu, barcode: $barcode, nds: $nds, product_count: $productcount, product_price: $productprice, sizes: $sizes)';
   }
 
   @override
@@ -290,78 +290,78 @@ class ProductData extends ResponseData {
     if (identical(this, other)) return true;
 
     return other is ProductData &&
-        other.type_good == type_good &&
+        other.typegood == typegood &&
         other.photo == photo &&
-        other.name_ru == name_ru &&
+        other.nameru == nameru &&
         other.ikpu == ikpu &&
         other.barcode == barcode &&
         other.nds == nds &&
-        other.product_count == product_count &&
-        other.product_price == product_price &&
+        other.productcount == productcount &&
+        other.productprice == productprice &&
         listEquals(other.sizes, sizes);
   }
 
   @override
   int get hashCode {
-    return type_good.hashCode ^
+    return typegood.hashCode ^
         photo.hashCode ^
-        name_ru.hashCode ^
+        nameru.hashCode ^
         ikpu.hashCode ^
         barcode.hashCode ^
         nds.hashCode ^
-        product_count.hashCode ^
-        product_price.hashCode ^
+        productcount.hashCode ^
+        productprice.hashCode ^
         sizes.hashCode;
   }
 }
 
 class Size extends ResponseData {
-  dynamic size_id;
-  dynamic size_quantity;
-  dynamic size_price;
-  String? size_name;
-  String? size_number;
+  dynamic sizeid;
+  dynamic sizequantity;
+  dynamic sizeprice;
+  String? sizename;
+  String? sizenumber;
   Size({
-    this.size_id,
-    this.size_quantity,
-    this.size_price,
-    this.size_name,
-    this.size_number,
+    this.sizeid,
+    this.sizequantity,
+    this.sizeprice,
+    this.sizename,
+    this.sizenumber,
   });
 
   Size copyWith({
-    dynamic size_id,
-    dynamic size_quantity,
-    dynamic size_price,
-    String? size_name,
-    String? size_number,
+    dynamic sizeid,
+    dynamic sizequantity,
+    dynamic sizeprice,
+    String? sizename,
+    String? sizenumber,
   }) {
     return Size(
-      size_id: size_id ?? this.size_id,
-      size_quantity: size_quantity ?? this.size_quantity,
-      size_price: size_price ?? this.size_price,
-      size_name: size_name ?? this.size_name,
-      size_number: size_number ?? this.size_number,
+      sizeid: sizeid ?? this.sizeid,
+      sizequantity: sizequantity ?? this.sizequantity,
+      sizeprice: sizeprice ?? this.sizeprice,
+      sizename: sizename ?? this.sizename,
+      sizenumber: sizenumber ?? this.sizenumber,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'size_id': size_id,
-      'size_quantity': size_quantity,
-      'size_price': size_price,
-      'size_name': size_name,
-      'size_number': size_number,
+      'size_id': sizeid,
+      'size_quantity': sizequantity,
+      'size_price': sizeprice,
+      'size_name': sizename,
+      'size_number': sizenumber,
     };
   }
 
   factory Size.fromMap(Map<String, dynamic> map) {
     return Size(
-      size_id: map['size_id'],
-      size_quantity: map['size_quantity'],
-      size_price: map['size_price'],
-      size_name: map['size_name'],
-      size_number: map['size_number'],
+      sizeid: map['size_id'],
+      sizequantity: map['size_quantity'],
+      sizeprice: map['size_price'],
+      sizename: map['size_name'],
+      sizenumber: map['size_number'],
     );
   }
 
@@ -371,7 +371,7 @@ class Size extends ResponseData {
 
   @override
   String toString() {
-    return 'Size(size_id: $size_id, size_quantity: $size_quantity, size_price: $size_price, size_name: $size_name, size_number: $size_number)';
+    return 'Size(size_id: $sizeid, size_quantity: $sizequantity, size_price: $sizeprice, size_name: $sizename, size_number: $sizenumber)';
   }
 
   @override
@@ -379,19 +379,19 @@ class Size extends ResponseData {
     if (identical(this, other)) return true;
   
     return other is Size &&
-      other.size_id == size_id &&
-      other.size_quantity == size_quantity &&
-      other.size_price == size_price &&
-      other.size_name == size_name &&
-      other.size_number == size_number;
+      other.sizeid == sizeid &&
+      other.sizequantity == sizequantity &&
+      other.sizeprice == sizeprice &&
+      other.sizename == sizename &&
+      other.sizenumber == sizenumber;
   }
 
   @override
   int get hashCode {
-    return size_id.hashCode ^
-      size_quantity.hashCode ^
-      size_price.hashCode ^
-      size_name.hashCode ^
-      size_number.hashCode;
+    return sizeid.hashCode ^
+      sizequantity.hashCode ^
+      sizeprice.hashCode ^
+      sizename.hashCode ^
+      sizenumber.hashCode;
   }
 }

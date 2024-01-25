@@ -19,7 +19,7 @@ class ConfirmOrderByCardBloc
         await CommonRequests.confirmOrById(event.name, event.phone, event.id);
     if (response is ConfirmOrderByCard) {
       emit(ConfirmOrderByCardSuccess(data: response));
-      print("CREATE ORDER SUCCESS");
+      // print("CREATE ORDER SUCCESS");
     }
   }
 }

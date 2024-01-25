@@ -27,13 +27,13 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
   String _getcategoryByLocale(SubCategoryModel category, Locale locale) {
     String categoryName = "no_data".tr();
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru ?? "";
+      categoryName = category.nameru ?? "";
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz ?? "";
+      categoryName = category.nameuz ?? "";
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en ?? "";
+      categoryName = category.nameen ?? "";
     } else if (locale == const Locale('fr')) {
-      categoryName = category.name_uz ?? "";
+      categoryName = category.nameuz ?? "";
     }
     return categoryName;
   }
@@ -41,13 +41,13 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
   String _getSubCategoryByLocale(SubCategoriesModel category, Locale locale) {
     String categoryName = "no_data".tr();
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru ?? "";
+      categoryName = category.nameru ?? "";
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz ?? "";
+      categoryName = category.nameuz ?? "";
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en ?? "";
+      categoryName = category.nameen ?? "";
     } else if (locale == const Locale('fr')) {
-      categoryName = category.name_uz ?? "";
+      categoryName = category.nameuz ?? "";
     }
     return categoryName;
   }
@@ -97,7 +97,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                                         ),
                                         id: int.parse(
                                           categories[index]
-                                              .category_id!
+                                              .categoryid!
                                               .toString(),
                                         ),
                                       ),

@@ -16,7 +16,7 @@ class GetZoneBloc extends Bloc<GetZoneEvent, GetZoneState> {
     final response = await CommonRequests.getZone();
     if (response is ZoneModels) {
       emit(GetZoneSuccess(zoneModels: response));
-      print("Zone Came truly");
+      // print("Zone Came truly");
     }
   }
 }

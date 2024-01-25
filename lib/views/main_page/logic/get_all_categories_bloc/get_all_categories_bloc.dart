@@ -19,10 +19,10 @@ class GetAllCategoriesBloc
     final response = await CommonRequests.getAllCategories();
     if (response is CategoriesModel) {
       emit(GetAllCategoriesSuccess(categoryModel: response));
-      print("GET ALL CATEGORIES SUCCESS ${response}");
+      // print("GET ALL CATEGORIES SUCCESS ${response}");
     } else if (response is ErrorModel) {
       emit(GetAllCategoriesFail(errorData: response));
-      print("GET ALL Banners ERROR");
+      // print("GET ALL Banners ERROR");
     }
   }
 }

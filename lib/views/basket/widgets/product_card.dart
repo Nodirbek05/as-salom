@@ -32,12 +32,12 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
-    print("RAZMER:${widget.product.size}");
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
+    // print("RAZMER:${widget.product.size}");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
     favBox =
-        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
-    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+        prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
     setState(() {});
   }
 
@@ -178,7 +178,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                                             onPressed: () {
                                               Navigator.pop(context);
                                             },
-                                            icon: Icon(Icons.close)),
+                                            icon: const Icon(Icons.close)),
                                       ],
                                     ),
                                     Text(
@@ -200,7 +200,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
                                         height: 55.h,
                                         width: 328.w,
                                         decoration: BoxDecoration(
-                                            color: ConstColor.as_salomText,
+                                            color: ConstColor.assalomText,
                                             borderRadius:
                                                 BorderRadius.circular(50.r)),
                                         child: Text(
@@ -252,9 +252,9 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
     final box = Hive.box<BasketModel>(basketBox).values.toList();
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG Quantity increase");
+        // print("DRUG Quantity increase");
         product.qty++;
-        print("DRUG Quantity ${product.qty}");
+        // print("DRUG Quantity ${product.qty}");
         break;
       }
     }
@@ -264,9 +264,9 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
     final box = Hive.box<BasketModel>(basketBox).values.toList();
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG Quantity decrease");
+        // print("DRUG Quantity decrease");
         product.qty--;
-        print("DRUG Quantity ${product.qty}");
+        // print("DRUG Quantity ${product.qty}");
         break;
       }
     }
@@ -323,7 +323,7 @@ class _BasketProductCardWidgetState extends State<BasketProductCardWidget> {
     final listProducts = Hive.box<BasketModel>(basketBox);
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG REMOVED FROM BASKET");
+        // print("DRUG REMOVED FROM BASKET");
         listProducts.delete(product.key);
         break;
       }

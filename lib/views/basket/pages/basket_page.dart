@@ -3,7 +3,6 @@ import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/number_formater.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
-import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/basket/widgets/product_card.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_order_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -29,11 +28,11 @@ class _BasketPageState extends State<BasketPage> {
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
     favBox =
-        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
-    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+        prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
     setState(() {});
   }
 
@@ -48,7 +47,7 @@ class _BasketPageState extends State<BasketPage> {
             : price = 0;
       }
     }
-    print(price);
+    // print(price);
   }
 
   int getSingleProPrice(BasketModel product) {
@@ -123,9 +122,9 @@ class _BasketPageState extends State<BasketPage> {
             ScreenUtil().setVerticalSpacing(15),
             InkWell(
               onTap: () async {
-                SharedPreferences _prefs =
+                SharedPreferences prefs =
                     await SharedPreferences.getInstance();
-                var token = _prefs.getString('token');
+                var token = prefs.getString('token');
                 if (token != null) {
                   product.isNotEmpty
                       // ignore: use_build_context_synchronously
@@ -243,7 +242,7 @@ class _BasketPageState extends State<BasketPage> {
                                         height: 55.h,
                                         width: 328.w,
                                         decoration: BoxDecoration(
-                                            color: ConstColor.as_salomText,
+                                            color: ConstColor.assalomText,
                                             borderRadius:
                                                 BorderRadius.circular(50.r)),
                                         child: Text(
@@ -284,7 +283,7 @@ class _BasketPageState extends State<BasketPage> {
                 height: 45.h,
                 width: 328.w,
                 decoration: BoxDecoration(
-                    color: ConstColor.as_salomText,
+                    color: ConstColor.assalomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
                   "create_order".tr(),

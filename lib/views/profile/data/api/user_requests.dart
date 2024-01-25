@@ -15,9 +15,9 @@ class UserRequests {
 
   static Future<ResponseData> getProfile() async {
     try {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      var token = _prefs.getString('token');
-      print('${ApiPaths.basicUrl}${ApiPaths.getUser}');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      // print('${ApiPaths.basicUrl}${ApiPaths.getUser}');
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getUser}'),
         headers: {
@@ -25,7 +25,7 @@ class UserRequests {
           'Content-Type': 'application/json'
         },
       );
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return ProfileModel.fromJson(response.body);
@@ -41,8 +41,8 @@ class UserRequests {
 
   static Future<ResponseData> updateName(String name, num userId) async {
     try {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      var token = _prefs.getString('token');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
       final response = await http.patch(
           Uri.parse('${ApiPaths.basicUrl}${ApiPaths.updateName}/$userId'),
           headers: {
@@ -52,7 +52,7 @@ class UserRequests {
           body: json.encode(
             {'name': name},
           ));
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return SuccessfulResponse();
@@ -68,8 +68,8 @@ class UserRequests {
 
   static Future<ResponseData> updatePhone(String number, num userId) async {
     try {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      var token = _prefs.getString('token');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
       final response = await http.patch(
           Uri.parse('${ApiPaths.basicUrl}${ApiPaths.updateNumber}/$userId'),
           headers: {
@@ -79,7 +79,7 @@ class UserRequests {
           body: json.encode(
             {'phone': "+998 ${number.replaceAll("-", " ")}"},
           ));
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return SuccessfulResponse();
@@ -95,8 +95,8 @@ class UserRequests {
 
   static Future<ResponseData> getOrders() async {
     // try {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    var token = _prefs.getString('token');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getOrders}'),
       headers: {
@@ -104,7 +104,7 @@ class UserRequests {
         'Authorization': "Bearer $token",
       },
     );
-    print(response.body);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return OrdersModel.fromJson(response.body);

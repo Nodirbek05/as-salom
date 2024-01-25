@@ -55,20 +55,20 @@ class UserDataModel {
   String? phone;
   dynamic code;
   dynamic role;
-  dynamic is_active;
-  String? device_name;
-  String? created_at;
-  String? updated_at;
+  dynamic isactive;
+  String? devicename;
+  String? createdat;
+  String? updatedat;
   UserDataModel({
     this.id,
     this.name,
     this.phone,
     this.code,
     this.role,
-    this.is_active,
-    this.device_name,
-    this.created_at,
-    this.updated_at,
+    this.isactive,
+    this.devicename,
+    this.createdat,
+    this.updatedat,
   });
 
   UserDataModel copyWith({
@@ -77,10 +77,10 @@ class UserDataModel {
     String? phone,
     dynamic code,
     dynamic role,
-    dynamic is_active,
-    String? device_name,
-    String? created_at,
-    String? updated_at,
+    dynamic isactive,
+    String? devicename,
+    String? createdat,
+    String? updatedat,
   }) {
     return UserDataModel(
       id: id ?? this.id,
@@ -88,10 +88,10 @@ class UserDataModel {
       phone: phone ?? this.phone,
       code: code ?? this.code,
       role: role ?? this.role,
-      is_active: is_active ?? this.is_active,
-      device_name: device_name ?? this.device_name,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
+      isactive: isactive ?? this.isactive,
+      devicename: devicename ?? this.devicename,
+      createdat: createdat ?? this.createdat,
+      updatedat: updatedat ?? this.updatedat,
     );
   }
 
@@ -113,17 +113,17 @@ class UserDataModel {
     if (role != null) {
       result.addAll({'role': role});
     }
-    if (is_active != null) {
-      result.addAll({'is_active': is_active});
+    if (isactive != null) {
+      result.addAll({'is_active': isactive});
     }
-    if (device_name != null) {
-      result.addAll({'device_name': device_name});
+    if (devicename != null) {
+      result.addAll({'device_name': devicename});
     }
-    if (created_at != null) {
-      result.addAll({'created_at': created_at});
+    if (createdat != null) {
+      result.addAll({'created_at': createdat});
     }
-    if (updated_at != null) {
-      result.addAll({'updated_at': updated_at});
+    if (updatedat != null) {
+      result.addAll({'updated_at': updatedat});
     }
 
     return result;
@@ -136,10 +136,10 @@ class UserDataModel {
       phone: map['phone'],
       code: map['code'],
       role: map['role'],
-      is_active: map['is_active'],
-      device_name: map['device_name'],
-      created_at: map['created_at'],
-      updated_at: map['updated_at'],
+      isactive: map['is_active'],
+      devicename: map['device_name'],
+      createdat: map['created_at'],
+      updatedat: map['updated_at'],
     );
   }
 
@@ -150,7 +150,7 @@ class UserDataModel {
 
   @override
   String toString() {
-    return 'UserDataModel(id: $id, name: $name, phone: $phone, code: $code, role: $role, is_active: $is_active, device_name: $device_name, created_at: $created_at, updated_at: $updated_at)';
+    return 'UserDataModel(id: $id, name: $name, phone: $phone, code: $code, role: $role, is_active: $isactive, device_name: $devicename, created_at: $createdat, updated_at: $updatedat)';
   }
 
   @override
@@ -163,10 +163,10 @@ class UserDataModel {
         other.phone == phone &&
         other.code == code &&
         other.role == role &&
-        other.is_active == is_active &&
-        other.device_name == device_name &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at;
+        other.isactive == isactive &&
+        other.devicename == devicename &&
+        other.createdat == createdat &&
+        other.updatedat == updatedat;
   }
 
   @override
@@ -176,9 +176,9 @@ class UserDataModel {
         phone.hashCode ^
         code.hashCode ^
         role.hashCode ^
-        is_active.hashCode ^
-        device_name.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode;
+        isactive.hashCode ^
+        devicename.hashCode ^
+        createdat.hashCode ^
+        updatedat.hashCode;
   }
 }

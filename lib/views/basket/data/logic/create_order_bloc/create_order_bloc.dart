@@ -19,7 +19,7 @@ class CreateOrderBloc extends Bloc<CreateOrderEvent, CreateOrderState> {
     final response = await CommonRequests.createOrder(event.good);
     if (response is CreatedOrderModel) {
       emit(CreateOrderSuccess(data: response));
-      print("CREATE ORDER SUCCESS");
+      // print("CREATE ORDER SUCCESS");
     }
   }
 }

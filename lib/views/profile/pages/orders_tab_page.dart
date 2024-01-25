@@ -6,7 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
@@ -135,7 +134,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                         color: orders[index].status == "new"
                                             ? ConstColor.newStatus
                                             : orders[index].status == "delivery"
-                                                ? ConstColor.as_salomText
+                                                ? ConstColor.assalomText
                                                 : orders[index].status ==
                                                         "completed"
                                                     ? ConstColor.indigo
@@ -182,7 +181,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                   left: 20.w,
                                 ),
                                 child: Text(
-                                    "${'confirmed_date'.tr()}:${DateFormat('dd.MM.yyyy HH:mm').format(DateTime.parse(orders[index].created_at!).toLocal())}",
+                                    "${'confirmed_date'.tr()}:${DateFormat('dd.MM.yyyy HH:mm').format(DateTime.parse(orders[index].createdat!).toLocal())}",
                                     style: Styles.style500sp14Black),
                               ),
                               openOrder != index
@@ -194,7 +193,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                         left: 20.w,
                                       ),
                                       child: Text(
-                                        "${'order_price'.tr()}: ${orders[index].total_price}",
+                                        "${'order_price'.tr()}: ${orders[index].totalprice}",
                                         style: Styles.style500sp14Black,
                                       ),
                                     )
@@ -221,7 +220,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                               borderRadius:
                                                   BorderRadius.circular(30.r),
                                               border: Border.all(
-                                                color: ConstColor.as_salomText,
+                                                color: ConstColor.assalomText,
                                               ),
                                             ),
                                             child: Text(
@@ -251,12 +250,12 @@ class _OrdersPageState extends State<OrdersPage> {
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),
                                           Text(
-                                            "${"${"payment_type".tr()}:" }${orders[index].payment_type == "1" ? "Click" : orders[index].payment_type == "2" ? "Payme" : orders[index].payment_type == "3" ? "Uzum" : orders[index].payment_type == "4" ? "Alif" : "Card"}",
+                                            "${"${"payment_type".tr()}:" }${orders[index].paymenttype == "1" ? "Click" : orders[index].paymenttype == "2" ? "Payme" : orders[index].paymenttype == "3" ? "Uzum" : orders[index].paymenttype == "4" ? "Alif" : "Card"}",
                                             style: Styles.style500sp14Black,
                                           ),
                                           ScreenUtil().setVerticalSpacing(5),
                                           Text(
-                                            "${'order_price'.tr()}:${orders[index].total_price} ${"sum".tr()}",
+                                            "${'order_price'.tr()}:${orders[index].totalprice} ${"sum".tr()}",
                                             style: Styles.style700sp18Black,
                                           ),
                                           ScreenUtil().setVerticalSpacing(15),
@@ -279,7 +278,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                               sizeData.add(orders[index]
                                                   .products![idx]
                                                   .sizes![i]
-                                                  .size_number!
+                                                  .sizenumber!
                                                   .toString());
                                             }
                                             return Padding(
@@ -320,7 +319,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                                       SizedBox(
                                                         width: 200.w,
                                                         child: Text(
-                                                          "${orders[index].products![idx].name_ru}",
+                                                          "${orders[index].products![idx].nameru}",
                                                           style: Styles
                                                               .style500sp14Black,
                                                           maxLines: 2,
@@ -339,7 +338,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                                           .setVerticalSpacing(
                                                               5),
                                                       Text(
-                                                        "${"volume".tr()}: ${orders[index].products![idx].product_count}",
+                                                        "${"volume".tr()}: ${orders[index].products![idx].productcount}",
                                                         style: Styles
                                                             .style400sp12Black,
                                                       ),
@@ -347,7 +346,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                                           .setVerticalSpacing(
                                                               5),
                                                       Text(
-                                                        "${"price".tr()} ${orders[index].products![idx].product_price}",
+                                                        "${"price".tr()} ${orders[index].products![idx].productprice}",
                                                         style: Styles
                                                             .style400sp12Black,
                                                       ),

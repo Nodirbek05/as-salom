@@ -41,13 +41,13 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   String _getcategoryByLocale(ProductModel product, Locale locale) {
     late String? productName;
     if (locale == const Locale('ru')) {
-      productName = product.name_ru;
+      productName = product.nameru;
     } else if (locale == const Locale('uz')) {
-      productName = product.name_uz;
+      productName = product.nameuz;
     } else if (locale == const Locale('en')) {
-      productName = product.name_en;
+      productName = product.nameen;
     } else if (locale == const Locale('fr')) {
-      productName = product.name_oz;
+      productName = product.nameoz;
     }
     return productName ?? "no_data".tr();
   }
@@ -61,7 +61,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
         'Content-Type': 'application/json',
       },
     );
-    print(response.body);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return GetProWithSlugModel.fromJson(response.body);
@@ -86,11 +86,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
     favBox =
-        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
-    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+        prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
 
     setState(() {});
   }
@@ -105,7 +105,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             Navigator.pushNamed(context, ProductDetailPage.routeName,
                 arguments: ProductDetailPage(
                     product: res.good!, slug: widget.product!.slug ?? ""));
-            print("SLUGGGGGGGG:${widget.product!.price}");
+            // print("SLUGGGGGGGG:${widget.product!.price}");
           }
         });
       },
@@ -140,7 +140,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         : const Center(),
                     Text(
                       widget.fromApi
-                          ? widget.product!.type_good == 3
+                          ? widget.product!.typegood == 3
                               ? "${NumberFormatter.currency(widget.product!.sizes![0].pivot!.price)} ${"sum".tr()} "
                               : "${NumberFormatter.currency(widget.product!.price)} ${"sum".tr()} "
                           : "${NumberFormatter.currency(widget.product!.price)} ${"sum".tr()} ",
@@ -172,7 +172,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                   height: 40.h,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: ConstColor.as_salomText),
+                                          color: ConstColor.assalomText),
                                       color: ConstColor.mainWhite,
                                       borderRadius:
                                           BorderRadius.circular(50.r)),
@@ -195,7 +195,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         },
                                         icon: const Icon(
                                           Icons.remove,
-                                          color: ConstColor.as_salomText,
+                                          color: ConstColor.assalomText,
                                         ),
                                       ),
                                       Text(
@@ -205,7 +205,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                       IconButton(
                                         // splashRadius: 8.r,
                                         onPressed: () {
-                                          if (widget.product!.type_good == 2 &&
+                                          if (widget.product!.typegood == 2 &&
                                               isHome == false) {
                                             if (getDrugQty(
                                                     widget.product!.id!) >=
@@ -242,7 +242,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                                                     Navigator.pop(
                                                                         context);
                                                                   },
-                                                                  icon: Icon(Icons
+                                                                  icon: const Icon(Icons
                                                                       .close)),
                                                             ],
                                                           ),
@@ -273,7 +273,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                                               width: 328.w,
                                                               decoration: BoxDecoration(
                                                                   color: ConstColor
-                                                                      .as_salomText,
+                                                                      .assalomText,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -304,7 +304,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         },
                                         icon: const Icon(
                                           Icons.add,
-                                          color: ConstColor.as_salomText,
+                                          color: ConstColor.assalomText,
                                         ),
                                       ),
                                     ],
@@ -322,15 +322,15 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         timeInSecForIosWeb: 1,
                                         textColor: Colors.white,
                                         backgroundColor:
-                                            ConstColor.as_salomText,
+                                            ConstColor.assalomText,
                                         fontSize: 16.0);
                                     addDrugToBasket(
                                         int.parse(
                                             widget.product!.id.toString()),
                                         _getcategoryByLocale(
                                             widget.product!, context.locale),
-                                        widget.product!.type_good!,
-                                        widget.product!.type_good! == 3
+                                        widget.product!.typegood!,
+                                        widget.product!.typegood! == 3
                                             ? widget
                                                 .product!.sizes![0].pivot!.price
                                                 .toString()
@@ -349,7 +349,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                         widget.product!.slug != null
                                             ? widget.product!.slug!
                                             : "null",
-                                        widget.product!.type_good == 3
+                                        widget.product!.typegood == 3
                                             ? widget.product!.sizes![0].number!
                                             : "");
                                   },
@@ -373,22 +373,22 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                 // print(widget.product!.sizes![0].id.toString);
                 !isProductSavedInHive(int.parse(widget.product!.id.toString()))
                     ? addToBox(
-                        widget.product!.name_ru ?? "",
-                        widget.product!.name_en ?? "",
-                        widget.product!.name_uz ?? "",
-                        widget.product!.name_oz ?? "",
-                        widget.product!.desc_ru ?? "",
-                        widget.product!.desc_uz ?? "",
-                        widget.product!.desc_en ?? "",
-                        widget.product!.desc_oz ?? "",
+                        widget.product!.nameru ?? "",
+                        widget.product!.nameen ?? "",
+                        widget.product!.nameuz ?? "",
+                        widget.product!.nameoz ?? "",
+                        widget.product!.descru ?? "",
+                        widget.product!.descuz ?? "",
+                        widget.product!.descen ?? "",
+                        widget.product!.descoz ?? "",
                         widget.product!.photo![0],
                         widget.product!.id != null
                             ? int.parse(widget.product!.id.toString())
                             : 0,
-                        widget.product!.type_good! == 3
+                        widget.product!.typegood! == 3
                             ? widget.product!.sizes![0].pivot!.price.toString()
                             : widget.product!.price.toString(),
-                        widget.product!.type_good ?? 0,
+                        widget.product!.typegood ?? 0,
                         widget.product!.discount.toString(),
                         widget.product!.sizes != null &&
                                 widget.product!.sizes!.isNotEmpty
@@ -411,7 +411,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           radius: 17,
                           child: Icon(
                             Icons.favorite,
-                            color: ConstColor.as_salomText,
+                            color: ConstColor.assalomText,
                           ),
                         )
                       : const CircleAvatar(
@@ -434,23 +434,23 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     final box = Hive.box<BasketModel>(basketBox).values.toList();
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG Quantity increase");
+        // print("DRUG Quantity increase");
         product.qty++;
-        print("DRUG Quantity ${product.qty}");
+        // print("DRUG Quantity ${product.qty}");
         break;
       }
     }
   }
 
   void addToBox(
-      String name_ru,
-      String name_en,
-      String name_uz,
-      String name_oz,
-      String desc_ru,
-      String desc_uz,
-      String desc_en,
-      String desc_oz,
+      String nameru,
+      String nameen,
+      String nameuz,
+      String nameoz,
+      String descru,
+      String descuz,
+      String descen,
+      String descoz,
       String image,
       int id,
       String price,
@@ -460,14 +460,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       String kg,
       String slug) {
     final product = FavoritesModel(
-        name_en: name_en,
-        name_uz: name_uz,
-        name_oz: name_oz,
-        name_ru: name_ru,
-        desc_en: desc_en,
-        desc_oz: desc_oz,
-        desc_ru: desc_ru,
-        desc_uz: desc_uz,
+        nameen: nameen,
+        nameuz: nameuz,
+        nameoz: nameoz,
+        nameru: nameru,
+        descen: descen,
+        descoz: descoz,
+        descru: descru,
+        descuz: descuz,
         discount: discount,
         id: id,
         image: image,
@@ -476,14 +476,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
         kg: kg,
         size: size,
         slug: slug)
-      ..name_ru = name_ru
-      ..name_en = name_en
-      ..name_uz = name_uz
-      ..name_oz = name_oz
-      ..desc_ru = desc_ru
-      ..desc_en = desc_en
-      ..desc_uz = desc_uz
-      ..desc_oz = desc_oz
+      ..nameru = nameru
+      ..nameen = nameen
+      ..nameuz = nameuz
+      ..nameoz = nameoz
+      ..descru = descru
+      ..descen = descen
+      ..descuz = descuz
+      ..descoz = descoz
       ..id = id
       ..image = image
       ..price = price
@@ -501,9 +501,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     final box = Hive.box<BasketModel>(basketBox).values.toList();
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG Quantity decrease");
+        // print("DRUG Quantity decrease");
         product.qty--;
-        print("DRUG Quantity ${product.qty}");
+        // print("DRUG Quantity ${product.qty}");
         break;
       }
     }
@@ -562,7 +562,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     final listProducts = Hive.box<BasketModel>(basketBox);
     for (var product in box) {
       if (drugId == product.id) {
-        print("DRUG REMOVED FROM BASKET");
+        // print("DRUG REMOVED FROM BASKET");
         listProducts.delete(product.key);
         break;
       }
@@ -574,7 +574,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     final listProducts = Hive.box<FavoritesModel>(favBox);
     for (var product in box) {
       if (drugId == product.id) {
-        print("Product REMOVED FROM BASKET");
+        // print("Product REMOVED FROM BASKET");
         listProducts.delete(product.key);
         break;
       }

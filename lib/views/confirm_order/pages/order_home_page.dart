@@ -95,7 +95,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
               height: 200.h,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: ConstColor.as_salomText,
+                color: ConstColor.assalomText,
                 borderRadius: BorderRadius.circular(
                   10.r,
                 ),
@@ -117,7 +117,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                         if (value is DataSuccess) {
                           setState(() {
                             OrderHomePage.adressController.text =
-                                value.data?.display_name ?? "null";
+                                value.data?.displayname ?? "null";
                           });
                         }
                       });
@@ -152,7 +152,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                     alignment: Alignment.center,
                     child: Icon(
                       Icons.location_on_rounded,
-                      color: ConstColor.as_salomText,
+                      color: ConstColor.assalomText,
                       size: 40,
                     ),
                   ),
@@ -169,7 +169,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                           if (value is DataSuccess) {
                             setState(() {
                               OrderHomePage.adressController.text =
-                                  value.data?.display_name ?? "null";
+                                  value.data?.displayname ?? "null";
                             });
                           }
                         });
@@ -189,7 +189,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
                       },
                       child: const CircleAvatar(
                         radius: 20,
-                        backgroundColor: ConstColor.as_salomText,
+                        backgroundColor: ConstColor.assalomText,
                         child: Icon(CupertinoIcons.paperplane),
                       ),
                     ),
@@ -216,17 +216,17 @@ class _OrderHomePageState extends State<OrderHomePage> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                       ),
                       border: OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                       ),
                       hintText: "flat".tr(),
                       hintStyle: Styles.style400sp16Black,
@@ -248,17 +248,17 @@ class _OrderHomePageState extends State<OrderHomePage> {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              const BorderSide(color: ConstColor.as_salomText),
+                              const BorderSide(color: ConstColor.assalomText),
                         ),
                         border: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(color: ConstColor.as_salomText),
+                              const BorderSide(color: ConstColor.assalomText),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              const BorderSide(color: ConstColor.as_salomText),
+                              const BorderSide(color: ConstColor.assalomText),
                         ),
                         hintText: "stage".tr(),
                         hintStyle: Styles.style400sp16Black),
@@ -287,17 +287,17 @@ class _OrderHomePageState extends State<OrderHomePage> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                       ),
                       border: OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                       ),
                     ),
                   ),
@@ -319,17 +319,17 @@ class _OrderHomePageState extends State<OrderHomePage> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                       ),
                       border: OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide:
-                            const BorderSide(color: ConstColor.as_salomText),
+                            const BorderSide(color: ConstColor.assalomText),
                       ),
                     ),
                   ),
@@ -352,15 +352,15 @@ class _OrderHomePageState extends State<OrderHomePage> {
                 contentPadding: EdgeInsets.only(top: 8.h, left: 10.w),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                  borderSide: const BorderSide(color: ConstColor.assalomText),
                 ),
                 border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                  borderSide: const BorderSide(color: ConstColor.assalomText),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                  borderSide: const BorderSide(color: ConstColor.assalomText),
                 ),
               ),
             ),
@@ -379,15 +379,15 @@ class _OrderHomePageState extends State<OrderHomePage> {
                 contentPadding: EdgeInsets.only(top: 4.h, left: 10.w),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                  borderSide: const BorderSide(color: ConstColor.assalomText),
                 ),
                 border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                  borderSide: const BorderSide(color: ConstColor.assalomText),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: ConstColor.as_salomText),
+                  borderSide: const BorderSide(color: ConstColor.assalomText),
                 ),
               ),
             ),
@@ -440,24 +440,24 @@ class DataError extends DataState {
 }
 
 class AddressName {
-  String? display_name;
+  String? displayname;
   AddressName({
-    this.display_name,
+    this.displayname,
   });
 
   AddressName copyWith({
-    String? display_name,
+    String? displayname,
   }) {
     return AddressName(
-      display_name: display_name ?? this.display_name,
+      displayname: displayname ?? this.displayname,
     );
   }
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    if (display_name != null) {
-      result.addAll({'display_name': display_name});
+    if (displayname != null) {
+      result.addAll({'display_name': displayname});
     }
 
     return result;
@@ -465,7 +465,7 @@ class AddressName {
 
   factory AddressName.fromMap(Map<String, dynamic> map) {
     return AddressName(
-      display_name: map['display_name'],
+      displayname: map['display_name'],
     );
   }
 
@@ -475,15 +475,15 @@ class AddressName {
       AddressName.fromMap(json.decode(source));
 
   @override
-  String toString() => 'AddressName(display_name: $display_name)';
+  String toString() => 'AddressName(display_name: $displayname)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is AddressName && other.display_name == display_name;
+    return other is AddressName && other.displayname == displayname;
   }
 
   @override
-  int get hashCode => display_name.hashCode;
+  int get hashCode => displayname.hashCode;
 }

@@ -52,7 +52,7 @@ class _InputWidgetState extends State<InputWidget> {
       keyboardType: widget.inputType,
       inputFormatters: widget.inputFormatter,
       style: Styles.style500sp16Black,
-      cursorColor: ConstColor.as_salomText,
+      cursorColor: ConstColor.assalomText,
       controller: widget.controller,
       obscuringCharacter: "*",
       obscureText: widget.isVisible ?? false,
@@ -66,12 +66,12 @@ class _InputWidgetState extends State<InputWidget> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
-            color: ConstColor.as_salomText,
+            color: ConstColor.assalomText,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: ConstColor.as_salomText,
+            color: ConstColor.assalomText,
           ),
           borderRadius: BorderRadius.circular(10),
         ),

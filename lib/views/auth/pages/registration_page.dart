@@ -46,14 +46,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   static Future<ResponseData> getCode() async {
     try {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      var token = _prefs.getString('token');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
       final response = await http
           .get(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCode}'), headers: {
         'Authorization': "Bearer $token",
         'Content-Type': 'application/json'
       });
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return SuccessfulResponse();
@@ -130,7 +130,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               gravity: ToastGravity.TOP,
                               timeInSecForIosWeb: 1,
                               textColor: Colors.white,
-                              backgroundColor: ConstColor.as_salomText,
+                              backgroundColor: ConstColor.assalomText,
                               fontSize: 16.0);
                         } else {
                           setState(() {
@@ -149,7 +149,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         height: 50.h,
                         width: 328.w,
                         decoration: BoxDecoration(
-                            color: ConstColor.as_salomText,
+                            color: ConstColor.assalomText,
                             borderRadius: BorderRadius.circular(50.r)),
                         child: isLoading
                             ? const CupertinoActivityIndicator(
@@ -194,7 +194,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   gravity: ToastGravity.TOP,
                                   timeInSecForIosWeb: 1,
                                   textColor: Colors.white,
-                                  backgroundColor: ConstColor.as_salomText,
+                                  backgroundColor: ConstColor.assalomText,
                                   fontSize: 16.0);
                             } else {
                               setState(() {
@@ -217,7 +217,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             height: 50.h,
                             width: 328.w,
                             decoration: BoxDecoration(
-                                color: ConstColor.as_salomText,
+                                color: ConstColor.assalomText,
                                 borderRadius: BorderRadius.circular(50.r)),
                             child: isLoading
                                 ? const CupertinoActivityIndicator(
@@ -233,7 +233,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     : BlocListener<LoginBloc, LoginState>(
                         listener: (context, state) {
                           if (state is LoginSuccess) {
-                            print("LOGIN SUCCES");
+                            // print("LOGIN SUCCES");
                             getCode();
                             setState(() {
                               hasSms = true;
@@ -250,7 +250,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   gravity: ToastGravity.TOP,
                                   timeInSecForIosWeb: 1,
                                   textColor: Colors.white,
-                                  backgroundColor: ConstColor.as_salomText,
+                                  backgroundColor: ConstColor.assalomText,
                                   fontSize: 16.0);
                             } else {
                               setState(() {
@@ -267,7 +267,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             height: 50.h,
                             width: 328.w,
                             decoration: BoxDecoration(
-                                color: ConstColor.as_salomText,
+                                color: ConstColor.assalomText,
                                 borderRadius: BorderRadius.circular(50.r)),
                             child: isLoading
                                 ? const CupertinoActivityIndicator(
@@ -300,7 +300,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   onTap: () {
                     hasSms
                         ? {
-                            print("can't"),
+                            // print("can't"),
                           }
                         : {
                             setState(() {
@@ -323,7 +323,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   onTap: () {
                     hasSms
                         ? {
-                            print("can't"),
+                            // print("can't"),
                           }
                         : {
                             setState(() {
@@ -437,7 +437,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                         textStyle: TextStyle(
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14.sp,
-                                            color: ConstColor.as_salomText),
+                                            color: ConstColor.assalomText),
                                         textFormat: CountdownTextFormat.SS,
                                         isReverse: true,
                                         isReverseAnimation: false,

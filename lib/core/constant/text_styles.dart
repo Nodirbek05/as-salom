@@ -19,7 +19,7 @@ abstract class Styles {
   );
 
   static final asSalomText = TextStyle(
-    color: ConstColor.as_salomText,
+    color: ConstColor.assalomText,
     fontSize: 34.sp,
     fontWeight: FontWeight.w700,
     fontFamily: interFontFamily,
@@ -32,28 +32,28 @@ abstract class Styles {
   );
 
   static final style400sp16Main = TextStyle(
-    color: ConstColor.as_salomText,
+    color: ConstColor.assalomText,
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,
     fontFamily: interFontFamily,
   );
 
   static final style700sp22Main = TextStyle(
-    color: ConstColor.as_salomText,
+    color: ConstColor.assalomText,
     fontSize: 22.sp,
     fontWeight: FontWeight.w700,
     fontFamily: interFontFamily,
   );
 
   static final style700sp16Main = TextStyle(
-    color: ConstColor.as_salomText,
+    color: ConstColor.assalomText,
     fontSize: 16.sp,
     fontWeight: FontWeight.w700,
     fontFamily: interFontFamily,
   );
 
   static final style600sp14Main = TextStyle(
-    color: ConstColor.as_salomText,
+    color: ConstColor.assalomText,
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
     fontFamily: interFontFamily,
@@ -121,14 +121,14 @@ abstract class Styles {
   );
 
   static final style400sp20Main = TextStyle(
-    color: ConstColor.as_salomText,
+    color: ConstColor.assalomText,
     fontSize: 20.sp,
     fontWeight: FontWeight.w400,
     fontFamily: interFontFamily,
   );
 
   static final style500sp14Main = TextStyle(
-    color: ConstColor.as_salomText,
+    color: ConstColor.assalomText,
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
     fontFamily: interFontFamily,
@@ -266,12 +266,12 @@ abstract class Styles {
       decoration: TextDecoration.underline);
 
   static final styles700sp16BlueUnder = TextStyle(
-      color: ConstColor.as_salomText,
+      color: ConstColor.assalomText,
       fontSize: 16.sp,
       fontWeight: FontWeight.w700,
       fontFamily: interFontFamily,
       decoration: TextDecoration.underline,
-      decorationColor: ConstColor.as_salomText);
+      decorationColor: ConstColor.assalomText);
 
   static final styles400sp14Black = TextStyle(
     color: ConstColor.mainBlack,
@@ -288,7 +288,7 @@ abstract class Styles {
   );
 
   static final chooseLangColor = TextStyle(
-    color: ConstColor.as_salomText,
+    color: ConstColor.assalomText,
     fontSize: 20.sp,
     fontWeight: FontWeight.w700,
     fontFamily: interFontFamily,

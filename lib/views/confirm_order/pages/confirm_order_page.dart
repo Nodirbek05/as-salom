@@ -13,7 +13,7 @@ import 'package:assalomproject/views/confirm_order/pages/order_home_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -49,12 +49,12 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
   String favBox = "favoritesBoxForHome";
   String basketBox = "basketBoxForHome";
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
-    print(_prefs.getInt('place'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
+    // print(prefs.getInt('place'));
     favBox =
-        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
-    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+        prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
     setState(() {});
   }
 
@@ -102,7 +102,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   gravity: ToastGravity.TOP,
                   timeInSecForIosWeb: 1,
                   textColor: Colors.white,
-                  backgroundColor: ConstColor.as_salomText,
+                  backgroundColor: ConstColor.assalomText,
                   fontSize: 16.0);
             } else if (isHome
                 ? false
@@ -113,10 +113,10 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   gravity: ToastGravity.TOP,
                   timeInSecForIosWeb: 1,
                   textColor: Colors.white,
-                  backgroundColor: ConstColor.as_salomText,
+                  backgroundColor: ConstColor.assalomText,
                   fontSize: 16.0);
             } else {
-              print(dropdownValue);
+              // print(dropdownValue);
               context.read<CreateOrderBloc>().add(
                     Makeorder(
                       good: CreateOrderModel(
@@ -178,7 +178,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
             height: 35.h,
             width: 328.w,
             decoration: BoxDecoration(
-                color: ConstColor.as_salomText,
+                color: ConstColor.assalomText,
                 borderRadius: BorderRadius.circular(50.r)),
             child: Text(
               "pay_for_order".tr(),
@@ -361,15 +361,15 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
         // contentPadding:  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: ConstColor.as_salomText),
+          borderSide: const BorderSide(color: ConstColor.assalomText),
         ),
         border: OutlineInputBorder(
-          borderSide: const BorderSide(color: ConstColor.as_salomText),
+          borderSide: const BorderSide(color: ConstColor.assalomText),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: ConstColor.as_salomText),
+          borderSide: const BorderSide(color: ConstColor.assalomText),
         ),
       ),
 
@@ -380,9 +380,9 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
       items: data
           .map(
             (item) => DropdownMenuItem<String>(
-              value: item.name_ru,
+              value: item.nameru,
               child: Text(
-                item.name_ru.toString(),
+                item.nameru.toString(),
                 style: Styles.style400sp16Black,
               ),
             ),
@@ -397,7 +397,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
       onChanged: (value) {
         dropdownValue = value;
         setState(() {});
-        print(value);
+        // print(value);
       },
       onSaved: (value) {
         dropdownValue = value;
@@ -405,7 +405,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
       iconStyleData: const IconStyleData(
         icon: Icon(
           Icons.arrow_drop_down,
-          color: ConstColor.as_salomText,
+          color: ConstColor.assalomText,
         ),
         iconSize: 24,
       ),
@@ -413,7 +413,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
-            color: ConstColor.as_salomText,
+            color: ConstColor.assalomText,
           ),
         ),
       ),

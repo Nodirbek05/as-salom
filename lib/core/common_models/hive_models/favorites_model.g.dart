@@ -18,14 +18,14 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
     };
     return FavoritesModel(
       id: fields[0] as dynamic,
-      name_ru: fields[1] as dynamic,
-      name_uz: fields[2] as dynamic,
-      name_en: fields[3] as dynamic,
-      name_oz: fields[4] as dynamic,
-      desc_ru: fields[5] as dynamic,
-      desc_uz: fields[6] as dynamic,
-      desc_en: fields[7] as dynamic,
-      desc_oz: fields[8] as dynamic,
+      nameru: fields[1] as dynamic,
+      nameuz: fields[2] as dynamic,
+      nameen: fields[3] as dynamic,
+      nameoz: fields[4] as dynamic,
+      descru: fields[5] as dynamic,
+      descuz: fields[6] as dynamic,
+      descen: fields[7] as dynamic,
+      descoz: fields[8] as dynamic,
       type: fields[9] as dynamic,
       price: fields[10] as dynamic,
       image: fields[11] as dynamic,
@@ -43,21 +43,21 @@ class FavoritesModelAdapter extends TypeAdapter<FavoritesModel> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name_ru)
+      ..write(obj.nameru)
       ..writeByte(2)
-      ..write(obj.name_uz)
+      ..write(obj.nameuz)
       ..writeByte(3)
-      ..write(obj.name_en)
+      ..write(obj.nameen)
       ..writeByte(4)
-      ..write(obj.name_oz)
+      ..write(obj.nameoz)
       ..writeByte(5)
-      ..write(obj.desc_ru)
+      ..write(obj.descru)
       ..writeByte(6)
-      ..write(obj.desc_uz)
+      ..write(obj.descuz)
       ..writeByte(7)
-      ..write(obj.desc_en)
+      ..write(obj.descen)
       ..writeByte(8)
-      ..write(obj.desc_oz)
+      ..write(obj.descoz)
       ..writeByte(9)
       ..write(obj.type)
       ..writeByte(10)

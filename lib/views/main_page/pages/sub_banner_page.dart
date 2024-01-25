@@ -24,13 +24,13 @@ class _SubBannersPageState extends State<SubBannersPage> {
   String _getcategoryByLocale(SubBanners category, Locale locale) {
     late String? categoryName;
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru;
+      categoryName = category.nameru;
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz;
+      categoryName = category.nameuz;
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en;
+      categoryName = category.nameen;
     } else if(locale == const Locale('fr')){
-      categoryName = category.name_oz;
+      categoryName = category.nameoz;
     }
     return categoryName ?? "no_data".tr();
   }

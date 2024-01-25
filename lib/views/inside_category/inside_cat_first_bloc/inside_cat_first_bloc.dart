@@ -19,12 +19,12 @@ class InsideCatFirstBloc
     final response = await CommonRequests.getInsideCategories(event.id);
     if (response is CategoryInnerModel) {
       emit(InsideCatFirstSuccess(modelData: response));
-      print("GET Inside CATEGORIES SUCCESS ${response}");
-      print("${response.category} GOOODS SHOULD COMING WITH DATA");
+      // print("GET Inside CATEGORIES SUCCESS ${response}");
+      // print("${response.category} GOOODS SHOULD COMING WITH DATA");
       // print("${response.category.goods!} GOOODS SHOULD COMING");
     } else if (response is ErrorModel) {
       emit(InsideCatFirstFail(errorMessage: response.message!));
-      print("GET Inside Banners ERROR");
+      // print("GET Inside Banners ERROR");
     }
   }
 }

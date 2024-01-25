@@ -14,7 +14,7 @@ class AuthRequests {
   static Future<ResponseData> createAccount(
       String name, String phone, String deviceName) async {
     try {
-      print('${ApiPaths.basicUrl}${ApiPaths.register}');
+      // print('${ApiPaths.basicUrl}${ApiPaths.register}');
       final response =
           await http.post(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.register}'),
               headers: {'Content-Type': 'application/json'},
@@ -25,8 +25,8 @@ class AuthRequests {
                   'device_name': deviceName,
                 },
               ));
-      print(response.body.toString() + "RESPONSE OF CREATEF");
-      print(response.statusCode.toString() + "RESPONSE OF CREATEF");
+      // print(response.body.toString() + "RESPONSE OF CREATEF");
+      // print(response.statusCode.toString() + "RESPONSE OF CREATEF");
       switch (response.statusCode) {
         case StatusCodes.ok:
           return CreatedAccountModel.fromJson(response.body);
@@ -43,14 +43,14 @@ class AuthRequests {
 
   static Future<Object> login(String phone) async {
     // try {
-    print('${ApiPaths.basicUrl}${ApiPaths.register}');
+    // print('${ApiPaths.basicUrl}${ApiPaths.register}');
     final response =
         await http.post(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.login}'),
             headers: {'Content-Type': 'application/json'},
             body: json.encode(
               {'phone': "+998 ${phone.replaceAll("-", " ")}"},
             ));
-    print("LOGIN RESPONSE ${response.body}");
+    // print("LOGIN RESPONSE ${response.body}");
     switch (response.statusCode) {
       case StatusCodes.ok:
         return CreateAccountDataModel.fromJson(response.body);
@@ -66,8 +66,8 @@ class AuthRequests {
 
   static Future<ResponseData> verification(num code) async {
     try {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      var token = _prefs.getString('token');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
       final response = await http.post(
           Uri.parse('${ApiPaths.basicUrl}${ApiPaths.verification}'),
           headers: {
@@ -77,7 +77,7 @@ class AuthRequests {
           body: json.encode(
             {'code': code},
           ));
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return SuccessfulResponse();

@@ -34,7 +34,7 @@ class _InsideCatFirstPageState extends State<InsideCatFirstPage> {
       ),
       body: BlocBuilder<InsideCatFirstBloc, InsideCatFirstState>(
         builder: (context, state) {
-          print("STATE HEREEEE $state");
+          // print("STATE HEREEEE $state");
           if (state is InsideCatFirstFail) {
             return const Center(
               child: CupertinoActivityIndicator(),
@@ -84,7 +84,7 @@ class _InsideCatFirstPageState extends State<InsideCatFirstPage> {
                         borderRadius: BorderRadius.circular(15.r),
                         // color: ConstColor.grey300,
                       ),
-                      child: Text(stateData[index].name_ru!),
+                      child: Text(stateData[index].nameru!),
                     ),
                   );
                 },

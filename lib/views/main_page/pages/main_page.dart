@@ -45,8 +45,8 @@ class _MainPageState extends State<MainPage> {
   bool isHome = true;
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
     setState(() {});
   }
 
@@ -106,7 +106,7 @@ class _MainPageState extends State<MainPage> {
                 width: 72.w,
                 height: 45.h,
                 decoration: BoxDecoration(
-                  color: ConstColor.as_salomText,
+                  color: ConstColor.assalomText,
                   borderRadius: BorderRadius.circular(
                     30.r,
                   ),
@@ -207,14 +207,14 @@ class _MainPageState extends State<MainPage> {
                                             ? int.parse(
                                                 products[index].price ?? "0")
                                             : products[index].price,
-                                        name_ru: products[index].name_ru,
-                                        name_en: products[index].name_en,
-                                        name_uz: products[index].name_uz,
-                                        desc_en: products[index].desc_en,
-                                        desc_ru: products[index].desc_ru,
-                                        desc_uz: products[index].desc_uz,
+                                        nameru: products[index].nameru,
+                                        nameen: products[index].nameen,
+                                        nameuz: products[index].nameuz,
+                                        descen: products[index].descen,
+                                        descru: products[index].descru,
+                                        descuz: products[index].descuz,
                                         id: products[index].id,
-                                        type_good: products[index].type,
+                                        typegood: products[index].type,
                                         discount: products[index].discount !=
                                                 "null"
                                             ? int.parse(
@@ -304,19 +304,19 @@ class _MainPageState extends State<MainPage> {
                     fromApi: true,
                     product: ProductModel(
                       quantity: products[index].quantity,
-                      name_oz: products[index].name_oz,
+                      nameoz: products[index].nameoz,
                       weight: products[index].weight,
                       sizes: products[index].sizes,
-                      desc_en: products[index].desc_en,
-                      desc_ru: products[index].desc_ru,
-                      desc_uz: products[index].desc_uz,
+                      descen: products[index].descen,
+                      descru: products[index].descru,
+                      descuz: products[index].descuz,
                       id: products[index].id,
                       discount: products[index].discount,
-                      name_ru: products[index].name_ru,
-                      name_en: products[index].name_en,
-                      name_uz: products[index].name_uz,
+                      nameru: products[index].nameru,
+                      nameen: products[index].nameen,
+                      nameuz: products[index].nameuz,
                       photo: products[index].photo,
-                      type_good: products[index].type_good,
+                      typegood: products[index].typegood,
                       price: products[index].price,
                       slug: products[index].slug,
                     ),

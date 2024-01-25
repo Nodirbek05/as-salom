@@ -109,38 +109,38 @@ class CreateAccountDataModel {
 class UserModel {
   String? name;
   String? phone;
-  String? device_name;
+  String? devicename;
   dynamic code;
   num? id;
-  String? updated_at;
-  String? created_at;
+  String? updatedat;
+  String? createdat;
   UserModel({
     this.name,
     this.phone,
-    this.device_name,
+    this.devicename,
     this.code,
     this.id,
-    this.updated_at,
-    this.created_at,
+    this.updatedat,
+    this.createdat,
   });
 
   UserModel copyWith({
     String? name,
     String? phone,
-    String? device_name,
+    String? devicename,
     dynamic code,
     num? id,
-    String? updated_at,
-    String? created_at,
+    String? updatedat,
+    String? createdat,
   }) {
     return UserModel(
       name: name ?? this.name,
       phone: phone ?? this.phone,
-      device_name: device_name ?? this.device_name,
+      devicename: devicename ?? this.devicename,
       code: code ?? this.code,
       id: id ?? this.id,
-      updated_at: updated_at ?? this.updated_at,
-      created_at: created_at ?? this.created_at,
+      updatedat: updatedat ?? this.updatedat,
+      createdat: createdat ?? this.createdat,
     );
   }
 
@@ -153,8 +153,8 @@ class UserModel {
     if (phone != null) {
       result.addAll({'phone': phone});
     }
-    if (device_name != null) {
-      result.addAll({'device_name': device_name});
+    if (devicename != null) {
+      result.addAll({'device_name': devicename});
     }
     if (code != null) {
       result.addAll({'code': code});
@@ -162,11 +162,11 @@ class UserModel {
     if (id != null) {
       result.addAll({'id': id});
     }
-    if (updated_at != null) {
-      result.addAll({'updated_at': updated_at});
+    if (updatedat != null) {
+      result.addAll({'updated_at': updatedat});
     }
-    if (created_at != null) {
-      result.addAll({'created_at': created_at});
+    if (createdat != null) {
+      result.addAll({'created_at': createdat});
     }
 
     return result;
@@ -176,11 +176,11 @@ class UserModel {
     return UserModel(
       name: map['name'],
       phone: map['phone'],
-      device_name: map['device_name'],
+      devicename: map['device_name'],
       code: map['code'],
       id: map['id'],
-      updated_at: map['updated_at'],
-      created_at: map['created_at'],
+      updatedat: map['updated_at'],
+      createdat: map['created_at'],
     );
   }
 
@@ -191,7 +191,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, phone: $phone, device_name: $device_name, code: $code, id: $id, updated_at: $updated_at, created_at: $created_at)';
+    return 'UserModel(name: $name, phone: $phone, device_name: $devicename, code: $code, id: $id, updated_at: $updatedat, created_at: $createdat)';
   }
 
   @override
@@ -201,21 +201,21 @@ class UserModel {
     return other is UserModel &&
         other.name == name &&
         other.phone == phone &&
-        other.device_name == device_name &&
+        other.devicename == devicename &&
         other.code == code &&
         other.id == id &&
-        other.updated_at == updated_at &&
-        other.created_at == created_at;
+        other.updatedat == updatedat &&
+        other.createdat == createdat;
   }
 
   @override
   int get hashCode {
     return name.hashCode ^
         phone.hashCode ^
-        device_name.hashCode ^
+        devicename.hashCode ^
         code.hashCode ^
         id.hashCode ^
-        updated_at.hashCode ^
-        created_at.hashCode;
+        updatedat.hashCode ^
+        createdat.hashCode;
   }
 }

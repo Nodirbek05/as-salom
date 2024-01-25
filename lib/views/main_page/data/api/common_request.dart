@@ -20,24 +20,24 @@ import 'package:assalomproject/views/main_page/data/models/search_model.dart';
 import 'package:assalomproject/views/main_page/data/models/spesific_products.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_categories_model.dart';
 import 'package:assalomproject/views/main_page/data/models/sub_category_inner_model.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CommonRequests {
   CommonRequests._();
   static Future<ResponseData> getBanners() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    int place = _prefs.getInt("place") ?? 0;
+    int place = prefs.getInt("place") ?? 0;
 
     try {
-      debugPrint("I NEED PLACE HERE:${place}");
+      // debugPrint("I NEED PLACE HERE:${place}");
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getBanners}/$place'),
         headers: {'Content-Type': 'application/json'},
       );
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return GetAllBanners.fromJson(response.body);
@@ -52,14 +52,14 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getSubBanners() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    int place = _prefs.getInt("place") ?? 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int place = prefs.getInt("place") ?? 0;
     try {
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubBanners}/$place'),
         headers: {'Content-Type': 'application/json'},
       );
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return GetSubBannersModel.fromJson(response.body);
@@ -74,14 +74,14 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getCategories() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    int place = _prefs.getInt("place") ?? 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int place = prefs.getInt("place") ?? 0;
     try {
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCategories}/$place'),
         headers: {'Content-Type': 'application/json'},
       );
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return CategoriesModel.fromJson(response.body);
@@ -96,14 +96,14 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getAllCategories() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    int place = _prefs.getInt("place") ?? 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int place = prefs.getInt("place") ?? 0;
     try {
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getAllCategories}/$place'),
         headers: {'Content-Type': 'application/json'},
       );
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return CategoriesModel.fromJson(response.body);
@@ -118,13 +118,13 @@ class CommonRequests {
   }
 
   static Future<Object> getInsideCategories(int id) async {
-    print(id);
+    // print(id);
     // try {
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.insideCat}$id'),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return CategoryInnerModel.fromJson(response.body);
@@ -139,14 +139,14 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getCatProducts(int id) async {
-    print(id);
+    // print(id);
     // try {
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.insideCat}$id'),
       headers: {'Content-Type': 'application/json'},
     );
-    print("RESPONSE DATA ${response.body}");
-    print(response.body);
+    // print("RESPONSE DATA ${response.body}");
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return SubCategoryModelMain.fromJson(response.body);
@@ -161,13 +161,13 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getInnerProducts(int id) async {
-    print(id);
+    // print(id);
     // try {
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.subCategoryInner}$id'),
       headers: {'Content-Type': 'application/json'},
     );
-    print("SUBCATEGORY RESPONSE DATA ${response.body}");
+    // print("SUBCATEGORY RESPONSE DATA ${response.body}");
     switch (response.statusCode) {
       case StatusCodes.ok:
         return InnerModel.fromJson(response.body);
@@ -187,7 +187,7 @@ class CommonRequests {
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.filter}/$id'),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return FilterModel.fromJson(response.body);
@@ -202,14 +202,14 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getSpesificProducts() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    int place = _prefs.getInt("place") ?? 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int place = prefs.getInt("place") ?? 0;
     // try {
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSelection}/$place'),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return SpesificProductsModel.fromJson(response.body);
@@ -224,14 +224,14 @@ class CommonRequests {
   }
 
   static Future<ResponseData> getSubcategories() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    int place = _prefs.getInt("place") ?? 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int place = prefs.getInt("place") ?? 0;
     // try {
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubCategories}/$place'),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return SubcategoriesMainModel.fromJson(response.body);
@@ -247,11 +247,11 @@ class CommonRequests {
 
   static Future<ResponseData> searchProducts(String query) async {
     // try {
-    // SharedPreferences _prefs = await SharedPreferences.getInstance();
-    // var token = _prefs.getString('token');
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // var token = prefs.getString('token');
 
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    int place = _prefs.getInt("place") ?? 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int place = prefs.getInt("place") ?? 0;
     final response = await http.get(
       Uri.parse(
           '${ApiPaths.basicUrl}${ApiPaths.search}/$place?search_text=$query'),
@@ -260,8 +260,8 @@ class CommonRequests {
       //   {'search_text': query},
       // ),
     );
-    print(response.body);
-    print(response.statusCode);
+    // print(response.body);
+    // print(response.statusCode);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return SearchModel.fromJson(response.body);
@@ -277,8 +277,8 @@ class CommonRequests {
 
   static Future<ResponseData> createOrder(CreateOrderModel order) async {
     // try {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    var token = _prefs.getString('token');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
     var list = [];
     var sizes = [];
 
@@ -298,9 +298,9 @@ class CommonRequests {
       };
       list.add(data);
     }
-    print(list);
-    print(order.zoneName);
-    print(order.roomNumber);
+    // print(list);
+    // print(order.zoneName);
+    // print(order.roomNumber);
 
     final response = await http.post(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.createOrder}'),
@@ -326,8 +326,8 @@ class CommonRequests {
         },
       ),
     );
-    print(response.statusCode);
-    print(response.body);
+    // print(response.statusCode);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
       case StatusCodes.good:
@@ -348,7 +348,7 @@ class CommonRequests {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
 
-    print(token);
+    // print(token);
     final response = await http.post(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.confirmCard}/$id'),
       headers: {
@@ -362,8 +362,8 @@ class CommonRequests {
         },
       ),
     );
-    print(response.statusCode);
-    print(response.body);
+    // print(response.statusCode);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
       case StatusCodes.good:
@@ -380,10 +380,10 @@ class CommonRequests {
 
   static Future<ResponseData> payForOrder(int id) async {
     // try {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    var token = _prefs.getString('token');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
 
-    print(token);
+    // print(token);
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getPayments}$id'),
       headers: {
@@ -391,8 +391,8 @@ class CommonRequests {
         'Content-Type': 'application/json'
       },
     );
-    print(response.statusCode);
-    print(response.body);
+    // print(response.statusCode);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return PaymentTypesModel.fromJson(response.body);
@@ -413,8 +413,8 @@ class CommonRequests {
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getZone}'),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.statusCode);
-    print(response.body);
+    // print(response.statusCode);
+    // print(response.body);
     switch (response.statusCode) {
       case StatusCodes.ok:
         return ZoneModels.fromJson(response.body);

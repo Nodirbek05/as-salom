@@ -17,10 +17,10 @@ class GetAllBannersBloc extends Bloc<GetAllBannersEvent, GetAllBannersState> {
     final response = await CommonRequests.getBanners();
     if (response is GetAllBanners) {
       emit(GetAllBannersSucces(allBanners: response));
-      print("GET ALL Banners SUCCESS ${response}");
+      // print("GET ALL Banners SUCCESS ${response}");
     } else {
       emit(GetAllBannersFailed(errorMessage: response.toString()));
-      print("GET ALL Banners ERROR");
+      // print("GET ALL Banners ERROR");
     }
   }
 }

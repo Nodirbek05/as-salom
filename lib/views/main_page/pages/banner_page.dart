@@ -29,8 +29,8 @@ class _BannerPageState extends State<BannerPage> {
   }
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
 
     // setState(() {});
   }
@@ -69,12 +69,12 @@ class _BannerPageState extends State<BannerPage> {
                         borderRadius: BorderRadius.circular(15.r),
                         onTap: () async {
                           if (index == 0) {
-                            SharedPreferences _prefs =
+                            SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
 
                             isHome
-                                ? await _prefs.setInt('place', 1)
-                                : await _prefs.setInt('place', 2);
+                                ? await prefs.setInt('place', 1)
+                                : await prefs.setInt('place', 2);
 
                             // ignore: use_build_context_synchronously
                             Navigator.pushNamedAndRemoveUntil(context,
@@ -92,7 +92,7 @@ class _BannerPageState extends State<BannerPage> {
                                 ),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(15.r),
-                            // color: ConstColor.as_salomText,
+                            // color: ConstColor.assalomText,
                           ),
                         ),
                       ),
@@ -114,7 +114,7 @@ class _BannerPageState extends State<BannerPage> {
                   count: bannerData.data!.length,
                   effect: WormEffect(
                     dotColor: ConstColor.dotColor,
-                    activeDotColor: ConstColor.as_salomText,
+                    activeDotColor: ConstColor.assalomText,
                     dotHeight: ScreenUtil().setWidth(10.0),
                     dotWidth: ScreenUtil().setWidth(10.0),
                   ),
@@ -157,7 +157,7 @@ class _BannerPageState extends State<BannerPage> {
                     decoration: BoxDecoration(
                       color: ConstColor.dotColor,
                       borderRadius: BorderRadius.circular(15.r),
-                      // color: ConstColor.as_salomText,
+                      // color: ConstColor.assalomText,
                     ),
                   ),
                 );

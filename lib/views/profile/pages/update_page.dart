@@ -38,14 +38,14 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
 
   static Future<ResponseData> getCode() async {
     try {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      var token = _prefs.getString('token');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
       final response = await http
           .get(Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getCode}'), headers: {
         'Authorization': "Bearer $token",
         'Content-Type': 'application/json'
       });
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
           return SuccessfulResponse();
@@ -104,7 +104,7 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
           child: BlocListener<UpdateNameBloc, UpdateNameState>(
             listener: (context, state) {
               if (state is UpdateNameSuccess) {
-                print("SUCCESFULL");
+                // print("SUCCESFULL");
                 Navigator.pushNamedAndRemoveUntil(
                     context, CustomNavigatonBar.routeName, (route) => false);
                 context.read<GetUserProfileBloc>().add(GetProfileEvent());
@@ -123,7 +123,7 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: ConstColor.as_salomText,
+                    color: ConstColor.assalomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
                   "save".tr(),
@@ -160,7 +160,7 @@ class _UpdateUserDataPageState extends State<UpdateUserDataPage> {
                     BlocListener<VerificationBloc, VerificationState>(
                       listener: (context, state) {
                         if (state is VerificationSuccess) {
-                          print("SUCCESFULL");
+                          // print("SUCCESFULL");
                           Navigator.pop(context);
                           context
                               .read<GetUserProfileBloc>()

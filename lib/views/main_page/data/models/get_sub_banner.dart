@@ -56,45 +56,45 @@ class SubBanners extends ResponseData {
   num? id;
   String? photo;
   String? link;
-  String? name_ru;
-  String? name_oz;
-  String? name_uz;
-  String? name_en;
-  String? created_at;
-  String? updated_at;
+  String? nameru;
+  String? nameoz;
+  String? nameuz;
+  String? nameen;
+  String? createdat;
+  String? updatedat;
   SubBanners({
     this.id,
     this.photo,
     this.link,
-    this.name_ru,
-    this.name_oz,
-    this.name_uz,
-    this.name_en,
-    this.created_at,
-    this.updated_at,
+    this.nameru,
+    this.nameoz,
+    this.nameuz,
+    this.nameen,
+    this.createdat,
+    this.updatedat,
   });
 
   SubBanners copyWith({
     num? id,
     String? photo,
     String? link,
-    String? name_ru,
-    String? name_oz,
-    String? name_uz,
-    String? name_en,
-    String? created_at,
-    String? updated_at,
+    String? nameru,
+    String? nameoz,
+    String? nameuz,
+    String? nameen,
+    String? createdat,
+    String? updatedat,
   }) {
     return SubBanners(
       id: id ?? this.id,
       photo: photo ?? this.photo,
       link: link ?? this.link,
-      name_ru: name_ru ?? this.name_ru,
-      name_oz: name_oz ?? this.name_oz,
-      name_uz: name_uz ?? this.name_uz,
-      name_en: name_en ?? this.name_en,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
+      nameru: nameru ?? this.nameru,
+      nameoz: nameoz ?? this.nameoz,
+      nameuz: nameuz ?? this.nameuz,
+      nameen: nameen ?? this.nameen,
+      createdat: createdat ?? this.createdat,
+      updatedat: updatedat ?? this.updatedat,
     );
   }
 
@@ -103,12 +103,12 @@ class SubBanners extends ResponseData {
       'id': id,
       'photo': photo,
       'link': link,
-      'name_ru': name_ru,
-      'name_oz': name_oz,
-      'name_uz': name_uz,
-      'name_en': name_en,
-      'created_at': created_at,
-      'updated_at': updated_at,
+      'name_ru': nameru,
+      'name_oz': nameoz,
+      'name_uz': nameuz,
+      'name_en': nameen,
+      'created_at': createdat,
+      'updated_at': updatedat,
     };
   }
 
@@ -117,12 +117,12 @@ class SubBanners extends ResponseData {
       id: map['id'],
       photo: map['photo'],
       link: map['link'],
-      name_ru: map['name_ru'],
-      name_oz: map['name_oz'],
-      name_uz: map['name_uz'],
-      name_en: map['name_en'],
-      created_at: map['created_at'],
-      updated_at: map['updated_at'],
+      nameru: map['name_ru'],
+      nameoz: map['name_oz'],
+      nameuz: map['name_uz'],
+      nameen: map['name_en'],
+      createdat: map['created_at'],
+      updatedat: map['updated_at'],
     );
   }
 
@@ -133,7 +133,7 @@ class SubBanners extends ResponseData {
 
   @override
   String toString() {
-    return 'SubBanners(id: $id, photo: $photo, link: $link, name_ru: $name_ru, name_oz: $name_oz, name_uz: $name_uz, name_en: $name_en, created_at: $created_at, updated_at: $updated_at)';
+    return 'SubBanners(id: $id, photo: $photo, link: $link, name_ru: $nameru, name_oz: $nameoz, name_uz: $nameuz, name_en: $nameen, created_at: $createdat, updated_at: $updatedat)';
   }
 
   @override
@@ -144,12 +144,12 @@ class SubBanners extends ResponseData {
         other.id == id &&
         other.photo == photo &&
         other.link == link &&
-        other.name_ru == name_ru &&
-        other.name_oz == name_oz &&
-        other.name_uz == name_uz &&
-        other.name_en == name_en &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at;
+        other.nameru == nameru &&
+        other.nameoz == nameoz &&
+        other.nameuz == nameuz &&
+        other.nameen == nameen &&
+        other.createdat == createdat &&
+        other.updatedat == updatedat;
   }
 
   @override
@@ -157,11 +157,11 @@ class SubBanners extends ResponseData {
     return id.hashCode ^
         photo.hashCode ^
         link.hashCode ^
-        name_ru.hashCode ^
-        name_oz.hashCode ^
-        name_uz.hashCode ^
-        name_en.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode;
+        nameru.hashCode ^
+        nameoz.hashCode ^
+        nameuz.hashCode ^
+        nameen.hashCode ^
+        createdat.hashCode ^
+        updatedat.hashCode;
   }
 }

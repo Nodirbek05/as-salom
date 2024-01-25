@@ -51,63 +51,63 @@ class ZoneModels extends ResponseData {
 
 class ZoneData extends ResponseData {
   num? id;
-  String? name_ru;
-  String? name_uz;
-  String? name_en;
-  String? name_oz;
-  String? created_at;
-  String? updated_at;
+  String? nameru;
+  String? nameuz;
+  String? nameen;
+  String? nameoz;
+  String? createdat;
+  String? updatedat;
   ZoneData({
     this.id,
-    this.name_ru,
-    this.name_uz,
-    this.name_en,
-    this.name_oz,
-    this.created_at,
-    this.updated_at,
+    this.nameru,
+    this.nameuz,
+    this.nameen,
+    this.nameoz,
+    this.createdat,
+    this.updatedat,
   });
 
   ZoneData copyWith({
     num? id,
-    String? name_ru,
-    String? name_uz,
-    String? name_en,
-    String? name_oz,
-    String? created_at,
-    String? updated_at,
+    String? nameru,
+    String? nameuz,
+    String? nameen,
+    String? nameoz,
+    String? createdat,
+    String? updatedat,
   }) {
     return ZoneData(
       id: id ?? this.id,
-      name_ru: name_ru ?? this.name_ru,
-      name_uz: name_uz ?? this.name_uz,
-      name_en: name_en ?? this.name_en,
-      name_oz: name_oz ?? this.name_oz,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
+      nameru: nameru ?? this.nameru,
+      nameuz: nameuz ?? this.nameuz,
+      nameen: nameen ?? this.nameen,
+      nameoz: nameoz ?? this.nameoz,
+      createdat: createdat ?? this.createdat,
+      updatedat: updatedat ?? this.updatedat,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name_ru': name_ru,
-      'name_uz': name_uz,
-      'name_en': name_en,
-      'name_oz': name_oz,
-      'created_at': created_at,
-      'updated_at': updated_at,
+      'name_ru': nameru,
+      'name_uz': nameuz,
+      'name_en': nameen,
+      'name_oz': nameoz,
+      'created_at': createdat,
+      'updated_at': updatedat,
     };
   }
 
   factory ZoneData.fromMap(Map<String, dynamic> map) {
     return ZoneData(
       id: map['id'],
-      name_ru: map['name_ru'],
-      name_uz: map['name_uz'],
-      name_en: map['name_en'],
-      name_oz: map['name_oz'],
-      created_at: map['created_at'],
-      updated_at: map['updated_at'],
+      nameru: map['name_ru'],
+      nameuz: map['name_uz'],
+      nameen: map['name_en'],
+      nameoz: map['name_oz'],
+      createdat: map['created_at'],
+      updatedat: map['updated_at'],
     );
   }
 
@@ -118,7 +118,7 @@ class ZoneData extends ResponseData {
 
   @override
   String toString() {
-    return 'ZoneData(id: $id, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, name_oz: $name_oz, created_at: $created_at, updated_at: $updated_at)';
+    return 'ZoneData(id: $id, name_ru: $nameru, name_uz: $nameuz, name_en: $nameen, name_oz: $nameoz, created_at: $createdat, updated_at: $updatedat)';
   }
 
   @override
@@ -127,22 +127,22 @@ class ZoneData extends ResponseData {
 
     return other is ZoneData &&
         other.id == id &&
-        other.name_ru == name_ru &&
-        other.name_uz == name_uz &&
-        other.name_en == name_en &&
-        other.name_oz == name_oz &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at;
+        other.nameru == nameru &&
+        other.nameuz == nameuz &&
+        other.nameen == nameen &&
+        other.nameoz == nameoz &&
+        other.createdat == createdat &&
+        other.updatedat == updatedat;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name_ru.hashCode ^
-        name_uz.hashCode ^
-        name_en.hashCode ^
-        name_oz.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode;
+        nameru.hashCode ^
+        nameuz.hashCode ^
+        nameen.hashCode ^
+        nameoz.hashCode ^
+        createdat.hashCode ^
+        updatedat.hashCode;
   }
 }

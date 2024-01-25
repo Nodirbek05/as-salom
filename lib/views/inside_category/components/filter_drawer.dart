@@ -75,7 +75,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           widget.onTap();
                         },
                         child: Text(
-                          widget.subCategory[index].name_ru!,
+                          widget.subCategory[index].nameru!,
                           style: Styles.styles400sp14Black,
                         ),
                       ),

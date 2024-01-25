@@ -1,3 +1,4 @@
+
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/confirm_order/pages/confirm_animation_page.dart';
@@ -38,11 +39,11 @@ class _ChoosePaymentPageState extends State<ChoosePaymentPage>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    print("LIFECYCLE WORKED OR NOPE");
-    print(state.toString());
+    // print("LIFECYCLE WORKED OR NOPE");
+    // print(state.toString());
     if (state == AppLifecycleState.resumed) {
       // WidgetsBinding.instance.removeObserver(this);
-      print("resumed");
+      // print("resumed");
       Navigator.pushNamed(context, ConfirmAnimationPage.routeName);
     }
     super.didChangeAppLifecycleState(state);

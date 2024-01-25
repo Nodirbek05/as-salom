@@ -62,13 +62,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   String _getcategoryByLocale(ProductModel product, Locale locale) {
     late String? productName;
     if (locale == const Locale('ru')) {
-      productName = product.name_ru;
+      productName = product.nameru;
     } else if (locale == const Locale('uz')) {
-      productName = product.name_uz;
+      productName = product.nameuz;
     } else if (locale == const Locale('en')) {
-      productName = product.name_en;
+      productName = product.nameen;
     } else if (locale == const Locale('fr')) {
-      productName = product.name_oz;
+      productName = product.nameoz;
     }
     return productName ?? "no_data".tr();
   }
@@ -76,13 +76,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   String _getDescByLocale(ProductModel product, Locale locale) {
     late String? productName;
     if (locale == const Locale('ru')) {
-      productName = _parseHtmlString(product.desc_ru ?? "");
+      productName = _parseHtmlString(product.descru ?? "");
     } else if (locale == const Locale('uz')) {
-      productName = _parseHtmlString(product.desc_uz ?? "");
+      productName = _parseHtmlString(product.descuz ?? "");
     } else if (locale == const Locale('en')) {
-      productName = _parseHtmlString(product.desc_en ?? "");
+      productName = _parseHtmlString(product.descen ?? "");
     } else if (locale == const Locale('fr')) {
-      productName = _parseHtmlString(product.desc_oz ?? "");
+      productName = _parseHtmlString(product.descoz ?? "");
     }
     return productName ?? "no_data".tr();
   }
@@ -100,11 +100,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
     favBox =
-        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
-    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+        prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
     setState(() {});
   }
 
@@ -133,7 +133,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         width: 175,
                         height: 50.h,
                         decoration: BoxDecoration(
-                            border: Border.all(color: ConstColor.as_salomText),
+                            border: Border.all(color: ConstColor.assalomText),
                             color: ConstColor.mainWhite,
                             borderRadius: BorderRadius.circular(50.r)),
                         child: Row(
@@ -152,7 +152,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               },
                               icon: const Icon(
                                 Icons.remove,
-                                color: ConstColor.as_salomText,
+                                color: ConstColor.assalomText,
                               ),
                             ),
                             Text(getDrugQty(widget.product.id!).toString(),
@@ -160,7 +160,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             IconButton(
                               splashRadius: 8.r,
                               onPressed: () {
-                                if (widget.product.type_good == 2 &&
+                                if (widget.product.typegood == 2 &&
                                     isHome == false) {
                                   if (getDrugQty(widget.product.id!) >= 12) {
                                     showDialog<void>(
@@ -219,7 +219,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                                     width: 328.w,
                                                     decoration: BoxDecoration(
                                                         color: ConstColor
-                                                            .as_salomText,
+                                                            .assalomText,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(
@@ -247,7 +247,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               },
                               icon: const Icon(
                                 Icons.add,
-                                color: ConstColor.as_salomText,
+                                color: ConstColor.assalomText,
                               ),
                             ),
                           ],
@@ -263,7 +263,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           height: 50.h,
                           width: 175.w,
                           decoration: BoxDecoration(
-                              color: ConstColor.as_salomText,
+                              color: ConstColor.assalomText,
                               borderRadius: BorderRadius.circular(50.r)),
                           child: Text(
                             "box".tr(),
@@ -286,13 +286,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             gravity: ToastGravity.TOP,
                             timeInSecForIosWeb: 1,
                             textColor: Colors.white,
-                            backgroundColor: ConstColor.as_salomText,
+                            backgroundColor: ConstColor.assalomText,
                             fontSize: 16.0);
                         addDrugToBasket(
                             int.parse(widget.product.id.toString()),
-                            widget.product.name_ru.toString(),
-                            widget.product.type_good ?? 0,
-                            widget.product.type_good == 3
+                            widget.product.nameru.toString(),
+                            widget.product.typegood ?? 0,
+                            widget.product.typegood == 3
                                 ? selectedSizePrice != 0
                                     ? selectedSizePrice.toString()
                                     : widget.product.sizes![0].pivot!.price
@@ -409,7 +409,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               0.60,
                               0.60
                             ]),
-                        // color: ConstColor.as_salomText,
+                        // color: ConstColor.assalomText,
                       ),
                       height: 115.h,
                       width: double.infinity,
@@ -426,7 +426,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           count: widget.product.photo!.length,
                           effect: WormEffect(
                             dotColor: ConstColor.dotColor,
-                            activeDotColor: ConstColor.as_salomText,
+                            activeDotColor: ConstColor.assalomText,
                             dotHeight: ScreenUtil().setWidth(10.0),
                             dotWidth: ScreenUtil().setWidth(10.0),
                           ),
@@ -456,20 +456,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           !isProductSavedInHive(
                                   int.parse(widget.product.id.toString()))
                               ? addToBox(
-                                  widget.product.name_ru ?? "",
-                                  widget.product.name_en ?? "",
-                                  widget.product.name_uz ?? "",
-                                  widget.product.name_oz ?? "",
-                                  widget.product.desc_en ?? "",
-                                  widget.product.desc_ru ?? "",
-                                  widget.product.desc_uz ?? "",
-                                  widget.product.desc_oz ?? "",
+                                  widget.product.nameru ?? "",
+                                  widget.product.nameen ?? "",
+                                  widget.product.nameuz ?? "",
+                                  widget.product.nameoz ?? "",
+                                  widget.product.descen ?? "",
+                                  widget.product.descru ?? "",
+                                  widget.product.descuz ?? "",
+                                  widget.product.descoz ?? "",
                                   widget.product.photo![0],
                                   widget.product.id != null
                                       ? int.parse(widget.product.id.toString())
                                       : 0,
                                   widget.product.price.toString(),
-                                  widget.product.type_good ?? 0,
+                                  widget.product.typegood ?? 0,
                                   widget.product.discount.toString(),
                                   widget.product.slug ?? "",
                                 )
@@ -484,7 +484,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     int.parse(widget.product.id!.toString()))
                                 ? const Icon(
                                     Icons.favorite,
-                                    color: ConstColor.as_salomText,
+                                    color: ConstColor.assalomText,
                                     size: 30,
                                   )
                                 : const Icon(
@@ -512,14 +512,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              widget.product.type_good == 1
+              widget.product.typegood == 1
                   ? Padding(
                       padding: EdgeInsets.only(left: 10.w, right: 10.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${"brutto".tr()} : ${widget.product.weight_bruto}гр.",
+                            "${"brutto".tr()} : ${widget.product.weightbruto}гр.",
                             style: Styles.style400sp14Grey,
                           ),
                           Text(
@@ -548,7 +548,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ],
                       ),
                     )
-                  : widget.product.type_good == 2
+                  : widget.product.typegood == 2
                       ? Padding(
                           padding: EdgeInsets.only(left: 10.w, right: 10.w),
                           child: Column(
@@ -670,7 +670,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                                             widget.product
                                                                 .sizes![indx].id
                                                         ? ConstColor
-                                                            .as_salomText
+                                                            .assalomText
                                                         : ConstColor.lightGrey,
                                                   ),
                                                   color: Colors.white,
@@ -696,7 +696,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                                         .sizes![indx].number
                                                         .toString()),
                                                     Text(widget.product
-                                                        .sizes![indx].name_ru
+                                                        .sizes![indx].nameru
                                                         .toString()),
                                                   ],
                                                 ),
@@ -759,7 +759,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   if (state is GetProductWithSlugFailed) {
                     return const Center();
                   } else if (state is GetProductWithSlugSuccess) {
-                    final randomGoods = state.dataModel.random_goods;
+                    final randomGoods = state.dataModel.randomgoods;
                     return randomGoods!.isNotEmpty
                         ? SizedBox(
                             height: 300,
@@ -776,11 +776,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     withHeight: true,
                                     product: ProductModel(
                                       price: randomGoods[ranIndex].price,
-                                      name_ru: randomGoods[ranIndex].name_ru,
+                                      nameru: randomGoods[ranIndex].nameru,
                                       id: randomGoods[ranIndex].id,
                                       photo: randomGoods[ranIndex].photo,
-                                      type_good: int.parse(randomGoods[ranIndex]
-                                          .type_good
+                                      typegood: int.parse(randomGoods[ranIndex]
+                                          .typegood
                                           .toString()),
                                       slug: randomGoods[ranIndex].slug,
                                       weight: randomGoods[ranIndex].weight,
@@ -923,14 +923,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   void addToBox(
-      String name_ru,
-      String name_en,
-      String name_uz,
-      String name_oz,
-      String desc_ru,
-      String desc_uz,
-      String desc_en,
-      String desc_oz,
+      String nameru,
+      String nameen,
+      String nameuz,
+      String nameoz,
+      String descru,
+      String descuz,
+      String descen,
+      String descoz,
       String image,
       int id,
       String price,
@@ -939,25 +939,25 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       String slug) {
     final product = FavoritesModel(
       id: id,
-      name_ru: name_ru,
+      nameru: nameru,
       type: type,
       price: price,
-      desc_en: desc_en,
-      desc_uz: desc_uz,
-      desc_ru: desc_ru,
-      desc_oz: desc_oz,
+      descen: descen,
+      descuz: descuz,
+      descru: descru,
+      descoz: descoz,
       discount: discount,
       image: image,
-      name_en: name_en,
-      name_oz: name_oz,
-      name_uz: name_uz,
+      nameen: nameen,
+      nameoz: nameoz,
+      nameuz: nameuz,
     )
-      ..name_ru = name_ru
-      ..name_en = name_en
-      ..name_uz = name_uz
-      ..desc_ru = desc_ru
-      ..desc_en = desc_en
-      ..desc_uz = desc_uz
+      ..nameru = nameru
+      ..nameen = nameen
+      ..nameuz = nameuz
+      ..descru = descru
+      ..descen = descen
+      ..descuz = descuz
       ..id = id
       ..image = image
       ..price = price

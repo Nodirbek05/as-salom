@@ -17,9 +17,9 @@ class GetUserProfileBloc
       GetProfileEvent event, Emitter<GetUserProfileState> emit) async {
     emit(GetUserProfileInitial());
     final response = await UserRequests.getProfile();
-    print(response);
+    // print(response);
     if (response is ProfileModel) {
-      print("object");
+      // print("object");
       emit(GetUserProfileSuccess(profilData: response));
     } else if (response is ErrorModel) {
       emit(GetUserProfileFail(errorData: response));

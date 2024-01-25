@@ -17,10 +17,10 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     final response = await CommonRequests.filterCat(event.id);
     if (response is FilterModel) {
       emit(FilterSuccess(filterModel: response));
-      print("GET FilterData SUCCESS ${response}");
+      // print("GET FilterData SUCCESS ${response}");
     } else if (response is ErrorModel) {
       emit(FilterFailed(errorMessage: response.message!));
-      print("GET FilterData ERROR");
+      // print("GET FilterData ERROR");
     }
   }
 }

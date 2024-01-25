@@ -3,10 +3,6 @@ import 'package:assalomproject/core/constant/api_paths.dart';
 import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
-import 'package:assalomproject/views/auth/data/logic/login_bloc/login_bloc.dart';
-import 'package:assalomproject/views/auth/data/logic/registration_bloc/register_bloc.dart';
-import 'package:assalomproject/views/auth/data/logic/verification_bloc/verification_bloc.dart';
-import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/basket/data/logic/create_order_bloc/create_order_bloc.dart';
 import 'package:assalomproject/views/basket/pages/basket_page.dart';
 import 'package:assalomproject/views/drawer/pages/drawer_page.dart';
@@ -49,10 +45,10 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
-    hasToken = _prefs.getString('token') != null;
-    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
+    hasToken = prefs.getString('token') != null;
+    basketBox = prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
     // setState(() {});
   }
 
@@ -91,13 +87,13 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
   String _getcategoryByLocale(CategoryDataModel category, Locale locale) {
     String categoryName = "no_data".tr();
     if (locale == const Locale('ru')) {
-      categoryName = category.name_ru ?? "";
+      categoryName = category.nameru ?? "";
     } else if (locale == const Locale('uz')) {
-      categoryName = category.name_uz ?? "";
+      categoryName = category.nameuz ?? "";
     } else if (locale == const Locale('en')) {
-      categoryName = category.name_en ?? "";
+      categoryName = category.nameen ?? "";
     } else if (locale == const Locale('fr')) {
-      categoryName = category.name_oz ?? "";
+      categoryName = category.nameoz ?? "";
     }
     return categoryName;
   }
@@ -130,15 +126,16 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
                     children: [
                       ListTile(
                         onTap: () async {
-                          SharedPreferences _prefs =
+                          SharedPreferences prefs =
                               await SharedPreferences.getInstance();
-                          print(_prefs.getInt('place'));
+                          // print(_prefs.getInt('place'));
 
                           isHome
-                              ? await _prefs.setInt('place', 1)
-                              : await _prefs.setInt('place', 2);
-                          print(_prefs.getInt('place'));
+                              ? await prefs.setInt('place', 1)
+                              : await prefs.setInt('place', 2);
+                          // print(prefs.getInt('place'));
 
+                          // ignore: use_build_context_synchronously
                           Navigator.pushNamedAndRemoveUntil(context,
                               CustomNavigatonBar.routeName, (route) => false);
                         },
@@ -281,7 +278,7 @@ class _CustomNavigatonBarState extends State<CustomNavigatonBar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: ConstColor.as_salomText,
+        selectedItemColor: ConstColor.assalomText,
         onTap: _onItemTapped,
       ),
     );

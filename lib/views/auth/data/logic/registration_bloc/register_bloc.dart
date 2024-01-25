@@ -19,8 +19,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     final response = await AuthRequests.createAccount(
         event.name, event.phone, event.deviceName);
     if (response is CreatedAccountModel) {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      await _prefs.setString('token', response.data.token);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('token', response.data.token);
       emit(RegisterSuccess(registerData: response));
     } else if (response is ErrorModel) {
       emit(RegisterFail(errorModel: response));

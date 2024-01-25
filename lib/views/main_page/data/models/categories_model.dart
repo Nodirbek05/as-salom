@@ -56,53 +56,53 @@ class CategoriesModel extends ResponseData {
 
 class CategoryDataModel {
   num? id;
-  String? name_uz;
-  String? name_en;
-  String? name_ru;
-  String? name_oz;
+  String? nameuz;
+  String? nameen;
+  String? nameru;
+  String? nameoz;
   String? icon;
   String? photo;
-  String? created_at;
-  String? updated_at;
+  String? createdat;
+  String? updatedat;
   List<SubCategoryModel>? subcategories;
   CategoryGoods? goods;
   CategoryDataModel({
     this.id,
-    this.name_uz,
-    this.name_en,
-    this.name_ru,
-    this.name_oz,
+    this.nameuz,
+    this.nameen,
+    this.nameru,
+    this.nameoz,
     this.icon,
     this.photo,
-    this.created_at,
-    this.updated_at,
+    this.createdat,
+    this.updatedat,
     this.subcategories,
     this.goods,
   });
 
   CategoryDataModel copyWith({
     num? id,
-    String? name_uz,
-    String? name_en,
-    String? name_ru,
-    String? name_oz,
+    String? nameuz,
+    String? nameen,
+    String? nameru,
+    String? nameoz,
     String? icon,
     String? photo,
-    String? created_at,
-    String? updated_at,
+    String? createdat,
+    String? updatedat,
     List<SubCategoryModel>? subcategories,
     CategoryGoods? goods,
   }) {
     return CategoryDataModel(
       id: id ?? this.id,
-      name_uz: name_uz ?? this.name_uz,
-      name_en: name_en ?? this.name_en,
-      name_ru: name_ru ?? this.name_ru,
-      name_oz: name_oz ?? this.name_oz,
+      nameuz: nameuz ?? this.nameuz,
+      nameen: nameen ?? this.nameen,
+      nameru: nameru ?? this.nameru,
+      nameoz: nameoz ?? this.nameoz,
       icon: icon ?? this.icon,
       photo: photo ?? this.photo,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
+      createdat: createdat ?? this.createdat,
+      updatedat: updatedat ?? this.updatedat,
       subcategories: subcategories ?? this.subcategories,
       goods: goods ?? this.goods,
     );
@@ -111,14 +111,14 @@ class CategoryDataModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name_uz': name_uz,
-      'name_en': name_en,
-      'name_ru': name_ru,
-      'name_oz': name_oz,
+      'name_uz': nameuz,
+      'name_en': nameen,
+      'name_ru': nameru,
+      'name_oz': nameoz,
       'icon': icon,
       'photo': photo,
-      'created_at': created_at,
-      'updated_at': updated_at,
+      'created_at': createdat,
+      'updated_at': updatedat,
       'subcategories': subcategories?.map((x) => x.toMap()).toList(),
       'goods': goods?.toMap(),
     };
@@ -127,14 +127,14 @@ class CategoryDataModel {
   factory CategoryDataModel.fromMap(Map<String, dynamic> map) {
     return CategoryDataModel(
       id: map['id'],
-      name_uz: map['name_uz'],
-      name_en: map['name_en'],
-      name_ru: map['name_ru'],
-      name_oz: map['name_oz'],
+      nameuz: map['name_uz'],
+      nameen: map['name_en'],
+      nameru: map['name_ru'],
+      nameoz: map['name_oz'],
       icon: map['icon'],
       photo: map['photo'],
-      created_at: map['created_at'],
-      updated_at: map['updated_at'],
+      createdat: map['created_at'],
+      updatedat: map['updated_at'],
       subcategories: map['subcategories'] != null ? List<SubCategoryModel>.from(map['subcategories']?.map((x) => SubCategoryModel.fromMap(x))) : null,
       goods: map['goods'] != null ? CategoryGoods.fromMap(map['goods']) : null,
     );
@@ -146,7 +146,7 @@ class CategoryDataModel {
 
   @override
   String toString() {
-    return 'CategoryDataModel(id: $id, name_uz: $name_uz, name_en: $name_en, name_ru: $name_ru, name_oz: $name_oz, icon: $icon, photo: $photo, created_at: $created_at, updated_at: $updated_at, subcategories: $subcategories, goods: $goods)';
+    return 'CategoryDataModel(id: $id, name_uz: $nameuz, name_en: $nameen, name_ru: $nameru, name_oz: $nameoz, icon: $icon, photo: $photo, created_at: $createdat, updated_at: $updatedat, subcategories: $subcategories, goods: $goods)';
   }
 
   @override
@@ -155,14 +155,14 @@ class CategoryDataModel {
   
     return other is CategoryDataModel &&
       other.id == id &&
-      other.name_uz == name_uz &&
-      other.name_en == name_en &&
-      other.name_ru == name_ru &&
-      other.name_oz == name_oz &&
+      other.nameuz == nameuz &&
+      other.nameen == nameen &&
+      other.nameru == nameru &&
+      other.nameoz == nameoz &&
       other.icon == icon &&
       other.photo == photo &&
-      other.created_at == created_at &&
-      other.updated_at == updated_at &&
+      other.createdat == createdat &&
+      other.updatedat == updatedat &&
       listEquals(other.subcategories, subcategories) &&
       other.goods == goods;
   }
@@ -170,76 +170,76 @@ class CategoryDataModel {
   @override
   int get hashCode {
     return id.hashCode ^
-      name_uz.hashCode ^
-      name_en.hashCode ^
-      name_ru.hashCode ^
-      name_oz.hashCode ^
+      nameuz.hashCode ^
+      nameen.hashCode ^
+      nameru.hashCode ^
+      nameoz.hashCode ^
       icon.hashCode ^
       photo.hashCode ^
-      created_at.hashCode ^
-      updated_at.hashCode ^
+      createdat.hashCode ^
+      updatedat.hashCode ^
       subcategories.hashCode ^
       goods.hashCode;
   }
 }
 
 class CategoryGoods extends ResponseData {
-  num? current_page;
-  String? first_page_url;
+  num? currentpage;
+  String? firstpageurl;
   List<ProductModel>? data;
   List<LinksModel>? links;
   dynamic from;
-  num? last_page;
-  String? last_page_url;
-  String? next_page_url;
+  num? lastpage;
+  String? lastpageurl;
+  String? nextpageurl;
   String? path;
-  num? per_page;
-  String? prev_page_url;
+  num? perpage;
+  String? prevpageurl;
   dynamic to;
   num? total;
   CategoryGoods({
-    this.current_page,
-    this.first_page_url,
+    this.currentpage,
+    this.firstpageurl,
     this.data,
     this.links,
     this.from,
-    this.last_page,
-    this.last_page_url,
-    this.next_page_url,
+    this.lastpage,
+    this.lastpageurl,
+    this.nextpageurl,
     this.path,
-    this.per_page,
-    this.prev_page_url,
+    this.perpage,
+    this.prevpageurl,
     this.to,
     this.total,
   });
 
   CategoryGoods copyWith({
-    num? current_page,
-    String? first_page_url,
+    num? currentpage,
+    String? firstpageurl,
     List<ProductModel>? data,
     List<LinksModel>? links,
     dynamic from,
-    num? last_page,
-    String? last_page_url,
-    String? next_page_url,
+    num? lastpage,
+    String? lastpageurl,
+    String? nextpageurl,
     String? path,
-    num? per_page,
-    String? prev_page_url,
+    num? perpage,
+    String? prevpageurl,
     dynamic to,
     num? total,
   }) {
     return CategoryGoods(
-      current_page: current_page ?? this.current_page,
-      first_page_url: first_page_url ?? this.first_page_url,
+      currentpage: currentpage ?? this.currentpage,
+      firstpageurl: firstpageurl ?? this.firstpageurl,
       data: data ?? this.data,
       links: links ?? this.links,
       from: from ?? this.from,
-      last_page: last_page ?? this.last_page,
-      last_page_url: last_page_url ?? this.last_page_url,
-      next_page_url: next_page_url ?? this.next_page_url,
+      lastpage: lastpage ?? this.lastpage,
+      lastpageurl: lastpageurl ?? this.lastpageurl,
+      nextpageurl: nextpageurl ?? this.nextpageurl,
       path: path ?? this.path,
-      per_page: per_page ?? this.per_page,
-      prev_page_url: prev_page_url ?? this.prev_page_url,
+      perpage: perpage ?? this.perpage,
+      prevpageurl: prevpageurl ?? this.prevpageurl,
       to: to ?? this.to,
       total: total ?? this.total,
     );
@@ -247,17 +247,17 @@ class CategoryGoods extends ResponseData {
 
   Map<String, dynamic> toMap() {
     return {
-      'current_page': current_page,
-      'first_page_url': first_page_url,
+      'current_page': currentpage,
+      'first_page_url': firstpageurl,
       'data': data?.map((x) => x.toMap()).toList(),
       'links': links?.map((x) => x.toMap()).toList(),
       'from': from,
-      'last_page': last_page,
-      'last_page_url': last_page_url,
-      'next_page_url': next_page_url,
+      'last_page': lastpage,
+      'last_page_url': lastpageurl,
+      'next_page_url': nextpageurl,
       'path': path,
-      'per_page': per_page,
-      'prev_page_url': prev_page_url,
+      'per_page': perpage,
+      'prev_page_url': prevpageurl,
       'to': to,
       'total': total,
     };
@@ -265,8 +265,8 @@ class CategoryGoods extends ResponseData {
 
   factory CategoryGoods.fromMap(Map<String, dynamic> map) {
     return CategoryGoods(
-      current_page: map['current_page'],
-      first_page_url: map['first_page_url'],
+      currentpage: map['current_page'],
+      firstpageurl: map['first_page_url'],
       data: map['data'] != null
           ? List<ProductModel>.from(
               map['data']?.map((x) => ProductModel.fromMap(x)))
@@ -276,12 +276,12 @@ class CategoryGoods extends ResponseData {
               map['links']?.map((x) => LinksModel.fromMap(x)))
           : null,
       from: map['from'] != null ? map['from'] : null,
-      last_page: map['last_page'],
-      last_page_url: map['last_page_url'],
-      next_page_url: map['next_page_url'],
+      lastpage: map['last_page'],
+      lastpageurl: map['last_page_url'],
+      nextpageurl: map['next_page_url'],
       path: map['path'],
-      per_page: map['per_page'],
-      prev_page_url: map['prev_page_url'],
+      perpage: map['per_page'],
+      prevpageurl: map['prev_page_url'],
       to: map['to'],
       total: map['total'],
     );
@@ -294,7 +294,7 @@ class CategoryGoods extends ResponseData {
 
   @override
   String toString() {
-    return 'CategoryGoods(current_page: $current_page, first_page_url: $first_page_url, data: $data, links: $links, from: $from, last_page: $last_page, last_page_url: $last_page_url, next_page_url: $next_page_url, path: $path, per_page: $per_page, prev_page_url: $prev_page_url, to: $to, total: $total)';
+    return 'CategoryGoods(current_page: $currentpage, first_page_url: $firstpageurl, data: $data, links: $links, from: $from, last_page: $lastpage, last_page_url: $lastpageurl, next_page_url: $nextpageurl, path: $path, per_page: $perpage, prev_page_url: $prevpageurl, to: $to, total: $total)';
   }
 
   @override
@@ -302,34 +302,34 @@ class CategoryGoods extends ResponseData {
     if (identical(this, other)) return true;
 
     return other is CategoryGoods &&
-        other.current_page == current_page &&
-        other.first_page_url == first_page_url &&
+        other.currentpage == currentpage &&
+        other.firstpageurl == firstpageurl &&
         listEquals(other.data, data) &&
         listEquals(other.links, links) &&
         other.from == from &&
-        other.last_page == last_page &&
-        other.last_page_url == last_page_url &&
-        other.next_page_url == next_page_url &&
+        other.lastpage == lastpage &&
+        other.lastpageurl == lastpageurl &&
+        other.nextpageurl == nextpageurl &&
         other.path == path &&
-        other.per_page == per_page &&
-        other.prev_page_url == prev_page_url &&
+        other.perpage == perpage &&
+        other.prevpageurl == prevpageurl &&
         other.to == to &&
         other.total == total;
   }
 
   @override
   int get hashCode {
-    return current_page.hashCode ^
-        first_page_url.hashCode ^
+    return currentpage.hashCode ^
+        firstpageurl.hashCode ^
         data.hashCode ^
         links.hashCode ^
         from.hashCode ^
-        last_page.hashCode ^
-        last_page_url.hashCode ^
-        next_page_url.hashCode ^
+        lastpage.hashCode ^
+        lastpageurl.hashCode ^
+        nextpageurl.hashCode ^
         path.hashCode ^
-        per_page.hashCode ^
-        prev_page_url.hashCode ^
+        perpage.hashCode ^
+        prevpageurl.hashCode ^
         to.hashCode ^
         total.hashCode;
   }

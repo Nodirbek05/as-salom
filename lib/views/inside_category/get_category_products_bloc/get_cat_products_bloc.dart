@@ -20,9 +20,9 @@ class GetCatProductsBloc
     emit(GetSubCatProductsInitial());
     final response = await CommonRequests.getInnerProducts(event.subCategoryId);
     if (response is InnerModel) {
-      print("SUCCES MODEL");
+      // print("SUCCES MODEL");
       emit(GetSubCatProductsSuccess(innerModel: response));
-      print("SUCCES MODEL EMITED");
+      // print("SUCCES MODEL EMITED");
     } else if (response is ErrorModel) {
       emit(GetSubCatProductsFail(errorModel: response));
     }

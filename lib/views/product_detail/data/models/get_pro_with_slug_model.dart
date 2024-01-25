@@ -7,33 +7,33 @@ import 'package:assalomproject/views/main_page/data/models/spesific_products.dar
 
 class GetProWithSlugModel extends ResponseData {
   ProductModel? good;
-  List<RandomGoods>? random_goods;
+  List<RandomGoods>? randomgoods;
   GetProWithSlugModel({
     this.good,
-    this.random_goods,
+    this.randomgoods,
   });
 
   GetProWithSlugModel copyWith({
     ProductModel? good,
-    List<RandomGoods>? random_goods,
+    List<RandomGoods>? randomgoods,
   }) {
     return GetProWithSlugModel(
       good: good ?? this.good,
-      random_goods: random_goods ?? this.random_goods,
+      randomgoods: randomgoods ?? this.randomgoods,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'good': good?.toMap(),
-      'random_goods': random_goods?.map((x) => x.toMap()).toList(),
+      'random_goods': randomgoods?.map((x) => x.toMap()).toList(),
     };
   }
 
   factory GetProWithSlugModel.fromMap(Map<String, dynamic> map) {
     return GetProWithSlugModel(
       good: map['good'] != null ? ProductModel.fromMap(map['good']) : null,
-      random_goods: map['random_goods'] != null ? List<RandomGoods>.from(map['random_goods']?.map((x) => RandomGoods.fromMap(x))) : null,
+      randomgoods: map['random_goods'] != null ? List<RandomGoods>.from(map['random_goods']?.map((x) => RandomGoods.fromMap(x))) : null,
     );
   }
 
@@ -42,7 +42,7 @@ class GetProWithSlugModel extends ResponseData {
   factory GetProWithSlugModel.fromJson(String source) => GetProWithSlugModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'GetProWithSlugModel(good: $good, random_goods: $random_goods)';
+  String toString() => 'GetProWithSlugModel(good: $good, random_goods: $randomgoods)';
 
   @override
   bool operator ==(Object other) {
@@ -50,115 +50,115 @@ class GetProWithSlugModel extends ResponseData {
   
     return other is GetProWithSlugModel &&
       other.good == good &&
-      listEquals(other.random_goods, random_goods);
+      listEquals(other.randomgoods, randomgoods);
   }
 
   @override
-  int get hashCode => good.hashCode ^ random_goods.hashCode;
+  int get hashCode => good.hashCode ^ randomgoods.hashCode;
 }
 
 class RandomGoods extends ResponseData {
   num? id;
-  num? type_good;
-  dynamic category_id;
-  dynamic subcategory_id;
-  String? name_ru;
-  String? name_uz;
-  String? name_en;
+  num? typegood;
+  dynamic categoryid;
+  dynamic subcategoryid;
+  String? nameru;
+  String? nameuz;
+  String? nameen;
   String? slug;
   dynamic price;
   dynamic discount;
   String? weight;
-  String? weight_max;
+  String? weightmax;
   String? ikpu;
   String? barcode;
   String? nds;
-  String? desc_ru;
-  String? desc_uz;
-  String? desc_en;
+  String? descru;
+  String? descuz;
+  String? descen;
   List<String>? photo;
-  String? created_at;
-  String? updated_at;
+  String? createdat;
+  String? updatedat;
   num? quantity;
-  dynamic weight_bruto;
+  dynamic weightbruto;
   List<SizeData>? sizes;
   RandomGoods({
     this.id,
-    this.type_good,
-    this.category_id,
-    this.subcategory_id,
-    this.name_ru,
-    this.name_uz,
-    this.name_en,
+    this.typegood,
+    this.categoryid,
+    this.subcategoryid,
+    this.nameru,
+    this.nameuz,
+    this.nameen,
     this.slug,
     this.price,
     this.discount,
     this.weight,
-    this.weight_max,
+    this.weightmax,
     this.ikpu,
     this.barcode,
     this.nds,
-    this.desc_ru,
-    this.desc_uz,
-    this.desc_en,
+    this.descru,
+    this.descuz,
+    this.descen,
     this.photo,
-    this.created_at,
-    this.updated_at,
+    this.createdat,
+    this.updatedat,
     this.quantity,
-    this.weight_bruto,
+    this.weightbruto,
     this.sizes,
   });
 
   RandomGoods copyWith({
     num? id,
-    num? type_good,
-    dynamic category_id,
-    dynamic subcategory_id,
-    String? name_ru,
-    String? name_uz,
-    String? name_en,
+    num? typegood,
+    dynamic categoryid,
+    dynamic subcategoryid,
+    String? nameru,
+    String? nameuz,
+    String? nameen,
     String? slug,
     dynamic price,
     dynamic discount,
     String? weight,
-    String? weight_max,
+    String? weightmax,
     String? ikpu,
     String? barcode,
     String? nds,
-    String? desc_ru,
-    String? desc_uz,
-    String? desc_en,
+    String? descru,
+    String? descuz,
+    String? descen,
     List<String>? photo,
-    String? created_at,
-    String? updated_at,
+    String? createdat,
+    String? updatedat,
     num? quantity,
-    dynamic weight_bruto,
+    dynamic weightbruto,
     List<SizeData>? sizes,
   }) {
     return RandomGoods(
       id: id ?? this.id,
-      type_good: type_good ?? this.type_good,
-      category_id: category_id ?? this.category_id,
-      subcategory_id: subcategory_id ?? this.subcategory_id,
-      name_ru: name_ru ?? this.name_ru,
-      name_uz: name_uz ?? this.name_uz,
-      name_en: name_en ?? this.name_en,
+      typegood: typegood ?? this.typegood,
+      categoryid: categoryid ?? this.categoryid,
+      subcategoryid: subcategoryid ?? this.subcategoryid,
+      nameru: nameru ?? this.nameru,
+      nameuz: nameuz ?? this.nameuz,
+      nameen: nameen ?? this.nameen,
       slug: slug ?? this.slug,
       price: price ?? this.price,
       discount: discount ?? this.discount,
       weight: weight ?? this.weight,
-      weight_max: weight_max ?? this.weight_max,
+      weightmax: weightmax ?? this.weightmax,
       ikpu: ikpu ?? this.ikpu,
       barcode: barcode ?? this.barcode,
       nds: nds ?? this.nds,
-      desc_ru: desc_ru ?? this.desc_ru,
-      desc_uz: desc_uz ?? this.desc_uz,
-      desc_en: desc_en ?? this.desc_en,
+      descru: descru ?? this.descru,
+      descuz: descuz ?? this.descuz,
+      descen: descen ?? this.descen,
       photo: photo ?? this.photo,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
+      createdat: createdat ?? this.createdat,
+      updatedat: updatedat ?? this.updatedat,
       quantity: quantity ?? this.quantity,
-      weight_bruto: weight_bruto ?? this.weight_bruto,
+      weightbruto: weightbruto ?? this.weightbruto,
       sizes: sizes ?? this.sizes,
     );
   }
@@ -166,28 +166,28 @@ class RandomGoods extends ResponseData {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'type_good': type_good,
-      'category_id': category_id,
-      'subcategory_id': subcategory_id,
-      'name_ru': name_ru,
-      'name_uz': name_uz,
-      'name_en': name_en,
+      'type_good': typegood,
+      'category_id': categoryid,
+      'subcategory_id': subcategoryid,
+      'name_ru': nameru,
+      'name_uz': nameuz,
+      'name_en': nameen,
       'slug': slug,
       'price': price,
       'discount': discount,
       'weight': weight,
-      'weight_max': weight_max,
+      'weight_max': weightmax,
       'ikpu': ikpu,
       'barcode': barcode,
       'nds': nds,
-      'desc_ru': desc_ru,
-      'desc_uz': desc_uz,
-      'desc_en': desc_en,
+      'desc_ru': descru,
+      'desc_uz': descuz,
+      'desc_en': descen,
       'photo': photo,
-      'created_at': created_at,
-      'updated_at': updated_at,
+      'created_at': createdat,
+      'updated_at': updatedat,
       'quantity': quantity,
-      'weight_bruto': weight_bruto,
+      'weight_bruto': weightbruto,
       'sizes': sizes?.map((x) => x.toMap()).toList(),
     };
   }
@@ -195,28 +195,28 @@ class RandomGoods extends ResponseData {
   factory RandomGoods.fromMap(Map<String, dynamic> map) {
     return RandomGoods(
       id: map['id'],
-      type_good: map['type_good'],
-      category_id: map['category_id'],
-      subcategory_id: map['subcategory_id'],
-      name_ru: map['name_ru'],
-      name_uz: map['name_uz'],
-      name_en: map['name_en'],
+      typegood: map['type_good'],
+      categoryid: map['category_id'],
+      subcategoryid: map['subcategory_id'],
+      nameru: map['name_ru'],
+      nameuz: map['name_uz'],
+      nameen: map['name_en'],
       slug: map['slug'],
       price: map['price'],
       discount: map['discount'],
       weight: map['weight'],
-      weight_max: map['weight_max'],
+      weightmax: map['weight_max'],
       ikpu: map['ikpu'],
       barcode: map['barcode'],
       nds: map['nds'],
-      desc_ru: map['desc_ru'],
-      desc_uz: map['desc_uz'],
-      desc_en: map['desc_en'],
+      descru: map['desc_ru'],
+      descuz: map['desc_uz'],
+      descen: map['desc_en'],
       photo: List<String>.from(map['photo']),
-      created_at: map['created_at'],
-      updated_at: map['updated_at'],
+      createdat: map['created_at'],
+      updatedat: map['updated_at'],
       quantity: map['quantity'],
-      weight_bruto: map['weight_bruto'],
+      weightbruto: map['weight_bruto'],
       sizes: map['sizes'] != null
           ? List<SizeData>.from(map['sizes']?.map((x) => SizeData.fromMap(x)))
           : null,
@@ -230,7 +230,7 @@ class RandomGoods extends ResponseData {
 
   @override
   String toString() {
-    return 'RandomGoods(id: $id, type_good: $type_good, category_id: $category_id, subcategory_id: $subcategory_id, name_ru: $name_ru, name_uz: $name_uz, name_en: $name_en, slug: $slug, price: $price, discount: $discount, weight: $weight, weight_max: $weight_max, ikpu: $ikpu, barcode: $barcode, nds: $nds, desc_ru: $desc_ru, desc_uz: $desc_uz, desc_en: $desc_en, photo: $photo, created_at: $created_at, updated_at: $updated_at, quantity: $quantity, weight_bruto: $weight_bruto, sizes: $sizes)';
+    return 'RandomGoods(id: $id, type_good: $typegood, category_id: $categoryid, subcategory_id: $subcategoryid, name_ru: $nameru, name_uz: $nameuz, name_en: $nameen, slug: $slug, price: $price, discount: $discount, weight: $weight, weight_max: $weightmax, ikpu: $ikpu, barcode: $barcode, nds: $nds, desc_ru: $descru, desc_uz: $descuz, desc_en: $descen, photo: $photo, created_at: $createdat, updated_at: $updatedat, quantity: $quantity, weight_bruto: $weightbruto, sizes: $sizes)';
   }
 
   @override
@@ -239,90 +239,90 @@ class RandomGoods extends ResponseData {
 
     return other is RandomGoods &&
         other.id == id &&
-        other.type_good == type_good &&
-        other.category_id == category_id &&
-        other.subcategory_id == subcategory_id &&
-        other.name_ru == name_ru &&
-        other.name_uz == name_uz &&
-        other.name_en == name_en &&
+        other.typegood == typegood &&
+        other.categoryid == categoryid &&
+        other.subcategoryid == subcategoryid &&
+        other.nameru == nameru &&
+        other.nameuz == nameuz &&
+        other.nameen == nameen &&
         other.slug == slug &&
         other.price == price &&
         other.discount == discount &&
         other.weight == weight &&
-        other.weight_max == weight_max &&
+        other.weightmax == weightmax &&
         other.ikpu == ikpu &&
         other.barcode == barcode &&
         other.nds == nds &&
-        other.desc_ru == desc_ru &&
-        other.desc_uz == desc_uz &&
-        other.desc_en == desc_en &&
+        other.descru == descru &&
+        other.descuz == descuz &&
+        other.descen == descen &&
         listEquals(other.photo, photo) &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at &&
+        other.createdat == createdat &&
+        other.updatedat == updatedat &&
         other.quantity == quantity &&
-        other.weight_bruto == weight_bruto &&
+        other.weightbruto == weightbruto &&
         listEquals(other.sizes, sizes);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        type_good.hashCode ^
-        category_id.hashCode ^
-        subcategory_id.hashCode ^
-        name_ru.hashCode ^
-        name_uz.hashCode ^
-        name_en.hashCode ^
+        typegood.hashCode ^
+        categoryid.hashCode ^
+        subcategoryid.hashCode ^
+        nameru.hashCode ^
+        nameuz.hashCode ^
+        nameen.hashCode ^
         slug.hashCode ^
         price.hashCode ^
         discount.hashCode ^
         weight.hashCode ^
-        weight_max.hashCode ^
+        weightmax.hashCode ^
         ikpu.hashCode ^
         barcode.hashCode ^
         nds.hashCode ^
-        desc_ru.hashCode ^
-        desc_uz.hashCode ^
-        desc_en.hashCode ^
+        descru.hashCode ^
+        descuz.hashCode ^
+        descen.hashCode ^
         photo.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode ^
+        createdat.hashCode ^
+        updatedat.hashCode ^
         quantity.hashCode ^
-        weight_bruto.hashCode ^
+        weightbruto.hashCode ^
         sizes.hashCode;
   }
 }
 
 class SizeData extends ResponseData {
   num? id;
-  String? name_ru;
+  String? nameru;
   String? number;
-  String? created_at;
-  String? updated_at;
+  String? createdat;
+  String? updatedat;
   PivotData? pivot;
   SizeData({
     this.id,
-    this.name_ru,
+    this.nameru,
     this.number,
-    this.created_at,
-    this.updated_at,
+    this.createdat,
+    this.updatedat,
     this.pivot,
   });
 
   SizeData copyWith({
     num? id,
-    String? name_ru,
+    String? nameru,
     String? number,
-    String? created_at,
-    String? updated_at,
+    String? createdat,
+    String? updatedat,
     PivotData? pivot,
   }) {
     return SizeData(
       id: id ?? this.id,
-      name_ru: name_ru ?? this.name_ru,
+      nameru: nameru ?? this.nameru,
       number: number ?? this.number,
-      created_at: created_at ?? this.created_at,
-      updated_at: updated_at ?? this.updated_at,
+      createdat: createdat ?? this.createdat,
+      updatedat: updatedat ?? this.updatedat,
       pivot: pivot ?? this.pivot,
     );
   }
@@ -330,10 +330,10 @@ class SizeData extends ResponseData {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name_ru': name_ru,
+      'name_ru': nameru,
       'number': number,
-      'created_at': created_at,
-      'updated_at': updated_at,
+      'created_at': createdat,
+      'updated_at': updatedat,
       'pivot': pivot?.toMap(),
     };
   }
@@ -341,10 +341,10 @@ class SizeData extends ResponseData {
   factory SizeData.fromMap(Map<String, dynamic> map) {
     return SizeData(
       id: map['id'],
-      name_ru: map['name_ru'],
+      nameru: map['name_ru'],
       number: map['number'],
-      created_at: map['created_at'],
-      updated_at: map['updated_at'],
+      createdat: map['created_at'],
+      updatedat: map['updated_at'],
       pivot: map['pivot'] != null ? PivotData.fromMap(map['pivot']) : null,
     );
   }
@@ -356,7 +356,7 @@ class SizeData extends ResponseData {
 
   @override
   String toString() {
-    return 'SizeData(id: $id, name_ru: $name_ru, number: $number, created_at: $created_at, updated_at: $updated_at, pivot: $pivot)';
+    return 'SizeData(id: $id, name_ru: $nameru, number: $number, created_at: $createdat, updated_at: $updatedat, pivot: $pivot)';
   }
 
   @override
@@ -365,45 +365,45 @@ class SizeData extends ResponseData {
 
     return other is SizeData &&
         other.id == id &&
-        other.name_ru == name_ru &&
+        other.nameru == nameru &&
         other.number == number &&
-        other.created_at == created_at &&
-        other.updated_at == updated_at &&
+        other.createdat == createdat &&
+        other.updatedat == updatedat &&
         other.pivot == pivot;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        name_ru.hashCode ^
+        nameru.hashCode ^
         number.hashCode ^
-        created_at.hashCode ^
-        updated_at.hashCode ^
+        createdat.hashCode ^
+        updatedat.hashCode ^
         pivot.hashCode;
   }
 }
 
 class PivotData extends ResponseData {
-  dynamic good_id;
-  dynamic size_id;
+  dynamic goodid;
+  dynamic sizeid;
   dynamic price;
   dynamic quantity;
   PivotData({
-    this.good_id,
-    this.size_id,
+    this.goodid,
+    this.sizeid,
     this.price,
     this.quantity,
   });
 
   PivotData copyWith({
-    dynamic good_id,
-    dynamic size_id,
+    dynamic goodid,
+    dynamic sizeid,
     dynamic price,
     dynamic quantity,
   }) {
     return PivotData(
-      good_id: good_id ?? this.good_id,
-      size_id: size_id ?? this.size_id,
+      goodid: goodid ?? this.goodid,
+      sizeid: sizeid ?? this.sizeid,
       price: price ?? this.price,
       quantity: quantity ?? this.quantity,
     );
@@ -411,8 +411,8 @@ class PivotData extends ResponseData {
 
   Map<String, dynamic> toMap() {
     return {
-      'good_id': good_id,
-      'size_id': size_id,
+      'good_id': goodid,
+      'size_id': sizeid,
       'price': price,
       'quantity': quantity,
     };
@@ -420,8 +420,8 @@ class PivotData extends ResponseData {
 
   factory PivotData.fromMap(Map<String, dynamic> map) {
     return PivotData(
-      good_id: map['good_id'],
-      size_id: map['size_id'],
+      goodid: map['good_id'],
+      sizeid: map['size_id'],
       price: map['price'],
       quantity: map['quantity'],
     );
@@ -434,7 +434,7 @@ class PivotData extends ResponseData {
 
   @override
   String toString() {
-    return 'PivotData(good_id: $good_id, size_id: $size_id, price: $price, quantity: $quantity)';
+    return 'PivotData(good_id: $goodid, size_id: $sizeid, price: $price, quantity: $quantity)';
   }
 
   @override
@@ -442,16 +442,16 @@ class PivotData extends ResponseData {
     if (identical(this, other)) return true;
 
     return other is PivotData &&
-        other.good_id == good_id &&
-        other.size_id == size_id &&
+        other.goodid == goodid &&
+        other.sizeid == sizeid &&
         other.price == price &&
         other.quantity == quantity;
   }
 
   @override
   int get hashCode {
-    return good_id.hashCode ^
-        size_id.hashCode ^
+    return goodid.hashCode ^
+        sizeid.hashCode ^
         price.hashCode ^
         quantity.hashCode;
   }

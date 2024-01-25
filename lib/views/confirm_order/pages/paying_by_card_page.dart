@@ -39,11 +39,11 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
   String basketBox = "basketBoxForHome";
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    isHome = _prefs.getInt("place") == 2;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isHome = prefs.getInt("place") == 2;
     favBox =
-        _prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
-    basketBox = _prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
+        prefs.getInt('place') == 2 ? "favoritesBoxForHome" : "favoritesBox";
+    basketBox = prefs.getInt('place') == 2 ? "basketBoxForHome" : "basketBox";
     setState(() {});
   }
 
@@ -56,7 +56,7 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
             : price = 0;
       }
     }
-    print(price);
+    // print(price);
   }
 
   @override
@@ -97,14 +97,14 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
               onTap: () {
                 if (phoneController.text.isEmpty ||
                     phoneController.text.length < 12) {
-                  print("DATA ENTERING HERE");
+                  // print("DATA ENTERING HERE");
                   Fluttertoast.showToast(
                       msg: "correct_number".tr(),
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.TOP,
                       timeInSecForIosWeb: 1,
                       textColor: Colors.white,
-                      backgroundColor: ConstColor.as_salomText,
+                      backgroundColor: ConstColor.assalomText,
                       fontSize: 16.0);
                 } else {
                   context.read<ConfirmOrderByCardBloc>().add(
@@ -121,7 +121,7 @@ class _PayingByCardPageState extends State<PayingByCardPage> {
                 height: 35.h,
                 width: 328.w,
                 decoration: BoxDecoration(
-                    color: ConstColor.as_salomText,
+                    color: ConstColor.assalomText,
                     borderRadius: BorderRadius.circular(50.r)),
                 child: Text(
                   "confirm_order".tr(),

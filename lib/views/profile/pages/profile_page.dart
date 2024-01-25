@@ -45,8 +45,8 @@ class _ProfilePageState extends State<ProfilePage>
   bool? hasToken;
 
   void getCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    hasToken = _prefs.getString('token') != null;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    hasToken = prefs.getString('token') != null;
     setState(() {});
   }
 
@@ -61,8 +61,8 @@ class _ProfilePageState extends State<ProfilePage>
                     appBar: AppBar(
                       backgroundColor: ConstColor.mainWhite,
                       bottom: TabBar(
-                        labelColor: ConstColor.as_salomText,
-                        indicatorColor: ConstColor.as_salomText,
+                        labelColor: ConstColor.assalomText,
+                        indicatorColor: ConstColor.assalomText,
                         tabs: myTabs,
                       ),
                       automaticallyImplyLeading: false,

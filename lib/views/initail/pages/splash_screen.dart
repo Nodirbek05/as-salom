@@ -34,8 +34,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   setCache() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    _prefs.getInt("place") != null ? null : _prefs.setInt('place', 2);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.getInt("place") != null ? null : prefs.setInt('place', 2);
   }
 
   @override

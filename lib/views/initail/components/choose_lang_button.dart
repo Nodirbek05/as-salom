@@ -44,7 +44,7 @@ class _ChooseButtonLangState extends State<ChooseButtonLang> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.r),
           border: Border.all(
-            color: ConstColor.as_salomText,
+            color: ConstColor.assalomText,
           ),
         ),
         child: Text(
