@@ -11,6 +11,7 @@ class UpdateNameBloc extends Bloc<UpdateNameEvent, UpdateNameState> {
   UpdateNameBloc() : super(UpdateNameInitial()) {
     on<UpdateName>(updateName);
     on<UpdateNumber>(updateNumber);
+    
   }
 
   Future<void> updateName(
@@ -34,4 +35,8 @@ class UpdateNameBloc extends Bloc<UpdateNameEvent, UpdateNameState> {
       emit(UpdateNumberFail(errorModel: response));
     }
   }
+
+
+
+
 }

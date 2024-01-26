@@ -45,7 +45,7 @@ class _SpesificProductsWidgetState extends State<SpesificProductsWidget> {
         if (state is GetSpesificProductsInitial) {
           return Center(child: shimmerWidget());
         } else if (state is GetSpesificProductsSuccess) {
-          final products = state.spesificProducts.data![widget.index].goods;
+          final products = state.spesificProducts.data?[widget.index].goods;
           return products!.isNotEmpty
               ? Padding(
                   padding: EdgeInsets.only(

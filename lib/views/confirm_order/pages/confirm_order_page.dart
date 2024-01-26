@@ -115,6 +115,15 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   textColor: Colors.white,
                   backgroundColor: ConstColor.assalomText,
                   fontSize: 16.0);
+            } else if (OrderHomePage.adressController.text.isEmpty) {
+              Fluttertoast.showToast(
+                  msg: "choose_zone".tr(),
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.TOP,
+                  timeInSecForIosWeb: 1,
+                  textColor: Colors.white,
+                  backgroundColor: ConstColor.assalomText,
+                  fontSize: 16.0);
             } else {
               // print(dropdownValue);
               context.read<CreateOrderBloc>().add(

@@ -10,9 +10,9 @@ class GetUserProfileState extends Equatable {
 class GetUserProfileInitial extends GetUserProfileState {}
 
 class GetUserProfileSuccess extends GetUserProfileState {
-  final ProfileModel profilData;
+  final ProfileModel? profilData;
 
-  const GetUserProfileSuccess({required this.profilData});
+  const GetUserProfileSuccess({ this.profilData});
 }
 
 class GetUserProfileFail extends GetUserProfileState {

@@ -12,6 +12,7 @@ class StatusCodes {
   /// received by the server.
   static const ok = 200;
   static const good = 201;
+  static const deleteSuccess = 204;
 
   /// 202 Accepted
   ///

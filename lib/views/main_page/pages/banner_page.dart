@@ -111,7 +111,7 @@ class _BannerPageState extends State<BannerPage> {
                 height: 4.h,
                 child: SmoothPageIndicator(
                   controller: _pageController1,
-                  count: bannerData.data!.length,
+                  count: bannerData.data?.length??0,
                   effect: WormEffect(
                     dotColor: ConstColor.dotColor,
                     activeDotColor: ConstColor.assalomText,

@@ -7,6 +7,7 @@ import 'package:assalomproject/views/auth/data/logic/verification_bloc/verificat
 import 'package:assalomproject/views/auth/pages/registration_page.dart';
 import 'package:assalomproject/views/profile/data/logic/get_orders_bloc/get_orders_bloc.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
+import 'package:assalomproject/views/profile/data/logic/update_name_bloc/update_name_bloc.dart';
 import 'package:assalomproject/views/profile/pages/orders_tab_page.dart';
 import 'package:assalomproject/views/profile/pages/profile_tab_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -47,6 +48,8 @@ class _ProfilePageState extends State<ProfilePage>
   void getCache() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     hasToken = prefs.getString('token') != null;
+    print("\n\n\n\n\nHAS TOKE $hasToken \n\n\n\n\n\n\n");
+    print("\n\n\n\n\nHAS TOKE ${prefs.getString('token')} \n\n\n\n\n\n\n");
     setState(() {});
   }
 
@@ -78,8 +81,15 @@ class _ProfilePageState extends State<ProfilePage>
                           create: (context) => GetOrdersBloc(),
                           child: const OrdersPage(),
                         ),
-                        BlocProvider(
-                          create: (context) => GetUserProfileBloc(),
+                        MultiBlocProvider(
+                          providers: [
+                            BlocProvider(
+                              create: (context) => GetUserProfileBloc(),
+                            ),
+                            BlocProvider(
+                              create: (context) => UpdateNameBloc(),
+                            ),
+                          ],
                           child: const ProfileTabPage(),
                         )
                       ],

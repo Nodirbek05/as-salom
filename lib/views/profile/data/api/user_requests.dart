@@ -17,6 +17,7 @@ class UserRequests {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var token = prefs.getString('token');
+      print("TOKEN TOKEN : ${token}");
       // print('${ApiPaths.basicUrl}${ApiPaths.getUser}');
       final response = await http.get(
         Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getUser}'),
@@ -93,6 +94,32 @@ class UserRequests {
     }
   }
 
+  static Future<ResponseData> deleteAccount(num id) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      final response = await http.get(
+        Uri.parse('${ApiPaths.basicUrl}${ApiPaths.deleteAccount}/$id'),
+        headers: {
+          'Authorization': "Bearer $token",
+          'Content-Type': 'application/json'
+        },
+      );
+      print(response.body + "With ID: ${id}");
+      switch (response.statusCode) {
+        case StatusCodes.deleteSuccess:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+      
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
   static Future<ResponseData> getOrders() async {
     // try {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -104,14 +131,14 @@ class UserRequests {
         'Authorization': "Bearer $token",
       },
     );
-    // print(response.body);
+    print(  "THIS IS WORKING LIKE TRAP ${response.statusCode} ");
     switch (response.statusCode) {
       case StatusCodes.ok:
         return OrdersModel.fromJson(response.body);
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:
-        throw ErrorModel.fromJson(response.body);
+        throw ErrorModel();
     }
     // } catch (e) {
     //   return ResponseError.noInternet;

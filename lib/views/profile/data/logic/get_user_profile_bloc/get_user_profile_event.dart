@@ -9,3 +9,10 @@ part of 'get_user_profile_bloc.dart';
 
 
 class GetProfileEvent extends GetUserProfileEvent{}
+
+class DeleteAccount extends GetUserProfileEvent {
+  final num id;
+  const DeleteAccount({
+    required this.id,
+  });
+}

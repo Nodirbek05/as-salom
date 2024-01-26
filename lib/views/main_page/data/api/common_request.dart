@@ -226,7 +226,7 @@ class CommonRequests {
   static Future<ResponseData> getSubcategories() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int place = prefs.getInt("place") ?? 0;
-    // try {
+    try {
     final response = await http.get(
       Uri.parse('${ApiPaths.basicUrl}${ApiPaths.getSubCategories}/$place'),
       headers: {'Content-Type': 'application/json'},
@@ -240,9 +240,9 @@ class CommonRequests {
       default:
         throw ErrorModel.fromJson(response.body);
     }
-    // } catch (e) {
-    //   return ResponseError.noInternet;
-    // }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
   }
 
   static Future<ResponseData> searchProducts(String query) async {

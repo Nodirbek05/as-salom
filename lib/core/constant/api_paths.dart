@@ -24,4 +24,5 @@ class ApiPaths {
   static String getWithSlug = "/product/";
   static String confirmCard = "/payment-card";
   static String getAllCategories = "/get_all_categories";
+  static String deleteAccount = "/delete_my_profile";
 }
