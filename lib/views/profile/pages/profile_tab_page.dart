@@ -3,7 +3,7 @@ import 'package:assalomproject/core/constant/icons_page.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 import 'package:assalomproject/views/initail/pages/splash_screen.dart';
 import 'package:assalomproject/views/profile/data/logic/get_user_profile_bloc/get_user_profile_bloc.dart';
-import 'package:assalomproject/views/profile/data/logic/update_name_bloc/update_name_bloc.dart';
+// import 'package:assalomproject/views/profile/data/logic/update_name_bloc/update_name_bloc.dart';
 import 'package:assalomproject/views/profile/data/models/model_for_update.dart';
 import 'package:assalomproject/views/profile/pages/update_page.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -244,7 +244,7 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
-                                  "Delete account".tr(),
+                                  "des_delete".tr(),
                                   style: Styles.style700sp22Main,
                                   textAlign: TextAlign.center,
                                 ),

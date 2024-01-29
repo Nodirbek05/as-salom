@@ -15,7 +15,7 @@ import 'package:assalomproject/core/constant/constant_color.dart';
 import 'package:assalomproject/core/constant/text_styles.dart';
 
 class OrderHomePage extends StatefulWidget {
-  static late Position position;
+  static  Position? position;
   static TextEditingController homeController = TextEditingController();
   static TextEditingController etajController = TextEditingController();
   static TextEditingController podezdController = TextEditingController();
@@ -72,7 +72,7 @@ class _OrderHomePageState extends State<OrderHomePage> {
 
   Completer<YandexMapController> completer = Completer<YandexMapController>();
 
-  late YandexMapController _yandexMapController;
+   YandexMapController? _yandexMapController;
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +111,8 @@ class _OrderHomePageState extends State<OrderHomePage> {
                     onMapCreated: (YandexMapController controller) async {
                       OrderHomePage.position = await _getLocation();
                       getLocation(
-                              lat: OrderHomePage.position.latitude,
-                              lon: OrderHomePage.position.longitude)
+                              lat: OrderHomePage.position?.latitude??0,
+                              lon: OrderHomePage.position?.longitude??0)
                           .then((value) {
                         if (value is DataSuccess) {
                           setState(() {
@@ -122,13 +122,13 @@ class _OrderHomePageState extends State<OrderHomePage> {
                         }
                       });
                       _yandexMapController = controller;
-                      _yandexMapController.moveCamera(
+                      _yandexMapController?.moveCamera(
                         CameraUpdate.newCameraPosition(
                           CameraPosition(
                             zoom: 17,
                             target: Point(
-                              latitude: OrderHomePage.position.latitude,
-                              longitude: OrderHomePage.position.longitude,
+                              latitude: OrderHomePage.position?.latitude??0,
+                              longitude: OrderHomePage.position?.longitude??0,
                             ),
                           ),
                         ),
@@ -161,10 +161,11 @@ class _OrderHomePageState extends State<OrderHomePage> {
                     bottom: 10,
                     child: InkWell(
                       onTap: () async {
+                        try {
                         await _getLocation();
-                        getLocation(
-                          lat: OrderHomePage.position.latitude,
-                          lon: OrderHomePage.position.longitude,
+                             getLocation(
+                          lat: OrderHomePage.position?.latitude??0,
+                          lon: OrderHomePage.position?.longitude??0,
                         ).then((value) {
                           if (value is DataSuccess) {
                             setState(() {
@@ -173,15 +174,19 @@ class _OrderHomePageState extends State<OrderHomePage> {
                             });
                           }
                         });
+                        } catch (e) {
+                          print(e.toString);
+                        }
+                     
                         // print(getAddressFromLatLng(
                         //     _position.latitude, _position.longitude));
-                        _yandexMapController.moveCamera(
+                        _yandexMapController?.moveCamera(
                           CameraUpdate.newCameraPosition(
                             CameraPosition(
                               zoom: 17,
                               target: Point(
-                                latitude: OrderHomePage.position.latitude,
-                                longitude: OrderHomePage.position.longitude,
+                                latitude: OrderHomePage.position?.latitude??0,
+                                longitude: OrderHomePage.position?.longitude??0,
                               ),
                             ),
                           ),

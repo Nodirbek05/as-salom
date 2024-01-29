@@ -100,5 +100,7 @@
     "delivery" : "Delivery",
     "delivered" : "Delivered",
     "cancel" : "Cancel",
-    "orderCheck" : "Please register to order anything"
+    "orderCheck" : "Please register to order anything",
+    "delete" : "Delete Account",
+    "des_delete": "Do you really want to delete your account?"
 }

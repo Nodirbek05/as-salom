@@ -6,14 +6,14 @@ import 'package:assalomproject/views/main_page/logic/get_all_banners_bloc/get_al
 import 'package:assalomproject/views/main_page/logic/get_all_categories_bloc/get_all_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/get_spesific_products_bloc/get_spesific_products_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/get_sub_banners_bloc/get_sub_banners_bloc.dart';
-import 'package:assalomproject/views/main_page/logic/get_sub_categories_bloc/get_sub_categories_bloc.dart';
+// import 'package:assalomproject/views/main_page/logic/get_sub_categories_bloc/get_sub_categories_bloc.dart';
 import 'package:assalomproject/views/main_page/logic/search_bloc/search_bloc.dart';
 import 'package:assalomproject/views/main_page/pages/additional_products.dart';
 import 'package:assalomproject/views/main_page/pages/banner_page.dart';
 import 'package:assalomproject/views/main_page/pages/categories_widget.dart';
 import 'package:assalomproject/views/main_page/pages/spesific_producyts_widget.dart';
 import 'package:assalomproject/views/main_page/pages/sub_banner_page.dart';
-import 'package:assalomproject/views/main_page/pages/sub_categories_widget.dart';
+// import 'package:assalomproject/views/main_page/pages/sub_categories_widget.dart';
 import 'package:assalomproject/widgets/product_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -249,11 +249,11 @@ class _MainPageState extends State<MainPage> {
                       child: const SubBannersPage(),
                     ),
                   ),
-                  ScreenUtil().setVerticalSpacing(25),
-                  BlocProvider(
-                    create: (context) => GetSubCategoriesBloc(),
-                    child: const SubCategoriesWidget(),
-                  ),
+                  // ScreenUtil().setVerticalSpacing(25),
+                  // BlocProvider(
+                  //   create: (context) => GetSubCategoriesBloc(),
+                  //   child: const SubCategoriesWidget(),
+                  // ),
                   ScreenUtil().setVerticalSpacing(20),
                   BlocProvider(
                     create: (context) => GetSpesificProductsBloc(),

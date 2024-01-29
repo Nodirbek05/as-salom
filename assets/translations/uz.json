@@ -100,5 +100,7 @@
     "delivery" : "Yo'lda",
     "delivered" : "Yetkazildi",
     "cancel" : "Bekor qilindi",
-    "orderCheck": "Buyurtma qilish uchun ro'yxatdan o'tishingiz kerak"
+    "orderCheck": "Buyurtma qilish uchun ro'yxatdan o'tishingiz kerak",
+    "delete": "Akkauntni o'chirish",
+    "des_delete": "Siz rostan ham akkauntingizni o'chirmoqchimisiz?"
 }

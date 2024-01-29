@@ -164,10 +164,10 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                                 : null
                             : null,
                         lat: isHome
-                            ? OrderHomePage.position.latitude.toString()
+                            ? OrderHomePage.position?.latitude.toString()
                             : null,
                         lng: isHome
-                            ? OrderHomePage.position.longitude.toString()
+                            ? OrderHomePage.position?.longitude.toString()
                             : null,
                       ),
                     ),

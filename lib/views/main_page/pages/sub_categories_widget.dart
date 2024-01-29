@@ -79,7 +79,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                             scrollDirection: Axis.horizontal,
                             itemCount: categories.length,
                             itemBuilder: (context, index) {
-                              // print(ApiPaths.imageUrl +
+                              // print("DATA FOR IMAGE: "+ApiPaths.imageUrl +
                               //     categories[index].photo.toString());
                               return Padding(
                                 padding: EdgeInsets.only(right: 10.w),
