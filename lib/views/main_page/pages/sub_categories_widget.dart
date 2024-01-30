@@ -126,6 +126,7 @@ class _SubCategoriesWidgetState extends State<SubCategoriesWidget> {
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
                                         ),
+                                        ScreenUtil().setVerticalSpacing(4),
                                         Container(
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
