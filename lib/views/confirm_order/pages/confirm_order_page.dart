@@ -115,7 +115,7 @@ class _ConfirmOrderPageState extends State<ConfirmOrderPage> {
                   textColor: Colors.white,
                   backgroundColor: ConstColor.assalomText,
                   fontSize: 16.0);
-            } else if (isHome ? false : OrderHomePage.adressController.text.isEmpty  ) {
+            } else if (isHome ? false : dropdownValue==null) {
               print("IS IT COMING HERE OR NOPE");
               Fluttertoast.showToast(
                   msg: "choose_zone".tr(),
